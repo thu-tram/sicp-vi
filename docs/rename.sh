@@ -5,14 +5,12 @@
 declare -a new_names=(
 "1-1" "1-2" "1-3"
 "2-1" "2-2" "2-3" "2-4" "2-5"
-"3-1" "3-2" "3-3" "3-4" "3-5"
-"4-1" "4-2" "4-3" "4-4"
-"5-1" "5-2" "5-3" "5-4" "5-5"
+"3-1"
 )
 
 # Vòng lặp để đổi tên tệp
-for i in $(seq 1 22); do
-    old_name="${i}.md"
+for i in $(seq 1 9); do
+    old_name="0${i}.md"
     new_name="${new_names[$i-1]}.md"
     if [ -f "$old_name" ]; then
         mv "$old_name" "$new_name"
