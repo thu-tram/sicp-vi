@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction to Data Abstraction - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html" class="active"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="21-giới-thiệu-về-data-abstraction-trừu-tượng-hóa-dữ-liệu"><a class="header" href="#21-giới-thiệu-về-data-abstraction-trừu-tượng-hóa-dữ-liệu">2.1 Giới thiệu về Data Abstraction (trừu tượng hóa dữ liệu)</a></h1>
+<p>Trong 1.1.8, chúng ta đã lưu ý rằng một procedure (thủ tục) được sử dụng như một thành phần trong việc tạo ra một procedure phức tạp hơn có thể được xem không chỉ như một tập hợp các thao tác cụ thể mà còn như một <em>procedural abstraction</em> (trừu tượng hóa thủ tục). Nghĩa là, các chi tiết về cách procedure đó được hiện thực có thể được ẩn đi, và chính procedure cụ thể đó có thể được thay thế bằng bất kỳ procedure nào khác có cùng hành vi tổng thể. Nói cách khác, chúng ta có thể tạo ra một abstraction (trừu tượng hóa) tách biệt cách procedure được sử dụng khỏi các chi tiết về cách procedure được hiện thực dựa trên các procedure nguyên thủy hơn. Khái niệm tương tự đối với compound data (dữ liệu phức hợp) được gọi là <em>data abstraction</em>. Data abstraction là một phương pháp cho phép chúng ta tách biệt cách một đối tượng dữ liệu phức hợp được sử dụng khỏi các chi tiết về cách nó được cấu thành từ các đối tượng dữ liệu nguyên thủy hơn.</p>
+<p>Ý tưởng cơ bản của data abstraction là cấu trúc các chương trình sẽ sử dụng các đối tượng dữ liệu phức hợp sao cho chúng hoạt động trên “abstract data” (dữ liệu trừu tượng). Nghĩa là, chương trình của chúng ta nên sử dụng dữ liệu theo cách không đưa ra các giả định về dữ liệu ngoài những gì thực sự cần thiết để thực hiện nhiệm vụ. Đồng thời, một “concrete” data representation (biểu diễn dữ liệu cụ thể) được định nghĩa độc lập với các chương trình sử dụng dữ liệu đó. Giao diện giữa hai phần này của hệ thống sẽ là một tập hợp các procedure, gọi là <em>selectors</em> (bộ chọn) và <em>constructors</em> (bộ tạo), dùng để hiện thực dữ liệu trừu tượng dựa trên biểu diễn cụ thể. Để minh họa kỹ thuật này, chúng ta sẽ xem xét cách thiết kế một tập hợp các procedure để thao tác với rational numbers (số hữu tỉ).</p>
+<h2 id="211-ví-dụ-các-phép-toán-số-học-cho-rational-numbers"><a class="header" href="#211-ví-dụ-các-phép-toán-số-học-cho-rational-numbers">2.1.1 Ví dụ: Các phép toán số học cho Rational Numbers</a></h2>
+<p>Giả sử chúng ta muốn thực hiện các phép toán số học với rational numbers. Chúng ta muốn có khả năng cộng, trừ, nhân, chia chúng và kiểm tra xem hai rational numbers có bằng nhau hay không.</p>
+<p>Hãy bắt đầu bằng cách giả định rằng chúng ta đã có một cách để tạo ra một rational number từ một numerator (tử số) và một denominator (mẫu số). Chúng ta cũng giả định rằng, khi có một rational number, chúng ta có cách để trích xuất (hoặc chọn) tử số và mẫu số của nó. Giả sử thêm rằng constructor và selectors này có sẵn dưới dạng các procedure:</p>
+<ul>
+<li><code>(make-rat ⟨n⟩ ⟨d⟩)</code> trả về rational number có numerator là số nguyên <code>⟨n⟩</code> và denominator là số nguyên <code>⟨d⟩</code>.</li>
+<li><code>(numer ⟨x⟩)</code> trả về numerator của rational number <code>⟨x⟩</code>.</li>
+<li><code>(denom ⟨x⟩)</code> trả về denominator của rational number <code>⟨x⟩</code>.</li>
+</ul>
+<p>Ở đây chúng ta đang sử dụng một chiến lược tổng hợp mạnh mẽ: <em>wishful thinking</em> (tư duy giả định). Chúng ta chưa nói rational number được biểu diễn như thế nào, hoặc các procedure <code>numer</code>, <code>denom</code>, và <code>make-rat</code> sẽ được hiện thực ra sao. Tuy nhiên, nếu chúng ta có ba procedure này, chúng ta có thể cộng, trừ, nhân, chia và kiểm tra bằng nhau bằng cách sử dụng các công thức sau:</p>
+<p>$$\begin{array}{lll}
+{\frac{n_{1}}{d_{1}} + \frac{n_{2}}{d_{2}}} &amp; = &amp; {\frac{n_{1}d_{2} + n_{2}d_{1}}{d_{1}d_{2}},} \
+{\frac{n_{1}}{d_{1}} - \frac{n_{2}}{d_{2}}} &amp; = &amp; {\frac{n_{1}d_{2} - n_{2}d_{1}}{d_{1}d_{2}},} \
+{\frac{n_{1}}{d_{1}} \times \frac{n_{2}}{d_{2}}} &amp; = &amp; {\frac{n_{1}n_{2}}{d_{1}d_{2}},} \
+\frac{n_{1},/, d_{1}}{n_{2},/, d_{2}} &amp; = &amp; {\frac{n_{1}d_{2}}{d_{1}n_{2}},} \
+\frac{n_{1}}{d_{1}} &amp; = &amp; {\frac{n_{2}}{d_{2}}\quad{\ if\ and\ only\ if\quad}n_{1}d_{2} = n_{2}d_{1}.} \
+\end{array}$$</p>
+<p>Chúng ta có thể biểu diễn các quy tắc này dưới dạng các procedure:</p>
+<pre><code class="language-{.scheme}">(define (add-rat x y)
+  (make-rat (+ (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (sub-rat x y)
+  (make-rat (- (* (numer x) (denom y))
+               (* (numer y) (denom x)))
+            (* (denom x) (denom y))))
+
+(define (mul-rat x y)
+  (make-rat (* (numer x) (numer y))
+            (* (denom x) (denom y))))
+
+(define (div-rat x y)
+  (make-rat (* (numer x) (denom y))
+            (* (denom x) (numer y))))
+
+(define (equal-rat? x y)
+  (= (* (numer x) (denom y))
+     (* (numer y) (denom x))))
+</code></pre>
+<p>Bây giờ chúng ta đã có các phép toán trên rational numbers được định nghĩa dựa trên các selector và constructor <code>numer</code>, <code>denom</code>, và <code>make-rat</code>. Nhưng chúng ta vẫn chưa định nghĩa chúng. Điều chúng ta cần là một cách để “gắn” một numerator và một denominator lại với nhau để tạo thành một rational number.</p>
+<h3 id="pairs"><a class="header" href="#pairs">Pairs</a></h3>
+<p>Để cho phép chúng ta hiện thực tầng cụ thể của data abstraction, ngôn ngữ của chúng ta cung cấp một cấu trúc phức hợp gọi là <em>pair</em> (cặp), có thể được tạo ra bằng primitive procedure (thủ tục nguyên thủy) <code>cons</code>. Procedure này nhận hai đối số và trả về một đối tượng dữ liệu phức hợp chứa hai đối số đó như các thành phần. Khi có một pair, chúng ta có thể trích xuất các thành phần bằng các primitive procedure <code>car</code> và <code>cdr</code>.<sup class="footnote-reference"><a href="#1">1</a></sup> Do đó, chúng ta có thể sử dụng <code>cons</code>, <code>car</code>, và <code>cdr</code> như sau:</p>
+<pre><code class="language-{.scheme}">(define x (cons 1 2))
+
+(car x)
+1
+
+(cdr x)
+2
+</code></pre>
+<p>Lưu ý rằng một pair là một đối tượng dữ liệu có thể được đặt tên và thao tác, giống như một đối tượng dữ liệu nguyên thủy. Hơn nữa, <code>cons</code> có thể được dùng để tạo ra các pair mà các phần tử của nó cũng là pair, và cứ thế tiếp tục:</p>
+<pre><code class="language-{.scheme}">(define x (cons 1 2))
+(define y (cons 3 4))
+(define z (cons x y))
+
+(car (car z))
+1
+
+(car (cdr z))
+3
+</code></pre>
+<p>Trong 2.2, chúng ta sẽ thấy khả năng kết hợp các pair này có nghĩa là pair có thể được sử dụng như các khối xây dựng đa dụng để tạo ra mọi loại cấu trúc dữ liệu phức tạp. Primitive compound-data (dữ liệu phức hợp nguyên thủy) duy nhất <em>pair</em>, được hiện thực bởi các procedure <code>cons</code>, <code>car</code>, và <code>cdr</code>, là “chất keo” duy nhất mà chúng ta cần. Các đối tượng dữ liệu được tạo từ pair được gọi là <em>list-structured</em> data (dữ liệu có cấu trúc danh sách).</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Tên <code>cons</code> là viết tắt của “construct.” Các tên <code>car</code> và <code>cdr</code> bắt nguồn từ hiện thực ban đầu của Lisp trên máy IBM 704. Máy này có một sơ đồ định địa chỉ cho phép tham chiếu đến phần “address” và “decrement” của một ô nhớ. <code>Car</code> là viết tắt của “Contents of Address part of Register” và <code>cdr</code> (phát âm là “could-er”) là viết tắt của “Contents of Decrement part of Register.”</p>
+</div>
+<h3 id="representing-rational-numbers"><a class="header" href="#representing-rational-numbers">Representing rational numbers</a></h3>
+<p>Pairs (cặp) cung cấp một cách tự nhiên để hoàn thiện hệ thống rational-number (số hữu tỉ). Chỉ cần biểu diễn một rational number như một pair gồm hai số nguyên: một numerator (tử số) và một denominator (mẫu số). Khi đó <code>make-rat</code>, <code>numer</code>, và <code>denom</code> có thể dễ dàng được hiện thực như sau:<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-{.scheme}">(define (make-rat n d) (cons n d))
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+</code></pre>
+<p>Ngoài ra, để hiển thị kết quả của các phép tính, chúng ta có thể in ra rational numbers bằng cách in numerator, một dấu gạch chéo, và denominator:<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<pre><code class="language-{.scheme}">(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display &quot;/&quot;)
+  (display (denom x)))
+</code></pre>
+<p>Bây giờ chúng ta có thể thử các procedure cho rational number:</p>
+<pre><code class="language-{.scheme}">(define one-half (make-rat 1 2))
+(print-rat one-half)
+1/2
+
+(define one-third (make-rat 1 3))
+(print-rat
+ (add-rat one-half one-third))
+5/6
+
+(print-rat
+ (mul-rat one-half one-third))
+1/6
+
+(print-rat
+ (add-rat one-third one-third))
+6/9
+</code></pre>
+<p>Như ví dụ cuối cùng cho thấy, hiện thực rational number của chúng ta không rút gọn chúng về dạng tối giản. Chúng ta có thể khắc phục điều này bằng cách thay đổi <code>make-rat</code>. Nếu chúng ta có một procedure <code>gcd</code> như trong 1.2.5, trả về ước số chung lớn nhất của hai số nguyên, chúng ta có thể dùng <code>gcd</code> để rút gọn numerator và denominator về dạng tối giản trước khi tạo pair:</p>
+<pre><code class="language-{.scheme}">(define (make-rat n d)
+  (let ((g (gcd n d)))
+    (cons (/ n g) 
+          (/ d g))))
+</code></pre>
+<p>Bây giờ chúng ta có:</p>
+<pre><code class="language-{.scheme}">(print-rat 
+ (add-rat one-third one-third))
+2/3
+</code></pre>
+<p>như mong muốn. Sự thay đổi này được thực hiện bằng cách chỉnh sửa constructor <code>make-rat</code> mà không cần thay đổi bất kỳ procedure nào (như <code>add-rat</code> và <code>mul-rat</code>) hiện thực các phép toán thực sự.</p>
+<p><strong>Bài tập 2.1:</strong> Định nghĩa một phiên bản tốt hơn của <code>make-rat</code> có thể xử lý cả đối số dương và âm. <code>Make-rat</code> nên chuẩn hóa dấu sao cho nếu rational number là số dương thì cả numerator và denominator đều dương, và nếu rational number là số âm thì chỉ numerator là số âm.</p>
+<h2 id="212-abstraction-barriers"><a class="header" href="#212-abstraction-barriers">2.1.2 Abstraction Barriers</a></h2>
+<p>Trước khi tiếp tục với nhiều ví dụ hơn về compound data (dữ liệu phức hợp) và data abstraction (trừu tượng hóa dữ liệu), hãy xem xét một số vấn đề được nêu ra bởi ví dụ rational number. Chúng ta đã định nghĩa các phép toán trên rational number dựa trên một constructor <code>make-rat</code> và các selector <code>numer</code> và <code>denom</code>. Nói chung, ý tưởng cốt lõi của data abstraction là xác định cho mỗi kiểu đối tượng dữ liệu một tập hợp cơ bản các phép toán, dựa trên đó mọi thao tác với đối tượng dữ liệu thuộc kiểu đó sẽ được biểu diễn, và sau đó chỉ sử dụng những phép toán này khi thao tác dữ liệu.</p>
+<p>Chúng ta có thể hình dung cấu trúc của hệ thống rational number như trong Hình 2.1. Các đường ngang biểu diễn <em>abstraction barriers</em> (rào chắn trừu tượng) tách biệt các “tầng” khác nhau của hệ thống. Ở mỗi tầng, rào chắn phân tách các chương trình (ở trên) sử dụng data abstraction khỏi các chương trình (ở dưới) hiện thực data abstraction. Các chương trình sử dụng rational number chỉ thao tác với chúng thông qua các procedure được cung cấp “cho sử dụng công khai” bởi gói rational number: <code>add-rat</code>, <code>sub-rat</code>, <code>mul-rat</code>, <code>div-rat</code>, và <code>equal-rat?</code>. Các procedure này lại chỉ được hiện thực dựa trên constructor và các selector <code>make-rat</code>, <code>numer</code>, và <code>denom</code>, vốn được hiện thực dựa trên pairs. Chi tiết về cách pairs được hiện thực là không liên quan đến phần còn lại của gói rational number miễn là pairs có thể được thao tác bằng <code>cons</code>, <code>car</code>, và <code>cdr</code>. Thực chất, các procedure ở mỗi tầng chính là giao diện định nghĩa abstraction barriers và kết nối các tầng khác nhau.</p>
+<p><img src="fig/Fig2.1d.jpg" alt="" /></p>
+<p><strong>Figure 2.1:</strong> Data-abstraction barriers in the rational-number package.</p>
+<p>Ý tưởng đơn giản này có nhiều ưu điểm. Một ưu điểm là nó giúp chương trình dễ bảo trì và sửa đổi hơn nhiều. Bất kỳ cấu trúc dữ liệu phức tạp nào cũng có thể được biểu diễn theo nhiều cách khác nhau bằng các cấu trúc dữ liệu nguyên thủy do ngôn ngữ lập trình cung cấp. Tất nhiên, lựa chọn cách biểu diễn sẽ ảnh hưởng đến các chương trình thao tác trên nó; do đó, nếu cách biểu diễn thay đổi về sau, tất cả các chương trình như vậy có thể phải được chỉnh sửa tương ứng. Công việc này có thể tốn nhiều thời gian và chi phí trong trường hợp các chương trình lớn, trừ khi sự phụ thuộc vào cách biểu diễn được giới hạn ngay từ thiết kế trong một số rất ít module chương trình.</p>
+<p>Ví dụ, một cách khác để giải quyết vấn đề rút gọn rational number về dạng tối giản là thực hiện việc rút gọn mỗi khi chúng ta truy cập các thành phần của một rational number, thay vì khi tạo nó. Điều này dẫn đến các constructor và selector khác:</p>
+<pre><code class="language-{.scheme}">(define (make-rat n d)
+  (cons n d))
+
+(define (numer x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (car x) g)))
+
+(define (denom x)
+  (let ((g (gcd (car x) (cdr x))))
+    (/ (cdr x) g)))
+</code></pre>
+<p>Sự khác biệt giữa hiện thực này và hiện thực trước nằm ở thời điểm chúng ta tính <code>gcd</code>. Nếu trong cách sử dụng thông thường, chúng ta truy cập numerator và denominator của cùng một rational number nhiều lần, sẽ tốt hơn nếu tính <code>gcd</code> khi tạo rational number. Nếu không, có thể tốt hơn là đợi đến lúc truy cập mới tính <code>gcd</code>. Dù thế nào, khi chúng ta thay đổi từ cách biểu diễn này sang cách biểu diễn khác, các procedure như <code>add-rat</code>, <code>sub-rat</code>, v.v. hoàn toàn không cần chỉnh sửa.</p>
+<p>Giới hạn sự phụ thuộc vào cách biểu diễn trong một số ít procedure giao diện giúp chúng ta vừa thiết kế vừa chỉnh sửa chương trình dễ dàng hơn, vì nó cho phép duy trì tính linh hoạt để xem xét các hiện thực thay thế. Tiếp tục với ví dụ đơn giản này, giả sử chúng ta đang thiết kế một gói rational number và ban đầu chưa thể quyết định nên tính <code>gcd</code> tại thời điểm tạo hay tại thời điểm truy cập. Phương pháp data abstraction cho chúng ta một cách để trì hoãn quyết định đó mà không làm mất khả năng tiếp tục phát triển các phần còn lại của hệ thống.</p>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Another way to define the selectors and constructor is<br />
+<sup class="footnote-reference"><a href="#3">3</a></sup>: <code>Display</code> là primitive của Scheme để in dữ liệu. Primitive <code>newline</code> của Scheme bắt đầu một dòng mới để in. Cả hai procedure này đều không trả về giá trị hữu ích, vì vậy trong các ví dụ sử dụng <code>print-rat</code> bên dưới, chúng ta chỉ hiển thị những gì <code>print-rat</code> in ra, không hiển thị giá trị mà trình thông dịch trả về khi gọi <code>print-rat</code>.</p>
+</div>
+<h2 id="213-Ý-nghĩa-của-khái-niệm-data-dữ-liệu-là-gì"><a class="header" href="#213-Ý-nghĩa-của-khái-niệm-data-dữ-liệu-là-gì">2.1.3 Ý nghĩa của khái niệm Data (dữ liệu) là gì?</a></h2>
+<p>Chúng ta đã bắt đầu việc hiện thực rational number (số hữu tỉ) trong 2.1.1 bằng cách hiện thực các phép toán trên rational number như <code>add-rat</code>, <code>sub-rat</code>, v.v. dựa trên ba procedure (thủ tục) chưa được xác định: <code>make-rat</code>, <code>numer</code>, và <code>denom</code>. Tại thời điểm đó, chúng ta có thể xem các phép toán này được định nghĩa dựa trên các data object (đối tượng dữ liệu) — numerator (tử số), denominator (mẫu số), và rational number — mà hành vi của chúng được xác định bởi ba procedure vừa nêu.</p>
+<p>Nhưng chính xác thì <em>data</em> (dữ liệu) nghĩa là gì? Chỉ nói “bất cứ thứ gì được hiện thực bởi các selector và constructor đã cho” là chưa đủ. Rõ ràng, không phải bất kỳ tập hợp tùy ý nào gồm ba procedure cũng có thể đóng vai trò nền tảng thích hợp cho việc hiện thực rational number. Chúng ta cần đảm bảo rằng, nếu tạo một rational number <code>x</code> từ một cặp số nguyên <code>n</code> và <code>d</code>, thì khi trích xuất <code>numer</code> và <code>denom</code> của <code>x</code> và chia chúng, kết quả phải giống với phép chia <code>n</code> cho <code>d</code>. Nói cách khác, <code>make-rat</code>, <code>numer</code>, và <code>denom</code> phải thỏa mãn điều kiện rằng, với mọi số nguyên <code>n</code> và mọi số nguyên khác 0 <code>d</code>, nếu <code>x</code> là <code>(make-rat n d)</code>, thì</p>
+<p>$$\frac{\text{(numer\ x)}}{\text{(denom\ x)}} = {\frac{\text{n}}{\text{d}}.}$$</p>
+<p>Thực tế, đây là điều kiện duy nhất mà <code>make-rat</code>, <code>numer</code>, và <code>denom</code> phải thỏa mãn để tạo thành một nền tảng thích hợp cho việc biểu diễn rational number. Nói chung, chúng ta có thể xem data được định nghĩa bởi một tập hợp các selector và constructor, cùng với các điều kiện mà các procedure này phải thỏa mãn để trở thành một biểu diễn hợp lệ.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<p>Quan điểm này có thể được dùng để định nghĩa không chỉ các data object “cấp cao” như rational number, mà cả các đối tượng cấp thấp hơn. Hãy xem xét khái niệm pair (cặp), mà chúng ta đã dùng để định nghĩa rational number. Chúng ta chưa bao giờ thực sự nói pair là gì, chỉ biết rằng ngôn ngữ cung cấp các procedure <code>cons</code>, <code>car</code>, và <code>cdr</code> để thao tác trên pair. Nhưng điều duy nhất chúng ta cần biết về ba phép toán này là: nếu chúng ta “gắn” hai đối tượng lại với nhau bằng <code>cons</code>, thì có thể lấy lại các đối tượng đó bằng <code>car</code> và <code>cdr</code>. Nghĩa là, các phép toán này thỏa mãn điều kiện rằng, với mọi đối tượng <code>x</code> và <code>y</code>, nếu <code>z</code> là <code>(cons x y)</code> thì <code>(car z)</code> là <code>x</code> và <code>(cdr z)</code> là <code>y</code>. Thật vậy, chúng ta đã đề cập rằng ba procedure này được bao gồm như các primitive (nguyên thủy) trong ngôn ngữ. Tuy nhiên, bất kỳ bộ ba procedure nào thỏa mãn điều kiện trên đều có thể được dùng làm nền tảng để hiện thực pair. Điều này được minh họa rõ rệt bởi thực tế rằng chúng ta có thể hiện thực <code>cons</code>, <code>car</code>, và <code>cdr</code> mà không cần dùng bất kỳ cấu trúc dữ liệu nào, chỉ dùng procedure. Dưới đây là định nghĩa:</p>
+<pre><code class="language-{.scheme}">(define (cons x y)
+  (define (dispatch m)
+    (cond ((= m 0) x)
+          ((= m 1) y)
+          (else 
+           (error &quot;Argument not 0 or 1:
+                   CONS&quot; m))))
+  dispatch)
+
+(define (car z) (z 0))
+(define (cdr z) (z 1))
+</code></pre>
+<p>Cách sử dụng procedure này hoàn toàn không giống với khái niệm trực quan của chúng ta về dữ liệu. Tuy nhiên, tất cả những gì cần làm để chứng minh đây là một cách biểu diễn hợp lệ của pair là xác minh rằng các procedure này thỏa mãn điều kiện đã nêu ở trên.</p>
+<p>Điểm tinh tế cần chú ý là giá trị trả về của <code>(cons x y)</code> là một procedure — cụ thể là procedure <code>dispatch</code> được định nghĩa bên trong, nhận một đối số và trả về <code>x</code> hoặc <code>y</code> tùy thuộc vào việc đối số đó là 0 hay 1. Tương ứng, <code>(car z)</code> được định nghĩa để áp dụng <code>z</code> cho 0. Do đó, nếu <code>z</code> là procedure được tạo bởi <code>(cons x y)</code>, thì <code>z</code> áp dụng cho 0 sẽ trả về <code>x</code>. Như vậy, chúng ta đã chứng minh rằng <code>(car (cons x y))</code> trả về <code>x</code>, như mong muốn. Tương tự, <code>(cdr (cons x y))</code> áp dụng procedure trả về từ <code>(cons x y)</code> cho 1, và trả về <code>y</code>. Vì vậy, hiện thực pair bằng procedure này là hợp lệ, và nếu chúng ta truy cập pair chỉ thông qua <code>cons</code>, <code>car</code>, và <code>cdr</code> thì không thể phân biệt hiện thực này với hiện thực dùng “cấu trúc dữ liệu thật”.</p>
+<p>Mục đích của việc trình bày cách biểu diễn pair bằng procedure không phải để nói rằng ngôn ngữ của chúng ta hoạt động theo cách này (Scheme, và các hệ thống Lisp nói chung, hiện thực pair trực tiếp vì lý do hiệu năng) mà là để chỉ ra rằng nó <em>có thể</em> hoạt động theo cách này. Cách biểu diễn bằng procedure, dù khó hiểu, vẫn là một cách hoàn toàn đầy đủ để biểu diễn pair, vì nó thỏa mãn các điều kiện duy nhất mà pair cần thỏa mãn. Ví dụ này cũng cho thấy rằng khả năng thao tác procedure như đối tượng tự động mang lại khả năng biểu diễn compound data (dữ liệu phức hợp). Điều này có thể chỉ là một sự tò mò ở thời điểm hiện tại, nhưng cách biểu diễn dữ liệu bằng procedure sẽ đóng vai trò trung tâm trong kho tàng lập trình của chúng ta. Phong cách lập trình này thường được gọi là <em>message passing</em> (truyền thông điệp), và chúng ta sẽ sử dụng nó như một công cụ cơ bản trong Chương 3 khi bàn về các vấn đề mô hình hóa và mô phỏng.</p>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Thật đáng ngạc nhiên, ý tưởng này rất khó để diễn đạt một cách chặt chẽ. Có hai cách tiếp cận để đưa ra một diễn đạt như vậy. Cách thứ nhất, được khởi xướng bởi C. A. R. Hoare (1972), được gọi là phương pháp <em>abstract models</em> (mô hình trừu tượng). Nó hình thức hóa đặc tả “procedures cộng điều kiện” như đã phác thảo trong ví dụ rational number ở trên. Lưu ý rằng điều kiện về biểu diễn rational number được phát biểu dựa trên các sự kiện về số nguyên (bằng nhau và phép chia). Nói chung, abstract models định nghĩa các kiểu data object mới dựa trên các kiểu data object đã được định nghĩa trước đó. Các mệnh đề về data object do đó có thể được kiểm tra bằng cách quy chúng về các mệnh đề về data object đã được định nghĩa trước. Cách tiếp cận thứ hai, được giới thiệu bởi Zilles tại MIT, bởi Goguen, Thatcher, Wagner, và Wright tại IBM (xem Thatcher et al. 1978), và bởi Guttag tại Toronto (xem Guttag 1977), được gọi là <em>algebraic specification</em> (đặc tả đại số). Nó xem “procedures” như các phần tử của một hệ thống đại số trừu tượng mà hành vi được xác định bởi các tiên đề tương ứng với “điều kiện” của chúng ta, và sử dụng các kỹ thuật của đại số trừu tượng để kiểm tra các mệnh đề về data object. Cả hai phương pháp đều được khảo sát trong bài báo của Liskov và Zilles (1975).</p>
+</div>
+<h2 id="214-bài-tập-mở-rộng-interval-arithmetic-số-học-khoảng"><a class="header" href="#214-bài-tập-mở-rộng-interval-arithmetic-số-học-khoảng">2.1.4 Bài tập mở rộng: Interval Arithmetic (số học khoảng)</a></h2>
+<p>Alyssa P. Hacker đang thiết kế một hệ thống để giúp mọi người giải quyết các bài toán kỹ thuật. Một tính năng mà cô ấy muốn cung cấp trong hệ thống của mình là khả năng thao tác với các đại lượng không chính xác (chẳng hạn như các tham số đo được của các thiết bị vật lý) nhưng có độ chính xác đã biết, để khi thực hiện các phép tính với những đại lượng xấp xỉ này, kết quả thu được sẽ là các con số có độ chính xác đã biết.</p>
+<p>Các kỹ sư điện sẽ sử dụng hệ thống của Alyssa để tính toán các đại lượng điện. Đôi khi họ cần tính giá trị điện trở tương đương song song $R_{p}$ của hai điện trở $R_{1}$ và $R_{2}$ bằng công thức</p>
+<p>$$R_{p}, = ,{\frac{1}{1/R_{1} + 1/R_{2}}.}$$</p>
+<p>Giá trị điện trở thường chỉ được biết với một sai số nhất định do nhà sản xuất điện trở đảm bảo. Ví dụ, nếu bạn mua một điện trở được ghi nhãn “6.8 ohms với sai số 10%” thì bạn chỉ có thể chắc chắn rằng điện trở đó có giá trị nằm trong khoảng từ 6.8 $-$ 0.68 = 6.12 đến 6.8 + 0.68 = 7.48 ohms. Do đó, nếu bạn có một điện trở 6.8 ohm sai số 10% mắc song song với một điện trở 4.7 ohm sai số 5%, thì điện trở tương đương của tổ hợp này có thể nằm trong khoảng từ khoảng 2.58 ohms (nếu cả hai điện trở đều ở giới hạn dưới) đến khoảng 2.97 ohms (nếu cả hai ở giới hạn trên).</p>
+<p>Ý tưởng của Alyssa là hiện thực “interval arithmetic” (số học khoảng) như một tập hợp các phép toán số học để kết hợp các “interval” (khoảng) — các đối tượng biểu diễn miền giá trị có thể có của một đại lượng không chính xác. Kết quả của phép cộng, trừ, nhân hoặc chia hai khoảng cũng là một khoảng, biểu diễn miền giá trị của kết quả.</p>
+<p>Alyssa giả định sự tồn tại của một đối tượng trừu tượng gọi là “interval” có hai điểm mút: một cận dưới và một cận trên. Cô cũng giả định rằng, khi biết các điểm mút của một khoảng, cô có thể tạo ra khoảng đó bằng data constructor <code>make-interval</code>. Alyssa trước tiên viết một procedure để cộng hai khoảng. Cô lập luận rằng giá trị nhỏ nhất mà tổng có thể đạt được là tổng của hai cận dưới, và giá trị lớn nhất có thể đạt được là tổng của hai cận trên:</p>
+<pre><code class="language-{.scheme}">(define (add-interval x y)
+  (make-interval (+ (lower-bound x) 
+                    (lower-bound y))
+                 (+ (upper-bound x) 
+                    (upper-bound y))))
+</code></pre>
+<p>Alyssa cũng tìm ra cách tính tích của hai khoảng bằng cách tìm giá trị nhỏ nhất và lớn nhất của các tích giữa các cận, rồi dùng chúng làm cận của khoảng kết quả. (<code>Min</code> và <code>max</code> là các primitive tìm giá trị nhỏ nhất hoặc lớn nhất của bất kỳ số lượng đối số nào.)</p>
+<pre><code class="language-{.scheme}">(define (mul-interval x y)
+  (let ((p1 (* (lower-bound x) 
+               (lower-bound y)))
+        (p2 (* (lower-bound x) 
+               (upper-bound y)))
+        (p3 (* (upper-bound x) 
+               (lower-bound y)))
+        (p4 (* (upper-bound x) 
+               (upper-bound y))))
+    (make-interval (min p1 p2 p3 p4)
+                   (max p1 p2 p3 p4))))
+</code></pre>
+<p>Để chia hai khoảng, Alyssa nhân khoảng thứ nhất với nghịch đảo của khoảng thứ hai. Lưu ý rằng các cận của khoảng nghịch đảo là nghịch đảo của cận trên và nghịch đảo của cận dưới, theo thứ tự đó.</p>
+<pre><code class="language-{.scheme}">(define (div-interval x y)
+  (mul-interval x 
+                (make-interval 
+                 (/ 1.0 (upper-bound y)) 
+                 (/ 1.0 (lower-bound y)))))
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="1-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="2-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="1-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="2-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

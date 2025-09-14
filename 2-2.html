@@ -1,0 +1,883 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hierarchical Data and the Closure Property - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html" class="active"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="22-dữ-liệu-phân-cấp-và-tính-chất-closure"><a class="header" href="#22-dữ-liệu-phân-cấp-và-tính-chất-closure">2.2 Dữ liệu phân cấp và tính chất closure</a></h1>
+<p>Như chúng ta đã thấy, <em>pair</em> (cặp) cung cấp một dạng “keo” nguyên thủy mà ta có thể dùng để xây dựng các đối tượng dữ liệu phức hợp. Hình 2.2 cho thấy một cách tiêu chuẩn để hình dung một <em>pair</em> — trong trường hợp này là <em>pair</em> được tạo bởi <code>(cons 1 2)</code>. Trong cách biểu diễn này, được gọi là <em>box-and-pointer notation</em> (“ký pháp hộp-và-con-trỏ”), mỗi đối tượng được thể hiện như một <em>pointer</em> (con trỏ) tới một hộp. Hộp của một đối tượng nguyên thủy chứa phần biểu diễn của đối tượng đó. Ví dụ, hộp của một số chứa ký hiệu số. Hộp của một <em>pair</em> thực chất là một hộp kép, phần bên trái chứa (một con trỏ tới) <code>car</code> của <em>pair</em> và phần bên phải chứa <code>cdr</code>.</p>
+<p><img src="fig/Fig2.2e.jpg" alt="" /></p>
+<p><strong>Figure 2.2:</strong> Box-and-pointer representation of <code>(cons 1 2)</code>.</p>
+<p>Chúng ta đã thấy rằng <code>cons</code> có thể được dùng để kết hợp không chỉ các số mà cả các <em>pair</em>. (Bạn đã sử dụng thực tế này, hoặc lẽ ra nên sử dụng, khi làm Bài tập 2.2 và Bài tập 2.3.) Do đó, <em>pair</em> cung cấp một khối xây dựng phổ quát từ đó ta có thể tạo ra đủ loại cấu trúc dữ liệu. Hình 2.3 cho thấy hai cách dùng <em>pair</em> để kết hợp các số 1, 2, 3 và 4.</p>
+<p><img src="fig/Fig2.3e.jpg" alt="" /></p>
+<p><strong>Figure 2.3:</strong> Two ways to combine 1, 2, 3, and 4 using pairs.</p>
+<p>Khả năng tạo ra các <em>pair</em> mà phần tử của chúng cũng là <em>pair</em> chính là bản chất của tầm quan trọng của <em>list structure</em> (“cấu trúc danh sách”) như một công cụ biểu diễn. Chúng ta gọi khả năng này là <em>closure property</em> (“tính chất closure”) của <code>cons</code>. Nói chung, một phép toán kết hợp các đối tượng dữ liệu thỏa mãn <em>closure property</em> nếu kết quả của việc kết hợp các đối tượng bằng phép toán đó lại có thể được kết hợp tiếp bằng chính phép toán đó<sup class="footnote-reference"><a href="#1">1</a></sup>. <em>Closure</em> là chìa khóa sức mạnh của bất kỳ phương thức kết hợp nào, bởi nó cho phép ta tạo ra các cấu trúc <em>hierarchical</em> (phân cấp) — các cấu trúc được tạo thành từ các phần, mà bản thân mỗi phần lại được tạo thành từ các phần nhỏ hơn, và cứ thế tiếp diễn.</p>
+<p>Ngay từ đầu Chương 1, chúng ta đã sử dụng một cách thiết yếu <em>closure</em> khi làm việc với <em>procedure</em>, bởi hầu hết các chương trình, trừ những chương trình đơn giản nhất, đều dựa vào thực tế rằng các phần tử của một phép kết hợp bản thân chúng cũng có thể là các phép kết hợp. Trong phần này, chúng ta sẽ xét các hệ quả của <em>closure</em> đối với dữ liệu phức hợp. Chúng ta sẽ mô tả một số kỹ thuật thông dụng để dùng <em>pair</em> biểu diễn <em>sequence</em> (dãy) và <em>tree</em> (cây), và sẽ trình bày một ngôn ngữ đồ họa minh họa <em>closure</em> một cách sinh động<sup class="footnote-reference"><a href="#2">2</a></sup>.</p>
+<h2 id="221-biểu-diễn-sequence"><a class="header" href="#221-biểu-diễn-sequence">2.2.1 Biểu diễn <em>Sequence</em></a></h2>
+<p>Một trong những cấu trúc hữu ích mà ta có thể xây dựng bằng <em>pair</em> là <em>sequence</em> — một tập hợp có thứ tự các đối tượng dữ liệu. Tất nhiên, có nhiều cách để biểu diễn <em>sequence</em> bằng <em>pair</em>. Một cách đặc biệt trực quan được minh họa trong Hình 2.4, nơi <em>sequence</em> 1, 2, 3, 4 được biểu diễn như một chuỗi các <em>pair</em>. <code>car</code> của mỗi <em>pair</em> là phần tử tương ứng trong chuỗi, và <code>cdr</code> của <em>pair</em> là <em>pair</em> tiếp theo trong chuỗi. <code>cdr</code> của <em>pair</em> cuối cùng báo hiệu kết thúc <em>sequence</em> bằng cách trỏ tới một giá trị đặc biệt không phải là <em>pair</em>, được biểu diễn trong sơ đồ <em>box-and-pointer</em> bằng một đường chéo và trong chương trình bằng giá trị của biến <code>nil</code>. Toàn bộ <em>sequence</em> được tạo ra bằng các phép <code>cons</code> lồng nhau:</p>
+<pre><code class="language-{.scheme}">(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+</code></pre>
+<p><img src="fig/Fig2.4e.jpg" alt="" /></p>
+<p><strong>Figure 2.4:</strong> The sequence 1, 2, 3, 4 represented as a chain of pairs.</p>
+<p>Một <em>sequence</em> như vậy của các <em>pair</em>, được tạo bởi các <code>cons</code> lồng nhau, được gọi là <em>list</em>, và Scheme cung cấp một nguyên thủy gọi là <code>list</code> để hỗ trợ việc xây dựng <em>list</em><sup class="footnote-reference"><a href="#3">3</a></sup>. <em>Sequence</em> ở trên có thể được tạo ra bởi <code>(list 1 2 3 4)</code>. Nói chung,</p>
+<pre><code class="language-{.scheme}">(list ⟨a₁⟩ ⟨a₂⟩ … ⟨aₙ⟩)
+</code></pre>
+<p>tương đương với</p>
+<pre><code class="language-{.scheme}">(cons ⟨a₁⟩
+      (cons ⟨a₂⟩
+            (cons …
+                  (cons ⟨aₙ⟩
+                        nil)…)))
+</code></pre>
+<p>Các hệ thống Lisp theo thông lệ in <em>list</em> bằng cách in dãy các phần tử, đặt trong dấu ngoặc đơn. Do đó, đối tượng dữ liệu trong Hình 2.4 được in ra là <code>(1 2 3 4)</code>:</p>
+<pre><code class="language-{.scheme}">(define one-through-four (list 1 2 3 4))
+
+one-through-four
+(1 2 3 4)
+</code></pre>
+<p>Cần cẩn thận để không nhầm lẫn biểu thức <code>(list 1 2 3 4)</code> với <em>list</em> <code>(1 2 3 4)</code>, vốn là kết quả thu được khi biểu thức được đánh giá. Cố gắng đánh giá biểu thức <code>(1 2 3 4)</code> sẽ gây lỗi khi <em>interpreter</em> cố áp dụng <em>procedure</em> <code>1</code> cho các đối số <code>2</code>, <code>3</code>, <code>4</code>.</p>
+<p>Ta có thể coi <code>car</code> là phép chọn phần tử đầu tiên trong <em>list</em>, và <code>cdr</code> là phép chọn <em>sublist</em> gồm tất cả các phần tử trừ phần tử đầu tiên. Các phép áp dụng lồng nhau của <code>car</code> và <code>cdr</code> có thể được dùng để trích xuất phần tử thứ hai, thứ ba, và các phần tử tiếp theo trong <em>list</em><sup class="footnote-reference"><a href="#4">4</a></sup>. <em>Constructor</em> <code>cons</code> tạo ra một <em>list</em> giống như <em>list</em> ban đầu, nhưng có thêm một phần tử ở đầu.</p>
+<pre><code class="language-{.scheme}">(car one-through-four)
+1
+
+(cdr one-through-four)
+(2 3 4)
+
+(car (cdr one-through-four))
+2
+
+(cons 10 one-through-four)
+(10 1 2 3 4)
+
+(cons 5 one-through-four)
+(5 1 2 3 4)
+</code></pre>
+<p>Giá trị của <code>nil</code>, được dùng để kết thúc chuỗi các <em>pair</em>, có thể được coi là một <em>sequence</em> không có phần tử nào, tức <em>empty list</em> (danh sách rỗng). Từ <em>nil</em> là dạng rút gọn của từ Latin <em>nihil</em>, nghĩa là “không gì cả”<sup class="footnote-reference"><a href="#5">5</a></sup>.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Việc sử dụng từ “closure” ở đây xuất phát từ đại số trừu tượng, nơi một tập hợp các phần tử được gọi là <em>đóng</em> dưới một phép toán nếu việc áp dụng phép toán đó lên các phần tử trong tập cho ra một phần tử vẫn thuộc tập. Cộng đồng Lisp cũng (thật không may) dùng từ “closure” để mô tả một khái niệm hoàn toàn khác: <em>closure</em> là một kỹ thuật hiện thực để biểu diễn <em>procedure</em> với các biến tự do. Chúng tôi không dùng từ “closure” theo nghĩa thứ hai này trong cuốn sách này.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Khái niệm rằng một phương thức kết hợp nên thỏa mãn <em>closure</em> là một ý tưởng đơn giản. Thật không may, các công cụ kết hợp dữ liệu trong nhiều ngôn ngữ lập trình phổ biến không thỏa mãn <em>closure</em>, hoặc khiến việc khai thác <em>closure</em> trở nên rườm rà. Trong Fortran hoặc Basic, người ta thường kết hợp các phần tử dữ liệu bằng cách ghép chúng vào <em>array</em> — nhưng không thể tạo <em>array</em> mà phần tử của nó lại là <em>array</em>. Pascal và C cho phép các <em>structure</em> có phần tử là <em>structure</em>. Tuy nhiên, điều này đòi hỏi lập trình viên phải thao tác <em>pointer</em> một cách tường minh, và tuân theo ràng buộc rằng mỗi trường của <em>structure</em> chỉ có thể chứa các phần tử thuộc một dạng xác định trước. Không giống Lisp với <em>pair</em>, các ngôn ngữ này không có một “keo” đa dụng tích hợp sẵn giúp thao tác dữ liệu phức hợp một cách thống nhất. Hạn chế này là</p>
+</div>
+<h3 id="các-phép-toán-trên-list"><a class="header" href="#các-phép-toán-trên-list">Các phép toán trên <em>list</em></a></h3>
+<p>Việc sử dụng <em>pair</em> để biểu diễn các <em>sequence</em> của phần tử dưới dạng <em>list</em> đi kèm với các kỹ thuật lập trình quy ước để thao tác <em>list</em> bằng cách lần lượt “<code>cdr</code> xuống” <em>list</em>. Ví dụ, <em>procedure</em> (thủ tục) <code>list-ref</code> nhận đối số là một <em>list</em> và một số $n$ và trả về phần tử thứ $n^{\text{th}}$ của <em>list</em>. Theo thông lệ, các phần tử của <em>list</em> được đánh số bắt đầu từ 0. Phương pháp tính <code>list-ref</code> như sau:</p>
+<ul>
+<li>Với $n = 0$, <code>list-ref</code> sẽ trả về <code>car</code> của <em>list</em>.</li>
+<li>Ngược lại, <code>list-ref</code> sẽ trả về phần tử thứ $(n - 1)$ của <code>cdr</code> của <em>list</em>.</li>
+</ul>
+<pre><code class="language-{.scheme}">(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) 
+                (- n 1))))
+
+(define squares 
+  (list 1 4 9 16 25))
+
+(list-ref squares 3)
+16
+</code></pre>
+<p>Thường thì ta sẽ <code>cdr</code> xuống toàn bộ <em>list</em>. Để hỗ trợ việc này, Scheme bao gồm một <em>primitive predicate</em> <code>null?</code>, dùng để kiểm tra xem đối số của nó có phải là <em>empty list</em> hay không. <em>Procedure</em> <code>length</code>, trả về số phần tử trong một <em>list</em>, minh họa mẫu sử dụng điển hình này:</p>
+<pre><code class="language-{.scheme}">(define (length items)
+  (if (null? items)
+      0
+      (+ 1 (length (cdr items)))))
+
+(define odds
+  (list 1 3 5 7))
+
+(length odds)
+4
+</code></pre>
+<p><em>Procedure</em> <code>length</code> hiện thực một kế hoạch đệ quy đơn giản. Bước rút gọn là:</p>
+<ul>
+<li><code>length</code> của bất kỳ <em>list</em> nào bằng 1 cộng với <code>length</code> của <code>cdr</code> của <em>list</em> đó.</li>
+</ul>
+<p>Điều này được áp dụng liên tiếp cho đến khi ta đạt trường hợp cơ sở:</p>
+<ul>
+<li><code>length</code> của <em>empty list</em> là 0.</li>
+</ul>
+<p>Ta cũng có thể tính <code>length</code> theo phong cách lặp:</p>
+<pre><code class="language-{.scheme}">(define (length items)
+  (define (length-iter a count)
+    (if (null? a)
+        count
+        (length-iter (cdr a) 
+                     (+ 1 count))))
+  (length-iter items 0))
+</code></pre>
+<p>Một kỹ thuật lập trình quy ước khác là “<code>cons</code> lên” một <em>answer list</em> trong khi <code>cdr</code> xuống một <em>list</em>, như trong <em>procedure</em> <code>append</code>, nhận hai <em>list</em> làm đối số và kết hợp các phần tử của chúng để tạo ra một <em>list</em> mới:</p>
+<pre><code class="language-{.scheme}">(append squares odds)
+(1 4 9 16 25 1 3 5 7)
+
+(append odds squares)
+(1 3 5 7 1 4 9 16 25)
+</code></pre>
+<p><code>Append</code> cũng được hiện thực bằng một kế hoạch đệ quy. Để <code>append</code> hai <em>list</em> <code>list1</code> và <code>list2</code>, thực hiện như sau:</p>
+<ul>
+<li>Nếu <code>list1</code> là <em>empty list</em>, thì kết quả chính là <code>list2</code>.</li>
+<li>Ngược lại, <code>append</code> <code>cdr</code> của <code>list1</code> và <code>list2</code>, rồi <code>cons</code> <code>car</code> của <code>list1</code> vào kết quả:</li>
+</ul>
+<pre><code class="language-{.scheme}">(define (append list1 list2)
+  (if (null? list1)
+      list2
+      (cons (car list1) 
+            (append (cdr list1) 
+                    list2))))
+</code></pre>
+<h3 id="mapping-trên-list"><a class="header" href="#mapping-trên-list"><em>Mapping</em> trên <em>list</em></a></h3>
+<p>Một phép toán cực kỳ hữu ích là áp dụng một phép biến đổi nào đó lên từng phần tử trong một <em>list</em> và tạo ra <em>list</em> kết quả. Ví dụ, <em>procedure</em> sau đây nhân mỗi số trong một <em>list</em> với một hệ số cho trước:</p>
+<pre><code class="language-{.scheme}">(define (scale-list items factor)
+  (if (null? items)
+      nil
+      (cons (* (car items) factor)
+            (scale-list (cdr items) 
+                        factor))))
+
+(scale-list (list 1 2 3 4 5) 10)
+(10 20 30 40 50)
+</code></pre>
+<p>Chúng ta có thể trừu tượng hóa ý tưởng tổng quát này và nắm bắt nó như một mẫu chung được biểu diễn dưới dạng <em>higher-order procedure</em>, giống như trong 1.3. <em>Higher-order procedure</em> ở đây được gọi là <code>map</code>. <code>Map</code> nhận đối số là một <em>procedure</em> của một đối số và một <em>list</em>, và trả về một <em>list</em> các kết quả thu được bằng cách áp dụng <em>procedure</em> đó lên từng phần tử trong <em>list</em><sup class="footnote-reference"><a href="#6">6</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (map proc items)
+  (if (null? items)
+      nil
+      (cons (proc (car items))
+            (map proc (cdr items)))))
+
+(map abs (list -10 2.5 -11.6 17))
+(10 2.5 11.6 17)
+
+(map (lambda (x) (* x x)) (list 1 2 3 4))
+(1 4 9 16)
+</code></pre>
+<p>Giờ đây ta có thể đưa ra một định nghĩa mới của <code>scale-list</code> dựa trên <code>map</code>:</p>
+<pre><code class="language-{.scheme}">(define (scale-list items factor)
+  (map (lambda (x) (* x factor))
+       items))
+</code></pre>
+<p><code>Map</code> là một cấu trúc quan trọng, không chỉ vì nó nắm bắt một mẫu chung, mà còn vì nó thiết lập một mức độ trừu tượng cao hơn khi làm việc với <em>list</em>. Trong định nghĩa ban đầu của <code>scale-list</code>, cấu trúc đệ quy của chương trình làm nổi bật việc xử lý từng phần tử của <em>list</em>. Định nghĩa <code>scale-list</code> dựa trên <code>map</code> loại bỏ mức chi tiết đó và nhấn mạnh rằng phép nhân tỷ lệ biến đổi một <em>list</em> phần tử thành một <em>list</em> kết quả. Sự khác biệt giữa hai định nghĩa không phải là máy tính thực hiện một quá trình khác (thực ra không phải), mà là chúng ta suy nghĩ về quá trình đó theo một cách khác. Thực chất, <code>map</code> giúp thiết lập một <em>abstraction barrier</em> (rào chắn trừu tượng) tách biệt việc hiện thực các <em>procedure</em> biến đổi <em>list</em> khỏi các chi tiết về cách trích xuất và kết hợp các phần tử của <em>list</em>. Giống như các rào chắn được minh họa trong Hình 2.1, sự trừu tượng này cho phép chúng ta linh hoạt thay đổi các chi tiết mức thấp về cách <em>sequence</em> được hiện thực, đồng thời vẫn giữ nguyên khung khái niệm của các phép toán biến đổi <em>sequence</em> thành <em>sequence</em>. Mục 2.2.3 sẽ mở rộng việc sử dụng <em>sequence</em> như một khung tổ chức chương trình.</p>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Scheme theo tiêu chuẩn cung cấp một <em>procedure</em> <code>map</code> tổng quát hơn so với mô tả ở đây. Phiên bản tổng quát hơn này nhận một <em>procedure</em> của $n$ đối số, cùng với $n$ <em>list</em>, và áp dụng <em>procedure</em> đó cho tất cả các phần tử thứ nhất của các <em>list</em>, tất cả các phần tử thứ hai của các <em>list</em>, và cứ thế tiếp tục, trả về một <em>list</em> các kết quả.</p>
+</div>
+<h2 id="222-cấu-trúc-phân-cấp"><a class="header" href="#222-cấu-trúc-phân-cấp">2.2.2 Cấu trúc phân cấp</a></h2>
+<p>Việc biểu diễn <em>sequence</em> bằng <em>list</em> được mở rộng một cách tự nhiên để biểu diễn các <em>sequence</em> mà phần tử của chúng bản thân cũng có thể là <em>sequence</em>. Ví dụ, ta có thể xem đối tượng <code>((1 2) 3 4)</code> được tạo bởi</p>
+<pre><code class="language-{.scheme}">(cons (list 1 2) (list 3 4))
+</code></pre>
+<p>như một <em>list</em> gồm ba phần tử, trong đó phần tử đầu tiên bản thân nó là một <em>list</em>, <code>(1 2)</code>. Thật vậy, điều này được gợi ý bởi dạng mà <em>interpreter</em> in ra kết quả. Hình 2.5 cho thấy cách biểu diễn cấu trúc này bằng các <em>pair</em>.</p>
+<p><img src="fig/Fig2.5e.jpg" alt="" /></p>
+<p><strong>Figure 2.5:</strong> Structure formed by <code>(cons (list 1 2) (list 3 4))</code>.</p>
+<p>Một cách khác để hình dung các <em>sequence</em> mà phần tử của chúng là <em>sequence</em> là xem chúng như các <em>tree</em> (cây). Các phần tử của <em>sequence</em> là các nhánh của <em>tree</em>, và các phần tử vốn là <em>sequence</em> sẽ là các <em>subtree</em> (cây con). Hình 2.6 cho thấy cấu trúc trong Hình 2.5 khi được nhìn như một <em>tree</em>.</p>
+<p><img src="fig/Fig2.6b.jpg" alt="" /></p>
+<p><strong>Figure 2.6:</strong> The list structure in Figure 2.5 viewed as a tree.</p>
+<p><em>Recursion</em> (đệ quy) là một công cụ tự nhiên để xử lý các cấu trúc <em>tree</em>, vì ta thường có thể quy các phép toán trên <em>tree</em> về các phép toán trên các nhánh của nó, rồi tiếp tục quy về các phép toán trên nhánh của nhánh, và cứ thế, cho đến khi ta chạm tới các <em>leaf</em> (lá) của <em>tree</em>. Ví dụ, hãy so sánh <em>procedure</em> <code>length</code> ở mục 2.2.1 với <em>procedure</em> <code>count-leaves</code>, trả về tổng số <em>leaf</em> của một <em>tree</em>:</p>
+<pre><code class="language-{.scheme}">(define x (cons (list 1 2) (list 3 4)))
+</code></pre>
+<pre><code class="language-{.scheme}">(length x)
+3
+</code></pre>
+<pre><code class="language-{.scheme}">(count-leaves x)
+4
+
+(list x x)
+(((1 2) 3 4) ((1 2) 3 4))
+
+(length (list x x))
+2
+
+(count-leaves (list x x))
+8
+</code></pre>
+<p>Để hiện thực <code>count-leaves</code>, hãy nhớ lại kế hoạch đệ quy để tính <code>length</code>:</p>
+<ul>
+<li><code>Length</code> của một <em>list</em> <code>x</code> bằng 1 cộng với <code>length</code> của <code>cdr</code> của <code>x</code>.</li>
+<li><code>Length</code> của <em>empty list</em> bằng 0.</li>
+</ul>
+<p><code>Count-leaves</code> cũng tương tự. Giá trị cho <em>empty list</em> là giống nhau:</p>
+<ul>
+<li><code>Count-leaves</code> của <em>empty list</em> bằng 0.</li>
+</ul>
+<p>Nhưng ở bước rút gọn, khi ta bỏ đi <code>car</code> của <em>list</em>, ta phải tính đến khả năng <code>car</code> bản thân nó là một <em>tree</em> mà ta cần đếm các <em>leaf</em>. Do đó, bước rút gọn thích hợp là:</p>
+<ul>
+<li><code>Count-leaves</code> của một <em>tree</em> <code>x</code> bằng <code>count-leaves</code> của <code>car</code> của <code>x</code> cộng với <code>count-leaves</code> của <code>cdr</code> của <code>x</code>.</li>
+</ul>
+<p>Cuối cùng, khi lấy <code>car</code> ta sẽ gặp các <em>leaf</em> thực sự, nên ta cần một trường hợp cơ sở khác:</p>
+<ul>
+<li><code>Count-leaves</code> của một <em>leaf</em> bằng 1.</li>
+</ul>
+<p>Để hỗ trợ việc viết các <em>procedure</em> đệ quy trên <em>tree</em>, Scheme cung cấp <em>primitive predicate</em> <code>pair?</code>, dùng để kiểm tra xem đối số của nó có phải là một <em>pair</em> hay không. Dưới đây là <em>procedure</em> hoàn chỉnh<sup class="footnote-reference"><a href="#7">7</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (count-leaves x)
+  (cond ((null? x) 0)
+        ((not (pair? x)) 1)
+        (else (+ (count-leaves (car x))
+                 (count-leaves (cdr x))))))
+</code></pre>
+<h3 id="mapping-trên-tree"><a class="header" href="#mapping-trên-tree"><em>Mapping</em> trên <em>tree</em></a></h3>
+<p>Cũng giống như <code>map</code> là một phép trừu tượng mạnh mẽ để xử lý <em>sequence</em>, <code>map</code> kết hợp với <em>recursion</em> là một phép trừu tượng mạnh mẽ để xử lý <em>tree</em>. Ví dụ, <em>procedure</em> <code>scale-tree</code>, tương tự như <code>scale-list</code> ở mục 2.2.1, nhận đối số là một hệ số số học và một <em>tree</em> mà các <em>leaf</em> là số. Nó trả về một <em>tree</em> có cùng hình dạng, trong đó mỗi số được nhân với hệ số đó. Kế hoạch đệ quy cho <code>scale-tree</code> tương tự như cho <code>count-leaves</code>:</p>
+<pre><code class="language-{.scheme}">(define (scale-tree tree factor)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) 
+         (* tree factor))
+        (else
+         (cons (scale-tree (car tree) 
+                           factor)
+               (scale-tree (cdr tree) 
+                           factor)))))
+
+(scale-tree (list 1 
+                  (list 2 (list 3 4) 5) 
+                  (list 6 7))
+            10)
+
+(10 (20 (30 40) 50) (60 70))
+</code></pre>
+<p>Một cách khác để hiện thực <code>scale-tree</code> là coi <em>tree</em> như một <em>sequence</em> của các <em>subtree</em> và dùng <code>map</code>. Ta <em>map</em> trên <em>sequence</em>, nhân tỷ lệ từng <em>subtree</em> lần lượt, và trả về <em>list</em> kết quả. Trong trường hợp cơ sở, khi <em>tree</em> là một <em>leaf</em>, ta chỉ cần nhân với hệ số:</p>
+<pre><code class="language-{.scheme}">(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (scale-tree sub-tree factor)
+             (* sub-tree factor)))
+       tree))
+</code></pre>
+<p>Nhiều phép toán trên <em>tree</em> có thể được hiện thực bằng các kết hợp tương tự giữa các phép toán trên <em>sequence</em> và <em>recursion</em>.</p>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Thứ tự của hai mệnh đề đầu tiên trong <code>cond</code> là quan trọng, vì <em>empty list</em> thỏa mãn <code>null?</code> và đồng thời cũng không phải là một <em>pair</em>.</p>
+</div>
+<h2 id="223-sequence-như-các-conventional-interface-giao-diện-quy-ước"><a class="header" href="#223-sequence-như-các-conventional-interface-giao-diện-quy-ước">2.2.3 <em>Sequence</em> như các <em>Conventional Interface</em> (giao diện quy ước)</a></h2>
+<p>Khi làm việc với dữ liệu phức hợp, chúng ta đã nhấn mạnh cách <em>data abstraction</em> (trừu tượng hóa dữ liệu) cho phép thiết kế chương trình mà không bị sa lầy vào các chi tiết của cách biểu diễn dữ liệu, và cách mà sự trừu tượng hóa giữ cho chúng ta khả năng linh hoạt để thử nghiệm với các cách biểu diễn thay thế. Trong phần này, chúng ta giới thiệu một nguyên tắc thiết kế mạnh mẽ khác khi làm việc với các cấu trúc dữ liệu — việc sử dụng <em>conventional interface</em>.</p>
+<p>Trong mục 1.3, chúng ta đã thấy cách các <em>program abstraction</em> (trừu tượng hóa chương trình), được hiện thực dưới dạng <em>higher-order procedure</em> (thủ tục bậc cao), có thể nắm bắt các mẫu chung trong các chương trình xử lý dữ liệu số. Khả năng của chúng ta trong việc xây dựng các phép toán tương tự để làm việc với dữ liệu phức hợp phụ thuộc rất nhiều vào phong cách mà chúng ta thao tác với các cấu trúc dữ liệu. Hãy xem xét, ví dụ, <em>procedure</em> sau, tương tự như <em>procedure</em> <code>count-leaves</code> ở mục 2.2.2, nhận một <em>tree</em> làm đối số và tính tổng bình phương của các <em>leaf</em> là số lẻ:</p>
+<pre><code class="language-{.scheme}">(define (sum-odd-squares tree)
+  (cond ((null? tree) 0)
+        ((not (pair? tree))
+         (if (odd? tree) (square tree) 0))
+        (else (+ (sum-odd-squares 
+                  (car tree))
+                 (sum-odd-squares 
+                  (cdr tree))))))
+</code></pre>
+<p>Bề ngoài, <em>procedure</em> này rất khác so với <em>procedure</em> sau, tạo ra một <em>list</em> chứa tất cả các số Fibonacci chẵn $\text{Fib}(k)$, với $k$ nhỏ hơn hoặc bằng một số nguyên $n$ cho trước:</p>
+<pre><code class="language-{.scheme}">(define (even-fibs n)
+  (define (next k)
+    (if (&gt; k n)
+        nil
+        (let ((f (fib k)))
+          (if (even? f)
+              (cons f (next (+ k 1)))
+              (next (+ k 1))))))
+  (next 0))
+</code></pre>
+<p>Mặc dù hai <em>procedure</em> này về mặt cấu trúc rất khác nhau, nhưng một mô tả trừu tượng hơn về hai phép tính này lại cho thấy nhiều điểm tương đồng. Chương trình thứ nhất:</p>
+<ul>
+<li>liệt kê các <em>leaf</em> của một <em>tree</em>;</li>
+<li>lọc chúng, chọn ra các phần tử lẻ;</li>
+<li>bình phương từng phần tử đã chọn; và</li>
+<li>cộng dồn các kết quả bằng <code>+</code>, bắt đầu từ 0.</li>
+</ul>
+<p>Chương trình thứ hai:</p>
+<ul>
+<li>liệt kê các số nguyên từ 0 đến $n$;</li>
+<li>tính số Fibonacci cho mỗi số nguyên;</li>
+<li>lọc chúng, chọn ra các phần tử chẵn; và</li>
+<li>cộng dồn các kết quả bằng <code>cons</code>, bắt đầu từ <em>empty list</em>.</li>
+</ul>
+<p>Một kỹ sư xử lý tín hiệu sẽ thấy tự nhiên khi hình dung các quá trình này như các tín hiệu chảy qua một chuỗi các giai đoạn, mỗi giai đoạn hiện thực một phần của kế hoạch chương trình, như minh họa trong Hình 2.7. Trong <code>sum-odd-squares</code>, chúng ta bắt đầu với một <em>enumerator</em>, tạo ra một “tín hiệu” gồm các <em>leaf</em> của một <em>tree</em> cho trước. Tín hiệu này được truyền qua một <em>filter</em>, loại bỏ tất cả trừ các phần tử lẻ. Tín hiệu kết quả lại được truyền qua một <em>map</em>, là một “transducer” áp dụng <em>procedure</em> <code>square</code> lên từng phần tử. Đầu ra của <em>map</em> sau đó được đưa vào một <em>accumulator</em>, kết hợp các phần tử bằng <code>+</code>, bắt đầu từ giá trị ban đầu là 0. Kế hoạch cho <code>even-fibs</code> là tương tự.</p>
+<p><img src="fig/Fig2.7e.jpg" alt="" /></p>
+<p><strong>Figure 2.7:</strong> The signal-flow plans for the procedures <code>sum-odd-squares</code> (top) and <code>even-fibs</code> (bottom) reveal the commonality between the two programs.</p>
+<p>Thật không may, hai định nghĩa <em>procedure</em> ở trên không thể hiện rõ cấu trúc <em>signal-flow</em> này. Ví dụ, nếu ta xem xét <em>procedure</em> <code>sum-odd-squares</code>, ta thấy rằng việc liệt kê được hiện thực một phần bởi các phép kiểm tra <code>null?</code> và <code>pair?</code>, và một phần bởi cấu trúc đệ quy trên <em>tree</em> của <em>procedure</em>. Tương tự, việc cộng dồn được tìm thấy một phần trong các phép kiểm tra và một phần trong phép cộng được dùng trong đệ quy. Nói chung, không có phần riêng biệt nào của mỗi <em>procedure</em> tương ứng trực tiếp với các thành phần trong mô tả <em>signal-flow</em>. Hai <em>procedure</em> này phân rã phép tính theo cách khác nhau, rải việc liệt kê khắp chương trình và trộn lẫn nó với <em>map</em>, <em>filter</em> và <em>accumulation</em>. Nếu chúng ta có thể tổ chức chương trình sao cho cấu trúc <em>signal-flow</em> được thể hiện rõ ràng trong các <em>procedure</em> mà ta viết, điều này sẽ nâng cao độ rõ ràng về mặt khái niệm của mã nguồn thu được.</p>
+<h3 id="các-phép-toán-trên-sequence"><a class="header" href="#các-phép-toán-trên-sequence">Các phép toán trên <em>Sequence</em></a></h3>
+<p>Chìa khóa để tổ chức chương trình phản ánh rõ hơn cấu trúc <em>signal-flow</em> là tập trung vào các “tín hiệu” chảy từ giai đoạn này sang giai đoạn tiếp theo trong quá trình. Nếu ta biểu diễn các tín hiệu này dưới dạng <em>list</em>, thì ta có thể dùng các phép toán trên <em>list</em> để hiện thực việc xử lý ở mỗi giai đoạn. Ví dụ, ta có thể hiện thực các giai đoạn <em>mapping</em> của sơ đồ <em>signal-flow</em> bằng <em>procedure</em> <code>map</code> từ mục 2.2.1:</p>
+<pre><code class="language-{.scheme}">(map square (list 1 2 3 4 5))
+(1 4 9 16 25)
+</code></pre>
+<p>Lọc một <em>sequence</em> để chỉ chọn các phần tử thỏa mãn một <em>predicate</em> cho trước được thực hiện như sau:</p>
+<pre><code class="language-{.scheme}">(define (filter predicate sequence)
+  (cond ((null? sequence) nil)
+        ((predicate (car sequence))
+         (cons (car sequence)
+               (filter predicate 
+                       (cdr sequence))))
+        (else  (filter predicate 
+                       (cdr sequence)))))
+</code></pre>
+<p>Ví dụ:</p>
+<pre><code class="language-{.scheme}">(filter odd? (list 1 2 3 4 5))
+(1 3 5)
+</code></pre>
+<p>Các phép cộng dồn (<em>accumulation</em>) có thể được hiện thực như sau:</p>
+<pre><code class="language-{.scheme}">(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op 
+                      initial 
+                      (cdr sequence)))))
+
+(accumulate + 0 (list 1 2 3 4 5))
+15
+(accumulate * 1 (list 1 2 3 4 5))
+120
+(accumulate cons nil (list 1 2 3 4 5))
+(1 2 3 4 5)
+</code></pre>
+<p>Tất cả những gì còn lại để hiện thực sơ đồ <em>signal-flow</em> là liệt kê <em>sequence</em> các phần tử cần xử lý. Với <code>even-fibs</code>, ta cần tạo ra <em>sequence</em> các số nguyên trong một khoảng cho trước, điều này có thể làm như sau:</p>
+<pre><code class="language-{.scheme}">(define (enumerate-interval low high)
+  (if (&gt; low high)
+      nil
+      (cons low 
+            (enumerate-interval 
+             (+ low 1) 
+             high))))
+
+(enumerate-interval 2 7)
+(2 3 4 5 6 7)
+</code></pre>
+<p>(TODO)</p>
+<p>Để liệt kê các <em>leaf</em> của một <em>tree</em>, ta có thể dùng<sup class="footnote-reference"><a href="#8">8</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (enumerate-tree tree)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (list tree))
+        (else (append 
+               (enumerate-tree (car tree))
+               (enumerate-tree (cdr tree))))))
+
+(enumerate-tree (list 1 (list 2 (list 3 4)) 5))
+(1 2 3 4 5)
+</code></pre>
+<p>Giờ đây ta có thể viết lại <code>sum-odd-squares</code> và <code>even-fibs</code> như trong các sơ đồ <em>signal-flow</em>. Với <code>sum-odd-squares</code>, ta liệt kê <em>sequence</em> các <em>leaf</em> của <em>tree</em>, lọc để giữ lại các số lẻ trong <em>sequence</em>, bình phương từng phần tử, và cộng tổng các kết quả:</p>
+<pre><code class="language-{.scheme}">(define (sum-odd-squares tree)
+  (accumulate 
+   +
+   0
+   (map square
+        (filter odd?
+                (enumerate-tree tree)))))
+</code></pre>
+<p>Với <code>even-fibs</code>, ta liệt kê các số nguyên từ 0 đến $n$, sinh số Fibonacci cho mỗi số nguyên này, lọc <em>sequence</em> kết quả để giữ lại các phần tử chẵn, và cộng dồn các kết quả vào một <em>list</em>:</p>
+<pre><code class="language-{.scheme}">(define (even-fibs n)
+  (accumulate 
+   cons
+   nil
+   (filter even?
+           (map fib
+                (enumerate-interval 0 n)))))
+</code></pre>
+<p>Giá trị của việc biểu diễn chương trình dưới dạng các phép toán trên <em>sequence</em> là nó giúp chúng ta thiết kế chương trình theo hướng <em>modular</em> (mô-đun), tức là các thiết kế được xây dựng bằng cách kết hợp các phần tương đối độc lập. Ta có thể khuyến khích thiết kế <em>modular</em> bằng cách cung cấp một thư viện các thành phần tiêu chuẩn cùng với một <em>conventional interface</em> để kết nối các thành phần theo những cách linh hoạt.</p>
+<p>Xây dựng theo mô-đun là một chiến lược mạnh mẽ để kiểm soát độ phức tạp trong thiết kế kỹ thuật. Trong các ứng dụng xử lý tín hiệu thực tế, ví dụ, các nhà thiết kế thường xây dựng hệ thống bằng cách mắc nối tiếp các phần tử được chọn từ các họ <em>filter</em> và <em>transducer</em> tiêu chuẩn. Tương tự, các phép toán trên <em>sequence</em> cung cấp một thư viện các phần tử chương trình tiêu chuẩn mà ta có thể kết hợp và hoán đổi. Ví dụ, ta có thể tái sử dụng các phần từ <em>procedure</em> <code>sum-odd-squares</code> và <code>even-fibs</code> trong một chương trình tạo ra <em>list</em> các bình phương của $n + 1$ số Fibonacci đầu tiên:</p>
+<pre><code class="language-{.scheme}">(define (list-fib-squares n)
+  (accumulate 
+   cons
+   nil
+   (map square
+        (map fib
+             (enumerate-interval 0 n)))))
+
+(list-fib-squares 10)
+(0 1 1 4 9 25 64 169 441 1156 3025)
+</code></pre>
+<p>Ta có thể sắp xếp lại các phần này và dùng chúng để tính tích các bình phương của các số nguyên lẻ trong một <em>sequence</em>:</p>
+<pre><code class="language-{.scheme}">(define 
+  (product-of-squares-of-odd-elements
+   sequence)
+  (accumulate 
+   *
+   1
+   (map square (filter odd? sequence))))
+
+(product-of-squares-of-odd-elements 
+ (list 1 2 3 4 5))
+225
+</code></pre>
+<p>Ta cũng có thể xây dựng các ứng dụng xử lý dữ liệu thông thường dưới dạng các phép toán trên <em>sequence</em>. Giả sử ta có một <em>sequence</em> các hồ sơ nhân sự và muốn tìm mức lương của lập trình viên được trả cao nhất. Giả sử ta có một <em>selector</em> <code>salary</code> trả về mức lương từ một hồ sơ, và một <em>predicate</em> <code>programmer?</code> kiểm tra xem hồ sơ đó có phải của một lập trình viên hay không. Khi đó ta có thể viết:</p>
+<pre><code class="language-{.scheme}">(define 
+  (salary-of-highest-paid-programmer
+   records)
+  (accumulate 
+   max
+   0
+   (map salary
+        (filter programmer? records))))
+</code></pre>
+<p>Các ví dụ này chỉ gợi ý một phần nhỏ trong phạm vi rộng lớn các phép toán có thể được biểu diễn dưới dạng các phép toán trên <em>sequence</em><sup class="footnote-reference"><a href="#9">9</a></sup>.</p>
+<p>Các <em>sequence</em>, được hiện thực ở đây dưới dạng <em>list</em>, đóng vai trò như một <em>conventional interface</em> cho phép chúng ta kết hợp các mô-đun xử lý. Thêm vào đó, khi ta biểu diễn thống nhất các cấu trúc dưới dạng <em>sequence</em>, ta đã giới hạn sự phụ thuộc vào cấu trúc dữ liệu trong chương trình vào một số ít các phép toán trên <em>sequence</em>. Bằng cách thay đổi chúng, ta có thể thử nghiệm các cách biểu diễn thay thế của <em>sequence</em>, trong khi vẫn giữ nguyên thiết kế tổng thể của chương trình. Chúng ta sẽ khai thác khả năng này trong mục 3.5, khi ta khái quát hóa mô hình xử lý <em>sequence</em> để chấp nhận cả các <em>sequence</em> vô hạn.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Thực tế, đây chính là <em>procedure</em> <code>fringe</code> trong Bài tập 2.28. Ở đây chúng tôi đổi tên để nhấn mạnh rằng nó là một phần của một họ các <em>procedure</em> thao tác <em>sequence</em> tổng quát.</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Richard Waters (1979) đã phát triển một chương trình tự động phân tích các chương trình Fortran truyền thống, xem chúng dưới dạng các <em>map</em>, <em>filter</em> và <em>accumulation</em>. Ông nhận thấy rằng tới 90% mã trong <em>Fortran Scientific Subroutine Package</em> hoàn toàn phù hợp với mô hình này. Một trong những lý do cho sự thành công của Lisp như một ngôn ngữ lập trình là <em>list</em> cung cấp một phương tiện tiêu chuẩn để biểu diễn các tập hợp có thứ tự, nhờ đó chúng có thể được thao tác bằng các phép toán bậc cao. Ngôn ngữ lập trình APL cũng có được nhiều sức mạnh và sự hấp dẫn nhờ một lựa chọn tương tự. Trong APL, mọi dữ liệu đều được biểu diễn dưới dạng <em>array</em>, và có một tập hợp các toán tử tổng quát, tiện lợi cho mọi loại thao tác trên <em>array</em>.</p>
+</div>
+<h3 id="nested-mappings-Ánh-xạ-lồng-nhau"><a class="header" href="#nested-mappings-Ánh-xạ-lồng-nhau"><em>Nested Mappings</em> (Ánh xạ lồng nhau)</a></h3>
+<p>Chúng ta có thể mở rộng mô hình <em>sequence</em> để bao gồm nhiều phép tính thường được biểu diễn bằng các vòng lặp lồng nhau<sup class="footnote-reference"><a href="#10">10</a></sup>. Xét bài toán sau: Cho một số nguyên dương $n$, tìm tất cả các cặp có thứ tự gồm hai số nguyên dương phân biệt $i$ và $j$, với ${1 \leq j} &lt; {i \leq n}$, sao cho $i + j$ là số nguyên tố. Ví dụ, nếu $n$ là 6, thì các cặp là:</p>
+<p>$$\begin{array}{llllllll}
+i &amp; 2 &amp; 3 &amp; 4 &amp; 4 &amp; 5 &amp; 6 &amp; 6 \
+j &amp; 1 &amp; 2 &amp; 1 &amp; 3 &amp; 2 &amp; 1 &amp; 5 \
+{i + j} &amp; 3 &amp; 5 &amp; 5 &amp; 7 &amp; 7 &amp; 7 &amp; 11 \
+\end{array}$$</p>
+<p>Một cách tự nhiên để tổ chức phép tính này là sinh ra <em>sequence</em> của tất cả các cặp có thứ tự gồm các số nguyên dương nhỏ hơn hoặc bằng $n$, <em>filter</em> để chọn các cặp có tổng là số nguyên tố, và sau đó, với mỗi cặp $(i,j)$ vượt qua bộ lọc, tạo ra bộ ba $(i,j,i + j)$.</p>
+<p>Dưới đây là một cách để sinh <em>sequence</em> các cặp: Với mỗi số nguyên $i \leq n$, liệt kê các số nguyên $j &lt; i$, và với mỗi $i$ và $j$ như vậy, sinh ra cặp $(i,j)$. Xét theo các phép toán trên <em>sequence</em>, ta <em>map</em> trên <em>sequence</em> <code>(enumerate-interval 1 n)</code>. Với mỗi $i$ trong <em>sequence</em> này, ta <em>map</em> trên <em>sequence</em> <code>(enumerate-interval 1 (- i 1))</code>. Với mỗi $j$ trong <em>sequence</em> sau, ta sinh ra cặp <code>(list i j)</code>. Điều này cho ta một <em>sequence</em> các cặp cho mỗi $i$. Kết hợp tất cả các <em>sequence</em> cho mọi $i$ (bằng cách <em>accumulate</em> với <code>append</code>) sẽ tạo ra <em>sequence</em> các cặp cần tìm<sup class="footnote-reference"><a href="#11">11</a></sup>:</p>
+<pre><code class="language-{.scheme}">(accumulate 
+ append
+ nil
+ (map (lambda (i)
+        (map (lambda (j) 
+               (list i j))
+             (enumerate-interval 1 (- i 1))))
+      (enumerate-interval 1 n)))
+</code></pre>
+<p>Sự kết hợp giữa <em>mapping</em> và <em>accumulating</em> với <code>append</code> phổ biến đến mức chúng ta sẽ tách nó thành một <em>procedure</em> riêng:</p>
+<pre><code class="language-{.scheme}">(define (flatmap proc seq)
+  (accumulate append nil (map proc seq)))
+</code></pre>
+<p>Giờ hãy <em>filter</em> <em>sequence</em> các cặp này để tìm những cặp có tổng là số nguyên tố. <em>Predicate</em> của <em>filter</em> được gọi cho mỗi phần tử của <em>sequence</em>; đối số của nó là một cặp và nó phải trích xuất các số nguyên từ cặp đó. Do đó, <em>predicate</em> áp dụng cho mỗi phần tử trong <em>sequence</em> là:</p>
+<pre><code class="language-{.scheme}">(define (prime-sum? pair)
+  (prime? (+ (car pair) (cadr pair))))
+</code></pre>
+<p>Cuối cùng, sinh <em>sequence</em> kết quả bằng cách <em>map</em> trên các cặp đã lọc, sử dụng <em>procedure</em> sau, tạo ra một bộ ba gồm hai phần tử của cặp cùng với tổng của chúng:</p>
+<pre><code class="language-{.scheme}">(define (make-pair-sum pair)
+  (list (car pair) 
+        (cadr pair) 
+        (+ (car pair) (cadr pair))))
+</code></pre>
+<p>Kết hợp tất cả các bước này cho ta <em>procedure</em> hoàn chỉnh:</p>
+<pre><code class="language-{.scheme}">(define (prime-sum-pairs n)
+  (map make-pair-sum
+       (filter 
+        prime-sum?
+        (flatmap
+         (lambda (i)
+           (map (lambda (j) 
+                  (list i j))
+                (enumerate-interval 
+                 1 
+                 (- i 1))))
+         (enumerate-interval 1 n)))))
+</code></pre>
+<p><em>Nested mapping</em> cũng hữu ích cho các <em>sequence</em> khác ngoài những <em>sequence</em> liệt kê các khoảng số. Giả sử ta muốn sinh tất cả các <em>permutation</em> của một tập $S$; tức là tất cả các cách sắp xếp thứ tự các phần tử trong tập. Ví dụ, các <em>permutation</em> của ${ 1,2,3}$ là ${ 1,2,3}$, ${ 1,3,2}$, ${ 2,1,3}$, ${ 2,3,1}$, ${ 3,1,2}$, và ${ 3,2,1}$. Dưới đây là kế hoạch để sinh các <em>permutation</em> của $S$: Với mỗi phần tử $x$ trong $S$, đệ quy sinh <em>sequence</em> các <em>permutation</em> của $S - x$<sup class="footnote-reference"><a href="#12">12</a></sup>, và nối $x$ vào đầu mỗi <em>permutation</em>. Điều này cho ta, với mỗi $x$ trong $S$, <em>sequence</em> các <em>permutation</em> của $S$ bắt đầu bằng $x$. Kết hợp các <em>sequence</em> này cho mọi $x$ sẽ cho tất cả các <em>permutation</em> của $S$<sup class="footnote-reference"><a href="#13">13</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (permutations s)
+  (if (null? s)   ; empty set?
+      (list nil)  ; sequence containing empty set
+      (flatmap (lambda (x)
+                 (map (lambda (p) 
+                        (cons x p))
+                      (permutations 
+                       (remove x s))))
+               s)))
+</code></pre>
+<p>Hãy chú ý cách chiến lược này quy bài toán sinh các <em>permutation</em> của $S$ về bài toán sinh các <em>permutation</em> của các tập có ít phần tử hơn $S$. Trong trường hợp cuối cùng, ta đi đến <em>empty list</em>, biểu diễn một tập không có phần tử nào. Với trường hợp này, ta sinh <code>(list nil)</code>, là một <em>sequence</em> với một phần tử duy nhất, chính là tập không có phần tử. <em>Procedure</em> <code>remove</code> được dùng trong <code>permutations</code> trả về tất cả các phần tử trong một <em>sequence</em> cho trước, trừ một phần tử nhất định. Điều này có thể được biểu diễn như một <em>filter</em> đơn giản:</p>
+<pre><code class="language-{.scheme}">(define (remove item sequence)
+  (filter (lambda (x) (not (= x item)))
+          sequence))
+</code></pre>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Cách tiếp cận <em>nested mapping</em> này được giới thiệu cho chúng tôi bởi David Turner, người đã phát triển các ngôn ngữ KRC và Miranda, cung cấp các hình thức chính quy thanh nhã để xử lý các cấu trúc này. Các ví dụ trong phần này (xem thêm Bài tập 2.42) được điều chỉnh từ Turner 1981. Trong mục 3.5.3, chúng ta sẽ thấy cách tiếp cận này được khái quát hóa cho các <em>sequence</em> vô hạn.</p>
+</div>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Ở đây chúng tôi biểu diễn một <em>pair</em> như một <em>list</em> gồm hai phần tử thay vì một <em>Lisp pair</em>. Do đó, “cặp” $(i,j)$ được biểu diễn là <code>(list i j)</code>, không phải <code>(cons i j)</code>.</p>
+</div>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p>Tập $S - x$ là tập hợp tất cả các phần tử của $S$, ngoại trừ $x$.</p>
+</div>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>Dấu chấm phẩy trong mã Scheme được dùng để bắt đầu <em>comment</em>. Mọi thứ từ dấu chấm phẩy đến hết dòng sẽ bị <em>interpreter</em> bỏ qua. Trong cuốn sách này, chúng tôi không dùng nhiều <em>comment</em>; chúng tôi cố gắng làm cho chương trình tự giải thích bằng cách sử dụng các tên mô tả.</p>
+</div>
+<h2 id="224-ví-dụ-một-ngôn-ngữ-vẽ-tranh-picture-language"><a class="header" href="#224-ví-dụ-một-ngôn-ngữ-vẽ-tranh-picture-language">2.2.4 Ví dụ: Một ngôn ngữ vẽ tranh (<em>Picture Language</em>)</a></h2>
+<p>Phần này giới thiệu một ngôn ngữ đơn giản để vẽ tranh, minh họa sức mạnh của <em>data abstraction</em> (trừu tượng hóa dữ liệu) và <em>closure</em> (tính đóng), đồng thời khai thác <em>higher-order procedure</em> (thủ tục bậc cao) một cách thiết yếu. Ngôn ngữ này được thiết kế để giúp dễ dàng thử nghiệm với các mẫu như trong Hình 2.9, được tạo thành từ các phần tử lặp lại được tịnh tiến và co giãn<sup class="footnote-reference"><a href="#14">14</a></sup>. Trong ngôn ngữ này, các đối tượng dữ liệu được kết hợp được biểu diễn dưới dạng <em>procedure</em> thay vì cấu trúc <em>list</em>. Cũng giống như <code>cons</code>, vốn thỏa mãn <em>closure property</em> và cho phép chúng ta dễ dàng xây dựng các cấu trúc <em>list</em> phức tạp tùy ý, các phép toán trong ngôn ngữ này — cũng thỏa mãn <em>closure property</em> — cho phép chúng ta dễ dàng xây dựng các mẫu phức tạp tùy ý.</p>
+<p><img src="fig/Fig2.9.jpg" alt="" /></p>
+<p><strong>Figure 2.9:</strong> Designs generated with the picture language.</p>
+<h3 id="ngôn-ngữ-vẽ-tranh"><a class="header" href="#ngôn-ngữ-vẽ-tranh">Ngôn ngữ vẽ tranh</a></h3>
+<p>Khi bắt đầu nghiên cứu lập trình ở mục 1.1, chúng ta đã nhấn mạnh tầm quan trọng của việc mô tả một ngôn ngữ bằng cách tập trung vào các <em>primitive</em> (nguyên thủy) của ngôn ngữ, các phương thức kết hợp (<em>means of combination</em>), và các phương thức trừu tượng hóa (<em>means of abstraction</em>). Chúng ta sẽ tiếp tục theo khung này ở đây.</p>
+<p>Một phần của sự tinh tế trong ngôn ngữ vẽ tranh này là chỉ có một loại phần tử duy nhất, gọi là <em>painter</em>. Một <em>painter</em> vẽ một hình ảnh được tịnh tiến và co giãn để vừa khít trong một khung hình dạng hình bình hành được chỉ định. Ví dụ, có một <em>primitive painter</em> mà ta gọi là <code>wave</code>, tạo ra một bản vẽ đường nét thô sơ, như minh họa trong Hình 2.10. Hình dạng thực tế của bản vẽ phụ thuộc vào khung — cả bốn hình trong Hình 2.10 đều được tạo ra bởi cùng một <em>painter</em> <code>wave</code>, nhưng với bốn khung khác nhau. <em>Painter</em> có thể phức tạp hơn thế: <em>Primitive painter</em> có tên <code>rogers</code> vẽ chân dung của người sáng lập MIT, William Barton Rogers, như trong Hình 2.11<sup class="footnote-reference"><a href="#15">15</a></sup>. Bốn hình trong Hình 2.11 được vẽ với cùng bốn khung như các hình <code>wave</code> trong Hình 2.10.</p>
+<p><img src="fig/Fig2.10.jpg" alt="" /></p>
+<p><strong>Figure 2.10:</strong> Images produced by the <code>wave</code> painter, with respect to four different frames. The frames, shown with dotted lines, are not part of the images.</p>
+<p><img src="fig/Fig2.11.jpg" alt="" /></p>
+<p><strong>Figure 2.11:</strong> Images of William Barton Rogers, founder and first president of MIT, painted with respect to the same four frames as in Figure 2.10 (original image from Wikimedia Commons).</p>
+<p>Để kết hợp các hình ảnh, chúng ta sử dụng nhiều phép toán khác nhau để tạo ra <em>painter</em> mới từ các <em>painter</em> đã cho. Ví dụ, phép toán <code>beside</code> nhận hai <em>painter</em> và tạo ra một <em>compound painter</em> (painter phức hợp) vẽ hình ảnh của <em>painter</em> thứ nhất ở nửa bên trái khung và hình ảnh của <em>painter</em> thứ hai ở nửa bên phải khung. Tương tự, <code>below</code> nhận hai <em>painter</em> và tạo ra một <em>compound painter</em> vẽ hình ảnh của <em>painter</em> thứ nhất bên dưới hình ảnh của <em>painter</em> thứ hai. Một số phép toán biến đổi một <em>painter</em> duy nhất để tạo ra <em>painter</em> mới. Ví dụ, <code>flip-vert</code> nhận một <em>painter</em> và tạo ra một <em>painter</em> vẽ hình ảnh của nó lộn ngược, và <code>flip-horiz</code> tạo ra một <em>painter</em> vẽ hình ảnh của <em>painter</em> gốc đảo ngược trái-phải.</p>
+<p>Hình 2.12 cho thấy bản vẽ của một <em>painter</em> có tên <code>wave4</code>, được xây dựng qua hai bước bắt đầu từ <code>wave</code>:</p>
+<pre><code class="language-{.scheme}">(define wave2 (beside wave (flip-vert wave)))
+(define wave4 (below wave2 wave2))
+</code></pre>
+<p><img src="fig/Fig2.12.jpg" alt="" /></p>
+<p><strong>Figure 2.12:</strong> Creating a complex figure, starting from the <code>wave</code> painter of Figure 2.10.</p>
+<p>Khi xây dựng một hình ảnh phức tạp theo cách này, chúng ta đang khai thác thực tế rằng các <em>painter</em> là <em>closed</em> (đóng) dưới các phương thức kết hợp của ngôn ngữ. <code>beside</code> hoặc <code>below</code> của hai <em>painter</em> bản thân nó cũng là một <em>painter</em>; do đó, chúng ta có thể sử dụng nó như một phần tử để tạo ra các <em>painter</em> phức tạp hơn. Giống như việc xây dựng cấu trúc <em>list</em> bằng <code>cons</code>, <em>closure</em> của dữ liệu dưới các phương thức kết hợp là yếu tố then chốt cho khả năng tạo ra các cấu trúc phức tạp chỉ với một vài phép toán.</p>
+<p>Khi đã có thể kết hợp các <em>painter</em>, chúng ta muốn có khả năng trừu tượng hóa các mẫu kết hợp <em>painter</em> điển hình. Chúng ta sẽ hiện thực các phép toán <em>painter</em> dưới dạng <em>procedure</em> Scheme. Điều này có nghĩa là chúng ta không cần một cơ chế trừu tượng hóa đặc biệt trong ngôn ngữ vẽ tranh: Vì các phương thức kết hợp là các <em>procedure</em> Scheme thông thường, chúng ta tự động có khả năng làm bất cứ điều gì với các phép toán <em>painter</em> mà chúng ta có thể làm với <em>procedure</em>. Ví dụ, chúng ta có thể trừu tượng hóa mẫu trong <code>wave4</code> như sau:</p>
+<pre><code class="language-{.scheme}">(define (flipped-pairs painter)
+  (let ((painter2 
+         (beside painter 
+                 (flip-vert painter))))
+    (below painter2 painter2)))
+</code></pre>
+<p>và định nghĩa <code>wave4</code> như một thể hiện của mẫu này:</p>
+<pre><code class="language-{.scheme}">(define wave4 (flipped-pairs wave))
+</code></pre>
+<p>Chúng ta cũng có thể định nghĩa các phép toán đệ quy. Dưới đây là một phép toán tạo ra các <em>painter</em> tách nhánh về phía bên phải như minh họa trong Hình 2.13 và Hình 2.14:</p>
+<pre><code class="language-{.scheme}">(define (right-split painter n)
+  (if (= n 0)
+      painter
+      (let ((smaller (right-split painter 
+                                  (- n 1))))
+        (beside painter 
+                (below smaller smaller)))))
+</code></pre>
+<p>![](fig/Fig2.13a.jpg 625.8x826.8)</p>
+<p><strong>Figure 2.13:</strong> Recursive plans for <code>right-split</code> and <code>corner-split</code>.</p>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p>Ngôn ngữ vẽ tranh này dựa trên ngôn ngữ do Peter Henderson tạo ra để dựng các hình ảnh giống như bản khắc gỗ “Square Limit” của M.C. Escher (xem Henderson 1982). Bản khắc gỗ này bao gồm một mẫu lặp lại được co giãn, tương tự như các bố cục được vẽ bằng <em>procedure</em> <code>square-limit</code> trong phần này.</p>
+</div>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">15</sup>
+<p>William Barton Rogers (1804-1882) là người sáng lập và là hiệu trưởng đầu tiên của MIT. Ông là một nhà địa chất và một giáo viên tài năng, từng giảng dạy tại William and Mary College và Đại học Virginia. Năm 1859, ông chuyển đến Boston, nơi ông có nhiều thời gian hơn cho nghiên cứu, làm việc về kế hoạch thành lập một “viện bách khoa” và là Thanh tra Nhà nước đầu tiên của Massachusetts về đồng hồ đo khí.</p>
+</div>
+<p>Chúng ta có thể tạo ra các mẫu cân đối bằng cách phân nhánh hướng lên trên cũng như hướng sang phải (xem Bài tập 2.44, Hình 2.13 và Hình 2.14):</p>
+<pre><code class="language-{.scheme}">(define (corner-split painter n)
+  (if (= n 0)
+      painter
+      (let ((up (up-split painter (- n 1)))
+            (right (right-split painter 
+                                (- n 1))))
+        (let ((top-left (beside up up))
+              (bottom-right (below right 
+                                   right))
+              (corner (corner-split painter 
+                                    (- n 1))))
+          (beside (below painter top-left)
+                  (below bottom-right 
+                         corner))))))
+</code></pre>
+<p><img src="fig/Fig2.14b.jpg" alt="" /></p>
+<p><strong>Figure 2.14:</strong> The recursive operations <code>right-split</code> and <code>corner-split</code> applied to the painters <code>wave</code> and <code>rogers</code>. Combining four <code>corner-split</code> figures produces symmetric <code>square-limit</code> designs as shown in Figure 2.9.</p>
+<p>Bằng cách đặt bốn bản sao của một <code>corner-split</code> một cách thích hợp, chúng ta thu được một mẫu gọi là <code>square-limit</code>, với ứng dụng cho <code>wave</code> và <code>rogers</code> như minh họa trong Hình 2.9:</p>
+<pre><code class="language-{.scheme}">(define (square-limit painter n)
+  (let ((quarter (corner-split painter n)))
+    (let ((half (beside (flip-horiz quarter) 
+                        quarter)))
+      (below (flip-vert half) half))))
+</code></pre>
+<h3 id="higher-order-operations-các-phép-toán-bậc-cao"><a class="header" href="#higher-order-operations-các-phép-toán-bậc-cao"><em>Higher-order operations</em> (các phép toán bậc cao)</a></h3>
+<p>Ngoài việc trừu tượng hóa các mẫu kết hợp <em>painter</em>, chúng ta có thể làm việc ở mức cao hơn, trừu tượng hóa các mẫu kết hợp các <em>painter operation</em> (phép toán trên painter). Nghĩa là, chúng ta có thể xem các <em>painter operation</em> như những phần tử để thao tác và có thể viết các phương thức kết hợp cho các phần tử này — các <em>procedure</em> nhận <em>painter operation</em> làm đối số và tạo ra <em>painter operation</em> mới.</p>
+<p>Ví dụ, <code>flipped-pairs</code> và <code>square-limit</code> đều sắp xếp bốn bản sao của hình ảnh một <em>painter</em> trong một mẫu hình vuông; chúng chỉ khác nhau ở cách định hướng các bản sao. Một cách để trừu tượng hóa mẫu kết hợp <em>painter</em> này là với <em>procedure</em> sau, nhận bốn <em>painter operation</em> một đối số và tạo ra một <em>painter operation</em> biến đổi một <em>painter</em> cho trước bằng bốn phép toán đó và sắp xếp các kết quả thành một hình vuông. <code>Tl</code>, <code>tr</code>, <code>bl</code>, và <code>br</code> là các phép biến đổi áp dụng lần lượt cho bản sao ở góc trên bên trái, góc trên bên phải, góc dưới bên trái và góc dưới bên phải.</p>
+<pre><code class="language-{.scheme}">(define (square-of-four tl tr bl br)
+  (lambda (painter)
+    (let ((top (beside (tl painter) 
+                       (tr painter)))
+          (bottom (beside (bl painter) 
+                          (br painter))))
+      (below bottom top))))
+</code></pre>
+<p>Khi đó, <code>flipped-pairs</code> có thể được định nghĩa dựa trên <code>square-of-four</code> như sau:<sup class="footnote-reference"><a href="#16">16</a></sup></p>
+<pre><code class="language-{.scheme}">(define (flipped-pairs painter)
+  (let ((combine4 
+         (square-of-four identity 
+                         flip-vert
+                         identity 
+                         flip-vert)))
+    (combine4 painter)))
+</code></pre>
+<p>và <code>square-limit</code> có thể được biểu diễn như sau<sup class="footnote-reference"><a href="#17">17</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (square-limit painter n)
+  (let ((combine4 
+         (square-of-four flip-horiz 
+                         identity
+                         rotate180 
+                         flip-vert)))
+    (combine4 (corner-split painter n))))
+</code></pre>
+<div class="footnote-definition" id="16"><sup class="footnote-definition-label">16</sup>
+<p>Tương đương, chúng ta có thể viết…</p>
+</div>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">17</sup>
+<p><code>Rotate180</code> xoay một <em>painter</em> 180 độ (xem Bài tập 2.50). Thay vì <code>rotate180</code>, chúng ta có thể viết <code>(compose flip-vert flip-horiz)</code>, sử dụng <em>procedure</em> <code>compose</code> từ Bài tập 1.42.</p>
+</div>
+<h3 id="frames"><a class="header" href="#frames">Frames</a></h3>
+<p>Trước khi chúng ta có thể chỉ ra cách hiện thực các <em>painter</em> và các phương thức kết hợp của chúng, trước hết cần xem xét <em>frame</em> (khung). Một <em>frame</em> có thể được mô tả bởi ba <em>vector</em> — một <em>origin vector</em> (vector gốc) và hai <em>edge vector</em> (vector cạnh). <em>Origin vector</em> xác định độ lệch của gốc <em>frame</em> so với một gốc tuyệt đối nào đó trên mặt phẳng, và các <em>edge vector</em> xác định độ lệch của các góc <em>frame</em> so với gốc của nó. Nếu các cạnh vuông góc, <em>frame</em> sẽ là hình chữ nhật. Ngược lại, <em>frame</em> sẽ là một hình bình hành tổng quát hơn.</p>
+<p>Hình 2.15 minh họa một <em>frame</em> và các <em>vector</em> liên quan. Theo nguyên tắc <em>data abstraction</em> (trừu tượng hóa dữ liệu), chúng ta chưa cần xác định cụ thể cách biểu diễn <em>frame</em>, ngoài việc nói rằng có một <em>constructor</em> <code>make-frame</code>, nhận ba <em>vector</em> và tạo ra một <em>frame</em>, cùng với ba <em>selector</em> tương ứng <code>origin-frame</code>, <code>edge1-frame</code>, và <code>edge2-frame</code> (xem Bài tập 2.47).</p>
+<p><img src="fig/Fig2.15a.jpg" alt="" /></p>
+<p><strong>Figure 2.15:</strong> A frame is described by three vectors — an origin and two edges.</p>
+<p>Chúng ta sẽ sử dụng hệ tọa độ trong <em>unit square</em> $(0 \leq x,y \leq 1)$ để xác định hình ảnh. Với mỗi <em>frame</em>, chúng ta gắn một <em>frame coordinate map</em> (ánh xạ tọa độ khung), được dùng để tịnh tiến và co giãn hình ảnh sao cho vừa khít với <em>frame</em>. Ánh xạ này biến đổi <em>unit square</em> thành <em>frame</em> bằng cách ánh xạ <em>vector</em> $\mathbf{v} = (x,y)$ thành tổng <em>vector</em>:</p>
+<p>$$\text{Origin(Frame)} + {x \cdot \text{Edge}<em>{1}\text{(Frame)}} + {y \cdot \text{Edge}</em>{2}\text{(Frame)}.}$$</p>
+<p>Ví dụ, (0, 0) được ánh xạ tới gốc của <em>frame</em>, (1, 1) tới đỉnh đối diện theo đường chéo với gốc, và (0.5, 0.5) tới tâm của <em>frame</em>. Chúng ta có thể tạo <em>frame coordinate map</em> bằng <em>procedure</em> sau<sup class="footnote-reference"><a href="#18">18</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (frame-coord-map frame)
+  (lambda (v)
+    (add-vect
+     (origin-frame frame)
+     (add-vect 
+      (scale-vect (xcor-vect v)
+                  (edge1-frame frame))
+      (scale-vect (ycor-vect v)
+                  (edge2-frame frame))))))
+</code></pre>
+<p>Lưu ý rằng việc áp dụng <code>frame-coord-map</code> cho một <em>frame</em> sẽ trả về một <em>procedure</em> mà, khi nhận một <em>vector</em>, sẽ trả về một <em>vector</em>. Nếu <em>vector</em> đối số nằm trong <em>unit square</em>, <em>vector</em> kết quả sẽ nằm trong <em>frame</em>. Ví dụ:</p>
+<pre><code class="language-{.scheme}">((frame-coord-map a-frame) (make-vect 0 0))
+</code></pre>
+<p>trả về cùng một <em>vector</em> với:</p>
+<pre><code class="language-{.scheme}">(origin-frame a-frame)
+</code></pre>
+<h3 id="painters"><a class="header" href="#painters">Painters</a></h3>
+<p>Một <em>painter</em> được biểu diễn như một <em>procedure</em> mà, khi nhận một <em>frame</em> làm đối số, sẽ vẽ một hình ảnh cụ thể được tịnh tiến và co giãn để vừa khít với <em>frame</em>. Nói cách khác, nếu <code>p</code> là một <em>painter</em> và <code>f</code> là một <em>frame</em>, thì ta tạo ra hình ảnh của <code>p</code> trong <code>f</code> bằng cách gọi <code>p</code> với <code>f</code> làm đối số.</p>
+<p>Chi tiết về cách hiện thực các <em>primitive painter</em> phụ thuộc vào đặc điểm cụ thể của hệ thống đồ họa và loại hình ảnh cần vẽ. Ví dụ, giả sử chúng ta có một <em>procedure</em> <code>draw-line</code> vẽ một đường thẳng trên màn hình giữa hai điểm được chỉ định. Khi đó, ta có thể tạo các <em>painter</em> cho bản vẽ đường nét, như <em>painter</em> <code>wave</code> trong Hình 2.10, từ các <em>list</em> đoạn thẳng như sau<sup class="footnote-reference"><a href="#19">19</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (segments-&gt;painter segment-list)
+  (lambda (frame)
+    (for-each
+     (lambda (segment)
+       (draw-line
+        ((frame-coord-map frame) 
+         (start-segment segment))
+        ((frame-coord-map frame) 
+         (end-segment segment))))
+     segment-list)))
+</code></pre>
+<p>Các đoạn thẳng được cho bằng tọa độ so với <em>unit square</em>. Với mỗi đoạn trong <em>list</em>, <em>painter</em> sẽ biến đổi các điểm đầu mút của đoạn bằng <em>frame coordinate map</em> và vẽ một đường nối giữa các điểm đã biến đổi.</p>
+<p>Việc biểu diễn <em>painter</em> dưới dạng <em>procedure</em> tạo ra một <em>abstraction barrier</em> (rào chắn trừu tượng) mạnh mẽ trong ngôn ngữ vẽ tranh. Chúng ta có thể tạo và kết hợp nhiều loại <em>primitive painter</em> khác nhau, dựa trên nhiều khả năng đồ họa khác nhau. Chi tiết hiện thực của chúng không quan trọng. Bất kỳ <em>procedure</em> nào cũng có thể đóng vai trò là <em>painter</em>, miễn là nó nhận một <em>frame</em> làm đối số và vẽ một thứ gì đó được co giãn để vừa khít với <em>frame</em><sup class="footnote-reference"><a href="#20">20</a></sup>.</p>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">18</sup>
+<p><code>Frame-coord-map</code> sử dụng các phép toán <em>vector</em> được mô tả trong Bài tập 2.46 bên dưới, mà chúng ta giả định đã được hiện thực bằng một cách biểu diễn nào đó cho <em>vector</em>. Do nguyên tắc <em>data abstraction</em>, không quan trọng biểu diễn <em>vector</em> đó là gì, miễn là các phép toán <em>vector</em> hoạt động đúng.</p>
+</div>
+<div class="footnote-definition" id="19"><sup class="footnote-definition-label">19</sup>
+<p><code>Segments-&gt;painter</code> sử dụng cách biểu diễn các đoạn thẳng được mô tả trong Bài tập 2.48 bên dưới. Nó cũng sử dụng <em>procedure</em> <code>for-each</code> được mô tả trong Bài tập 2.23.</p>
+</div>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">20</sup>
+<p>Ví dụ, <em>painter</em> <code>rogers</code> trong Hình 2.11 được tạo từ một ảnh mức xám. Với mỗi điểm trong một <em>frame</em> cho trước, <em>painter</em> <code>rogers</code> xác định điểm trong ảnh được ánh xạ tới nó theo <em>frame coordinate map</em>, và tô bóng tương ứng. Bằng cách cho phép nhiều loại <em>painter</em> khác nhau, chúng ta đang tận dụng ý tưởng <em>abstract data</em> đã thảo luận ở mục 2.1.3, nơi chúng ta lập luận rằng một biểu diễn số hữu tỉ có thể là bất cứ thứ gì miễn là thỏa mãn điều kiện thích hợp. Ở đây, chúng ta sử dụng thực tế rằng một <em>painter</em> có thể được hiện thực theo bất kỳ cách nào, miễn là nó vẽ được thứ gì đó trong <em>frame</em> được chỉ định. Mục 2.1.3 cũng đã chỉ ra cách <em>pair</em> có thể được hiện thực như các <em>procedure</em>. <em>Painter</em> là ví dụ thứ hai của chúng ta về một cách biểu diễn dữ liệu bằng <em>procedure</em>.</p>
+</div>
+<h3 id="biến-đổi-và-kết-hợp-painter"><a class="header" href="#biến-đổi-và-kết-hợp-painter">Biến đổi và kết hợp <em>painter</em></a></h3>
+<p>Một phép toán trên <em>painter</em> (chẳng hạn như <code>flip-vert</code> hoặc <code>beside</code>) hoạt động bằng cách tạo ra một <em>painter</em> mới, gọi các <em>painter</em> gốc với các <em>frame</em> được suy ra từ <em>frame</em> đối số. Do đó, ví dụ, <code>flip-vert</code> không cần biết một <em>painter</em> hoạt động như thế nào để lật nó — nó chỉ cần biết cách lật ngược một <em>frame</em>: <em>Painter</em> đã lật chỉ đơn giản sử dụng <em>painter</em> gốc, nhưng trong <em>frame</em> đã bị đảo ngược.</p>
+<p>Các phép toán trên <em>painter</em> được xây dựng dựa trên <em>procedure</em> (thủ tục) <code>transform-painter</code>, nhận vào một <em>painter</em> và thông tin về cách biến đổi một <em>frame</em>, và tạo ra một <em>painter</em> mới. <em>Painter</em> đã biến đổi, khi được gọi với một <em>frame</em>, sẽ biến đổi <em>frame</em> đó và gọi <em>painter</em> gốc với <em>frame</em> đã biến đổi. Các đối số truyền cho <code>transform-painter</code> là các điểm (được biểu diễn dưới dạng <em>vector</em>) xác định các góc của <em>frame</em> mới: Khi được ánh xạ vào <em>frame</em>, điểm thứ nhất xác định gốc của <em>frame</em> mới và hai điểm còn lại xác định điểm cuối của các <em>edge vector</em> của nó. Do đó, các đối số nằm trong <em>unit square</em> sẽ xác định một <em>frame</em> nằm bên trong <em>frame</em> gốc.</p>
+<pre><code class="language-{.scheme}">(define (transform-painter 
+         painter origin corner1 corner2)
+  (lambda (frame)
+    (let ((m (frame-coord-map frame)))
+      (let ((new-origin (m origin)))
+        (painter (make-frame new-origin
+                  (sub-vect (m corner1) 
+                            new-origin)
+                  (sub-vect (m corner2)
+                            new-origin)))))))
+</code></pre>
+<p>Ví dụ về cách lật ngược hình ảnh của <em>painter</em> theo chiều dọc:</p>
+<pre><code class="language-{.scheme}">(define (flip-vert painter)
+  (transform-painter 
+   painter
+   (make-vect 0.0 1.0)   ; new origin
+   (make-vect 1.0 1.0)   ; new end of edge1
+   (make-vect 0.0 0.0))) ; new end of edge2
+</code></pre>
+<p>Sử dụng <code>transform-painter</code>, chúng ta có thể dễ dàng định nghĩa các phép biến đổi mới. Ví dụ, ta có thể định nghĩa một <em>painter</em> thu nhỏ hình ảnh của nó vào góc phần tư phía trên bên phải của <em>frame</em> được truyền vào:</p>
+<pre><code class="language-{.scheme}">(define (shrink-to-upper-right painter)
+  (transform-painter painter
+                     (make-vect 0.5 0.5)
+                     (make-vect 1.0 0.5)
+                     (make-vect 0.5 1.0)))
+</code></pre>
+<p>Các phép biến đổi khác có thể xoay hình ảnh ngược chiều kim đồng hồ 90 độ<sup class="footnote-reference"><a href="#21">21</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (rotate90 painter)
+  (transform-painter painter
+                     (make-vect 1.0 0.0)
+                     (make-vect 1.0 1.0)
+                     (make-vect 0.0 0.0)))
+</code></pre>
+<p>hoặc ép hình ảnh vào gần tâm của <em>frame</em><sup class="footnote-reference"><a href="#22">22</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (squash-inwards painter)
+  (transform-painter painter
+                     (make-vect 0.0 0.0)
+                     (make-vect 0.65 0.35)
+                     (make-vect 0.35 0.65)))
+</code></pre>
+<p>Biến đổi <em>frame</em> cũng là chìa khóa để định nghĩa các phương thức kết hợp hai hoặc nhiều <em>painter</em>. Ví dụ, <em>procedure</em> <code>beside</code> nhận hai <em>painter</em>, biến đổi chúng để vẽ lần lượt ở nửa bên trái và nửa bên phải của <em>frame</em> đối số, và tạo ra một <em>compound painter</em> (painter phức hợp) mới. Khi <em>painter</em> phức hợp này được truyền một <em>frame</em>, nó sẽ gọi <em>painter</em> đã biến đổi thứ nhất để vẽ ở nửa bên trái của <em>frame</em> và gọi <em>painter</em> đã biến đổi thứ hai để vẽ ở nửa bên phải của <em>frame</em>:</p>
+<pre><code class="language-{.scheme}">(define (beside painter1 painter2)
+  (let ((split-point (make-vect 0.5 0.0)))
+    (let ((paint-left  (transform-painter 
+                        painter1
+                        (make-vect 0.0 0.0)
+                        split-point
+                        (make-vect 0.0 1.0)))
+          (paint-right (transform-painter
+                        painter2
+                        split-point
+                        (make-vect 1.0 0.0)
+                        (make-vect 0.5 1.0))))
+      (lambda (frame)
+        (paint-left frame)
+        (paint-right frame)))))
+</code></pre>
+<p>Hãy chú ý cách <em>data abstraction</em> của <em>painter</em>, và đặc biệt là cách biểu diễn <em>painter</em> dưới dạng <em>procedure</em>, giúp cho <code>beside</code> dễ dàng được hiện thực. <em>Procedure</em> <code>beside</code> không cần biết bất cứ chi tiết nào về các <em>painter</em> thành phần, ngoài việc mỗi <em>painter</em> sẽ vẽ một thứ gì đó trong <em>frame</em> được chỉ định của nó.</p>
+<div class="footnote-definition" id="21"><sup class="footnote-definition-label">21</sup>
+<p><code>Rotate90</code> là một phép xoay thuần túy chỉ đối với các <em>frame</em> hình vuông, vì nó cũng kéo giãn và thu nhỏ hình ảnh để vừa với <em>frame</em> đã xoay.</p>
+</div>
+<div class="footnote-definition" id="22"><sup class="footnote-definition-label">22</sup>
+<p>Các hình dạng kim cương trong Hình 2.10 và Hình 2.11 được tạo ra bằng cách áp dụng <code>squash-inwards</code> cho <code>wave</code> và <code>rogers</code>.</p>
+</div>
+<h3 id="các-cấp-độ-ngôn-ngữ-cho-thiết-kế-bền-vững-robust-design"><a class="header" href="#các-cấp-độ-ngôn-ngữ-cho-thiết-kế-bền-vững-robust-design">Các cấp độ ngôn ngữ cho thiết kế bền vững (<em>robust design</em>)</a></h3>
+<p>Ngôn ngữ vẽ tranh minh họa một số ý tưởng then chốt mà chúng ta đã giới thiệu về <em>abstraction</em> (trừu tượng hóa) với <em>procedure</em> (thủ tục) và dữ liệu. Các <em>data abstraction</em> (trừu tượng hóa dữ liệu) cơ bản — <em>painter</em> — được hiện thực bằng <em>procedural representation</em> (biểu diễn thủ tục), cho phép ngôn ngữ xử lý các khả năng vẽ cơ bản khác nhau theo một cách thống nhất. Các <em>means of combination</em> (phương thức kết hợp) thỏa mãn <em>closure property</em> (tính đóng), cho phép chúng ta dễ dàng xây dựng các thiết kế phức tạp. Cuối cùng, tất cả các công cụ để trừu tượng hóa <em>procedure</em> đều sẵn có để chúng ta trừu tượng hóa các phương thức kết hợp cho <em>painter</em>.</p>
+<p>Chúng ta cũng đã thoáng thấy một ý tưởng quan trọng khác về ngôn ngữ và thiết kế chương trình. Đây là cách tiếp cận <em>stratified design</em> (thiết kế phân tầng), quan niệm rằng một hệ thống phức tạp nên được cấu trúc thành một chuỗi các tầng, mỗi tầng được mô tả bằng một chuỗi các ngôn ngữ. Mỗi tầng được xây dựng bằng cách kết hợp các phần được coi là <em>primitive</em> (nguyên thủy) ở tầng đó, và các phần được tạo ra ở mỗi tầng sẽ được dùng làm <em>primitive</em> ở tầng tiếp theo. Ngôn ngữ được sử dụng ở mỗi tầng của một <em>stratified design</em> có các <em>primitive</em>, <em>means of combination</em>, và <em>means of abstraction</em> phù hợp với mức độ chi tiết của tầng đó.</p>
+<p><em>Stratified design</em> thấm nhuần trong kỹ thuật của các hệ thống phức tạp. Ví dụ, trong kỹ thuật máy tính, điện trở và transistor được kết hợp (và được mô tả bằng một ngôn ngữ của mạch tương tự) để tạo ra các phần tử như <em>and-gate</em> và <em>or-gate</em>, vốn tạo thành các <em>primitive</em> của một ngôn ngữ thiết kế mạch số<sup class="footnote-reference"><a href="#Phần 3.3.4 mô tả một ngôn ngữ như vậy.">23</a></sup>. Các phần tử này được kết hợp để xây dựng bộ xử lý, cấu trúc bus, và hệ thống bộ nhớ, rồi lại được kết hợp để tạo thành máy tính, sử dụng các ngôn ngữ phù hợp với kiến trúc máy tính. Các máy tính lại được kết hợp để tạo thành các hệ thống phân tán, sử dụng các ngôn ngữ phù hợp để mô tả kết nối mạng, và cứ thế tiếp tục.</p>
+<p>Như một ví dụ nhỏ về phân tầng, ngôn ngữ vẽ tranh của chúng ta sử dụng các phần tử nguyên thủy (<em>primitive painter</em>) được tạo ra bằng một ngôn ngữ xác định các điểm và đường để cung cấp danh sách các đoạn thẳng cho <code>segments-&gt;painter</code>, hoặc các chi tiết tô bóng cho một <em>painter</em> như <code>rogers</code>. Phần lớn mô tả của chúng ta về ngôn ngữ vẽ tranh tập trung vào việc kết hợp các <em>primitive</em> này, sử dụng các <em>geometric combiner</em> (bộ kết hợp hình học) như <code>beside</code> và <code>below</code>. Chúng ta cũng đã làm việc ở mức cao hơn, coi <code>beside</code> và <code>below</code> là các <em>primitive</em> để thao tác trong một ngôn ngữ mà các phép toán của nó, như <code>square-of-four</code>, nắm bắt các mẫu chung của việc kết hợp các <em>geometric combiner</em>.</p>
+<p><em>Stratified design</em> giúp chương trình trở nên <em>robust</em> (bền vững), nghĩa là làm tăng khả năng rằng những thay đổi nhỏ trong đặc tả sẽ chỉ đòi hỏi những thay đổi nhỏ tương ứng trong chương trình. Ví dụ, giả sử chúng ta muốn thay đổi hình ảnh dựa trên <code>wave</code> trong Hình 2.9. Chúng ta có thể làm việc ở tầng thấp nhất để thay đổi chi tiết hình thức của phần tử <code>wave</code>; chúng ta có thể làm việc ở tầng giữa để thay đổi cách <code>corner-split</code> nhân bản <code>wave</code>; chúng ta có thể làm việc ở tầng cao nhất để thay đổi cách <code>square-limit</code> sắp xếp bốn bản sao của góc. Nói chung, mỗi tầng của một <em>stratified design</em> cung cấp một vốn từ khác nhau để diễn đạt các đặc điểm của hệ thống, và một loại khả năng thay đổi khác nhau.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="2-3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="2-3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

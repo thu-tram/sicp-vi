@@ -1,0 +1,657 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Elements of Programming - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html" class="active"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="11-các-thành-phần-của-programming"><a class="header" href="#11-các-thành-phần-của-programming">1.1 Các thành phần của Programming</a></h1>
+<p>Một ngôn ngữ <strong>programming</strong> mạnh mẽ không chỉ là công cụ để ra lệnh cho máy tính thực hiện các tác vụ. Ngôn ngữ còn đóng vai trò như một khung tư duy mà trong đó chúng ta tổ chức các ý tưởng về <strong>processes</strong> (quá trình). Vì vậy, khi mô tả một ngôn ngữ, chúng ta nên chú ý đặc biệt đến các phương tiện mà ngôn ngữ cung cấp để kết hợp những ý tưởng đơn giản nhằm hình thành các ý tưởng phức tạp hơn. Mỗi ngôn ngữ mạnh mẽ đều có ba cơ chế để thực hiện điều này:</p>
+<ul>
+<li><strong>primitive expressions</strong> (biểu thức nguyên thủy), đại diện cho những thực thể đơn giản nhất mà ngôn ngữ quan tâm,</li>
+<li><strong>means of combination</strong> (phương tiện kết hợp), bằng đó các phần tử phức hợp được xây dựng từ những phần tử đơn giản hơn, và</li>
+<li><strong>means of abstraction</strong> (phương tiện trừu tượng hóa), nhờ đó các phần tử phức hợp có thể được đặt tên và thao tác như các đơn vị.</li>
+</ul>
+<p>Trong <strong>programming</strong>, chúng ta làm việc với hai loại thành phần: <strong>procedures</strong> (thủ tục) và <strong>data</strong> (dữ liệu). (Sau này chúng ta sẽ phát hiện rằng chúng thực ra không hẳn là khác biệt.) Nói một cách không chính thức, <strong>data</strong> là “thứ” mà chúng ta muốn thao tác, còn <strong>procedures</strong> là mô tả các quy tắc để thao tác dữ liệu đó. Do đó, bất kỳ ngôn ngữ programming mạnh mẽ nào cũng phải có khả năng mô tả <strong>primitive data</strong> và <strong>primitive procedures</strong>, đồng thời có phương thức để kết hợp và trừu tượng hóa <strong>procedures</strong> và <strong>data</strong>.</p>
+<p>Trong chương này, chúng ta sẽ chỉ làm việc với <strong>numerical data</strong> (dữ liệu số) đơn giản để có thể tập trung vào các quy tắc xây dựng <strong>procedures</strong>.<sup class="footnote-reference"><a href="#1">1</a></sup> Ở các chương sau, chúng ta sẽ thấy rằng các quy tắc này cũng cho phép ta xây dựng <strong>procedures</strong> để thao tác với <strong>compound data</strong> (dữ liệu phức hợp).</p>
+<h2 id="111-expressions"><a class="header" href="#111-expressions">1.1.1 Expressions</a></h2>
+<p>Một cách dễ dàng để bắt đầu học <strong>programming</strong> là quan sát một số tương tác điển hình với <strong>interpreter</strong> (trình thông dịch) của ngôn ngữ <strong>Scheme</strong> (một dialect của Lisp). Hãy tưởng tượng bạn đang ngồi trước một máy tính. Bạn gõ vào một <strong>expression</strong> (biểu thức), và <strong>interpreter</strong> phản hồi bằng cách hiển thị kết quả của việc <strong>evaluating</strong> (tính toán/đánh giá) biểu thức đó.</p>
+<p>Một loại <strong>primitive expression</strong> mà bạn có thể gõ là một số. (Chính xác hơn, biểu thức bạn gõ gồm các chữ số đại diện cho số đó ở hệ thập phân.) Nếu bạn đưa cho Lisp một số</p>
+<pre><code class="language-{.scheme}">486
+</code></pre>
+<p><strong>interpreter</strong> sẽ phản hồi bằng cách in ra<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-{.scheme}">486
+</code></pre>
+<p>Các <strong>expressions</strong> biểu diễn số có thể được kết hợp với một <strong>expression</strong> biểu diễn một <strong>primitive procedure</strong> (chẳng hạn như <code>+</code> hoặc <code>*</code>) để hình thành một <strong>compound expression</strong> (biểu thức phức hợp) mô tả việc áp dụng <strong>procedure</strong> đó lên các số. Ví dụ:</p>
+<pre><code class="language-{.scheme}">(+ 137 349)
+486
+
+(- 1000 334)
+666
+
+(* 5 99)
+495
+
+(/ 10 5)
+2
+
+(+ 2.7 10)
+12.7
+</code></pre>
+<p>Những <strong>expressions</strong> như trên, được tạo ra bằng cách đặt một danh sách các <strong>expressions</strong> trong cặp ngoặc đơn để biểu thị việc áp dụng <strong>procedure</strong>, được gọi là <em>combinations</em> (tổ hợp). Phần tử ngoài cùng bên trái trong danh sách được gọi là <em>operator</em> (toán tử), và các phần tử còn lại được gọi là <em>operands</em> (toán hạng). Giá trị của một <em>combination</em> được thu được bằng cách áp dụng <strong>procedure</strong> mà <em>operator</em> chỉ định lên các <em>arguments</em> (đối số) chính là giá trị của các <em>operands</em>.</p>
+<p>Quy ước đặt <em>operator</em> ở bên trái <em>operands</em> được gọi là <em>prefix notation</em> (ký pháp tiền tố), và ban đầu có thể hơi khó hiểu vì nó khác biệt đáng kể với quy ước toán học thông thường. Tuy nhiên, <em>prefix notation</em> có một số ưu điểm. Một trong số đó là nó có thể chứa các <strong>procedures</strong> có số lượng <strong>arguments</strong> tùy ý, như trong các ví dụ sau:</p>
+<pre><code class="language-{.scheme}">(+ 21 35 12 7)
+75
+
+(* 25 4 12)
+1200
+</code></pre>
+<p>Không thể xảy ra sự mơ hồ, vì <em>operator</em> luôn là phần tử ngoài cùng bên trái và toàn bộ <em>combination</em> được bao bởi dấu ngoặc đơn.</p>
+<p>Ưu điểm thứ hai của <em>prefix notation</em> là nó mở rộng một cách trực tiếp để cho phép <em>combinations</em> được <em>nested</em> (lồng nhau), tức là có những <em>combinations</em> mà các phần tử của chúng lại chính là <em>combinations</em>:</p>
+<pre><code class="language-{.scheme}">(+ (* 3 5) (- 10 6))
+19
+</code></pre>
+<p>Về nguyên tắc, độ sâu của việc <em>nested</em> và độ phức tạp tổng thể của <strong>expressions</strong> mà <strong>interpreter</strong> Lisp có thể tính toán là không giới hạn. Chính con người chúng ta mới là những người dễ bị rối khi gặp những biểu thức tương đối đơn giản như:</p>
+<pre><code class="language-{.scheme}">(+ (* 3 (+ (* 2 4) (+ 3 5))) (+ (- 10 7) 6))
+</code></pre>
+<p>trong khi <strong>interpreter</strong> có thể dễ dàng tính ra kết quả 57. Chúng ta có thể tự giúp mình bằng cách viết biểu thức này theo dạng</p>
+<pre><code class="language-{.scheme}">(+ (* 3
+      (+ (* 2 4)
+         (+ 3 5)))
+   (+ (- 10 7)
+      6))
+</code></pre>
+<p>theo một quy ước định dạng gọi là <em>pretty-printing</em> (in đẹp), trong đó mỗi <em>combination</em> dài được viết sao cho các <em>operands</em> được căn thẳng hàng theo chiều dọc. Các thụt lề như vậy hiển thị rõ cấu trúc của <strong>expression</strong>.<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<p>Ngay cả với những <strong>expressions</strong> phức tạp, <strong>interpreter</strong> luôn vận hành theo cùng một chu trình cơ bản: Nó đọc một <strong>expression</strong> từ terminal, tính toán biểu thức đó, và in ra kết quả. Chế độ hoạt động này thường được diễn đạt bằng cách nói rằng <strong>interpreter</strong> chạy trong một vòng lặp <em>read-eval-print loop</em>. Hãy đặc biệt chú ý rằng không cần phải ra lệnh tường minh cho <strong>interpreter</strong> in ra giá trị của biểu thức.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<h2 id="112-naming-and-the-environment"><a class="header" href="#112-naming-and-the-environment">1.1.2 Naming and the Environment</a></h2>
+<p>Một khía cạnh quan trọng của một ngôn ngữ programming là phương tiện mà nó cung cấp để sử dụng tên nhằm tham chiếu đến các đối tượng tính toán. Chúng ta nói rằng tên xác định một <em>variable</em> (biến), mà <em>value</em> (giá trị) của nó là đối tượng đó.</p>
+<p>Trong dialect Scheme của Lisp, chúng ta đặt tên bằng <code>define</code>. Việc gõ</p>
+<pre><code class="language-{.scheme}">(define size 2)
+</code></pre>
+<p>khiến <strong>interpreter</strong> liên kết giá trị 2 với tên <code>size</code>.<sup class="footnote-reference"><a href="#5">5</a></sup> Một khi tên <code>size</code> đã được gắn với số 2, chúng ta có thể tham chiếu đến giá trị 2 bằng tên đó:</p>
+<pre><code class="language-{.scheme}">size
+2
+
+(* 5 size)
+10
+</code></pre>
+<p>Dưới đây là thêm một vài ví dụ về việc sử dụng <code>define</code>:</p>
+<pre><code class="language-{.scheme}">(define pi 3.14159)
+(define radius 10)
+
+(* pi (* radius radius))
+314.159
+
+(define circumference (* 2 pi radius))
+
+circumference
+62.8318
+</code></pre>
+<p><code>Define</code> là phương tiện trừu tượng hóa đơn giản nhất của ngôn ngữ, vì nó cho phép chúng ta sử dụng những tên đơn giản để tham chiếu đến kết quả của các phép toán phức hợp, chẳng hạn như <code>circumference</code> được tính ở trên. Nói chung, các đối tượng tính toán có thể có cấu trúc rất phức tạp, và sẽ cực kỳ bất tiện nếu phải nhớ và lặp lại chi tiết của chúng mỗi lần muốn sử dụng. Thật vậy, các chương trình phức tạp được xây dựng bằng cách tạo ra, từng bước một, các đối tượng tính toán có độ phức tạp ngày càng tăng. <strong>Interpreter</strong> khiến cho việc xây dựng chương trình theo từng bước như vậy trở nên đặc biệt tiện lợi vì các liên kết tên-đối tượng có thể được tạo ra dần dần qua những lần tương tác kế tiếp. Đặc điểm này khuyến khích sự phát triển và thử nghiệm chương trình theo cách gia tăng và phần lớn chịu trách nhiệm cho việc chương trình Lisp thường bao gồm một số lượng lớn các <strong>procedures</strong> tương đối đơn giản.</p>
+<p>Rõ ràng việc có thể gắn các giá trị với các ký hiệu rồi sau đó truy xuất lại chúng có nghĩa là <strong>interpreter</strong> phải duy trì một dạng bộ nhớ nào đó để theo dõi các cặp tên-đối tượng. Bộ nhớ này được gọi là <em>environment</em> (môi trường) (chính xác hơn là <em>global environment</em> (môi trường toàn cục), vì sau này chúng ta sẽ thấy rằng một phép tính có thể liên quan đến nhiều <em>environments</em> khác nhau)<sup class="footnote-reference"><a href="#0">6</a></sup>.</p>
+<div class="footnote-definition" id="0"><sup class="footnote-definition-label">6</sup>
+<p>Chapter 3 sẽ cho thấy rằng khái niệm <em>environment</em> này rất quan trọng, cả trong việc hiểu cách <strong>interpreter</strong> hoạt động lẫn trong việc hiện thực hóa các <strong>interpreters</strong>.</p>
+</div>
+<h2 id="113-evaluating-combinations"><a class="header" href="#113-evaluating-combinations">1.1.3 Evaluating Combinations</a></h2>
+<p>Một trong những mục tiêu của chúng ta trong chương này là phân tách các vấn đề liên quan đến việc tư duy theo cách <strong>procedural</strong> (thủ tục). Là một ví dụ, hãy xem xét rằng khi tính toán một <em>combination</em>, chính <strong>interpreter</strong> cũng đang tuân theo một <strong>procedure</strong>.</p>
+<blockquote>
+<p>Để tính toán một <em>combination</em>, hãy thực hiện các bước sau:</p>
+<blockquote>
+<ol>
+<li>Tính toán các <em>subexpressions</em> (biểu thức con) của <em>combination</em>.</li>
+</ol>
+</blockquote>
+<ol start="2">
+<li>Áp dụng <strong>procedure</strong> là giá trị của <em>subexpression</em> ngoài cùng bên trái (<em>operator</em>) lên các <strong>arguments</strong> là giá trị của các <em>subexpressions</em> còn lại (<em>operands</em>).</li>
+</ol>
+</blockquote>
+<p>Ngay cả quy tắc đơn giản này cũng minh họa một số điểm quan trọng về các <strong>processes</strong> nói chung. Trước hết, hãy chú ý rằng bước đầu tiên quy định rằng để hoàn thành quá trình tính toán một <em>combination</em>, chúng ta phải trước tiên thực hiện quá trình tính toán trên từng phần tử của <em>combination</em>. Do đó, quy tắc tính toán này có bản chất là <em>recursive</em> (đệ quy); tức là, nó bao gồm — như một trong các bước — yêu cầu gọi lại chính quy tắc đó.<sup class="footnote-reference"><a href="#6">7</a></sup></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Việc mô tả số như là “dữ liệu đơn giản” thực chất là một sự đánh lừa trắng trợn. Thật ra, cách xử lý số là một trong những khía cạnh khó khăn và dễ gây nhầm lẫn nhất của bất kỳ ngôn ngữ programming nào. Một số vấn đề điển hình là: Một số hệ thống máy tính phân biệt <em>integers</em> (số nguyên), như 2, với <em>real numbers</em> (số thực), như 2.71. Số thực 2.00 có khác với số nguyên 2 không? Các phép toán số học cho số nguyên có giống với các phép toán cho số thực không? 6 chia cho 2 cho ra 3 hay 3.0? Ta có thể biểu diễn số lớn đến mức nào? Biểu diễn được bao nhiêu chữ số thập phân chính xác? Phạm vi của số nguyên có giống với phạm vi của số thực không? Ngoài tất cả những câu hỏi này, dĩ nhiên, còn có một loạt vấn đề về sai số làm tròn và cắt cụt — toàn bộ ngành khoa học phân tích số. Vì trọng tâm của cuốn sách này là thiết kế chương trình quy mô lớn chứ không phải các kỹ thuật số, nên chúng ta sẽ bỏ qua những vấn đề này. Các ví dụ số học trong chương này sẽ thể hiện hành vi làm tròn thường thấy khi sử dụng các phép toán chỉ giữ được một số lượng chữ số thập phân nhất định trong các phép toán phi nguyên.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Trong suốt cuốn sách này, khi muốn nhấn mạnh sự phân biệt giữa đầu vào do người dùng gõ và phản hồi do <strong>interpreter</strong> in ra, chúng tôi sẽ hiển thị cái sau bằng chữ nghiêng.</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Các hệ thống Lisp thường cung cấp những tính năng hỗ trợ người dùng trong việc định dạng biểu thức. Hai tính năng đặc biệt hữu ích là: một tính năng tự động thụt lề đúng vị trí <em>pretty-print</em> mỗi khi bắt đầu dòng mới, và một tính năng làm nổi bật dấu ngoặc mở tương ứng mỗi khi người dùng gõ dấu ngoặc đóng.</p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Lisp tuân theo quy ước rằng mọi <strong>expression</strong> đều có một giá trị. Quy ước này, cùng với danh tiếng cũ của Lisp như một ngôn ngữ kém hiệu quả, là nguồn gốc của câu nói đùa của Alan Perlis (mượn lời Oscar Wilde) rằng “Lisp programmers know the value of everything but the cost of nothing.”</p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Trong cuốn sách này, chúng tôi không hiển thị phản hồi của <strong>interpreter</strong> khi tính toán các <strong>definitions</strong> (định nghĩa), vì điều này phụ thuộc rất nhiều vào cách hiện thực cụ thể.</p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">7</sup>
+<p>Có thể thấy kỳ lạ rằng quy tắc tính toán nói, trong phần của bước đầu tiên, rằng chúng ta nên tính toán phần tử ngoài cùng bên trái của một <em>combination</em>, bởi vì ở thời điểm này nó chỉ có thể là một <em>operator</em> như <code>+</code> hoặc <code>*</code> đại diện cho một <strong>primitive procedure</strong> như cộng hoặc nhân. Chúng ta sẽ thấy sau này rằng việc có thể làm việc với những <em>combinations</em> mà <em>operators</em> của chúng lại là các <strong>expressions</strong> phức hợp là điều hữu ích.</p>
+</div>
+<p>Nhận thấy rằng ý tưởng về recursion (đệ quy) có thể được dùng để diễn đạt một cách súc tích điều mà trong trường hợp của một combination (tổ hợp) lồng nhau sâu sẽ được xem như một quá trình khá phức tạp. Ví dụ, việc tính giá trị của</p>
+<pre><code class="language-{.scheme}">(* (+ 2 (* 4 6)) (+ 3 5 7))
+</code></pre>
+<p>yêu cầu quy tắc đánh giá được áp dụng cho bốn combination khác nhau. Chúng ta có thể minh họa tiến trình này bằng cách biểu diễn combination dưới dạng một cây, như được thể hiện trong Figure 1.1. Mỗi combination được biểu diễn bằng một nút với các nhánh tương ứng với operator (toán tử) và các operand (toán hạng) phát sinh từ nó. Các nút tận (terminal node – tức là nút không có nhánh nào phát sinh từ chúng) biểu diễn hoặc là toán tử, hoặc là số. Khi nhìn vào việc đánh giá theo cây, ta có thể hình dung rằng các giá trị của các operand “thấm dần lên” (percolate upward), bắt đầu từ các nút tận rồi kết hợp ở các mức ngày càng cao hơn. Nhìn chung, ta sẽ thấy rằng recursion là một kỹ thuật rất mạnh để xử lý các đối tượng phân cấp, dạng cây. Thực tế, dạng “percolate values upward” của quy tắc đánh giá chính là một ví dụ của một kiểu tiến trình tổng quát gọi là <em>tree accumulation</em> (tích lũy theo cây).</p>
+<p><img src="fig/Fig1.1g.jpg" alt="" /></p>
+<p><strong>Figure 1.1:</strong> Tree representation, showing the value of each subcombination.</p>
+<p>Tiếp theo, hãy quan sát rằng việc lặp đi lặp lại bước đầu tiên dẫn chúng ta đến chỗ cần phải đánh giá, không phải các combination, mà là các primitive expression (biểu thức nguyên thủy) như số, toán tử dựng sẵn, hoặc các tên khác. Ta xử lý các trường hợp nguyên thủy này bằng cách quy định rằng:</p>
+<ul>
+<li>giá trị của số (numeral) là chính con số mà nó biểu diễn,</li>
+<li>giá trị của các toán tử dựng sẵn là các chuỗi lệnh máy thực hiện các phép toán tương ứng, và</li>
+<li>giá trị của các tên khác là các đối tượng gắn liền với những tên đó trong environment (môi trường).</li>
+</ul>
+<p>Ta có thể xem quy tắc thứ hai là một trường hợp đặc biệt của quy tắc thứ ba bằng cách quy định rằng các symbol (ký hiệu) như <code>+</code> và <code>*</code> cũng được bao gồm trong global environment và được gắn với các chuỗi lệnh máy là “giá trị” của chúng. Điểm mấu chốt cần lưu ý là vai trò của environment trong việc xác định ý nghĩa của các symbol trong biểu thức. Trong một ngôn ngữ tương tác như Lisp, thật vô nghĩa khi nói về giá trị của một biểu thức như <code>(+ x 1)</code> mà không chỉ rõ thông tin nào đó về environment, thứ sẽ cung cấp ý nghĩa cho symbol <code>x</code> (thậm chí cả cho symbol <code>+</code>). Như ta sẽ thấy trong Chapter 3, khái niệm tổng quát về environment như một bối cảnh mà trong đó việc đánh giá diễn ra sẽ đóng một vai trò quan trọng trong việc hiểu cách thực thi chương trình.</p>
+<p>Hãy lưu ý rằng quy tắc đánh giá đưa ra ở trên không xử lý các định nghĩa. Chẳng hạn, việc tính <code>(define x 3)</code> không có nghĩa là áp dụng <code>define</code> cho hai đối số, một là giá trị của symbol <code>x</code> và một là 3, bởi vì mục đích của <code>define</code> chính là để gắn <code>x</code> với một giá trị. (Nói cách khác, <code>(define x 3)</code> không phải là một combination.)</p>
+<p>Những ngoại lệ cho quy tắc đánh giá tổng quát như vậy được gọi là <em>special forms</em> (biểu thức đặc biệt). <code>Define</code> là ví dụ duy nhất về special form mà chúng ta đã thấy cho đến nay, nhưng chẳng bao lâu nữa ta sẽ gặp thêm các ví dụ khác. Mỗi special form có quy tắc đánh giá riêng. Các loại biểu thức khác nhau (mỗi loại gắn với quy tắc đánh giá riêng của nó) cấu thành cú pháp của ngôn ngữ lập trình. So với hầu hết các ngôn ngữ lập trình khác, Lisp có cú pháp rất đơn giản; nghĩa là, quy tắc đánh giá cho các biểu thức có thể được mô tả bằng một quy tắc tổng quát đơn giản kết hợp với một số ít quy tắc chuyên biệt dành cho các special form.<sup class="footnote-reference"><a href="#7">8</a></sup></p>
+<h2 id="114-compound-procedures-thủ-tục-hợp-thành"><a class="header" href="#114-compound-procedures-thủ-tục-hợp-thành">1.1.4 Compound Procedures (Thủ tục hợp thành)</a></h2>
+<p>Chúng ta đã xác định trong Lisp một số yếu tố cần xuất hiện trong bất kỳ ngôn ngữ lập trình mạnh mẽ nào:</p>
+<ul>
+<li>Numbers và các phép toán số học là dữ liệu và procedure (thủ tục) nguyên thủy.</li>
+<li>Việc lồng các combination cung cấp phương tiện để kết hợp các phép toán.</li>
+<li>Các định nghĩa gắn tên với giá trị cung cấp một phương tiện trừu tượng hóa hạn chế.</li>
+</ul>
+<p>Bây giờ chúng ta sẽ học về <em>procedure definition</em> (định nghĩa thủ tục), một kỹ thuật trừu tượng hóa mạnh mẽ hơn nhiều, nhờ đó một phép toán hợp thành có thể được gán cho một tên và sau đó được tham chiếu như một đơn vị.</p>
+<p>Chúng ta bắt đầu bằng cách xem xét làm thế nào để diễn đạt ý tưởng “bình phương.” Ta có thể nói, “Bình phương một cái gì đó nghĩa là nhân nó với chính nó.” Điều này được diễn đạt trong ngôn ngữ của chúng ta như sau:</p>
+<pre><code class="language-{.scheme}">(define (square x) (* x x))
+</code></pre>
+<p>Ta có thể hiểu điều này như sau:</p>
+<pre><code class="language-{.example}">(define (square x)    (*       x       x))
+  |      |      |      |       |       |
+ To square something, multiply it by itself.
+</code></pre>
+<p>Ở đây chúng ta có một <em>compound procedure</em> (thủ tục hợp thành), được gán tên <code>square</code>. Thủ tục này biểu diễn phép toán nhân một cái gì đó với chính nó. Đối tượng cần nhân được gán một tên cục bộ, <code>x</code>, vốn đóng cùng vai trò như đại từ trong ngôn ngữ tự nhiên. Việc đánh giá định nghĩa này tạo ra thủ tục hợp thành đó và gắn nó với tên <code>square</code>.<sup class="footnote-reference"><a href="#8">9</a></sup></p>
+<p>Dạng tổng quát của một procedure definition là:</p>
+<pre><code class="language-{.scheme}">(define (⟨name⟩ ⟨formal parameters⟩) ⟨body⟩)
+</code></pre>
+<p><code>⟨</code>name<code>⟩</code> là một symbol sẽ được gắn với định nghĩa thủ tục trong environment.<sup class="footnote-reference"><a href="#9">10</a></sup>
+<code>⟨</code>formal parameters<code>⟩</code> là các tên được sử dụng trong body (thân) của thủ tục để tham chiếu đến các đối số tương ứng của thủ tục.
+<code>⟨</code>body<code>⟩</code> là một biểu thức sẽ cho ra giá trị của lời gọi thủ tục khi các tham số hình thức được thay thế bằng các đối số thực mà thủ tục được áp dụng.<sup class="footnote-reference"><a href="#10">11</a></sup>
+<code>⟨</code>name<code>⟩</code> và <code>⟨</code>formal parameters<code>⟩</code> được nhóm lại trong dấu ngoặc đơn, giống như cách chúng xuất hiện trong một lời gọi thực sự đến thủ tục đang được định nghĩa.</p>
+<p>Sau khi đã định nghĩa <code>square</code>, ta có thể dùng nó:</p>
+<pre><code class="language-{.scheme}">(square 21)
+441
+
+(square (+ 2 5))
+49
+
+(square (square 3))
+81
+</code></pre>
+<p>Ta cũng có thể dùng <code>square</code> làm khối xây dựng trong việc định nghĩa các thủ tục khác. Chẳng hạn, $x^{2} + y^{2}$ có thể được biểu diễn là:</p>
+<pre><code class="language-{.scheme}">(+ (square x) (square y))
+</code></pre>
+<p>Ta có thể dễ dàng định nghĩa một thủ tục <code>sum-of-squares</code> mà, với hai số bất kỳ làm đối số, tạo ra tổng các bình phương của chúng:</p>
+<pre><code class="language-{.scheme}">(define (sum-of-squares x y)
+  (+ (square x) (square y)))
+
+(sum-of-squares 3 4)
+25
+</code></pre>
+<p>Bây giờ ta có thể dùng <code>sum-of-squares</code> làm khối xây dựng để tạo ra các thủ tục tiếp theo:</p>
+<pre><code class="language-{.scheme}">(define (f a)
+  (sum-of-squares (+ a 1) (* a 2)))
+
+(f 5)
+136
+</code></pre>
+<p>Compound procedure được sử dụng theo cách hoàn toàn giống với primitive procedure. Thật vậy, ta không thể biết, chỉ bằng cách nhìn vào định nghĩa của <code>sum-of-squares</code> ở trên, rằng <code>square</code> được xây dựng sẵn trong interpreter giống như <code>+</code> và <code>*</code>, hay được định nghĩa như một compound procedure.</p>
+<h2 id="115-the-substitution-model-for-procedure-application-mô-hình-thay-thế-trong-việc-áp-dụng-thủ-tục"><a class="header" href="#115-the-substitution-model-for-procedure-application-mô-hình-thay-thế-trong-việc-áp-dụng-thủ-tục">1.1.5 The Substitution Model for Procedure Application (Mô hình thay thế trong việc áp dụng thủ tục)</a></h2>
+<p>Để đánh giá một combination mà operator của nó là tên của một compound procedure, interpreter thực hiện gần như cùng một quá trình như đối với combination có operator là tên của một primitive procedure, mà chúng ta đã mô tả trong 1.1.3. Nghĩa là, interpreter đánh giá các thành phần của combination và áp dụng procedure (vốn là giá trị của operator của combination) lên các argument (là các giá trị của operand trong combination).</p>
+<p>Ta có thể giả định rằng cơ chế áp dụng primitive procedure lên các argument được xây dựng sẵn trong interpreter. Đối với compound procedure, quá trình áp dụng diễn ra như sau:</p>
+<blockquote>
+<p>Để áp dụng một compound procedure cho các argument, hãy đánh giá body của thủ tục với mỗi tham số hình thức được thay thế bằng đối số tương ứng.</p>
+</blockquote>
+<p>Để minh họa quá trình này, hãy đánh giá combination</p>
+<pre><code class="language-{.scheme}">(f 5)
+</code></pre>
+<p>trong đó <code>f</code> là thủ tục được định nghĩa trong 1.1.4. Ta bắt đầu bằng cách lấy body của <code>f</code>:</p>
+<pre><code class="language-{.scheme}">(sum-of-squares (+ a 1) (* a 2))
+</code></pre>
+<p>Sau đó ta thay thế tham số hình thức <code>a</code> bằng đối số 5:</p>
+<pre><code class="language-{.scheme}">(sum-of-squares (+ 5 1) (* 5 2))
+</code></pre>
+<p>Như vậy, vấn đề được rút gọn thành việc đánh giá một combination với hai operand và một operator <code>sum-of-squares</code>. Việc đánh giá combination này bao gồm ba tiểu vấn đề. Ta phải đánh giá operator để nhận thủ tục cần áp dụng, và ta phải đánh giá các operand để lấy các đối số. Bây giờ <code>(+ 5 1)</code> cho kết quả 6 và <code>(* 5 2)</code> cho kết quả 10, do đó ta phải áp dụng thủ tục <code>sum-of-squares</code> cho 6 và 10. Các giá trị này được thay thế cho tham số hình thức <code>x</code> và <code>y</code> trong body của <code>sum-of-squares</code>, làm cho biểu thức trở thành:</p>
+<pre><code class="language-{.scheme}">(+ (square 6) (square 10))
+</code></pre>
+<p>Nếu dùng định nghĩa của <code>square</code>, biểu thức này được rút gọn thành:</p>
+<pre><code class="language-{.scheme}">(+ (* 6 6) (* 10 10))
+</code></pre>
+<p>rút gọn theo phép nhân thành:</p>
+<pre><code class="language-{.scheme}">(+ 36 100)
+</code></pre>
+<p>và cuối cùng là:</p>
+<pre><code class="language-{.scheme}">136
+</code></pre>
+<p>Quá trình mà chúng ta vừa mô tả được gọi là <em>substitution model</em> (mô hình thay thế) cho việc áp dụng thủ tục. Nó có thể được coi như một mô hình xác định “ý nghĩa” của việc áp dụng thủ tục, xét trong phạm vi các thủ tục ở chương này. Tuy nhiên, có hai điểm cần nhấn mạnh:</p>
+<ul>
+<li>Mục đích của việc thay thế là để giúp chúng ta suy nghĩ về việc áp dụng thủ tục, chứ không phải để mô tả cách interpreter thực sự hoạt động. Các interpreter điển hình không đánh giá các lời gọi thủ tục bằng cách thao tác văn bản của thủ tục để thay thế các giá trị cho các tham số hình thức. Trên thực tế, “sự thay thế” này được thực hiện bằng cách sử dụng một environment cục bộ cho các tham số hình thức. Chúng ta sẽ bàn kỹ hơn điều này trong Chapter 3 và Chapter 4 khi khảo sát chi tiết việc cài đặt một interpreter.</li>
+<li>Trong suốt cuốn sách này, chúng ta sẽ giới thiệu một chuỗi các mô hình ngày càng phức tạp về cách interpreter hoạt động, cuối cùng sẽ dẫn đến một bản cài đặt hoàn chỉnh của một interpreter và một compiler trong Chapter 5. Substitution model chỉ là mô hình đầu tiên trong số đó—một cách để bắt đầu suy nghĩ một cách hình thức về quá trình đánh giá. Nhìn chung, khi mô hình hóa các hiện tượng trong khoa học và kỹ thuật, chúng ta thường bắt đầu với các mô hình đơn giản, chưa đầy đủ. Khi khảo sát chi tiết hơn, các mô hình đơn giản đó trở nên không đủ và phải được thay thế bằng các mô hình tinh vi hơn. Substitution model cũng không phải ngoại lệ. Đặc biệt, khi chúng ta bàn đến trong Chapter 3 việc sử dụng thủ tục với “mutable data” (dữ liệu có thể thay đổi), ta sẽ thấy substitution model bị phá vỡ và phải được thay thế bằng một mô hình phức tạp hơn về việc áp dụng thủ tục.<sup class="footnote-reference"><a href="#11">12</a></sup></li>
+</ul>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">8</sup>
+<p>Special syntactic forms that are simply convenient alternative surface structures for things that can be written in more uniform ways are sometimes called <em>syntactic sugar</em>, to use a phrase coined by Peter Landin. In comparison with users of other languages, Lisp programmers, as a rule, are less concerned with matters of syntax. (By contrast, examine any Pascal manual and notice how much of it is devoted to descriptions of syntax.) This disdain for syntax is due partly to the flexibility of Lisp, which makes it easy to change surface syntax, and partly to the observation that many “convenient” syntactic constructs, which make the language less uniform, end up causing more trouble than they are worth when programs become large and complex. In the words of Alan Perlis, “Syntactic sugar causes cancer of the semicolon.”</p>
+</div>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">9</sup>
+<p>Observe that có hai thao tác khác nhau được kết hợp ở đây: chúng ta tạo ra thủ tục, và chúng ta gán cho nó tên <code>square</code>. Điều quan trọng là phải phân biệt được hai khái niệm này—tạo thủ tục mà không đặt tên, và gán tên cho thủ tục đã được tạo. Chúng ta sẽ thấy cách làm điều này ở 1.3.2.</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">10</sup>
+<p>Trong suốt cuốn sách này, chúng ta sẽ mô tả cú pháp tổng quát của biểu thức bằng cách sử dụng các ký hiệu in nghiêng được đặt trong dấu ngoặc nhọn—ví dụ, <code>⟨</code>name<code>⟩</code>—để biểu thị các “chỗ trống” trong biểu thức, vốn sẽ được điền vào khi biểu thức đó thực sự được sử dụng.</p>
+</div>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">11</sup>
+<p>Tổng quát hơn, body của thủ tục có thể là một chuỗi các biểu thức. Trong trường hợp đó, interpreter sẽ đánh giá lần lượt từng biểu thức trong chuỗi và trả về giá trị của biểu thức cuối cùng như là giá trị của lời gọi thủ tục.</p>
+</div>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">12</sup>
+<p>Mặc dù ý tưởng thay thế có vẻ đơn giản, nhưng lại hóa ra khá phức tạp khi cần đưa ra một định nghĩa toán học chặt chẽ cho tiến trình thay thế. Vấn đề nảy sinh từ khả năng nhầm lẫn giữa các tên được dùng cho tham số hình thức của một thủ tục và các tên (có thể trùng lặp) được dùng trong các biểu thức mà thủ tục có thể được áp dụng. Thực tế, đã có một lịch sử dài những định nghĩa sai lầm về <em>substitution</em> trong tài liệu logic và ngữ nghĩa lập trình. Xem Stoy 1977 để tham khảo một thảo luận cẩn trọng về substitution.</p>
+</div>
+<h3 id="thứ-tự-áp-dụng-so-với-thứ-tự-chuẩn-tắc"><a class="header" href="#thứ-tự-áp-dụng-so-với-thứ-tự-chuẩn-tắc">Thứ tự áp dụng so với thứ tự chuẩn tắc</a></h3>
+<p>Theo mô tả về quá trình <em>evaluation</em> (đánh giá biểu thức) trong 1.1.3, <em>interpreter</em> (trình thông dịch) trước hết sẽ tính toán <em>operator</em> (toán tử) và các <em>operand</em> (toán hạng), sau đó áp dụng <em>procedure</em> (thủ tục) thu được cho các <em>argument</em> (đối số) tương ứng. Đây không phải là cách duy nhất để thực hiện evaluation. Một mô hình khác sẽ không tính toán các operand cho đến khi thật sự cần giá trị của chúng. Thay vào đó, nó sẽ thay thế các biểu thức operand vào tham số cho đến khi nhận được một biểu thức chỉ còn liên quan đến các <em>primitive operator</em> (toán tử nguyên thủy), rồi mới thực hiện evaluation. Nếu ta dùng phương pháp này, quá trình tính <code>(f 5)</code> sẽ diễn ra theo chuỗi khai triển như sau:</p>
+<pre><code class="language-{.scheme}">(sum-of-squares (+ 5 1) (* 5 2))
+
+(+ (square (+ 5 1)) 
+   (square (* 5 2)))
+
+(+ (* (+ 5 1) (+ 5 1)) 
+   (* (* 5 2) (* 5 2)))
+</code></pre>
+<p>tiếp theo là các bước rút gọn:</p>
+<pre><code class="language-{.scheme}">(+ (* 6 6) 
+   (* 10 10))
+
+(+ 36 100)
+
+136
+</code></pre>
+<p>Cách này cho ra cùng một kết quả như mô hình evaluation trước đó, nhưng quá trình thực hiện thì khác. Đặc biệt, các biểu thức <code>(+ 5 1)</code> và <code>(* 5 2)</code> được tính hai lần, tương ứng với việc rút gọn biểu thức <code>(* x x)</code> khi thay <code>x</code> bằng <code>(+ 5 1)</code> và <code>(* 5 2)</code>.</p>
+<p>Phương pháp thay thế hoàn toàn rồi rút gọn này được gọi là <em>normal-order evaluation</em> (đánh giá theo thứ tự chuẩn tắc), trái ngược với phương pháp “tính toán đối số trước rồi áp dụng” mà interpreter thực sự dùng, gọi là <em>applicative-order evaluation</em> (đánh giá theo thứ tự áp dụng). Có thể chứng minh rằng với các ứng dụng <em>procedure</em> có thể được mô hình hóa bằng phép thay thế (bao gồm toàn bộ các procedure trong hai chương đầu tiên của sách này) và cho ra giá trị hợp lệ, thì normal-order và applicative-order evaluation đều sinh ra cùng một kết quả. (Xem Bài tập 1.5 để thấy ví dụ về một giá trị “không hợp lệ” mà hai cách đánh giá không cho cùng một kết quả.)</p>
+<p>Lisp sử dụng applicative-order evaluation, một phần vì hiệu suất cao hơn khi tránh phải tính toán lặp lại nhiều lần các biểu thức như <code>(+ 5 1)</code> và <code>(* 5 2)</code> ở trên, và quan trọng hơn, vì normal-order evaluation trở nên phức tạp hơn nhiều khi ta bước ra ngoài phạm vi những procedure có thể mô hình hóa bằng thay thế. Tuy vậy, normal-order evaluation có thể là một công cụ cực kỳ hữu ích, và ta sẽ nghiên cứu một số hệ quả của nó trong Chương 3 và Chương 4.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<h2 id="116-biểu-thức-điều-kiện-và-predicate"><a class="header" href="#116-biểu-thức-điều-kiện-và-predicate">1.1.6 Biểu thức điều kiện và <em>Predicate</em></a></h2>
+<p>Khả năng biểu đạt của lớp <em>procedure</em> mà chúng ta có thể định nghĩa ở thời điểm này vẫn rất hạn chế, bởi ta chưa có cách kiểm tra điều kiện và thực hiện những thao tác khác nhau dựa trên kết quả kiểm tra. Ví dụ, ta không thể định nghĩa một procedure tính giá trị tuyệt đối của một số bằng cách kiểm tra xem số đó dương, âm hay bằng 0 rồi chọn hành động tương ứng theo quy tắc:</p>
+<p>$$\left| x \right|; = ;\left{ \begin{array}{lll}
+x &amp; {;\text{if}} &amp; {x &gt; 0,} \
+0 &amp; {;\text{if}} &amp; {x = 0,} \
+{- x} &amp; {;\text{if}} &amp; {x &lt; 0.} \
+\end{array} \right.$$</p>
+<p>Cấu trúc này gọi là <em>case analysis</em> (phân tích theo trường hợp), và trong Lisp có một <em>special form</em> (dạng đặc biệt) để viết: <code>cond</code> (viết tắt của “conditional”), được dùng như sau:</p>
+<pre><code class="language-{.scheme}">(define (abs x)
+  (cond ((&gt; x 0) x)
+        ((= x 0) 0)
+        ((&lt; x 0) (- x))))
+</code></pre>
+<p>The general form of a conditional expression is</p>
+<pre><code class="language-{.scheme}">(cond (⟨p₁⟩ ⟨e₁⟩)
+      (⟨p₂⟩ ⟨e₂⟩)
+      …
+      (⟨pₙ⟩ ⟨eₙ⟩))
+</code></pre>
+<p>consisting of the symbol <code>cond</code> followed by parenthesized pairs of expressions</p>
+<pre><code class="language-{.scheme}">(⟨p⟩ ⟨e⟩)
+</code></pre>
+<p>gọi là <em>clauses</em> (mệnh đề). Biểu thức đầu tiên trong mỗi cặp là một <em>predicate</em> (mệnh đề điều kiện)—tức là một biểu thức có giá trị được diễn giải là đúng hoặc sai.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<p>Các biểu thức điều kiện được đánh giá như sau. Predicate $⟨p_{1}⟩$ được đánh giá đầu tiên. Nếu giá trị của nó là sai, thì $⟨p_{2}⟩$ được đánh giá. Nếu giá trị của $⟨p_{2}⟩$ cũng là sai, thì $⟨p_{3}⟩$ được đánh giá. Quá trình này tiếp tục cho đến khi tìm được một predicate có giá trị là đúng, khi đó trình thông dịch sẽ trả về giá trị của <em>consequent expression</em> $⟨e⟩$ tương ứng trong mệnh đề đó như là giá trị của biểu thức điều kiện. Nếu không có $⟨p⟩$ nào có giá trị đúng, thì giá trị của <code>cond</code> là không xác định.</p>
+<p>Từ <em>predicate</em> được dùng để chỉ các procedure trả về giá trị đúng hoặc sai, cũng như các biểu thức đánh giá ra giá trị đúng hoặc sai. Thủ tục tính giá trị tuyệt đối <code>abs</code> sử dụng các predicate nguyên thủy <code>&gt;</code>, <code>&lt;</code>, và <code>=</code>.<sup class="footnote-reference"><a href="#14">14</a></sup> Các procedure này nhận hai số làm đối số và kiểm tra xem số thứ nhất có lớn hơn, nhỏ hơn, hoặc bằng số thứ hai hay không, và trả về giá trị đúng hoặc sai tương ứng.</p>
+<p>Một cách khác để viết procedure tính giá trị tuyệt đối là:</p>
+<pre><code class="language-{.scheme}">(define (abs x)
+  (cond ((&lt; x 0) (- x))
+        (else x)))
+</code></pre>
+<p>có thể diễn đạt bằng tiếng Anh là “Nếu $x$ nhỏ hơn không thì trả về $-x$; nếu không thì trả về $x$.” <code>Else</code> là một ký hiệu đặc biệt có thể được dùng thay cho $⟨p⟩$ trong mệnh đề cuối cùng của một <code>cond</code>. Điều này khiến <code>cond</code> trả về giá trị của $⟨e⟩$ tương ứng bất cứ khi nào tất cả các mệnh đề trước đó bị bỏ qua. Thực tế, bất kỳ biểu thức nào luôn đánh giá ra giá trị đúng đều có thể được dùng làm $⟨p⟩$ ở đây.</p>
+<p>Dưới đây là một cách khác nữa để viết procedure tính giá trị tuyệt đối:</p>
+<pre><code class="language-{.scheme}">(define (abs x)
+  (if (&lt; x 0)
+      (- x)
+      x))
+</code></pre>
+<p>Cách này sử dụng dạng đặc biệt <code>if</code>, một loại biểu thức điều kiện giới hạn có thể được dùng khi phân tích trường hợp chỉ có đúng hai trường hợp. Dạng tổng quát của một biểu thức <code>if</code> là:</p>
+<pre><code class="language-{.scheme}">(if ⟨predicate⟩ ⟨consequent⟩ ⟨alternative⟩)
+</code></pre>
+<p>Để đánh giá một biểu thức <code>if</code>, trình thông dịch bắt đầu bằng việc đánh giá phần <code>⟨predicate⟩</code> của biểu thức. Nếu <code>⟨predicate⟩</code> đánh giá ra giá trị đúng, trình thông dịch sẽ đánh giá <code>⟨consequent⟩</code> và trả về giá trị của nó. Nếu không, nó sẽ đánh giá <code>⟨alternative⟩</code> và trả về giá trị của phần đó.<sup class="footnote-reference"><a href="#15">15</a></sup></p>
+<p>Ngoài các predicate nguyên thủy như <code>&lt;</code>, <code>=</code>, và <code>&gt;</code>, còn có các phép toán tổ hợp logic, cho phép ta xây dựng các predicate phức hợp. Ba phép toán được dùng thường xuyên nhất là:</p>
+<ul>
+<li>
+<p><code>(and ⟨e₁⟩ … ⟨eₙ⟩)</code></p>
+<p>Trình thông dịch đánh giá các biểu thức <code>⟨e⟩</code> từng cái một, theo thứ tự từ trái sang phải. Nếu bất kỳ <code>⟨e⟩</code> nào đánh giá ra giá trị sai, thì giá trị của biểu thức <code>and</code> là sai, và các <code>⟨e⟩</code> còn lại sẽ không được đánh giá. Nếu tất cả <code>⟨e⟩</code> đều đánh giá ra giá trị đúng, thì giá trị của biểu thức <code>and</code> là giá trị của biểu thức cuối cùng.</p>
+</li>
+<li>
+<p><code>(or ⟨e₁⟩ … ⟨eₙ⟩)</code></p>
+<p>Trình thông dịch đánh giá các biểu thức <code>⟨e⟩</code> từng cái một, theo thứ tự từ trái sang phải. Nếu bất kỳ <code>⟨e⟩</code> nào đánh giá ra giá trị đúng, thì giá trị đó được trả về như là giá trị của biểu thức <code>or</code>, và các <code>⟨e⟩</code> còn lại sẽ không được đánh giá. Nếu tất cả <code>⟨e⟩</code> đều đánh giá ra giá trị sai, thì giá trị của biểu thức <code>or</code> là sai.</p>
+</li>
+<li>
+<p><code>(not ⟨e⟩)</code></p>
+<p>Giá trị của biểu thức <code>not</code> là đúng khi biểu thức <code>⟨e⟩</code> đánh giá ra giá trị sai, và sai trong các trường hợp còn lại.</p>
+</li>
+</ul>
+<p>Lưu ý rằng <code>and</code> và <code>or</code> là các dạng đặc biệt, không phải procedure, bởi vì các biểu thức con không nhất thiết đều được đánh giá. <code>Not</code> là một procedure thông thường.</p>
+<p>Ví dụ về cách sử dụng các biểu thức này: điều kiện để một số $x$ nằm trong khoảng $5 &lt; x &lt; 10$ có thể được biểu diễn như sau:</p>
+<pre><code class="language-{.scheme}">(and (&gt; x 5) (&lt; x 10))
+</code></pre>
+<p>Một ví dụ khác, ta có thể định nghĩa một predicate để kiểm tra xem một số có lớn hơn hoặc bằng số khác hay không như sau:</p>
+<pre><code class="language-{.scheme}">(define (&gt;= x y) 
+  (or (&gt; x y) (= x y)))
+</code></pre>
+<p>hoặc cách khác:</p>
+<pre><code class="language-{.scheme}">(define (&gt;= x y) 
+  (not (&lt; x y)))
+</code></pre>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>“Interpreted as either true or false” means this: In Scheme, there are two distinguished values that are denoted by the constants <code>#t</code> and <code>#f</code>. When the interpreter checks a predicate’s value, it interprets <code>#f</code> as false. Any other value is treated as true. (Thus, providing <code>#t</code> is logically unnecessary, but it is convenient.) In this book we will use names <code>true</code> and <code>false</code>, which are associated with the values <code>#t</code> and <code>#f</code> respectively.</p>
+</div>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p><code>Abs</code> also uses the “minus” operator <code>-</code>, which, when used with a single operand, as in <code>(- x)</code>, indicates negation.</p>
+</div>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">15</sup>
+<p>A minor difference between <code>if</code> and <code>cond</code> is that the <code>⟨e⟩</code> part of each <code>cond</code> clause may be a sequence of expressions. If the corresponding <code>⟨p⟩</code> is found to be true, the expressions <code>⟨e⟩</code> are evaluated in sequence and the value of the final expression in the sequence is returned as the value of the <code>cond</code>. In an <code>if</code> expression, however, the <code>⟨consequent⟩</code> and <code>⟨alternative⟩</code> must be single expressions.</p>
+</div>
+<p>Được chứ Khánh, mình sẽ tiếp tục dịch phần tiếp theo của chương, bắt đầu từ <strong>1.1.7 Example: Square Roots by Newton’s Method</strong> và tuân thủ đúng các quy tắc bạn đã đưa ra.</p>
+<h2 id="117-ví-dụ-căn-bậc-hai-bằng-phương-pháp-newton"><a class="header" href="#117-ví-dụ-căn-bậc-hai-bằng-phương-pháp-newton">1.1.7 Ví dụ: Căn bậc hai bằng phương pháp Newton</a></h2>
+<p>Các procedure (thủ tục), như đã giới thiệu ở trên, khá giống với các hàm toán học thông thường. Chúng xác định một giá trị được quyết định bởi một hoặc nhiều tham số. Nhưng có một điểm khác biệt quan trọng giữa các hàm toán học và các procedure trong máy tính: procedure phải <em>có tính khả thi</em> (effective).</p>
+<p>Ví dụ, hãy xét bài toán tính căn bậc hai. Ta có thể định nghĩa hàm căn bậc hai như sau:</p>
+<p>$$\sqrt{x} ;=; \text{the}; y ;\text{such that}; y \geq 0 ;\text{and}; y^{2} = x.$$</p>
+<p>Định nghĩa này mô tả một hàm toán học hoàn toàn hợp lệ. Ta có thể dùng nó để nhận biết xem một số có phải là căn bậc hai của số khác hay không, hoặc để suy ra các tính chất tổng quát về căn bậc hai. Tuy nhiên, định nghĩa này không mô tả một procedure. Thực tế, nó hầu như không cho ta biết cách tìm căn bậc hai của một số cụ thể. Việc viết lại định nghĩa này bằng pseudo-Lisp cũng không giúp ích gì:</p>
+<pre><code class="language-scheme">(define (sqrt x)
+  (the y (and (&gt;= y 0) 
+              (= (square y) x))))
+</code></pre>
+<p>Điều này chỉ khiến câu hỏi trở nên vòng vo hơn.</p>
+<p>Sự khác biệt giữa <em>function</em> (hàm) và <em>procedure</em> (thủ tục) phản ánh sự phân biệt chung giữa việc mô tả <em>tính chất</em> của sự vật và việc mô tả <em>cách làm</em> một việc gì đó — hay còn gọi là sự khác nhau giữa <em>declarative knowledge</em> (tri thức khai báo) và <em>imperative knowledge</em> (tri thức mệnh lệnh)<sup class="footnote-reference"><a href="#16">16</a></sup>. Trong toán học, ta thường quan tâm đến mô tả khai báo (cái gì là gì), trong khi trong khoa học máy tính, ta thường quan tâm đến mô tả mệnh lệnh (làm thế nào để làm).</p>
+<p>Vậy làm thế nào để tính căn bậc hai? Cách phổ biến nhất là dùng <em>phương pháp Newton</em> (<em>Newton’s method</em>) của các phép xấp xỉ liên tiếp. Phương pháp này nói rằng, khi ta có một giá trị đoán $y$ cho căn bậc hai của số $x$, ta có thể cải thiện giá trị đoán này (đưa nó gần hơn với căn bậc hai thực) bằng cách lấy trung bình của $y$ và $x/y$<sup class="footnote-reference"><a href="#17">17</a></sup>.</p>
+<p>Ví dụ, tính $\sqrt{2}$ với giá trị đoán ban đầu là 1:</p>
+<pre><code>Guess     Quotient      Average
+
+1         (2/1)  = 2    ((2 + 1)/2)  = 1.5
+
+1.5       (2/1.5)       ((1.3333 + 1.5)/2)
+            = 1.3333      = 1.4167
+
+1.4167    (2/1.4167)    ((1.4167 + 1.4118)/2) 
+            = 1.4118      = 1.4142  
+
+1.4142    ...           ...
+</code></pre>
+<p>Tiếp tục quá trình này, ta sẽ thu được các xấp xỉ ngày càng chính xác hơn.</p>
+<p>Bây giờ, hãy mô tả quá trình này bằng các procedure. Ta bắt đầu với giá trị của <em>radicand</em> (số cần lấy căn) và một giá trị đoán. Nếu giá trị đoán đủ tốt, ta dừng; nếu không, ta lặp lại quá trình với giá trị đoán được cải thiện:</p>
+<pre><code class="language-scheme">(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+</code></pre>
+<p>Cải thiện giá trị đoán bằng cách lấy trung bình giữa nó và thương của radicand với giá trị đoán cũ:</p>
+<pre><code class="language-scheme">(define (improve guess x)
+  (average guess (/ x guess)))
+</code></pre>
+<p>Trong đó:</p>
+<pre><code class="language-scheme">(define (average x y) 
+  (/ (+ x y) 2))
+</code></pre>
+<p>Ta cũng cần định nghĩa thế nào là “đủ tốt”. Ví dụ minh họa sau đây chưa phải là một phép kiểm tra tốt nhất (xem Bài tập 1.7), nhưng ý tưởng là tiếp tục cải thiện cho đến khi bình phương của giá trị đoán khác radicand ít hơn một ngưỡng cho trước (ở đây là 0.001)<sup class="footnote-reference"><a href="#18">18</a></sup>:</p>
+<pre><code class="language-scheme">(define (good-enough? guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+</code></pre>
+<p>Cuối cùng, ta cần một cách để bắt đầu. Ví dụ, ta có thể luôn đoán rằng căn bậc hai của bất kỳ số nào là 1.0<sup class="footnote-reference"><a href="#19">19</a></sup>:</p>
+<pre><code class="language-scheme">(define (sqrt x)
+  (sqrt-iter 1.0 x))
+</code></pre>
+<p>Khi nhập các định nghĩa này vào trình thông dịch, ta có thể dùng <code>sqrt</code> như bất kỳ procedure nào khác:</p>
+<pre><code class="language-scheme">(sqrt 9)
+3.00009155413138
+
+(sqrt (+ 100 37))
+11.704699917758145
+
+(sqrt (+ (sqrt 2) (sqrt 3)))
+1.7739279023207892
+
+(square (sqrt 1000))
+1000.000369924366
+</code></pre>
+<p>Chương trình <code>sqrt</code> cũng cho thấy rằng ngôn ngữ thủ tục đơn giản mà ta đã giới thiệu đủ để viết bất kỳ chương trình số học thuần túy nào mà ta có thể viết bằng C hoặc Pascal. Điều này có thể gây ngạc nhiên, vì ta chưa hề đưa vào ngôn ngữ này bất kỳ cấu trúc lặp (<em>looping construct</em>) nào. Tuy nhiên, <code>sqrt-iter</code> cho thấy việc lặp có thể được thực hiện chỉ bằng khả năng gọi procedure<sup class="footnote-reference"><a href="#20">20</a></sup>.</p>
+<div class="footnote-definition" id="16"><sup class="footnote-definition-label">16</sup>
+<p><em>Declarative</em> và <em>imperative</em> có mối liên hệ mật thiết, cũng như toán học và khoa học máy tính. Ví dụ, nói rằng kết quả của một chương trình là “đúng” là một phát biểu khai báo về chương trình. Có nhiều nghiên cứu nhằm chứng minh tính đúng đắn của chương trình, và phần khó khăn kỹ thuật nằm ở việc chuyển đổi giữa các phát biểu mệnh lệnh (từ đó tạo ra chương trình) và các phát biểu khai báo (dùng để suy luận). Một hướng nghiên cứu khác là thiết kế ngôn ngữ lập trình bậc rất cao, cho phép lập trình trực tiếp bằng các phát biểu khai báo, và trình thông dịch sẽ tự động sinh ra cách thực hiện. Điều này không thể làm được trong mọi trường hợp, nhưng có những lĩnh vực đã đạt tiến bộ. Sẽ bàn lại ở Chương 4.</p>
+</div>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">17</sup>
+<p>Thuật toán căn bậc hai này thực chất là một trường hợp đặc biệt của <em>Newton’s method</em>, một kỹ thuật tổng quát để tìm nghiệm của phương trình. Thuật toán này được Heron thành Alexandria phát triển vào thế kỷ thứ nhất sau Công nguyên. Ta sẽ thấy cách biểu diễn Newton’s method tổng quát bằng Lisp ở 1.3.4.</p>
+</div>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">18</sup>
+<p>Thông thường, các predicate sẽ được đặt tên kết thúc bằng dấu hỏi <code>?</code> để nhắc rằng chúng là predicate. Đây chỉ là quy ước đặt tên, trình thông dịch coi dấu <code>?</code> như ký tự bình thường.</p>
+</div>
+<div class="footnote-definition" id="19"><sup class="footnote-definition-label">19</sup>
+<p>Lưu ý rằng ta dùng 1.0 thay vì 1. Trong MIT Scheme, phép chia hai số nguyên cho ra số hữu tỉ, còn chia hai số thập phân cho ra số thập phân. Nếu bắt đầu với 1, toàn bộ kết quả sẽ là số hữu tỉ; bắt đầu với 1.0 sẽ buộc kết quả là số thập phân.</p>
+</div>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">20</sup>
+<p>Vấn đề hiệu năng khi dùng lời gọi procedure để thực hiện lặp sẽ được bàn trong phần “<em>tail recursion</em>” ở 1.2.1.</p>
+</div>
+<h2 id="118-procedures-as-black-box-abstractions"><a class="header" href="#118-procedures-as-black-box-abstractions">1.1.8 Procedures as Black-Box Abstractions</a></h2>
+<p><code>Sqrt</code> là ví dụ đầu tiên của chúng ta về một <em>process</em> (tiến trình) được định nghĩa bởi một tập hợp các procedure (thủ tục) định nghĩa lẫn nhau. Lưu ý rằng định nghĩa của <code>sqrt-iter</code> là <em>recursive</em> (đệ quy); tức là procedure này được định nghĩa dựa trên chính nó. Ý tưởng rằng có thể định nghĩa một procedure bằng chính nó có thể gây bối rối; thoạt nhìn, có vẻ không rõ làm sao một định nghĩa “vòng tròn” như vậy lại có thể hợp lý, chứ chưa nói đến việc chỉ định một tiến trình rõ ràng để máy tính thực hiện. Vấn đề này sẽ được bàn kỹ hơn ở 1.2. Nhưng trước hết, hãy xét một số điểm quan trọng khác mà ví dụ <code>sqrt</code> minh họa.</p>
+<p>Hãy quan sát rằng bài toán tính căn bậc hai tự nhiên được chia thành nhiều bài toán con: làm thế nào để biết một giá trị đoán là đủ tốt, làm thế nào để cải thiện giá trị đoán, v.v. Mỗi nhiệm vụ này được thực hiện bởi một procedure riêng. Toàn bộ chương trình <code>sqrt</code> có thể được xem như một cụm các procedure (như minh họa ở Hình 1.2) phản ánh việc phân rã bài toán thành các bài toán con.</p>
+<p><img src="fig/Fig1.2.jpg" alt="" /></p>
+<p><strong>Figure 1.2:</strong> Procedural decomposition of the <code>sqrt</code> program.</p>
+<p>Tầm quan trọng của chiến lược phân rã này không chỉ nằm ở việc chia chương trình thành các phần. Rốt cuộc, ta có thể lấy bất kỳ chương trình lớn nào và chia nó thành các đoạn — mười dòng đầu, mười dòng tiếp theo, v.v. Điều then chốt là mỗi procedure thực hiện một nhiệm vụ có thể nhận diện rõ ràng và có thể được dùng như một module trong việc định nghĩa các procedure khác. Ví dụ, khi ta định nghĩa procedure <code>good-enough?</code> dựa trên <code>square</code>, ta có thể coi <code>square</code> như một “black box” (hộp đen). Lúc này, ta không quan tâm <em>cách</em> procedure đó tính kết quả, mà chỉ quan tâm đến việc nó tính bình phương. Chi tiết về cách tính bình phương có thể được ẩn đi, để xem xét sau. Thực tế, đối với <code>good-enough?</code>, <code>square</code> không hẳn là một procedure cụ thể mà là một <em>procedural abstraction</em> (trừu tượng hóa thủ tục). Ở mức độ trừu tượng này, bất kỳ procedure nào tính bình phương đều tốt như nhau.</p>
+<p>Do đó, xét về giá trị trả về, hai procedure sau để tính bình phương của một số phải không thể phân biệt được. Mỗi procedure nhận một đối số số học và trả về bình phương của số đó<sup class="footnote-reference"><a href="#21">21</a></sup>:</p>
+<pre><code class="language-scheme">(define (square x) (* x x))
+
+(define (square x) 
+  (exp (double (log x))))
+
+(define (double x) (+ x x))
+</code></pre>
+<p>Vì vậy, một định nghĩa procedure nên có khả năng ẩn chi tiết. Người dùng procedure có thể không tự viết nó, mà nhận từ một lập trình viên khác như một hộp đen. Người dùng không cần biết procedure được cài đặt thế nào để có thể sử dụng nó.</p>
+<h3 id="local-names"><a class="header" href="#local-names">Local names</a></h3>
+<p>Một chi tiết trong cài đặt procedure không nên ảnh hưởng đến người dùng là việc lập trình viên chọn tên gì cho các <em>formal parameter</em> (tham số hình thức). Do đó, hai procedure sau phải không thể phân biệt:</p>
+<pre><code class="language-scheme">(define (square x) (* x x))
+(define (square y) (* y y))
+</code></pre>
+<p>Nguyên tắc này — rằng ý nghĩa của một procedure phải độc lập với tên tham số mà tác giả dùng — thoạt nhìn có vẻ hiển nhiên, nhưng hệ quả của nó rất sâu sắc. Hệ quả đơn giản nhất là tên tham số của một procedure phải <em>local</em> (cục bộ) với phần thân procedure đó. Ví dụ, ta đã dùng <code>square</code> trong định nghĩa <code>good-enough?</code> của chương trình căn bậc hai:</p>
+<pre><code class="language-scheme">(define (good-enough? guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+</code></pre>
+<p>Tác giả của <code>good-enough?</code> muốn kiểm tra xem bình phương của đối số thứ nhất có nằm trong một sai số cho phép so với đối số thứ hai hay không. Ở đây, <code>guess</code> được dùng cho đối số thứ nhất, <code>x</code> cho đối số thứ hai. Đối số của <code>square</code> là <code>guess</code>. Nếu tác giả của <code>square</code> dùng <code>x</code> để đặt tên cho đối số đó, thì <code>x</code> trong <code>good-enough?</code> phải là một <code>x</code> khác với <code>x</code> trong <code>square</code>. Việc chạy <code>square</code> không được phép ảnh hưởng đến giá trị <code>x</code> mà <code>good-enough?</code> đang dùng, vì giá trị đó có thể cần sau khi <code>square</code> tính xong.</p>
+<p>Nếu tham số không cục bộ với phần thân procedure, thì <code>x</code> trong <code>square</code> có thể bị nhầm với <code>x</code> trong <code>good-enough?</code>, và hành vi của <code>good-enough?</code> sẽ phụ thuộc vào phiên bản <code>square</code> ta dùng. Khi đó, <code>square</code> sẽ không còn là hộp đen như mong muốn.</p>
+<p>Một <em>formal parameter</em> có vai trò đặc biệt: tên của nó không quan trọng. Tên như vậy được gọi là <em>bound variable</em> (biến bị ràng buộc), và ta nói rằng định nghĩa procedure <em>binds</em> (ràng buộc) các tham số hình thức của nó. Ý nghĩa của một định nghĩa procedure không thay đổi nếu ta đổi tên bound variable một cách nhất quán<sup class="footnote-reference"><a href="#22">22</a></sup>. Nếu một biến không bị ràng buộc, ta gọi nó là <em>free variable</em> (biến tự do). Tập hợp các biểu thức mà một ràng buộc định nghĩa tên gọi là <em>scope</em> (phạm vi) của tên đó. Trong định nghĩa procedure, các bound variable được khai báo làm tham số hình thức có phạm vi là phần thân procedure.</p>
+<p>Trong định nghĩa <code>good-enough?</code> ở trên, <code>guess</code> và <code>x</code> là bound variable, còn <code>&lt;</code>, <code>-</code>, <code>abs</code>, và <code>square</code> là free variable. Ý nghĩa của <code>good-enough?</code> độc lập với tên ta chọn cho <code>guess</code> và <code>x</code> miễn là chúng khác nhau và khác với <code>&lt;</code>, <code>-</code>, <code>abs</code>, và <code>square</code>. (Nếu ta đổi <code>guess</code> thành <code>abs</code>, ta sẽ tạo ra lỗi do <em>capturing</em> biến <code>abs</code>, biến này sẽ từ free thành bound.) Tuy nhiên, ý nghĩa của <code>good-enough?</code> không độc lập với tên của các free variable. Nó phụ thuộc vào việc (bên ngoài định nghĩa này) ký hiệu <code>abs</code> đặt tên cho một procedure tính giá trị tuyệt đối. <code>Good-enough?</code> sẽ tính một hàm khác nếu ta thay <code>abs</code> bằng <code>cos</code>.</p>
+<h3 id="internal-definitions-and-block-structure"><a class="header" href="#internal-definitions-and-block-structure">Internal definitions and block structure</a></h3>
+<p>Cho đến giờ, ta mới có một dạng cô lập tên: tham số hình thức của procedure là cục bộ với phần thân procedure. Chương trình căn bậc hai minh họa một cách khác để kiểm soát việc dùng tên. Chương trình hiện tại gồm các procedure riêng biệt:</p>
+<pre><code class="language-scheme">(define (sqrt x) 
+  (sqrt-iter 1.0 x))
+
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+
+(define (good-enough? guess x)
+  (&lt; (abs (- (square guess) x)) 0.001))
+
+(define (improve guess x)
+  (average guess (/ x guess)))
+</code></pre>
+<p>Vấn đề là procedure duy nhất quan trọng với người dùng <code>sqrt</code> là <code>sqrt</code>. Các procedure khác (<code>sqrt-iter</code>, <code>good-enough?</code>, <code>improve</code>) chỉ gây rối. Người dùng không thể định nghĩa một procedure khác tên <code>good-enough?</code> trong một chương trình khác để dùng chung, vì <code>sqrt</code> cần nó. Vấn đề này đặc biệt nghiêm trọng khi xây dựng hệ thống lớn bởi nhiều lập trình viên. Ví dụ, trong một thư viện lớn các procedure số học, nhiều hàm được tính bằng xấp xỉ liên tiếp và có thể đều có <code>good-enough?</code> và <code>improve</code> làm thủ tục phụ. Ta muốn <em>localize</em> (cục bộ hóa) các subprocedure này, ẩn chúng bên trong <code>sqrt</code> để <code>sqrt</code> có thể tồn tại cùng các xấp xỉ khác, mỗi cái có <code>good-enough?</code> riêng. Để làm điều này, ta cho phép một procedure có <em>internal definitions</em> (định nghĩa bên trong) cục bộ với procedure đó. Ví dụ:</p>
+<pre><code class="language-scheme">(define (sqrt x)
+  (define (good-enough? guess x)
+    (&lt; (abs (- (square guess) x)) 0.001))
+  (define (improve guess x)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess x)
+    (if (good-enough? guess x)
+        guess
+        (sqrt-iter (improve guess x) x)))
+  (sqrt-iter 1.0 x))
+</code></pre>
+<p>Việc lồng các định nghĩa như vậy, gọi là <em>block structure</em> (cấu trúc khối), về cơ bản là giải pháp đúng cho vấn đề đóng gói tên ở mức đơn giản nhất. Nhưng ở đây còn có một ý tưởng hay hơn. Ngoài việc đưa các định nghĩa của các <em>auxiliary procedures</em> (thủ tục phụ trợ) vào bên trong, ta còn có thể đơn giản hóa chúng.</p>
+<p>Vì <code>x</code> được <em>bind</em> (ràng buộc) trong định nghĩa của <code>sqrt</code>, các procedure <code>good-enough?</code>, <code>improve</code>, và <code>sqrt-iter</code> — vốn được định nghĩa bên trong <code>sqrt</code> — đều nằm trong <em>scope</em> (phạm vi) của <code>x</code>. Do đó, không cần phải truyền <code>x</code> một cách tường minh cho từng procedure này. Thay vào đó, ta cho phép <code>x</code> là một <em>free variable</em> (biến tự do) trong các định nghĩa bên trong, như minh họa dưới đây. Khi đó, <code>x</code> sẽ nhận giá trị từ đối số được truyền vào khi gọi procedure bao ngoài <code>sqrt</code>. Quy tắc này được gọi là <em>lexical scoping</em> (phạm vi từ vựng) <sup class="footnote-reference"><a href="#23">23</a></sup>.</p>
+<pre><code class="language-scheme">(define (sqrt x)
+  (define (good-enough? guess)
+    (&lt; (abs (- (square guess) x)) 0.001))
+  (define (improve guess)
+    (average guess (/ x guess)))
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+  (sqrt-iter 1.0))
+</code></pre>
+<p>Chúng ta sẽ sử dụng <em>block structure</em> một cách rộng rãi để giúp chia nhỏ các chương trình lớn thành những phần có thể xử lý được <sup class="footnote-reference"><a href="#24">24</a></sup>. Ý tưởng về <em>block structure</em> bắt nguồn từ ngôn ngữ lập trình <strong>Algol 60</strong>. Nó xuất hiện trong hầu hết các ngôn ngữ lập trình tiên tiến và là một công cụ quan trọng giúp tổ chức việc xây dựng các chương trình lớn.</p>
+<div class="footnote-definition" id="23"><sup class="footnote-definition-label">23</sup>
+<p>Lexical scoping quy định rằng các biến tự do trong một procedure sẽ được hiểu là tham chiếu tới các ràng buộc được tạo ra bởi các định nghĩa procedure bao ngoài; tức là chúng được tra cứu trong <em>environment</em> (môi trường) mà procedure được định nghĩa. Chúng ta sẽ thấy chi tiết cách hoạt động của điều này trong Chương 3 khi nghiên cứu về môi trường và hành vi chi tiết của trình thông dịch.</p>
+</div>
+<div class="footnote-definition" id="24"><sup class="footnote-definition-label">24</sup>
+<p>Các định nghĩa lồng bên trong phải được đặt trước tiên trong phần thân của một procedure. Tác giả không chịu trách nhiệm về hậu quả của việc chạy các chương trình trộn lẫn định nghĩa và sử dụng.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="next" href="1-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="next" href="1-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

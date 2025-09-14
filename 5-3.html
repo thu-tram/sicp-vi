@@ -1,0 +1,401 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Storage Allocation and Garbage Collection - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html" class="active"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="53-cấp-phát-bộ-nhớ-và-thu-gom-rác"><a class="header" href="#53-cấp-phát-bộ-nhớ-và-thu-gom-rác">5.3 Cấp phát bộ nhớ và Thu gom rác</a></h1>
+<p>Trong mục 5.4, chúng ta sẽ trình bày cách hiện thực một Scheme evaluator (bộ thông dịch Scheme) dưới dạng một register machine (máy thanh ghi). Để đơn giản hóa phần thảo luận, chúng ta sẽ giả định rằng các register machine của mình có thể được trang bị một <em>list-structured memory</em> (“bộ nhớ có cấu trúc danh sách”), trong đó các thao tác cơ bản để xử lý dữ liệu dạng danh sách là các thao tác nguyên thủy. Giả định sự tồn tại của một bộ nhớ như vậy là một trừu tượng hóa hữu ích khi tập trung vào các cơ chế điều khiển trong một Scheme interpreter, nhưng điều này không phản ánh thực tế về các thao tác dữ liệu nguyên thủy của các máy tính hiện đại. Để có một bức tranh đầy đủ hơn về cách một hệ thống Lisp vận hành, chúng ta cần tìm hiểu cách biểu diễn cấu trúc danh sách sao cho tương thích với bộ nhớ của máy tính thông thường.</p>
+<p>Có hai khía cạnh cần xem xét khi hiện thực cấu trúc danh sách. Khía cạnh thứ nhất hoàn toàn là vấn đề biểu diễn: làm thế nào để biểu diễn cấu trúc “box-and-pointer” (hộp và con trỏ) của các cặp Lisp, chỉ sử dụng khả năng lưu trữ và định địa chỉ của bộ nhớ máy tính thông thường. Khía cạnh thứ hai liên quan đến việc quản lý bộ nhớ khi quá trình tính toán diễn ra. Hoạt động của một hệ thống Lisp phụ thuộc rất nhiều vào khả năng liên tục tạo ra các đối tượng dữ liệu mới. Những đối tượng này bao gồm cả các đối tượng được tạo ra một cách tường minh bởi các procedure Lisp đang được thông dịch, cũng như các cấu trúc được chính bộ thông dịch tạo ra, chẳng hạn như environments và argument lists. Mặc dù việc liên tục tạo ra các đối tượng dữ liệu mới sẽ không gây vấn đề gì trên một máy tính có bộ nhớ vô hạn và có thể truy cập nhanh, nhưng bộ nhớ máy tính thực tế chỉ có kích thước hữu hạn (thật đáng tiếc). Do đó, các hệ thống Lisp cung cấp một cơ chế <em>automatic storage allocation</em> (“cấp phát bộ nhớ tự động”) để hỗ trợ ảo tưởng về một bộ nhớ vô hạn. Khi một đối tượng dữ liệu không còn cần thiết nữa, vùng nhớ đã cấp phát cho nó sẽ được tự động thu hồi và tái sử dụng để tạo ra các đối tượng dữ liệu mới. Có nhiều kỹ thuật khác nhau để cung cấp cơ chế cấp phát bộ nhớ tự động như vậy. Phương pháp mà chúng ta sẽ thảo luận trong phần này được gọi là <em>garbage collection</em> (“thu gom rác”).</p>
+<h2 id="531-bộ-nhớ-dưới-dạng-vector"><a class="header" href="#531-bộ-nhớ-dưới-dạng-vector">5.3.1 Bộ nhớ dưới dạng Vector</a></h2>
+<p>Bộ nhớ máy tính thông thường có thể được hình dung như một mảng các ô chứa (cubbyhole), mỗi ô có thể chứa một mẩu thông tin. Mỗi ô chứa có một tên duy nhất, gọi là <em>address</em> (địa chỉ) hoặc <em>location</em> (vị trí). Các hệ thống bộ nhớ điển hình cung cấp hai thao tác nguyên thủy: một thao tác lấy dữ liệu được lưu tại một vị trí xác định và một thao tác gán dữ liệu mới vào một vị trí xác định. Địa chỉ bộ nhớ có thể được tăng tuần tự để hỗ trợ truy cập tuần tự đến một tập hợp các ô chứa. Tổng quát hơn, nhiều thao tác dữ liệu quan trọng yêu cầu địa chỉ bộ nhớ được xử lý như dữ liệu, có thể lưu trữ trong các vị trí bộ nhớ và thao tác trong các register của máy. Việc biểu diễn cấu trúc danh sách là một ứng dụng của <em>address arithmetic</em> (số học địa chỉ) như vậy.</p>
+<p>Để mô hình hóa bộ nhớ máy tính, chúng ta sử dụng một kiểu cấu trúc dữ liệu mới gọi là <em>vector</em>. Về mặt trừu tượng, một vector là một đối tượng dữ liệu hợp thành, trong đó các phần tử riêng lẻ có thể được truy cập thông qua một chỉ số nguyên trong một khoảng thời gian không phụ thuộc vào chỉ số đó<sup class="footnote-reference"><a href="#1">1</a></sup>. Để mô tả các thao tác bộ nhớ, chúng ta sử dụng hai procedure nguyên thủy của Scheme để thao tác với vector:</p>
+<ul>
+<li><code>(vector-ref ⟨vector⟩ ⟨n⟩)</code> trả về phần tử thứ $n^{\text{th}}$ của vector.</li>
+<li><code>(vector-set! ⟨vector⟩ ⟨n⟩ ⟨value⟩)</code> gán giá trị được chỉ định cho phần tử thứ $n^{\text{th}}$ của vector.</li>
+</ul>
+<p>Ví dụ, nếu <code>v</code> là một vector, thì <code>(vector-ref v 5)</code> lấy phần tử thứ năm trong vector <code>v</code> và <code>(vector-set! v 5 7)</code> thay đổi giá trị của phần tử thứ năm trong vector <code>v</code> thành 7<sup class="footnote-reference"><a href="#2">2</a></sup>. Đối với bộ nhớ máy tính, việc truy cập này có thể được hiện thực bằng cách sử dụng số học địa chỉ để kết hợp <em>base address</em> (địa chỉ cơ sở) chỉ vị trí bắt đầu của một vector trong bộ nhớ với một <em>index</em> (chỉ số) chỉ độ lệch của phần tử cụ thể trong vector đó.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Chúng ta có thể biểu diễn bộ nhớ dưới dạng danh sách các phần tử. Tuy nhiên, khi đó thời gian truy cập sẽ không còn độc lập với chỉ số, vì để truy cập phần tử thứ $n^{\text{th}}$ của một danh sách cần thực hiện $n - 1$ phép <code>cdr</code>.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Để đầy đủ, chúng ta nên chỉ rõ thao tác <code>make-vector</code> để tạo vector. Tuy nhiên, trong ứng dụng hiện tại, chúng ta sẽ chỉ sử dụng vector để mô hình hóa các phân vùng cố định của bộ nhớ máy tính.</p>
+</div>
+<h3 id="biểu-diễn-dữ-liệu-lisp"><a class="header" href="#biểu-diễn-dữ-liệu-lisp">Biểu diễn dữ liệu Lisp</a></h3>
+<p>Chúng ta có thể sử dụng vector để hiện thực các cấu trúc pair cơ bản cần thiết cho một list-structured memory. Giả sử bộ nhớ máy tính được chia thành hai vector: <code>the-cars</code> và <code>the-cdrs</code>. Chúng ta sẽ biểu diễn cấu trúc danh sách như sau: Một con trỏ đến một pair là một chỉ số vào hai vector này. <code>car</code> của pair là phần tử trong <code>the-cars</code> tại chỉ số được chỉ định, và <code>cdr</code> của pair là phần tử trong <code>the-cdrs</code> tại chỉ số đó. Chúng ta cũng cần một cách biểu diễn cho các đối tượng không phải pair (chẳng hạn như số và symbol) và một cách để phân biệt các loại dữ liệu khác nhau. Có nhiều phương pháp để thực hiện điều này, nhưng tất cả đều quy về việc sử dụng <em>typed pointers</em> (“con trỏ có kiểu”), tức là mở rộng khái niệm “con trỏ” để bao gồm cả thông tin về kiểu dữ liệu<sup class="footnote-reference"><a href="#3">3</a></sup>. Kiểu dữ liệu cho phép hệ thống phân biệt một con trỏ đến một pair (bao gồm kiểu dữ liệu “pair” và một chỉ số vào các vector bộ nhớ) với các con trỏ đến các loại dữ liệu khác (bao gồm một kiểu dữ liệu khác và bất kỳ cách biểu diễn nào được sử dụng cho loại dữ liệu đó). Hai đối tượng dữ liệu được coi là giống nhau (<code>eq?</code>) nếu các con trỏ của chúng giống hệt nhau <sup class="footnote-reference"><a href="#4">4</a></sup>.</p>
+<p>Hình 5.14 minh họa việc sử dụng phương pháp này để biểu diễn danh sách <code>((1 2) 3 4)</code>, kèm theo sơ đồ box-and-pointer của nó. Chúng ta sử dụng các tiền tố chữ cái để biểu thị thông tin kiểu dữ liệu. Ví dụ, một con trỏ đến pair có chỉ số 5 được ký hiệu là <code>p5</code>, danh sách rỗng được ký hiệu bằng con trỏ <code>e0</code>, và một con trỏ đến số 4 được ký hiệu là <code>n4</code>. Trong sơ đồ box-and-pointer, chúng ta đã chỉ ra ở góc dưới bên trái của mỗi pair chỉ số vector xác định nơi lưu trữ <code>car</code> và <code>cdr</code> của pair đó. Các vị trí trống trong <code>the-cars</code> và <code>the-cdrs</code> có thể chứa các phần của các cấu trúc danh sách khác (không được đề cập ở đây).</p>
+<p><img src="fig/Fig5.14b.jpg" alt="" /></p>
+<p><strong>Figure 5.14:</strong> Box-and-pointer and memory-vector representations of the list <code>((1 2) 3 4)</code>.</p>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Đây chính là ý tưởng “tagged data” (dữ liệu gắn nhãn) mà chúng ta đã giới thiệu trong Chương 2 để xử lý các phép toán tổng quát. Tuy nhiên, ở đây các kiểu dữ liệu được bao gồm ở mức máy nguyên thủy thay vì được xây dựng thông qua việc sử dụng danh sách.
+<sup class="footnote-reference"><a href="#4">4</a></sup>: Thông tin kiểu có thể được mã hóa theo nhiều cách khác nhau, tùy thuộc vào chi tiết của máy tính mà hệ thống Lisp được hiện thực. Hiệu suất thực thi của các chương trình Lisp sẽ phụ thuộc mạnh mẽ vào mức độ khéo léo của lựa chọn này, nhưng rất khó để đưa ra các quy tắc thiết kế tổng quát cho các lựa chọn tốt. Cách đơn giản nhất để hiện thực typed pointers là cấp phát một tập hợp cố định các bit trong mỗi con trỏ để làm <em>type field</em> (trường kiểu) mã hóa kiểu dữ liệu. Các câu hỏi quan trọng cần giải quyết khi thiết kế một biểu diễn như vậy bao gồm: Cần bao nhiêu bit kiểu? Chỉ số vector cần lớn đến mức nào? Có thể sử dụng hiệu quả các lệnh máy nguyên thủy để thao tác các trường kiểu của con trỏ hay không? Các máy tính có phần cứng đặc biệt để xử lý hiệu quả các trường kiểu được gọi là <em>tagged architectures</em>.</p>
+</div>
+<p>Một con trỏ đến một số, chẳng hạn như <code>n4</code>, có thể bao gồm một kiểu dữ liệu chỉ ra rằng đây là dữ liệu số, cùng với biểu diễn thực tế của số 4 <sup class="footnote-reference"><a href="#5">5</a></sup>. Để xử lý các số quá lớn không thể biểu diễn trong không gian cố định dành cho một con trỏ, chúng ta có thể sử dụng một kiểu dữ liệu riêng gọi là <em>bignum</em>, trong đó con trỏ trỏ đến một danh sách chứa các phần của số đó <sup class="footnote-reference"><a href="#6">6</a></sup>. </p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Quyết định về cách biểu diễn số này sẽ xác định liệu <code>eq?</code> — phép kiểm tra sự bằng nhau của các con trỏ — có thể được dùng để kiểm tra sự bằng nhau của các số hay không. Nếu con trỏ chứa trực tiếp giá trị số, thì các số bằng nhau sẽ có cùng một con trỏ. Nhưng nếu con trỏ chứa chỉ số của một vị trí lưu trữ số đó, thì các số bằng nhau chỉ chắc chắn có cùng con trỏ nếu chúng ta cẩn thận không bao giờ lưu cùng một số ở nhiều vị trí khác nhau.</p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Điều này giống như việc viết một số dưới dạng một chuỗi các chữ số, ngoại trừ việc mỗi “chữ số” là một số nằm trong khoảng từ 0 đến số lớn nhất có thể lưu trong một con trỏ đơn.</p>
+</div>
+<p>Một symbol có thể được biểu diễn như một typed pointer (con trỏ có kiểu) trỏ đến một dãy các ký tự tạo thành dạng in của symbol đó. Dãy ký tự này được Lisp reader (bộ đọc Lisp) tạo ra khi chuỗi ký tự lần đầu tiên xuất hiện trong đầu vào. Vì chúng ta muốn hai thể hiện của cùng một symbol được <code>eq?</code> nhận diện là “cùng” một symbol và muốn <code>eq?</code> chỉ là một phép kiểm tra đơn giản về sự bằng nhau của các con trỏ, chúng ta phải đảm bảo rằng nếu reader gặp cùng một chuỗi ký tự hai lần, nó sẽ sử dụng cùng một con trỏ (trỏ đến cùng một dãy ký tự) để biểu diễn cả hai lần xuất hiện.</p>
+<p>Để làm được điều này, reader duy trì một bảng, theo truyền thống gọi là <em>obarray</em>, chứa tất cả các symbol mà nó từng gặp. Khi reader gặp một chuỗi ký tự và chuẩn bị tạo một symbol, nó sẽ kiểm tra obarray để xem đã từng gặp chuỗi ký tự này trước đây chưa. Nếu chưa, nó sẽ dùng các ký tự đó để tạo một symbol mới (một typed pointer trỏ đến một dãy ký tự mới) và đưa con trỏ này vào obarray. Nếu reader đã gặp chuỗi ký tự này trước đó, nó sẽ trả về con trỏ symbol đã lưu trong obarray. Quá trình thay thế các chuỗi ký tự bằng các con trỏ duy nhất này được gọi là <em>interning</em> symbol.</p>
+<h3 id="hiện-thực-các-thao-tác-danh-sách-nguyên-thủy"><a class="header" href="#hiện-thực-các-thao-tác-danh-sách-nguyên-thủy">Hiện thực các thao tác danh sách nguyên thủy</a></h3>
+<p>Với sơ đồ biểu diễn ở trên, chúng ta có thể thay thế mỗi thao tác danh sách “nguyên thủy” của một register machine bằng một hoặc nhiều thao tác vector nguyên thủy. Chúng ta sẽ dùng hai register, <code>the-cars</code> và <code>the-cdrs</code>, để xác định các vector bộ nhớ, và giả định rằng <code>vector-ref</code> và <code>vector-set!</code> có sẵn như các thao tác nguyên thủy. Chúng ta cũng giả định rằng các phép toán số học trên con trỏ (chẳng hạn như tăng giá trị con trỏ, dùng con trỏ pair để đánh chỉ số vào vector, hoặc cộng hai số) chỉ sử dụng phần chỉ số của typed pointer.</p>
+<p>Ví dụ, chúng ta có thể làm cho một register machine hỗ trợ các lệnh:</p>
+<pre><code class="language-{.scheme}">(assign ⟨reg₁⟩ (op car) (reg ⟨reg₂⟩))
+(assign ⟨reg₁⟩ (op cdr) (reg ⟨reg₂⟩))
+</code></pre>
+<p>nếu chúng ta hiện thực chúng lần lượt như sau:</p>
+<pre><code class="language-{.scheme}">(assign ⟨reg₁⟩ 
+        (op vector-ref)
+        (reg the-cars)
+        (reg ⟨reg₂⟩))
+(assign ⟨reg₁⟩
+        (op vector-ref)
+        (reg the-cdrs)
+        (reg ⟨reg₂⟩))
+</code></pre>
+<p>Các lệnh:</p>
+<pre><code class="language-{.scheme}">(perform (op set-car!) (reg ⟨reg₁⟩) (reg ⟨reg₂⟩))
+(perform (op set-cdr!) (reg ⟨reg₁⟩) (reg ⟨reg₂⟩))
+</code></pre>
+<p>được hiện thực như sau:</p>
+<pre><code class="language-{.scheme}">(perform (op vector-set!)
+         (reg the-cars)
+         (reg ⟨reg₁⟩)
+         (reg ⟨reg₂⟩))
+(perform (op vector-set!)
+         (reg the-cdrs)
+         (reg ⟨reg₁⟩)
+         (reg ⟨reg₂⟩))
+</code></pre>
+<p><code>Cons</code> được thực hiện bằng cách cấp phát một chỉ số chưa dùng và lưu các đối số của <code>cons</code> vào <code>the-cars</code> và <code>the-cdrs</code> tại vị trí vector có chỉ số đó. Chúng ta giả định rằng có một register đặc biệt, <code>free</code>, luôn giữ một pair pointer chứa chỉ số khả dụng tiếp theo, và chúng ta có thể tăng phần chỉ số của con trỏ đó để tìm vị trí trống tiếp theo <sup class="footnote-reference"><a href="#7">7</a></sup>.</p>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Có những cách khác để tìm vùng nhớ trống. Ví dụ, chúng ta có thể liên kết tất cả các pair chưa dùng thành một <em>free list</em>. Các vị trí trống của chúng ta là liên tiếp (và do đó có thể truy cập bằng cách tăng con trỏ) vì chúng ta đang sử dụng một compacting garbage collector, như sẽ thấy ở 5.3.2.</p>
+</div>
+<p>Ví dụ, lệnh:</p>
+<pre><code class="language-{.scheme}">(assign ⟨reg₁⟩
+        (op cons)
+        (reg ⟨reg₂⟩)
+        (reg ⟨reg₃⟩))
+</code></pre>
+<p>được hiện thực thành chuỗi thao tác vector sau đây:<sup class="footnote-reference"><a href="#8">8</a></sup></p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Về cơ bản đây là cách hiện thực <code>cons</code> bằng <code>set-car!</code> và <code>set-cdr!</code>, như mô tả ở 3.3.1. Thao tác <code>get-new-pair</code> dùng trong hiện thực đó ở đây được thực hiện bởi con trỏ <code>free</code>.</p>
+</div>
+<pre><code class="language-{.scheme}">(perform (op vector-set!)
+         (reg the-cars)
+         (reg free)
+         (reg ⟨reg₂⟩))
+(perform (op vector-set!)
+         (reg the-cdrs)
+         (reg free)
+         (reg ⟨reg₃⟩))
+(assign ⟨reg₁⟩ (reg free))
+(assign free (op +) (reg free) (const 1))
+</code></pre>
+<p>Thao tác <code>eq?</code>:</p>
+<pre><code class="language-{.scheme}">(op eq?) (reg ⟨reg₁⟩) (reg ⟨reg₂⟩)
+</code></pre>
+<p>đơn giản chỉ kiểm tra sự bằng nhau của tất cả các trường trong các register, và các predicate như <code>pair?</code>, <code>null?</code>, <code>symbol?</code>, và <code>number?</code> chỉ cần kiểm tra trường kiểu.</p>
+<h3 id="hiện-thực-stack"><a class="header" href="#hiện-thực-stack">Hiện thực stack</a></h3>
+<p>Mặc dù các register machine của chúng ta sử dụng stack, chúng ta không cần làm gì đặc biệt ở đây, vì stack có thể được mô hình hóa bằng danh sách. Stack có thể là một danh sách các giá trị đã lưu, được trỏ tới bởi một register đặc biệt <code>the-stack</code>. Do đó, <code>(save ⟨reg⟩)</code> có thể được hiện thực như:</p>
+<pre><code class="language-{.scheme}">(assign the-stack 
+        (op cons)
+        (reg ⟨reg⟩)
+        (reg the-stack))
+</code></pre>
+<p>Tương tự, <code>(restore ⟨reg⟩)</code> có thể được hiện thực như:</p>
+<pre><code class="language-{.scheme}">(assign ⟨reg⟩ (op car) (reg the-stack))
+(assign the-stack (op cdr) (reg the-stack))
+</code></pre>
+<p>và <code>(perform (op initialize-stack))</code> có thể được hiện thực như:</p>
+<pre><code class="language-{.scheme}">(assign the-stack (const ()))
+</code></pre>
+<p>Các thao tác này có thể được mở rộng thêm dựa trên các thao tác vector đã nêu ở trên. Tuy nhiên, trong các kiến trúc máy tính thông thường, thường có lợi khi cấp phát stack như một vector riêng biệt. Khi đó, việc push và pop stack có thể được thực hiện bằng cách tăng hoặc giảm một chỉ số vào vector đó.</p>
+<h2 id="532-duy-trì-ảo-tưởng-về-bộ-nhớ-vô-hạn"><a class="header" href="#532-duy-trì-ảo-tưởng-về-bộ-nhớ-vô-hạn">5.3.2 Duy trì ảo tưởng về bộ nhớ vô hạn</a></h2>
+<p>Phương pháp biểu diễn được phác thảo ở 5.3.1 giải quyết vấn đề hiện thực cấu trúc danh sách, với điều kiện chúng ta có một lượng bộ nhớ vô hạn. Với một máy tính thực, cuối cùng chúng ta sẽ hết vùng trống để tạo các pair mới<sup class="footnote-reference"><a href="#9">9</a></sup>.</p>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Điều này có thể sẽ không còn đúng trong tương lai, vì bộ nhớ có thể đủ lớn để không thể hết bộ nhớ trống trong suốt vòng đời của máy tính. Ví dụ, có khoảng $3 \cdot 10^{13}$ micro giây trong một năm, nên nếu chúng ta <code>cons</code> một lần mỗi micro giây thì sẽ cần khoảng $10^{15}$ ô nhớ để xây dựng một máy có thể hoạt động 30 năm mà không hết bộ nhớ. Lượng bộ nhớ đó nghe có vẻ cực kỳ lớn theo tiêu chuẩn ngày nay, nhưng không phải là không thể về mặt vật lý. Mặt khác, bộ xử lý ngày càng nhanh hơn và một máy tính trong tương lai có thể có số lượng lớn bộ xử lý hoạt động song song trên cùng một bộ nhớ, nên có thể tiêu thụ bộ nhớ nhanh hơn nhiều so với giả định.</p>
+</div>
+<p>Tuy nhiên, hầu hết các pair được tạo ra trong một phép tính điển hình chỉ được dùng để giữ các kết quả trung gian. Sau khi các kết quả này được truy cập, các pair đó không còn cần thiết nữa — chúng trở thành <em>garbage</em> (rác). Ví dụ, phép tính:</p>
+<pre><code class="language-{.scheme}">(accumulate 
+ + 
+ 0
+ (filter odd? (enumerate-interval 0 n)))
+</code></pre>
+<p>tạo ra hai danh sách: danh sách liệt kê và kết quả của việc lọc danh sách đó. Khi quá trình cộng dồn hoàn tất, các danh sách này không còn cần thiết nữa, và vùng nhớ đã cấp phát có thể được thu hồi. Nếu chúng ta có thể sắp xếp để thu gom toàn bộ rác định kỳ, và nếu việc này tái sử dụng bộ nhớ với tốc độ xấp xỉ tốc độ tạo ra các pair mới, chúng ta sẽ duy trì được ảo tưởng rằng có một lượng bộ nhớ vô hạn.</p>
+<pre><code class="language-{.scheme}">begin-garbage-collection
+  (assign free (const 0))
+  (assign scan (const 0))
+  (assign old (reg root))
+  (assign relocate-continue 
+          (label reassign-root))
+  (goto (label relocate-old-result-in-new))
+reassign-root
+  (assign root (reg new))
+  (goto (label gc-loop))
+</code></pre>
+<p>Trong vòng lặp chính của bộ thu gom rác (garbage collector), chúng ta phải xác định xem còn đối tượng nào cần quét hay không. Việc này được thực hiện bằng cách kiểm tra xem con trỏ <code>scan</code> có trùng với con trỏ <code>free</code> hay không. Nếu hai con trỏ bằng nhau, điều đó có nghĩa là tất cả các đối tượng có thể truy cập đã được di dời (relocate), và chúng ta sẽ rẽ nhánh đến <code>gc-flip</code>, nơi thực hiện việc dọn dẹp để có thể tiếp tục quá trình tính toán đang bị gián đoạn. Nếu vẫn còn các pair cần quét, chúng ta gọi chương trình con (subroutine) relocate để di dời <code>car</code> của pair tiếp theo (bằng cách đặt con trỏ <code>car</code> vào <code>old</code>). Thanh ghi <code>relocate-continue</code> được thiết lập để chương trình con sẽ quay lại và cập nhật con trỏ <code>car</code>.</p>
+<pre><code class="language-{.scheme}">gc-loop
+  (test (op =) (reg scan) (reg free))
+  (branch (label gc-flip))
+  (assign old 
+          (op vector-ref)
+          (reg new-cars)
+          (reg scan))
+  (assign relocate-continue 
+          (label update-car))
+  (goto (label relocate-old-result-in-new))
+</code></pre>
+<p>Tại <code>update-car</code>, chúng ta sửa đổi con trỏ <code>car</code> của pair đang được quét, sau đó tiếp tục di dời <code>cdr</code> của pair. Chúng ta quay lại <code>update-cdr</code> khi việc di dời đó đã hoàn tất. Sau khi di dời và cập nhật <code>cdr</code>, chúng ta đã hoàn tất việc quét pair đó, vì vậy tiếp tục vòng lặp chính.</p>
+<pre><code class="language-{.scheme}">update-car
+  (perform (op vector-set!)
+           (reg new-cars)
+           (reg scan)
+           (reg new))
+  (assign  old 
+           (op vector-ref)
+           (reg new-cdrs)
+           (reg scan))
+  (assign  relocate-continue
+           (label update-cdr))
+  (goto (label relocate-old-result-in-new))
+update-cdr
+  (perform (op vector-set!)
+           (reg new-cdrs)
+           (reg scan)
+           (reg new))
+  (assign  scan (op +) (reg scan) (const 1))
+  (goto (label gc-loop))
+</code></pre>
+<p>Chương trình con <code>relocate-old-result-in-new</code> di dời các đối tượng như sau: Nếu đối tượng cần di dời (được trỏ bởi <code>old</code>) không phải là một pair, thì chúng ta trả về cùng một con trỏ đến đối tượng đó mà không thay đổi (trong <code>new</code>). (Ví dụ, chúng ta có thể đang quét một pair mà <code>car</code> của nó là số 4. Nếu chúng ta biểu diễn <code>car</code> bằng <code>n4</code>, như mô tả trong 5.3.1, thì chúng ta muốn con trỏ <code>car</code> “đã di dời” vẫn là <code>n4</code>.) Ngược lại, chúng ta phải thực hiện việc di dời. Nếu vị trí <code>car</code> của pair cần di dời chứa một nhãn broken-heart, thì pair này thực tế đã được di chuyển, do đó chúng ta lấy địa chỉ chuyển tiếp (forwarding address) từ vị trí <code>cdr</code> của broken heart và trả về giá trị này trong <code>new</code>. Nếu con trỏ trong <code>old</code> trỏ đến một pair chưa được di chuyển, thì chúng ta di chuyển pair đó đến ô trống đầu tiên trong bộ nhớ mới (được trỏ bởi <code>free</code>) và thiết lập broken heart bằng cách lưu nhãn broken-heart và địa chỉ chuyển tiếp tại vị trí cũ. <code>Relocate-old-result-in-new</code> sử dụng một thanh ghi <code>oldcr</code> để giữ <code>car</code> hoặc <code>cdr</code> của đối tượng được trỏ bởi <code>old</code> <sup class="footnote-reference"><a href="#10">10</a></sup>.</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Bộ thu gom rác sử dụng predicate mức thấp <code>pointer-to-pair?</code> thay vì phép toán cấu trúc danh sách <code>pair?</code> vì trong một hệ thống thực tế có thể tồn tại nhiều loại đối tượng được xử lý như pair cho mục đích garbage collection. Ví dụ, trong một hệ thống Scheme tuân thủ tiêu chuẩn IEEE, một đối tượng procedure có thể được hiện thực như một dạng đặc biệt của “pair” mà không thỏa mãn predicate <code>pair?</code>. Trong mục đích mô phỏng, <code>pointer-to-pair?</code> có thể được hiện thực như <code>pair?</code>.</p>
+</div>
+<pre><code class="language-{.scheme}">relocate-old-result-in-new
+  (test (op pointer-to-pair?) (reg old))
+  (branch (label pair))
+  (assign new (reg old))
+  (goto (reg relocate-continue))
+pair
+  (assign  oldcr 
+           (op vector-ref)
+           (reg the-cars)
+           (reg old))
+  (test (op broken-heart?) (reg oldcr))
+  (branch  (label already-moved))
+  (assign  new (reg free)) ; new location for pair
+  ;; Update free pointer.
+  (assign free (op +) (reg free) (const 1))
+  ;; Copy the car and cdr to new memory.
+  (perform (op vector-set!)
+           (reg new-cars)
+           (reg new)
+           (reg oldcr))
+  (assign  oldcr 
+           (op vector-ref)
+           (reg the-cdrs)
+           (reg old))
+  (perform (op vector-set!)
+           (reg new-cdrs)
+           (reg new)
+           (reg oldcr))
+  ;; Construct the broken heart.
+  (perform (op vector-set!)
+           (reg the-cars)
+           (reg old)
+           (const broken-heart))
+  (perform (op vector-set!)
+           (reg the-cdrs)
+           (reg old)
+           (reg new))
+  (goto (reg relocate-continue))
+already-moved
+  (assign  new
+           (op vector-ref)
+           (reg the-cdrs)
+           (reg old))
+  (goto (reg relocate-continue))
+</code></pre>
+<p>Ở phần cuối cùng của quá trình garbage collection, chúng ta hoán đổi vai trò của bộ nhớ cũ và bộ nhớ mới bằng cách hoán đổi các con trỏ: hoán đổi <code>the-cars</code> với <code>new-cars</code>, và <code>the-cdrs</code> với <code>new-cdrs</code>. Khi đó, chúng ta sẽ sẵn sàng thực hiện một lần garbage collection khác khi bộ nhớ lại đầy.</p>
+<pre><code class="language-{.scheme}">gc-flip
+  (assign temp (reg the-cdrs))
+  (assign the-cdrs (reg new-cdrs))
+  (assign new-cdrs (reg temp))
+  (assign temp (reg the-cars))
+  (assign the-cars (reg new-cars))
+  (assign new-cars (reg temp))
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="5-4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="5-4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

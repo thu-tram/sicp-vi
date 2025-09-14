@@ -1,0 +1,1214 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Logic Programming - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html" class="active"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="44-logic-programming"><a class="header" href="#44-logic-programming">4.4 Logic Programming</a></h1>
+<p>Trong Chương 1, chúng ta đã nhấn mạnh rằng khoa học máy tính xử lý imperative (&quot;cách làm&quot;) knowledge (kiến thức), trong khi toán học xử lý declarative (&quot;cái gì là&quot;) knowledge. Thật vậy, programming languages (ngôn ngữ lập trình) yêu cầu lập trình viên biểu đạt kiến thức dưới một hình thức cho thấy các phương pháp từng bước để giải quyết những vấn đề cụ thể. Mặt khác, high-level languages (ngôn ngữ bậc cao) cung cấp, như một phần của việc triển khai ngôn ngữ, một lượng đáng kể methodological knowledge (kiến thức phương pháp) giúp người dùng không phải bận tâm đến vô số chi tiết về cách một phép tính đã chỉ định sẽ được thực hiện.</p>
+<p>Hầu hết programming languages, bao gồm Lisp, được tổ chức xoay quanh việc tính toán giá trị của các mathematical functions (hàm toán học). Expression-oriented languages (ngôn ngữ hướng biểu thức) (như Lisp, Fortran, và Algol) tận dụng “lối chơi chữ” rằng một expression (biểu thức) mô tả giá trị của một hàm cũng có thể được hiểu như một phương tiện để tính toán giá trị đó. Vì lý do này, hầu hết programming languages có xu hướng thiên mạnh về unidirectional computations (tính toán một chiều) (tính toán với đầu vào và đầu ra được xác định rõ ràng). Tuy nhiên, có những programming languages hoàn toàn khác biệt làm giảm bớt sự thiên lệch này. Chúng ta đã thấy một ví dụ như vậy ở 3.3.5, nơi các đối tượng của phép tính là arithmetic constraints (ràng buộc số học). Trong một constraint system (hệ thống ràng buộc), hướng và thứ tự của phép tính không được xác định rõ ràng; do đó, khi thực hiện một phép tính, hệ thống phải cung cấp nhiều kiến thức “cách làm” chi tiết hơn so với trường hợp của một phép tính số học thông thường. Tuy nhiên, điều này không có nghĩa là người dùng hoàn toàn được giải phóng khỏi trách nhiệm cung cấp imperative knowledge. Có nhiều constraint networks (mạng ràng buộc) triển khai cùng một tập hợp ràng buộc, và người dùng phải chọn từ tập hợp các mạng tương đương về mặt toán học một mạng phù hợp để chỉ định một phép tính cụ thể.</p>
+<p>The nondeterministic program evaluator (bộ đánh giá chương trình bất định) ở 4.3 cũng rời xa quan điểm rằng lập trình là xây dựng các thuật toán để tính toán các hàm một chiều. Trong một nondeterministic language (ngôn ngữ bất định), các biểu thức có thể có nhiều hơn một giá trị, và do đó, phép tính xử lý các quan hệ thay vì các hàm đơn trị. Logic programming (lập trình logic) mở rộng ý tưởng này bằng cách kết hợp tầm nhìn lập trình dựa trên quan hệ với một dạng powerful symbolic pattern matching (so khớp mẫu ký hiệu mạnh mẽ) gọi là <em>unification</em> (hợp nhất).<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>Cách tiếp cận này, khi hoạt động, có thể là một phương pháp rất mạnh mẽ để viết chương trình. Một phần sức mạnh đến từ thực tế rằng một “what is” fact (sự thật “cái gì là”) duy nhất có thể được dùng để giải quyết nhiều vấn đề khác nhau vốn sẽ có các thành phần “how to” khác nhau. Ví dụ, hãy xét operation (phép toán) <code>append</code>, nhận hai lists (danh sách) làm đối số và kết hợp các phần tử của chúng để tạo thành một danh sách duy nhất. Trong một procedural language (ngôn ngữ thủ tục) như Lisp, chúng ta có thể định nghĩa <code>append</code> dựa trên basic list constructor (hàm dựng danh sách cơ bản) <code>cons</code>, như chúng ta đã làm ở 2.2.1:</p>
+<pre><code class="language-{.scheme}">(define (append x y)
+  (if (null? x) 
+      y 
+      (cons (car x) (append (cdr x) y))))
+</code></pre>
+<p>Procedure này có thể được xem như một bản dịch sang Lisp của hai quy tắc sau, trong đó quy tắc đầu tiên bao quát trường hợp danh sách thứ nhất rỗng và quy tắc thứ hai xử lý trường hợp danh sách không rỗng, vốn là một <code>cons</code> của hai phần:</p>
+<ul>
+<li>Với bất kỳ list <code>y</code> nào, empty list (danh sách rỗng) và <code>y</code> <code>append</code> để tạo thành <code>y</code>.</li>
+<li>Với bất kỳ <code>u</code>, <code>v</code>, <code>y</code>, và <code>z</code> nào, <code>(cons u v)</code> và <code>y</code> <code>append</code> để tạo thành <code>(cons u z)</code> nếu <code>v</code> và <code>y</code> <code>append</code> để tạo thành <code>z</code>.<sup class="footnote-reference"><a href="#2">2</a></sup></li>
+</ul>
+<p>Sử dụng procedure <code>append</code>, chúng ta có thể trả lời các câu hỏi như:</p>
+<blockquote>
+<p>Tìm <code>append</code> của <code>(a b)</code> và <code>(c d)</code>.</p>
+</blockquote>
+<p>Nhưng cùng hai quy tắc đó cũng đủ để trả lời các loại câu hỏi sau, vốn procedure không thể trả lời:</p>
+<blockquote>
+<p>Tìm một list <code>y</code> mà <code>append</code> với <code>(a b)</code> để tạo ra <code>(a b c d)</code>.</p>
+<blockquote>
+<p>Tìm tất cả <code>x</code> và <code>y</code> mà <code>append</code> để tạo thành <code>(a b c d)</code>.</p>
+</blockquote>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Logic programming phát triển từ một lịch sử nghiên cứu lâu dài về automatic theorem proving (chứng minh định lý tự động). Các chương trình chứng minh định lý thời kỳ đầu đạt được rất ít, vì chúng tìm kiếm toàn bộ không gian các chứng minh khả dĩ. Bước đột phá lớn khiến việc tìm kiếm này khả thi là khám phá vào đầu những năm 1960 của <em>unification algorithm</em> (thuật toán hợp nhất) và <em>resolution principle</em> (nguyên lý quy giải) (Robinson 1965). Resolution được sử dụng, ví dụ, bởi Green và Raphael (1968) (xem thêm Green 1969) làm cơ sở cho một hệ thống hỏi-đáp suy diễn. Trong hầu hết giai đoạn này, các nhà nghiên cứu tập trung vào các thuật toán được đảm bảo sẽ tìm ra chứng minh nếu tồn tại. Các thuật toán như vậy khó kiểm soát và điều hướng tới một chứng minh. Hewitt (1969) nhận ra khả năng kết hợp control structure (cấu trúc điều khiển) của một programming language với các thao tác của một logic-manipulation system (hệ thống thao tác logic), dẫn đến công trình về tìm kiếm tự động được đề cập ở 4.3.1 (Footnote 250). Cùng thời điểm đó, Colmerauer, ở Marseille, đang phát triển các rule-based systems (hệ thống dựa trên luật) để xử lý natural language (ngôn ngữ tự nhiên) (xem Colmerauer et al. 1973). Ông phát minh ra một programming language gọi là Prolog để biểu diễn các luật đó. Kowalski (1973; 1979), ở Edinburgh, nhận ra rằng việc thực thi một chương trình Prolog có thể được hiểu như là chứng minh các định lý (sử dụng một kỹ thuật chứng minh gọi là linear Horn-clause resolution). Sự kết hợp của hai hướng nghiên cứu cuối cùng này đã dẫn đến phong trào logic programming. Do đó, khi ghi nhận công lao phát triển logic programming, người Pháp có thể chỉ ra nguồn gốc của Prolog tại Đại học Marseille, trong khi người Anh có thể nhấn mạnh công trình tại Đại học Edinburgh. Theo một số người ở MIT, logic programming được phát triển bởi các nhóm này trong nỗ lực tìm hiểu xem Hewitt đang nói gì trong luận án tiến sĩ xuất sắc nhưng khó hiểu của ông. Để biết lịch sử của logic programming, xem Robinson 1983.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Để thấy sự tương ứng giữa các quy tắc và procedure, hãy để <code>x</code> trong procedure (khi <code>x</code> không rỗng) tương ứng với <code>(cons u v)</code> trong quy tắc. Khi đó <code>z</code> trong quy tắc tương ứng với <code>append</code> của <code>(cdr x)</code> và <code>y</code>.</p>
+</div>
+<p>Trong một logic programming language (ngôn ngữ lập trình logic), lập trình viên viết một <code>append</code> “procedure” (thủ tục) bằng cách nêu ra hai quy tắc về <code>append</code> đã được đưa ra ở trên. “How to” knowledge (kiến thức “cách làm”) được interpreter (trình thông dịch) tự động cung cấp để cho phép cặp quy tắc duy nhất này được sử dụng nhằm trả lời cả ba loại câu hỏi về <code>append</code>.<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<p>Các contemporary logic programming languages (ngôn ngữ lập trình logic hiện đại) (bao gồm cả ngôn ngữ mà chúng ta triển khai ở đây) có những thiếu sót đáng kể, ở chỗ các phương pháp “how to” tổng quát của chúng có thể dẫn đến các vòng lặp vô hạn giả hoặc các hành vi không mong muốn khác. Logic programming là một lĩnh vực nghiên cứu đang hoạt động trong computer science (khoa học máy tính).<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<p>Trước đó trong chương này, chúng ta đã khám phá công nghệ triển khai interpreters (bộ thông dịch) và mô tả các thành phần thiết yếu đối với một interpreter cho một Lisp-like language (ngôn ngữ giống Lisp) (thực tế là cho bất kỳ ngôn ngữ thông thường nào). Giờ đây, chúng ta sẽ áp dụng những ý tưởng này để thảo luận về một interpreter cho một logic programming language. Chúng ta gọi ngôn ngữ này là <em>query language</em> (ngôn ngữ truy vấn), bởi vì nó rất hữu ích để truy xuất thông tin từ data bases (cơ sở dữ liệu) bằng cách xây dựng <em>queries</em> (truy vấn), hay các câu hỏi, được diễn đạt trong ngôn ngữ này.</p>
+<p>Mặc dù query language rất khác với Lisp, chúng ta sẽ thấy thuận tiện khi mô tả ngôn ngữ này theo cùng một khuôn khổ tổng quát mà chúng ta đã sử dụng từ trước đến nay: như một tập hợp các primitive elements (phần tử nguyên thủy), cùng với các means of combination (phương thức kết hợp) cho phép chúng ta kết hợp các phần tử đơn giản để tạo ra các phần tử phức tạp hơn, và các means of abstraction (phương thức trừu tượng hóa) cho phép chúng ta coi các phần tử phức tạp như những đơn vị khái niệm đơn lẻ.</p>
+<p>Một interpreter cho một logic programming language phức tạp hơn đáng kể so với một interpreter cho một ngôn ngữ như Lisp. Tuy nhiên, chúng ta sẽ thấy rằng interpreter của query language chứa nhiều thành phần giống với interpreter ở 4.1. Đặc biệt, sẽ có một phần “eval” phân loại expressions (biểu thức) theo loại và một phần “apply” triển khai abstraction mechanism (cơ chế trừu tượng hóa) của ngôn ngữ (procedures trong trường hợp của Lisp, và <em>rules</em> (quy tắc) trong trường hợp của logic programming). Ngoài ra, một vai trò trung tâm trong việc triển khai được đảm nhận bởi frame data structure (cấu trúc dữ liệu khung), cấu trúc này xác định sự tương ứng giữa các symbols (ký hiệu) và các giá trị liên kết của chúng. Một khía cạnh thú vị khác của việc triển khai query language là chúng ta sử dụng đáng kể streams (luồng), vốn đã được giới thiệu trong Chương 3.</p>
+<h2 id="441-deductive-information-retrieval"><a class="header" href="#441-deductive-information-retrieval">4.4.1 Deductive Information Retrieval</a></h2>
+<p>Logic programming vượt trội trong việc cung cấp các giao diện tới data bases để truy xuất thông tin. Query language mà chúng ta sẽ triển khai trong chương này được thiết kế để sử dụng theo cách đó.</p>
+<p>Để minh họa những gì query system (hệ thống truy vấn) thực hiện, chúng ta sẽ cho thấy cách nó có thể được sử dụng để quản lý cơ sở dữ liệu hồ sơ nhân sự của Microshaft, một công ty công nghệ cao đang phát triển mạnh ở khu vực Boston. Ngôn ngữ này cung cấp khả năng truy cập thông tin nhân sự theo hướng pattern-directed (dựa trên mẫu) và cũng có thể tận dụng các general rules (quy tắc tổng quát) để đưa ra các suy luận logic.</p>
+<h3 id="a-sample-data-base"><a class="header" href="#a-sample-data-base">A sample data base</a></h3>
+<p>Cơ sở dữ liệu nhân sự của Microshaft chứa các <em>assertions</em> (mệnh đề khẳng định) về nhân sự của công ty. Dưới đây là thông tin về Ben Bitdiddle, resident computer wizard (chuyên gia máy tính thường trú):</p>
+<pre><code class="language-{.scheme}">(address (Bitdiddle Ben) 
+         (Slumerville (Ridge Road) 10))
+(job (Bitdiddle Ben) (computer wizard))
+(salary (Bitdiddle Ben) 60000)
+</code></pre>
+<p>Mỗi assertion là một list (danh sách) (trong trường hợp này là một triple — bộ ba) mà các phần tử của nó cũng có thể là các list.</p>
+<p>Là resident wizard, Ben phụ trách bộ phận máy tính của công ty, và anh giám sát hai programmers (lập trình viên) và một technician (kỹ thuật viên). Dưới đây là thông tin về họ:</p>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Điều này chắc chắn không giải phóng người dùng khỏi toàn bộ vấn đề về cách tính toán câu trả lời. Có nhiều tập hợp quy tắc tương đương về mặt toán học để xây dựng quan hệ <code>append</code>, nhưng chỉ một số trong đó có thể được chuyển thành các công cụ hiệu quả để tính toán theo bất kỳ hướng nào. Ngoài ra, đôi khi thông tin “what is” không đưa ra manh mối nào về “how to” để tính toán câu trả lời. Ví dụ, hãy xét bài toán tính $y$ sao cho $y^{2} = x$.</p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Sự quan tâm đến logic programming đạt đỉnh vào đầu những năm 80 khi chính phủ Nhật Bản bắt đầu một dự án đầy tham vọng nhằm xây dựng các máy tính siêu nhanh được tối ưu hóa để chạy logic programming languages. Tốc độ của các máy tính như vậy được đo bằng LIPS (Logical Inferences Per Second) thay vì FLOPS (FLoating-point Operations Per Second) thông thường. Mặc dù dự án đã thành công trong việc phát triển phần cứng và phần mềm như kế hoạch ban đầu, ngành công nghiệp máy tính quốc tế đã đi theo một hướng khác. Xem Feigenbaum và Shrobe 1993 để có cái nhìn tổng quan và đánh giá về dự án của Nhật Bản. Cộng đồng logic programming cũng đã chuyển sang xem xét relational programming (lập trình quan hệ) dựa trên các kỹ thuật khác ngoài simple pattern matching (so khớp mẫu đơn giản), chẳng hạn như khả năng xử lý numerical constraints (ràng buộc số) như những ràng buộc được minh họa trong constraint-propagation system (hệ thống truyền ràng buộc) ở 3.3.5.</p>
+</div>
+<p>Cũng có một programmer trainee (lập trình viên tập sự), người được Alyssa giám sát:</p>
+<pre><code class="language-{.scheme}">(address (Reasoner Louis) 
+         (Slumerville (Pine Tree Road) 80))
+(job (Reasoner Louis) 
+     (computer programmer trainee))
+(salary (Reasoner Louis) 30000)
+(supervisor (Reasoner Louis) 
+            (Hacker Alyssa P))
+</code></pre>
+<p>Tất cả những người này đều thuộc computer division (bộ phận máy tính), như được chỉ ra bởi từ <code>computer</code> là mục đầu tiên trong phần mô tả công việc của họ.</p>
+<p>Ben là một high-level employee (nhân viên cấp cao). Người giám sát của anh chính là big wheel (lãnh đạo cấp cao) của công ty:</p>
+<pre><code class="language-{.scheme}">(supervisor (Bitdiddle Ben) (Warbucks Oliver))
+(address (Warbucks Oliver) 
+         (Swellesley (Top Heap Road)))
+(job (Warbucks Oliver) 
+     (administration big wheel))
+(salary (Warbucks Oliver) 150000)
+</code></pre>
+<p>Ngoài computer division do Ben giám sát, công ty còn có một accounting division (bộ phận kế toán), bao gồm một chief accountant (kế toán trưởng) và trợ lý của ông:</p>
+<pre><code class="language-{.scheme}">(address (Scrooge Eben) 
+         (Weston (Shady Lane) 10))
+(job (Scrooge Eben) 
+     (accounting chief accountant))
+(salary (Scrooge Eben) 75000)
+(supervisor (Scrooge Eben) (Warbucks Oliver))
+
+(address (Cratchet Robert) 
+         (Allston (N Harvard Street) 16))
+(job (Cratchet Robert) (accounting scrivener))
+(salary (Cratchet Robert) 18000)
+(supervisor (Cratchet Robert) (Scrooge Eben))
+</code></pre>
+<p>Cũng có một secretary (thư ký) cho big wheel:</p>
+<pre><code class="language-{.scheme}">(address (Aull DeWitt) 
+         (Slumerville (Onion Square) 5))
+(job (Aull DeWitt) (administration secretary))
+(salary (Aull DeWitt) 25000)
+(supervisor (Aull DeWitt) (Warbucks Oliver))
+</code></pre>
+<p>Cơ sở dữ liệu cũng chứa các assertions (mệnh đề khẳng định) về những loại công việc có thể được thực hiện bởi những người giữ các loại công việc khác. Ví dụ, một computer wizard có thể làm cả công việc của một computer programmer và một computer technician:</p>
+<pre><code class="language-{.scheme}">(can-do-job (computer wizard) 
+            (computer programmer))
+
+(can-do-job (computer wizard) 
+            (computer technician))
+</code></pre>
+<p>Một computer programmer có thể thay thế cho một trainee:</p>
+<pre><code class="language-{.scheme}">(can-do-job (computer programmer)
+            (computer programmer trainee))
+</code></pre>
+<p>Ngoài ra, như ai cũng biết:</p>
+<pre><code class="language-{.scheme}">(can-do-job (administration secretary)
+            (administration big wheel))
+</code></pre>
+<h3 id="simple-queries"><a class="header" href="#simple-queries">Simple queries</a></h3>
+<p>Query language (ngôn ngữ truy vấn) cho phép người dùng truy xuất thông tin từ data base (cơ sở dữ liệu) bằng cách đưa ra các truy vấn để phản hồi lại prompt (nhắc lệnh) của hệ thống. Ví dụ, để tìm tất cả các computer programmers (lập trình viên máy tính), ta có thể viết:</p>
+<pre><code class="language-{.scheme}">;;; Query input:
+(job ?x (computer programmer))
+</code></pre>
+<p>Hệ thống sẽ phản hồi với các mục sau:</p>
+<pre><code class="language-{.scheme}">;;; Query results:
+(job (Hacker Alyssa P) (computer programmer))
+(job (Fect Cy D) (computer programmer))
+</code></pre>
+<p>Truy vấn đầu vào chỉ ra rằng chúng ta đang tìm các mục trong data base khớp với một <em>pattern</em> (mẫu) nhất định. Trong ví dụ này, pattern chỉ ra rằng các mục bao gồm ba phần tử, trong đó phần tử thứ nhất là literal symbol (ký hiệu dạng literal) <code>job</code>, phần tử thứ hai có thể là bất kỳ giá trị nào, và phần tử thứ ba là literal list <code>(computer programmer)</code>. Giá trị “bất kỳ” có thể là phần tử thứ hai trong danh sách khớp được chỉ định bởi một <em>pattern variable</em> (biến mẫu), <code>?x</code>. Dạng tổng quát của một pattern variable là một symbol, được coi là tên của biến, đứng trước bởi một dấu hỏi. Chúng ta sẽ thấy bên dưới lý do tại sao việc chỉ định tên cho pattern variables lại hữu ích hơn là chỉ đặt <code>?</code> vào trong pattern để biểu diễn “bất kỳ giá trị nào”. Hệ thống phản hồi một simple query (truy vấn đơn giản) bằng cách hiển thị tất cả các mục trong data base khớp với pattern đã chỉ định.</p>
+<p>Một pattern có thể có nhiều hơn một biến. Ví dụ, truy vấn:</p>
+<pre><code class="language-{.scheme}">(address ?x ?y)
+</code></pre>
+<p>sẽ liệt kê tất cả địa chỉ của nhân viên.</p>
+<p>Một pattern có thể không có biến nào, trong trường hợp đó truy vấn chỉ đơn giản xác định xem pattern đó có phải là một mục trong data base hay không. Nếu có, sẽ có một kết quả khớp; nếu không, sẽ không có kết quả nào.</p>
+<p>Cùng một pattern variable có thể xuất hiện nhiều hơn một lần trong một truy vấn, chỉ ra rằng cùng một “bất kỳ giá trị nào” phải xuất hiện ở mỗi vị trí. Đây là lý do tại sao các biến có tên. Ví dụ:</p>
+<pre><code class="language-{.scheme}">(supervisor ?x ?x)
+</code></pre>
+<p>tìm tất cả những người tự giám sát chính mình (mặc dù không có mệnh đề nào như vậy trong data base mẫu của chúng ta).</p>
+<p>Truy vấn:</p>
+<pre><code class="language-{.scheme}">(job ?x (computer ?type))
+</code></pre>
+<p>khớp với tất cả các mục công việc mà phần tử thứ ba là một danh sách gồm hai phần tử, trong đó phần tử đầu tiên là <code>computer</code>:</p>
+<pre><code class="language-{.scheme}">(job (Bitdiddle Ben) (computer wizard))
+(job (Hacker Alyssa P) (computer programmer))
+(job (Fect Cy D) (computer programmer))
+(job (Tweakit Lem E) (computer technician))
+</code></pre>
+<p>Pattern này <em>không</em> khớp với:</p>
+<pre><code class="language-{.scheme}">(job (Reasoner Louis) 
+     (computer programmer trainee))
+</code></pre>
+<p>bởi vì phần tử thứ ba trong mục này là một danh sách gồm ba phần tử, trong khi phần tử thứ ba của pattern chỉ định rằng phải có hai phần tử. Nếu chúng ta muốn thay đổi pattern để phần tử thứ ba có thể là bất kỳ danh sách nào bắt đầu bằng <code>computer</code>, ta có thể chỉ định<sup class="footnote-reference"><a href="#5">5</a></sup>:</p>
+<pre><code class="language-{.scheme}">(job ?x (computer . ?type))
+</code></pre>
+<p>Ví dụ:</p>
+<pre><code class="language-{.scheme}">(computer . ?type)
+</code></pre>
+<p>khớp với dữ liệu:</p>
+<pre><code class="language-{.scheme}">(computer programmer trainee)
+</code></pre>
+<p>với <code>?type</code> là danh sách <code>(programmer trainee)</code>. Nó cũng khớp với dữ liệu:</p>
+<pre><code class="language-{.scheme}">(computer programmer)
+</code></pre>
+<p>với <code>?type</code> là danh sách <code>(programmer)</code>, và khớp với dữ liệu:</p>
+<pre><code class="language-{.scheme}">(computer)
+</code></pre>
+<p>với <code>?type</code> là danh sách rỗng <code>()</code>.</p>
+<p>Chúng ta có thể mô tả cách query language xử lý simple queries như sau:</p>
+<ul>
+<li>Hệ thống tìm tất cả các phép gán cho các biến trong query pattern mà <em>satisfy</em> (thỏa mãn) pattern — nghĩa là, tất cả các tập giá trị cho các biến sao cho nếu pattern variables được <em>instantiated with</em> (thay thế bằng) các giá trị đó, kết quả sẽ có trong data base.</li>
+<li>Hệ thống phản hồi truy vấn bằng cách liệt kê tất cả các instantiations (thể hiện) của query pattern với các phép gán biến thỏa mãn nó.</li>
+</ul>
+<p>Lưu ý rằng nếu pattern không có biến nào, truy vấn sẽ được rút gọn thành việc xác định xem pattern đó có trong data base hay không. Nếu có, phép gán rỗng — không gán giá trị nào cho biến — sẽ thỏa mãn pattern đó đối với data base này.</p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Điều này sử dụng dotted-tail notation (ký pháp đuôi chấm) được giới thiệu trong Bài tập 2.20.</p>
+</div>
+<h3 id="compound-queries"><a class="header" href="#compound-queries">Compound queries</a></h3>
+<p>Simple queries (truy vấn đơn giản) tạo thành các primitive operations (phép toán nguyên thủy) của query language (ngôn ngữ truy vấn). Để hình thành các compound operations (phép toán phức hợp), query language cung cấp các means of combination (phương thức kết hợp). Một yếu tố khiến query language trở thành một logic programming language (ngôn ngữ lập trình logic) là các means of combination này phản chiếu các phương thức kết hợp được sử dụng trong việc hình thành logical expressions (biểu thức logic): <code>and</code>, <code>or</code>, và <code>not</code>. (Ở đây <code>and</code>, <code>or</code>, và <code>not</code> không phải là các Lisp primitives, mà là các phép toán được tích hợp sẵn trong query language.)</p>
+<p>Chúng ta có thể sử dụng <code>and</code> như sau để tìm địa chỉ của tất cả các computer programmers:</p>
+<pre><code class="language-{.scheme}">(and (job ?person (computer programmer))
+     (address ?person ?where))
+</code></pre>
+<p>Kết quả đầu ra là:</p>
+<pre><code class="language-{.scheme}">(and (job (Hacker Alyssa P) 
+          (computer programmer))
+     (address (Hacker Alyssa P) 
+              (Cambridge (Mass Ave) 78)))
+
+(and (job (Fect Cy D) (computer programmer))
+     (address (Fect Cy D) 
+              (Cambridge (Ames Street) 3)))
+</code></pre>
+<p>Tổng quát:</p>
+<pre><code class="language-{.scheme}">(and ⟨query₁⟩ ⟨query₂⟩ … ⟨queryₙ⟩)
+</code></pre>
+<p>được thỏa mãn bởi tất cả các tập giá trị của pattern variables (biến mẫu) đồng thời thỏa mãn $\langle\mspace{2mu} query_{1}\rangle$ … $\langle\mspace{2mu} query_{n}\rangle$.</p>
+<p>Tương tự như với simple queries, hệ thống xử lý một compound query bằng cách tìm tất cả các phép gán cho pattern variables thỏa mãn truy vấn, sau đó hiển thị các instantiations (thể hiện) của truy vấn với các giá trị đó.</p>
+<p>Một phương thức khác để xây dựng compound queries là thông qua <code>or</code>. Ví dụ:</p>
+<pre><code class="language-{.scheme}">(or (supervisor ?x (Bitdiddle Ben))
+    (supervisor ?x (Hacker Alyssa P)))
+</code></pre>
+<p>sẽ tìm tất cả các nhân viên được giám sát bởi Ben Bitdiddle hoặc Alyssa P. Hacker:</p>
+<pre><code class="language-{.scheme}">(or (supervisor (Hacker Alyssa P) 
+                (Bitdiddle Ben))
+    (supervisor (Hacker Alyssa P) 
+                (Hacker Alyssa P)))
+
+(or (supervisor (Fect Cy D) 
+                (Bitdiddle Ben))
+    (supervisor (Fect Cy D) 
+                (Hacker Alyssa P)))
+
+(or (supervisor (Tweakit Lem E) 
+                (Bitdiddle Ben))
+    (supervisor (Tweakit Lem E) 
+                (Hacker Alyssa P)))
+
+(or (supervisor (Reasoner Louis) 
+                (Bitdiddle Ben))
+    (supervisor (Reasoner Louis) 
+                (Hacker Alyssa P)))
+</code></pre>
+<p>Tổng quát:</p>
+<pre><code class="language-{.scheme}">(or ⟨query₁⟩ ⟨query₂⟩ … ⟨queryₙ⟩)
+</code></pre>
+<p>được thỏa mãn bởi tất cả các tập giá trị của pattern variables thỏa mãn ít nhất một trong các $\langle\mspace{2mu} query_{1}\rangle$ … $\langle\mspace{2mu} query_{n}\rangle$.</p>
+<p>Compound queries cũng có thể được tạo bằng <code>not</code>. Ví dụ:</p>
+<pre><code class="language-{.scheme}">(and (supervisor ?x (Bitdiddle Ben))
+     (not (job ?x (computer programmer))))
+</code></pre>
+<p>tìm tất cả những người được Ben Bitdiddle giám sát nhưng không phải là computer programmers. Tổng quát:</p>
+<pre><code class="language-{.scheme}">(not ⟨query₁⟩)
+</code></pre>
+<p>được thỏa mãn bởi tất cả các phép gán cho pattern variables mà không thỏa mãn $\langle\mspace{2mu} query_{1}\rangle$.<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<p>Hình thức kết hợp cuối cùng được gọi là <code>lisp-value</code>. Khi <code>lisp-value</code> là phần tử đầu tiên của một pattern, nó chỉ ra rằng phần tử tiếp theo là một Lisp predicate (mệnh đề điều kiện Lisp) sẽ được áp dụng cho các phần tử còn lại (đã được instantiate) như các đối số. Tổng quát:</p>
+<pre><code class="language-{.scheme}">(lisp-value ⟨predicate⟩ ⟨arg₁⟩ … ⟨argₙ⟩)
+</code></pre>
+<p>sẽ được thỏa mãn bởi các phép gán cho pattern variables mà <code>⟨</code>predicate<code>⟩</code> khi áp dụng cho các $\langle\mspace{2mu} arg_{1}\rangle$ … $\langle\mspace{2mu} arg_{n}\rangle$ đã được instantiate là đúng. Ví dụ, để tìm tất cả những người có salary (mức lương) lớn hơn $30,000, chúng ta có thể viết<sup class="footnote-reference"><a href="#7">7</a></sup>:</p>
+<pre><code class="language-{.scheme}">(and (salary ?person ?amount)
+     (lisp-value &gt; ?amount 30000))
+</code></pre>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Thực tế, mô tả này của <code>not</code> chỉ đúng cho các trường hợp đơn giản. Hành vi thực sự của <code>not</code> phức tạp hơn. Chúng ta sẽ xem xét các đặc điểm riêng của <code>not</code> trong 4.4.2 và 4.4.3.</p>
+</div>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p><code>Lisp-value</code> chỉ nên được sử dụng để thực hiện một phép toán không được hỗ trợ sẵn trong query language. Đặc biệt, nó không nên được dùng để kiểm tra equality (bằng nhau) (vì đó là điều mà cơ chế matching trong query language được thiết kế để thực hiện) hoặc inequality (khác nhau) (vì điều đó có thể được thực hiện với <code>same</code> rule được trình bày bên dưới).</p>
+</div>
+<h3 id="rules"><a class="header" href="#rules">Rules</a></h3>
+<p>Ngoài primitive queries (truy vấn nguyên thủy) và compound queries (truy vấn phức hợp), query language (ngôn ngữ truy vấn) còn cung cấp phương thức để trừu tượng hóa truy vấn. Các phương thức này được đưa ra dưới dạng <em>rules</em> (quy tắc). Quy tắc:</p>
+<pre><code class="language-{.scheme}">(rule (lives-near ?person-1 ?person-2)
+      (and (address ?person-1 
+                    (?town . ?rest-1))
+           (address ?person-2 
+                    (?town . ?rest-2))
+           (not (same ?person-1 ?person-2))))
+</code></pre>
+<p>chỉ ra rằng hai người sống gần nhau nếu họ sống trong cùng một thị trấn. Mệnh đề <code>not</code> cuối cùng ngăn quy tắc này khẳng định rằng mọi người đều sống gần chính mình. Quan hệ <code>same</code> được định nghĩa bởi một quy tắc rất đơn giản:<sup class="footnote-reference"><a href="#8">8</a></sup></p>
+<pre><code class="language-{.scheme}">(rule (same ?x ?x))
+</code></pre>
+<p>Quy tắc sau đây tuyên bố rằng một người là “wheel” (nhân vật quyền lực) trong một tổ chức nếu người đó giám sát ai đó mà người này lại là một supervisor (người giám sát):</p>
+<pre><code class="language-{.scheme}">(rule (wheel ?person)
+      (and (supervisor ?middle-manager 
+                       ?person)
+           (supervisor ?x ?middle-manager)))
+</code></pre>
+<p>Dạng tổng quát của một quy tắc là:</p>
+<pre><code class="language-{.scheme}">(rule ⟨conclusion⟩ ⟨body⟩)
+</code></pre>
+<p>trong đó <code>⟨</code>conclusion<code>⟩</code> là một pattern (mẫu) và <code>⟨</code>body<code>⟩</code> là bất kỳ query (truy vấn) nào.<sup class="footnote-reference"><a href="#9">9</a></sup> Chúng ta có thể xem một quy tắc như đại diện cho một tập hợp lớn (thậm chí vô hạn) các assertions (mệnh đề khẳng định), cụ thể là tất cả các instantiations (thể hiện) của phần kết luận của quy tắc với các phép gán biến thỏa mãn phần thân quy tắc. Khi mô tả simple queries (truy vấn đơn giản), chúng ta đã nói rằng một phép gán cho các biến thỏa mãn một pattern nếu pattern đã được instantiate có trong data base (cơ sở dữ liệu). Tuy nhiên, pattern không nhất thiết phải tồn tại tường minh trong data base như một assertion. Nó có thể là một assertion ngầm được suy ra từ một quy tắc. Ví dụ, truy vấn:</p>
+<pre><code class="language-{.scheme}">(lives-near ?x (Bitdiddle Ben))
+</code></pre>
+<p>cho kết quả:</p>
+<pre><code class="language-{.scheme}">(lives-near (Reasoner Louis) (Bitdiddle Ben))
+(lives-near (Aull DeWitt) (Bitdiddle Ben))
+</code></pre>
+<p>Để tìm tất cả các computer programmers (lập trình viên máy tính) sống gần Ben Bitdiddle, ta có thể hỏi:</p>
+<pre><code class="language-{.scheme}">(and (job ?x (computer programmer))
+     (lives-near ?x (Bitdiddle Ben)))
+</code></pre>
+<p>Giống như trong trường hợp compound procedures (thủ tục phức hợp), rules có thể được sử dụng như một phần của các rules khác (như ta đã thấy với quy tắc <code>lives-near</code> ở trên) hoặc thậm chí được định nghĩa đệ quy. Ví dụ, quy tắc:</p>
+<pre><code class="language-{.scheme}">(rule (outranked-by ?staff-person ?boss)
+      (or (supervisor ?staff-person ?boss)
+          (and (supervisor ?staff-person 
+                           ?middle-manager)
+               (outranked-by ?middle-manager 
+                             ?boss))))
+</code></pre>
+<p>nói rằng một nhân viên bị outranked-by (cấp dưới) một boss (sếp) trong tổ chức nếu boss là supervisor của người đó hoặc (đệ quy) nếu supervisor của người đó bị outranked-by boss.</p>
+<h3 id="logic-as-programs"><a class="header" href="#logic-as-programs">Logic as programs</a></h3>
+<p>Chúng ta có thể coi một rule như một dạng logical implication (hàm ý logic): <em>Nếu</em> một phép gán giá trị cho các pattern variables thỏa mãn phần thân, <em>thì</em> nó thỏa mãn phần kết luận. Do đó, chúng ta có thể coi query language là có khả năng thực hiện <em>logical deductions</em> (suy luận logic) dựa trên các rules.</p>
+<p>Ví dụ, hãy xét operation (phép toán) <code>append</code> được mô tả ở đầu mục 4.4. Như đã nói, <code>append</code> có thể được đặc trưng bởi hai quy tắc sau:</p>
+<ul>
+<li>Với bất kỳ list <code>y</code> nào, empty list (danh sách rỗng) và <code>y</code> <code>append</code> để tạo thành <code>y</code>.</li>
+<li>Với bất kỳ <code>u</code>, <code>v</code>, <code>y</code>, và <code>z</code> nào, <code>(cons u v)</code> và <code>y</code> <code>append</code> để tạo thành <code>(cons u z)</code> nếu <code>v</code> và <code>y</code> <code>append</code> để tạo thành <code>z</code>.</li>
+</ul>
+<p>Để biểu diễn điều này trong query language, chúng ta định nghĩa hai quy tắc cho một relation (quan hệ):</p>
+<pre><code class="language-{.scheme}">(append-to-form x y z)
+</code></pre>
+<p>mà ta có thể hiểu là “<code>x</code> và <code>y</code> <code>append</code> để tạo thành <code>z</code>”:</p>
+<pre><code class="language-{.scheme}">(rule (append-to-form () ?y ?y))
+(rule (append-to-form (?u . ?v) ?y (?u . ?z))
+      (append-to-form ?v ?y ?z))
+</code></pre>
+<p>Quy tắc đầu tiên không có body, nghĩa là kết luận đúng với mọi giá trị của <code>?y</code>. Lưu ý cách quy tắc thứ hai sử dụng dotted-tail notation (ký pháp đuôi chấm) để đặt tên cho <code>car</code> và <code>cdr</code> của một list.</p>
+<p>Với hai quy tắc này, chúng ta có thể xây dựng các truy vấn để tính <code>append</code> của hai lists:</p>
+<pre><code class="language-{.scheme}">;;; Query input:
+(append-to-form (a b) (c d) ?z)
+
+;;; Query results:
+(append-to-form (a b) (c d) (a b c d))
+</code></pre>
+<p>Điều thú vị hơn là chúng ta có thể dùng cùng các quy tắc này để hỏi: “List nào, khi <code>append</code> với <code>(a b)</code>, sẽ cho ra <code>(a b c d)</code>?” Điều này được thực hiện như sau:</p>
+<pre><code class="language-{.scheme}">;;; Query input:
+(append-to-form (a b) ?y (a b c d))
+
+;;; Query results:
+(append-to-form (a b) (c d) (a b c d))
+</code></pre>
+<p>Chúng ta cũng có thể yêu cầu tất cả các cặp lists mà <code>append</code> để tạo thành <code>(a b c d)</code>:</p>
+<pre><code class="language-{.scheme}">;;; Query input:
+(append-to-form ?x ?y (a b c d))
+
+;;; Query results:
+(append-to-form () (a b c d) (a b c d))
+(append-to-form (a) (b c d) (a b c d))
+(append-to-form (a b) (c d) (a b c d))
+(append-to-form (a b c) (d) (a b c d))
+(append-to-form (a b c d) () (a b c d))
+</code></pre>
+<p>Query system (hệ thống truy vấn) có vẻ thể hiện khá nhiều “trí thông minh” khi sử dụng các rules để suy ra câu trả lời cho các truy vấn trên. Thực tế, như chúng ta sẽ thấy ở phần tiếp theo, hệ thống đang tuân theo một thuật toán được xác định rõ ràng để phân giải các rules. Đáng tiếc là, mặc dù hệ thống hoạt động ấn tượng trong trường hợp <code>append</code>, các phương pháp tổng quát có thể thất bại trong những trường hợp phức tạp hơn, như chúng ta sẽ thấy ở 4.4.3.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Lưu ý rằng chúng ta không cần <code>same</code> để làm cho hai thứ giống nhau: Chỉ cần sử dụng cùng một pattern variable cho mỗi thứ — thực chất, chúng ta chỉ có một thứ thay vì hai thứ ngay từ đầu. Ví dụ, xem <code>?town</code> trong quy tắc <code>lives-near</code> và <code>?middle-manager</code> trong quy tắc <code>wheel</code> bên dưới. <code>Same</code> hữu ích khi chúng ta muốn buộc hai thứ phải khác nhau, chẳng hạn như <code>?person-1</code> và <code>?person-2</code> trong quy tắc <code>lives-near</code>. Mặc dù việc sử dụng cùng một pattern variable ở hai phần của một truy vấn buộc cùng một giá trị xuất hiện ở cả hai chỗ, nhưng việc sử dụng các pattern variables khác nhau không buộc các giá trị phải khác nhau. (Các giá trị được gán cho các pattern variables khác nhau có thể giống hoặc khác nhau.)</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Chúng ta cũng cho phép các rules không có body, như trong <code>same</code>, và chúng ta sẽ hiểu một quy tắc như vậy có nghĩa là kết luận của quy tắc được thỏa mãn với bất kỳ giá trị nào của các biến.</p>
+</div>
+<h2 id="442-how-the-query-system-works"><a class="header" href="#442-how-the-query-system-works">4.4.2 How the Query System Works</a></h2>
+<p>Trong mục 4.4.4, chúng ta sẽ trình bày một implementation (triển khai) của query interpreter (bộ thông dịch truy vấn) dưới dạng một tập hợp các procedures (thủ tục). Trong mục này, chúng ta đưa ra một phần tổng quan giải thích cấu trúc chung của hệ thống, tách biệt với các chi tiết triển khai ở mức thấp. Sau khi mô tả việc triển khai interpreter, chúng ta sẽ có cơ sở để hiểu một số hạn chế của nó và một số cách tinh vi mà các phép toán logic của query language (ngôn ngữ truy vấn) khác với các phép toán của mathematical logic (logic toán học).</p>
+<p>Có thể thấy rõ rằng query evaluator (bộ đánh giá truy vấn) phải thực hiện một dạng tìm kiếm nào đó để so khớp các truy vấn với các facts (sự kiện) và rules (quy tắc) trong data base (cơ sở dữ liệu). Một cách để làm điều này là triển khai query system (hệ thống truy vấn) như một nondeterministic program (chương trình bất định), sử dụng <code>amb</code> evaluator ở 4.3 (xem Bài tập 4.78). Một khả năng khác là quản lý việc tìm kiếm với sự hỗ trợ của streams (luồng). Implementation của chúng ta theo cách tiếp cận thứ hai này.</p>
+<p>Query system được tổ chức xoay quanh hai thao tác trung tâm gọi là <em>pattern matching</em> (so khớp mẫu) và <em>unification</em> (hợp nhất). Trước tiên, chúng ta mô tả pattern matching và giải thích cách thao tác này, cùng với việc tổ chức thông tin dưới dạng streams of frames (luồng các khung), cho phép chúng ta triển khai cả simple queries (truy vấn đơn giản) và compound queries (truy vấn phức hợp). Tiếp theo, chúng ta thảo luận về unification, một sự khái quát hóa của pattern matching cần thiết để triển khai rules. Cuối cùng, chúng ta sẽ chỉ ra cách toàn bộ query interpreter được ghép lại với nhau thông qua một procedure phân loại expressions (biểu thức) theo cách tương tự như <code>eval</code> phân loại expressions cho interpreter được mô tả ở 4.1.</p>
+<h3 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h3>
+<p>Một <em>pattern matcher</em> (bộ so khớp mẫu) là một chương trình kiểm tra xem một datum (dữ liệu) có khớp với một pattern (mẫu) đã chỉ định hay không. Ví dụ, data list <code>((a b) c (a b))</code> khớp với pattern <code>(?x c ?x)</code> với pattern variable (biến mẫu) <code>?x</code> được gán giá trị <code>(a b)</code>. Cùng data list này khớp với pattern <code>(?x ?y ?z)</code> với <code>?x</code> và <code>?z</code> đều được gán <code>(a b)</code> và <code>?y</code> được gán <code>c</code>. Nó cũng khớp với pattern <code>((?x ?y) c (?x ?y))</code> với <code>?x</code> được gán <code>a</code> và <code>?y</code> được gán <code>b</code>. Tuy nhiên, nó không khớp với pattern <code>(?x a ?y)</code>, vì pattern này chỉ định một list có phần tử thứ hai là symbol <code>a</code>.</p>
+<p>Pattern matcher được query system sử dụng nhận vào một pattern, một datum, và một <em>frame</em> (khung) chỉ định các bindings (ràng buộc) cho các pattern variables khác nhau. Nó kiểm tra xem datum có khớp với pattern theo cách nhất quán với các bindings đã có trong frame hay không. Nếu có, nó trả về frame đã cho, được bổ sung thêm bất kỳ bindings nào có thể được xác định bởi phép so khớp. Nếu không, nó cho biết rằng phép so khớp đã thất bại.</p>
+<p>Ví dụ, sử dụng pattern <code>(?x ?y ?x)</code> để so khớp <code>(a b a)</code> với một empty frame (khung rỗng) sẽ trả về một frame chỉ định rằng <code>?x</code> được gán <code>a</code> và <code>?y</code> được gán <code>b</code>. Thử so khớp với cùng pattern, cùng datum, và một frame chỉ định rằng <code>?y</code> được gán <code>a</code> sẽ thất bại. Thử so khớp với cùng pattern, cùng datum, và một frame trong đó <code>?y</code> được gán <code>b</code> và <code>?x</code> chưa được gán sẽ trả về frame đã cho, được bổ sung thêm binding của <code>?x</code> với <code>a</code>.</p>
+<p>Pattern matcher là toàn bộ cơ chế cần thiết để xử lý các simple queries không liên quan đến rules. Ví dụ, để xử lý truy vấn:</p>
+<pre><code class="language-{.scheme}">(job ?x (computer programmer))
+</code></pre>
+<p>chúng ta quét qua tất cả các assertions (mệnh đề khẳng định) trong data base và chọn những mệnh đề khớp với pattern so với một empty frame ban đầu. Với mỗi kết quả khớp tìm được, chúng ta sử dụng frame trả về từ phép so khớp để instantiate (thay thế) pattern với một giá trị cho <code>?x</code>.</p>
+<h3 id="streams-of-frames"><a class="header" href="#streams-of-frames">Streams of frames</a></h3>
+<p>Việc kiểm tra các patterns (mẫu) so với frames (khung) được tổ chức thông qua việc sử dụng streams (luồng). Với một frame duy nhất, quá trình so khớp sẽ duyệt qua các mục trong data base (cơ sở dữ liệu) từng mục một. Với mỗi mục trong data base, matcher (bộ so khớp) sẽ tạo ra hoặc là một symbol đặc biệt cho biết phép so khớp đã thất bại, hoặc là một phần mở rộng của frame. Kết quả cho tất cả các mục trong data base được thu thập thành một stream, sau đó được đưa qua một bộ lọc để loại bỏ các kết quả thất bại. Kết quả cuối cùng là một stream gồm tất cả các frames mở rộng frame đã cho thông qua việc so khớp với một assertion (mệnh đề khẳng định) nào đó trong data base.<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<p>Trong hệ thống của chúng ta, một query (truy vấn) nhận vào một input stream (luồng đầu vào) gồm các frames và thực hiện thao tác so khớp như trên cho từng frame trong stream, như minh họa ở Hình 4.4. Nghĩa là, với mỗi frame trong input stream, query sẽ tạo ra một stream mới gồm tất cả các phần mở rộng của frame đó thông qua việc so khớp với các assertions trong data base. Tất cả các streams này sau đó được kết hợp lại để tạo thành một stream lớn duy nhất, chứa tất cả các phần mở rộng khả dĩ của mọi frame trong input stream. Stream này chính là output (đầu ra) của query.</p>
+<p><img src="fig/Fig4.4a.jpg" alt="" /></p>
+<p><strong>Figure 4.4:</strong> A query processes a stream of frames.</p>
+<p>Để trả lời một simple query (truy vấn đơn giản), chúng ta sử dụng query với một input stream gồm một empty frame (khung rỗng) duy nhất. Output stream thu được sẽ chứa tất cả các phần mở rộng của empty frame (tức là tất cả các câu trả lời cho truy vấn của chúng ta). Stream các frames này sau đó được dùng để tạo ra một stream các bản sao của query pattern gốc, với các biến được instantiate (thay thế) bằng các giá trị trong mỗi frame, và đây là stream cuối cùng được in ra.</p>
+<h3 id="compound-queries-1"><a class="header" href="#compound-queries-1">Compound queries</a></h3>
+<p>Sự tinh tế thực sự của việc triển khai stream-of-frames (luồng khung) thể hiện rõ khi chúng ta xử lý compound queries (truy vấn phức hợp). Việc xử lý compound queries tận dụng khả năng của matcher yêu cầu một phép so khớp phải nhất quán với một frame đã chỉ định. Ví dụ, để xử lý <code>and</code> của hai queries, như:</p>
+<pre><code class="language-{.scheme}">(and (can-do-job 
+      ?x 
+      (computer programmer trainee))
+     (job ?person ?x))
+</code></pre>
+<p>(theo cách diễn đạt tự nhiên: “Tìm tất cả những người có thể làm công việc của một computer programmer trainee”), trước tiên chúng ta tìm tất cả các mục khớp với pattern:</p>
+<pre><code class="language-{.scheme}">(can-do-job ?x (computer programmer trainee))
+</code></pre>
+<p>Điều này tạo ra một stream các frames, mỗi frame chứa một binding (ràng buộc) cho <code>?x</code>. Sau đó, với mỗi frame trong stream, chúng ta tìm tất cả các mục khớp với:</p>
+<pre><code class="language-{.scheme}">(job ?person ?x)
+</code></pre>
+<p>theo cách nhất quán với binding đã cho của <code>?x</code>. Mỗi phép so khớp như vậy sẽ tạo ra một frame chứa các bindings cho <code>?x</code> và <code>?person</code>. <code>And</code> của hai queries có thể được xem như một sự kết hợp nối tiếp của hai truy vấn thành phần, như minh họa ở Hình 4.5. Các frames đi qua bộ lọc của truy vấn thứ nhất sẽ được lọc và mở rộng thêm bởi truy vấn thứ hai.</p>
+<p><img src="fig/Fig4.5a.jpg" alt="" /></p>
+<p><strong>Figure 4.5:</strong> The <code>and</code> combination of two queries is produced by operating on the stream of frames in series.</p>
+<p>Figure 4.6 minh họa phương pháp tương tự để tính <code>or</code> của hai queries như một sự kết hợp song song của hai truy vấn thành phần. Input stream các frames được mở rộng riêng biệt bởi mỗi truy vấn. Hai streams kết quả sau đó được hợp nhất để tạo ra output stream cuối cùng.</p>
+<p><img src="fig/Fig4.6a.jpg" alt="" /></p>
+<p><strong>Figure 4.6:</strong> The <code>or</code> combination of two queries is produced by operating on the stream of frames in parallel and merging the results.</p>
+<p>Ngay cả từ mô tả ở mức cao này, có thể thấy rằng việc xử lý compound queries có thể chậm. Ví dụ, vì một query có thể tạo ra nhiều hơn một output frame cho mỗi input frame, và mỗi query trong một <code>and</code> nhận input frames từ query trước đó, một <code>and</code> query trong trường hợp xấu nhất có thể phải thực hiện số phép so khớp tăng theo hàm mũ với số lượng queries (xem Bài tập 4.76).<sup class="footnote-reference"><a href="#11">11</a></sup> Mặc dù các hệ thống chỉ xử lý simple queries là khá khả thi, việc xử lý complex queries (truy vấn phức tạp) là cực kỳ khó khăn.<sup class="footnote-reference"><a href="#12">12</a></sup></p>
+<p>Từ góc nhìn stream-of-frames, <code>not</code> của một query nào đó hoạt động như một bộ lọc loại bỏ tất cả các frames mà query đó có thể được thỏa mãn. Ví dụ, với pattern:</p>
+<pre><code class="language-{.scheme}">(not (job ?x (computer programmer)))
+</code></pre>
+<p>chúng ta sẽ cố gắng, với mỗi frame trong input stream, tạo ra các extension frames (khung mở rộng) thỏa mãn <code>(job ?x (computer programmer))</code>. Chúng ta loại bỏ khỏi input stream tất cả các frames mà các extension như vậy tồn tại. Kết quả là một stream chỉ gồm những frames trong đó binding của <code>?x</code> không thỏa mãn <code>(job ?x (computer programmer))</code>. Ví dụ, khi xử lý truy vấn:</p>
+<pre><code class="language-{.scheme}">(and (supervisor ?x ?y)
+     (not (job ?x (computer programmer))))
+</code></pre>
+<p>mệnh đề đầu tiên sẽ tạo ra các frames với bindings cho <code>?x</code> và <code>?y</code>. Mệnh đề <code>not</code> sau đó sẽ lọc các frames này bằng cách loại bỏ tất cả các frames trong đó binding của <code>?x</code> thỏa mãn điều kiện rằng <code>?x</code> là một computer programmer.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<p>Special form (dạng đặc biệt) <code>lisp-value</code> được triển khai như một bộ lọc tương tự trên các frame streams. Chúng ta sử dụng mỗi frame trong stream để instantiate bất kỳ biến nào trong pattern, sau đó áp dụng Lisp predicate (mệnh đề điều kiện Lisp). Chúng ta loại bỏ khỏi input stream tất cả các frames mà predicate trả về false.</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Vì việc so khớp thường rất tốn kém, chúng ta muốn tránh áp dụng full matcher (bộ so khớp đầy đủ) cho mọi phần tử của data base. Điều này thường được thực hiện bằng cách chia quá trình thành một phép so khớp nhanh, thô và phép so khớp cuối cùng. Phép so khớp thô lọc data base để tạo ra một tập nhỏ các ứng viên cho phép so khớp cuối cùng. Nếu cẩn thận, chúng ta có thể sắp xếp data base sao cho một phần công việc của phép so khớp thô có thể được thực hiện khi xây dựng data base thay vì khi chúng ta muốn chọn các ứng viên. Điều này được gọi là <em>indexing</em> (đánh chỉ mục) data base. Có một công nghệ rất lớn xoay quanh các phương pháp đánh chỉ mục cơ sở dữ liệu. Implementation của chúng ta, được mô tả ở 4.4.4, chứa một dạng tối ưu hóa đơn giản của kỹ thuật này.</p>
+</div>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Nhưng kiểu bùng nổ theo hàm mũ này không phổ biến trong các <code>and</code> queries vì các điều kiện bổ sung có xu hướng giảm thay vì tăng số lượng frames được tạo ra.</p>
+</div>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p>Có một lượng lớn tài liệu về data-base-management systems (hệ quản trị cơ sở dữ liệu) tập trung vào cách xử lý complex queries một cách hiệu quả.</p>
+</div>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>Có một sự khác biệt tinh tế giữa cách triển khai <code>not</code> như một bộ lọc này và ý nghĩa thông thường của <code>not</code> trong mathematical logic. Xem 4.4.3.</p>
+</div>
+<h3 id="unification"><a class="header" href="#unification">Unification</a></h3>
+<p>Để xử lý các rules (quy tắc) trong query language (ngôn ngữ truy vấn), chúng ta phải có khả năng tìm các rules có phần kết luận (conclusion) khớp với một query pattern (mẫu truy vấn) đã cho. Rule conclusions giống như assertions (mệnh đề khẳng định) ngoại trừ việc chúng có thể chứa các biến, vì vậy chúng ta sẽ cần một sự khái quát hóa của pattern matching (so khớp mẫu) — gọi là <em>unification</em> (hợp nhất) — trong đó cả “pattern” và “datum” (dữ liệu) đều có thể chứa biến.</p>
+<p>Một <em>unifier</em> (bộ hợp nhất) nhận vào hai patterns, mỗi pattern chứa các hằng số và biến, và xác định xem có thể gán giá trị cho các biến để làm cho hai patterns này bằng nhau hay không. Nếu có thể, nó trả về một frame (khung) chứa các bindings (ràng buộc) này. Ví dụ, unifying <code>(?x a ?y)</code> và <code>(?y ?z a)</code> sẽ tạo ra một frame trong đó <code>?x</code>, <code>?y</code>, và <code>?z</code> đều được gán giá trị <code>a</code>. Ngược lại, unifying <code>(?x ?y a)</code> và <code>(?x b ?y)</code> sẽ thất bại, vì không có giá trị nào cho <code>?y</code> có thể làm cho hai patterns này bằng nhau. (Để phần tử thứ hai của hai patterns bằng nhau, <code>?y</code> phải là <code>b</code>; tuy nhiên, để phần tử thứ ba bằng nhau, <code>?y</code> phải là <code>a</code>.) Unifier được sử dụng trong query system, giống như pattern matcher, nhận vào một frame và thực hiện unification sao cho nhất quán với frame này.</p>
+<p>Thuật toán unification là phần khó nhất về mặt kỹ thuật của query system. Với các patterns phức tạp, việc thực hiện unification có thể đòi hỏi suy luận. Ví dụ, để unify <code>(?x ?x)</code> và <code>((a ?y c) (a b ?z))</code>, thuật toán phải suy ra rằng <code>?x</code> nên là <code>(a b c)</code>, <code>?y</code> nên là <code>b</code>, và <code>?z</code> nên là <code>c</code>. Chúng ta có thể xem quá trình này như việc giải một tập hợp các phương trình giữa các thành phần của pattern. Nói chung, đây là các phương trình đồng thời, có thể yêu cầu xử lý đáng kể để giải quyết.<sup class="footnote-reference"><a href="#14">14</a></sup> Ví dụ, unifying <code>(?x ?x)</code> và <code>((a ?y c) (a b ?z))</code> có thể được xem như việc xác định các phương trình đồng thời:</p>
+<pre><code class="language-{.scheme}">?x = (a ?y c)
+?x = (a b ?z)
+</code></pre>
+<p>Các phương trình này ngụ ý rằng:</p>
+<pre><code class="language-{.scheme}">(a ?y c) = (a b ?z)
+</code></pre>
+<p>và điều này lại ngụ ý rằng:</p>
+<pre><code class="language-{.scheme}">a = a, ?y = b, c = ?z,
+</code></pre>
+<p>và do đó:</p>
+<pre><code class="language-{.scheme}">?x = (a b c)
+</code></pre>
+<p>Trong một pattern match thành công, tất cả các pattern variables sẽ được gán giá trị, và các giá trị này chỉ chứa các hằng số. Điều này cũng đúng với tất cả các ví dụ về unification mà chúng ta đã thấy cho đến nay. Tuy nhiên, nói chung, một unification thành công có thể không xác định hoàn toàn giá trị của các biến; một số biến có thể vẫn chưa được gán, và một số khác có thể được gán các giá trị chứa biến.</p>
+<p>Xét unification của <code>(?x a)</code> và <code>((b ?y) ?z)</code>. Chúng ta có thể suy ra rằng <code>?x = (b ?y)</code> và <code>a = ?z</code>, nhưng không thể giải thêm cho <code>?x</code> hoặc <code>?y</code>. Unification này không thất bại, vì chắc chắn có thể làm cho hai patterns này bằng nhau bằng cách gán giá trị cho <code>?x</code> và <code>?y</code>. Vì phép so khớp này không hề giới hạn các giá trị mà <code>?y</code> có thể nhận, nên không có binding nào cho <code>?y</code> được đưa vào frame kết quả. Tuy nhiên, phép so khớp này giới hạn giá trị của <code>?x</code>. Dù <code>?y</code> có giá trị gì, <code>?x</code> cũng phải là <code>(b ?y)</code>. Do đó, một binding của <code>?x</code> với pattern <code>(b ?y)</code> được đưa vào frame. Nếu sau này giá trị của <code>?y</code> được xác định và thêm vào frame (bởi một pattern match hoặc unification khác cần nhất quán với frame này), thì <code>?x</code> đã được gán trước đó sẽ tham chiếu đến giá trị này.<sup class="footnote-reference"><a href="#15">15</a></sup></p>
+<h3 id="applying-rules"><a class="header" href="#applying-rules">Applying rules</a></h3>
+<p>Unification là chìa khóa cho thành phần của query system cho phép suy luận từ các rules. Để thấy cách thực hiện điều này, hãy xét việc xử lý một query liên quan đến áp dụng một rule, chẳng hạn:</p>
+<pre><code class="language-{.scheme}">(lives-near ?x (Hacker Alyssa P))
+</code></pre>
+<p>Để xử lý query này, trước tiên chúng ta sử dụng ordinary pattern-match procedure (thủ tục so khớp mẫu thông thường) đã mô tả ở trên để xem có assertion nào trong data base khớp với pattern này hay không. (Trong trường hợp này sẽ không có, vì data base của chúng ta không chứa các assertion trực tiếp về việc ai sống gần ai.) Bước tiếp theo là cố gắng unify query pattern với conclusion của mỗi rule. Chúng ta thấy rằng pattern này unify với conclusion của rule:</p>
+<pre><code class="language-{.scheme}">(rule (lives-near ?person-1 ?person-2)
+      (and (address ?person-1 
+                    (?town . ?rest-1))
+           (address ?person-2 
+                    (?town . ?rest-2))
+           (not (same ?person-1 ?person-2))))
+</code></pre>
+<p>Kết quả là một frame chỉ định rằng <code>?person-2</code> được gán <code>(Hacker Alyssa P)</code> và <code>?x</code> sẽ được gán (có cùng giá trị với) <code>?person-1</code>. Bây giờ, dựa trên frame này, chúng ta đánh giá compound query (truy vấn phức hợp) được cho trong phần body của rule. Các phép so khớp thành công sẽ mở rộng frame này bằng cách cung cấp một binding cho <code>?person-1</code>, và do đó một giá trị cho <code>?x</code>, mà chúng ta có thể dùng để instantiate query pattern ban đầu.</p>
+<p>Nói chung, query evaluator sử dụng phương pháp sau để áp dụng một rule khi cố gắng xác lập một query pattern trong một frame đã chỉ định các bindings cho một số pattern variables:</p>
+<ul>
+<li>Unify query với conclusion của rule để tạo ra, nếu thành công, một phần mở rộng của frame ban đầu.</li>
+<li>Dựa trên frame đã mở rộng, đánh giá query được tạo thành từ body của rule.</li>
+</ul>
+<p>Hãy chú ý sự tương đồng với phương pháp áp dụng một procedure trong <code>eval</code>/<code>apply</code> evaluator cho Lisp:</p>
+<ul>
+<li>Gán các parameters (tham số) của procedure với các arguments (đối số) để tạo ra một frame mở rộng environment (môi trường) ban đầu của procedure.</li>
+<li>Dựa trên environment đã mở rộng, đánh giá expression (biểu thức) được tạo thành từ body của procedure.</li>
+</ul>
+<p>Sự tương đồng giữa hai evaluators này không có gì đáng ngạc nhiên. Cũng như procedure definitions (định nghĩa thủ tục) là phương tiện trừu tượng hóa trong Lisp, rule definitions là phương tiện trừu tượng hóa trong query language. Trong mỗi trường hợp, chúng ta “tháo gỡ” sự trừu tượng bằng cách tạo ra các bindings thích hợp và đánh giá body của rule hoặc procedure dựa trên chúng.</p>
+<h3 id="simple-queries-1"><a class="header" href="#simple-queries-1">Simple queries</a></h3>
+<p>Chúng ta đã thấy ở phần trước của mục này cách đánh giá simple queries khi không có rules. Giờ đây, sau khi đã thấy cách áp dụng rules, chúng ta có thể mô tả cách đánh giá simple queries bằng cách sử dụng cả rules và assertions.</p>
+<p>Với query pattern và một stream các frames, chúng ta tạo ra, cho mỗi frame trong input stream, hai streams:</p>
+<ul>
+<li>Một stream các extended frames (khung mở rộng) thu được bằng cách so khớp pattern với tất cả các assertions trong data base (sử dụng pattern matcher).</li>
+<li>Một stream các extended frames thu được bằng cách áp dụng tất cả các rules khả dĩ (sử dụng unifier).<sup class="footnote-reference"><a href="#16">16</a></sup></li>
+</ul>
+<p>Ghép nối (append) hai streams này tạo ra một stream bao gồm tất cả các cách mà pattern đã cho có thể được thỏa mãn, nhất quán với frame ban đầu. Các streams này (một cho mỗi frame trong input stream) sau đó được kết hợp lại để tạo thành một stream lớn duy nhất, do đó bao gồm tất cả các cách mà bất kỳ frame nào trong input stream ban đầu có thể được mở rộng để tạo ra một phép so khớp với pattern đã cho.</p>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p>Trong one-sided pattern matching (so khớp mẫu một phía), tất cả các phương trình chứa pattern variables đều tường minh và đã được giải cho ẩn số (pattern variable).<br />
+<sup class="footnote-reference"><a href="#15">15</a></sup>: Một cách khác để nghĩ về unification là nó tạo ra pattern tổng quát nhất, vốn là một trường hợp đặc biệt của cả hai patterns đầu vào. Nghĩa là, unification của <code>(?x a)</code> và `((b ?y)</p>
+</div>
+<h3 id="the-query-evaluator-and-the-driver-loop"><a class="header" href="#the-query-evaluator-and-the-driver-loop">The query evaluator and the driver loop</a></h3>
+<p>Bất chấp sự phức tạp của các thao tác so khớp bên dưới, hệ thống được tổ chức khá giống với một evaluator (bộ đánh giá) cho bất kỳ ngôn ngữ nào. Procedure (thủ tục) điều phối các thao tác so khớp được gọi là <code>qeval</code>, và nó đóng vai trò tương tự như procedure <code>eval</code> trong Lisp. <code>Qeval</code> nhận vào một query (truy vấn) và một stream (luồng) các frames (khung). Đầu ra của nó là một stream các frames, tương ứng với các phép so khớp thành công với query pattern (mẫu truy vấn), mở rộng một số frame trong input stream, như minh họa ở Hình 4.4. Giống như <code>eval</code>, <code>qeval</code> phân loại các loại expressions (biểu thức) khác nhau (queries) và điều phối đến procedure thích hợp cho từng loại. Có một procedure cho mỗi special form (<code>and</code>, <code>or</code>, <code>not</code>, và <code>lisp-value</code>) và một procedure cho simple queries (truy vấn đơn giản).</p>
+<p>Driver loop (vòng lặp điều khiển), tương tự như procedure <code>driver-loop</code> cho các evaluators khác trong chương này, đọc các queries từ terminal. Với mỗi query, nó gọi <code>qeval</code> với query đó và một stream gồm một empty frame (khung rỗng) duy nhất. Điều này sẽ tạo ra stream của tất cả các phép so khớp khả dĩ (tất cả các phần mở rộng khả dĩ của empty frame). Với mỗi frame trong stream kết quả, nó instantiate (thay thế) query gốc bằng các giá trị của các biến tìm thấy trong frame. Stream các queries đã được instantiate này sau đó được in ra.<sup class="footnote-reference"><a href="#17">17</a></sup></p>
+<p>Driver cũng kiểm tra lệnh đặc biệt <code>assert!</code>, báo hiệu rằng input không phải là một query mà là một assertion (mệnh đề khẳng định) hoặc rule (quy tắc) cần được thêm vào data base (cơ sở dữ liệu). Ví dụ:</p>
+<pre><code class="language-{.scheme}">(assert!
+ (job (Bitdiddle Ben)
+      (computer wizard)))
+
+(assert!
+ (rule (wheel ?person)
+       (and (supervisor 
+             ?middle-manager ?person)
+            (supervisor
+             ?x ?middle-manager))))
+</code></pre>
+<h2 id="443-is-logic-programming-mathematical-logic"><a class="header" href="#443-is-logic-programming-mathematical-logic">4.4.3 Is Logic Programming Mathematical Logic?</a></h2>
+<p>Các means of combination (phương thức kết hợp) được sử dụng trong query language thoạt nhìn có thể giống hệt với các phép toán <code>and</code>, <code>or</code>, và <code>not</code> của mathematical logic (logic toán học), và việc áp dụng các query-language rules (quy tắc của ngôn ngữ truy vấn) thực tế được thực hiện thông qua một phương pháp suy luận hợp lệ.<sup class="footnote-reference"><a href="#18">18</a></sup> Tuy nhiên, sự đồng nhất này giữa query language và mathematical logic thực ra không hoàn toàn đúng, vì query language cung cấp một <em>control structure</em> (cấu trúc điều khiển) diễn giải các mệnh đề logic theo cách thủ tục. Chúng ta thường có thể tận dụng control structure này. Ví dụ, để tìm tất cả supervisors (người giám sát) của programmers (lập trình viên), chúng ta có thể xây dựng một query theo một trong hai dạng logic tương đương:</p>
+<pre><code class="language-{.scheme}">(and (job ?x (computer programmer))
+     (supervisor ?x ?y))
+</code></pre>
+<p>hoặc</p>
+<pre><code class="language-{.scheme}">(and (supervisor ?x ?y)
+     (job ?x (computer programmer)))
+</code></pre>
+<p>Nếu một công ty có nhiều supervisors hơn programmers (trường hợp thường gặp), thì tốt hơn nên dùng dạng đầu tiên thay vì dạng thứ hai, vì data base phải được quét cho mỗi kết quả trung gian (frame) được tạo ra bởi mệnh đề đầu tiên của <code>and</code>.</p>
+<p>Mục tiêu của logic programming là cung cấp cho lập trình viên các kỹ thuật để phân tách một vấn đề tính toán thành hai vấn đề riêng biệt: “what” (cái gì) cần tính toán, và “how” (cách) tính toán điều đó. Điều này được thực hiện bằng cách chọn một tập con của các mệnh đề trong mathematical logic đủ mạnh để mô tả bất kỳ điều gì cần tính toán, nhưng đủ yếu để có thể diễn giải thủ tục một cách kiểm soát được. Ý định ở đây là, một mặt, một chương trình được chỉ định trong một logic programming language phải là một chương trình hiệu quả có thể được máy tính thực thi. Control (“how” to compute) được thực hiện bằng cách sử dụng thứ tự đánh giá của ngôn ngữ. Chúng ta nên có khả năng sắp xếp thứ tự các mệnh đề và thứ tự các subgoals (mục tiêu con) trong mỗi mệnh đề sao cho việc tính toán được thực hiện theo một trình tự được coi là hiệu quả. Đồng thời, chúng ta nên có khả năng xem kết quả của việc tính toán (“what” to compute) như một hệ quả đơn giản của các quy luật logic.</p>
+<p>Query language của chúng ta có thể được coi là một tập con của mathematical logic có thể diễn giải theo cách thủ tục. Một assertion biểu diễn một sự thật đơn giản (một atomic proposition — mệnh đề nguyên tử). Một rule biểu diễn hàm ý rằng kết luận của rule đúng trong những trường hợp mà phần thân của rule đúng. Một rule có một cách diễn giải thủ tục tự nhiên: Để xác lập kết luận của rule, hãy xác lập phần thân của rule. Do đó, rules chỉ định các phép tính. Tuy nhiên, vì rules cũng có thể được coi là các mệnh đề của mathematical logic, chúng ta có thể biện minh cho bất kỳ “inference” (suy luận) nào được thực hiện bởi một logic program bằng cách khẳng định rằng cùng một kết quả có thể đạt được khi làm việc hoàn toàn trong mathematical logic.<sup class="footnote-reference"><a href="#19">19</a></sup></p>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">17</sup>
+<p>Lý do chúng ta sử dụng streams (thay vì lists) các frames là vì việc áp dụng đệ quy các rules có thể tạo ra số lượng vô hạn các giá trị thỏa mãn một query. Việc đánh giá trì hoãn (delayed evaluation) được thể hiện trong streams là rất quan trọng ở đây: Hệ thống sẽ in các phản hồi từng cái một khi chúng được tạo ra, bất kể số lượng phản hồi là hữu hạn hay vô hạn.<br />
+<sup class="footnote-reference"><a href="#18">18</a></sup>: Việc một phương pháp suy luận nào đó là hợp lệ không phải là một khẳng định tầm thường. Cần phải chứng minh rằng nếu bắt đầu với các tiền đề đúng, thì chỉ có thể suy ra các kết luận đúng. Phương pháp suy luận được thể hiện qua việc áp dụng rules là <em>modus ponens</em>, phương pháp suy luận quen thuộc nói rằng nếu $A$ đúng và <em>A implies B</em> đúng, thì ta có thể kết luận rằng $B$ đúng.<br />
+<sup class="footnote-reference"><a href="#19">19</a></sup>: Chúng ta cần làm rõ rằng, khi nói về “inference” được thực hiện bởi một logic program, chúng ta giả định rằng việc tính toán kết thúc. Đáng tiếc là, ngay cả phát biểu đã được làm rõ này cũng sai đối với implementation của query language của chúng ta (và cũng sai đối với các chương trình trong Prolog và hầu hết các logic programming languages hiện tại) vì việc sử dụng <code>not</code> và <code>lisp-value</code>. Như chúng ta sẽ mô tả bên dưới, <code>not</code> được triển khai trong query language không phải lúc nào cũng nhất quán với <code>not</code> của mathematical logic, và <code>lisp-value</code> gây ra các phức tạp bổ sung. Chúng ta có thể triển khai một ngôn ngữ nhất quán với mathematical logic bằng cách đơn giản loại bỏ <code>not</code> và <code>lisp-value</code> khỏi ngôn ngữ và đồng ý viết chương trình chỉ sử dụng simple queries, <code>and</code>, và <code>or</code>. Tuy nhiên, điều này sẽ hạn chế đáng kể sức biểu đạt của ngôn ngữ. Một trong những mối quan tâm lớn của nghiên cứu trong logic programming là tìm cách đạt được sự nhất quán hơn với mathematical logic mà không làm giảm quá nhiều sức biểu đạt.</p>
+</div>
+<h3 id="infinite-loops"><a class="header" href="#infinite-loops">Infinite loops</a></h3>
+<p>Một hệ quả của việc diễn giải thủ tục (procedural interpretation) các logic programs (chương trình logic) là có thể xây dựng ra những chương trình cực kỳ kém hiệu quả để giải quyết một số vấn đề nhất định. Một trường hợp cực đoan của sự kém hiệu quả xảy ra khi hệ thống rơi vào các vòng lặp vô hạn trong quá trình suy luận.</p>
+<p>Ví dụ đơn giản, giả sử chúng ta đang thiết lập một data base (cơ sở dữ liệu) về các cuộc hôn nhân nổi tiếng, bao gồm:</p>
+<pre><code class="language-{.scheme}">(assert! (married Minnie Mickey))
+</code></pre>
+<p>Nếu bây giờ chúng ta hỏi:</p>
+<pre><code class="language-{.scheme}">(married Mickey ?who)
+</code></pre>
+<p>chúng ta sẽ không nhận được phản hồi, vì hệ thống không biết rằng nếu $A$ kết hôn với $B$, thì $B$ cũng kết hôn với $A$. Vì vậy, chúng ta thêm vào rule (quy tắc):</p>
+<pre><code class="language-{.scheme}">(assert! (rule (married ?x ?y)
+               (married ?y ?x)))
+</code></pre>
+<p>và lại truy vấn:</p>
+<pre><code class="language-{.scheme}">(married Mickey ?who)
+</code></pre>
+<p>Thật không may, điều này sẽ khiến hệ thống rơi vào vòng lặp vô hạn, như sau:</p>
+<ul>
+<li>Hệ thống phát hiện rule <code>married</code> có thể áp dụng; nghĩa là, rule conclusion <code>(married ?x ?y)</code> unify (hợp nhất) thành công với query pattern <code>(married Mickey ?who)</code> để tạo ra một frame (khung) trong đó <code>?x</code> được gán <code>Mickey</code> và <code>?y</code> được gán <code>?who</code>. Do đó, interpreter (bộ thông dịch) tiếp tục đánh giá rule body <code>(married ?y ?x)</code> trong frame này — thực chất là xử lý truy vấn <code>(married ?who Mickey)</code>.</li>
+<li>Một câu trả lời xuất hiện trực tiếp như một assertion (mệnh đề khẳng định) trong data base: <code>(married Minnie Mickey)</code>.</li>
+<li>Rule <code>married</code> cũng có thể áp dụng, vì vậy interpreter lại đánh giá rule body, lần này tương đương với <code>(married Mickey ?who)</code>.</li>
+</ul>
+<p>Hệ thống hiện đang ở trong vòng lặp vô hạn. Thực tế, việc hệ thống có tìm ra câu trả lời đơn giản <code>(married Minnie Mickey)</code> trước khi rơi vào vòng lặp hay không phụ thuộc vào các chi tiết triển khai liên quan đến thứ tự mà hệ thống kiểm tra các mục trong data base. Đây là một ví dụ rất đơn giản về các loại vòng lặp có thể xảy ra. Tập hợp các rules liên quan lẫn nhau có thể dẫn đến các vòng lặp khó lường hơn nhiều, và sự xuất hiện của vòng lặp có thể phụ thuộc vào thứ tự các mệnh đề trong một <code>and</code> (xem Bài tập 4.64) hoặc vào các chi tiết mức thấp liên quan đến thứ tự mà hệ thống xử lý các queries.<sup class="footnote-reference"><a href="#20">20</a></sup></p>
+<h3 id="problems-with-not"><a class="header" href="#problems-with-not">Problems with <code>not</code></a></h3>
+<p>Một điểm đặc biệt khác trong query system liên quan đến <code>not</code>. Với data base ở 4.4.1, hãy xét hai queries sau:</p>
+<pre><code class="language-{.scheme}">(and (supervisor ?x ?y)
+     (not (job ?x (computer programmer))))
+
+(and (not (job ?x (computer programmer)))
+     (supervisor ?x ?y))
+</code></pre>
+<p>Hai queries này không tạo ra cùng một kết quả. Query đầu tiên bắt đầu bằng việc tìm tất cả các mục trong data base khớp với <code>(supervisor ?x ?y)</code>, sau đó lọc các frames kết quả bằng cách loại bỏ những frame trong đó giá trị của <code>?x</code> thỏa mãn <code>(job ?x (computer programmer))</code>. Query thứ hai bắt đầu bằng việc lọc các frames đầu vào để loại bỏ những frame có thể thỏa mãn <code>(job ?x (computer programmer))</code>. Vì frame đầu vào duy nhất là empty frame, hệ thống sẽ kiểm tra data base để xem có pattern nào thỏa mãn <code>(job ?x (computer programmer))</code> hay không. Vì thường sẽ có các mục như vậy, mệnh đề <code>not</code> sẽ lọc bỏ empty frame và trả về một empty stream (luồng rỗng) các frames. Do đó, toàn bộ compound query (truy vấn phức hợp) trả về một empty stream.</p>
+<p>Vấn đề là implementation (triển khai) của <code>not</code> thực chất được thiết kế để hoạt động như một bộ lọc trên các giá trị của biến. Nếu một mệnh đề <code>not</code> được xử lý với một frame trong đó một số biến vẫn chưa được gán giá trị (như <code>?x</code> trong ví dụ trên), hệ thống sẽ tạo ra kết quả không mong đợi. Các vấn đề tương tự xảy ra với việc sử dụng <code>lisp-value</code> — Lisp predicate (mệnh đề điều kiện Lisp) không thể hoạt động nếu một số đối số của nó chưa được gán giá trị. Xem Bài tập 4.77.</p>
+<p>Ngoài ra, còn có một điểm khác biệt nghiêm trọng hơn giữa <code>not</code> của query language và <code>not</code> của mathematical logic. Trong logic, chúng ta diễn giải mệnh đề “not $P$” là $P$ không đúng. Tuy nhiên, trong query system, “not $P$” nghĩa là $P$ không thể được suy ra từ kiến thức trong data base. Ví dụ, với personnel data base (cơ sở dữ liệu nhân sự) ở 4.4.1, hệ thống sẽ dễ dàng suy ra đủ loại mệnh đề <code>not</code>, chẳng hạn như Ben Bitdiddle không phải là một baseball fan (người hâm mộ bóng chày), rằng bên ngoài không mưa, và rằng 2 + 2 không bằng 4.<sup class="footnote-reference"><a href="#21">21</a></sup> Nói cách khác, <code>not</code> của logic programming languages phản ánh giả định gọi là <em>closed world assumption</em> (giả định thế giới đóng) rằng tất cả thông tin liên quan đã được đưa vào data base.<sup class="footnote-reference"><a href="#22">22</a></sup></p>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">20</sup>
+<p>Đây không phải là vấn đề của logic mà là của cách diễn giải thủ tục logic do interpreter của chúng ta cung cấp. Chúng ta có thể viết một interpreter sẽ không rơi vào vòng lặp ở đây. Ví dụ, chúng ta có thể liệt kê tất cả các chứng minh có thể suy ra từ các assertions và rules của mình theo thứ tự duyệt rộng (breadth-first) thay vì duyệt sâu (depth-first). Tuy nhiên, một hệ thống như vậy sẽ khó tận dụng thứ tự suy luận trong các chương trình của chúng ta hơn. Một nỗ lực xây dựng cơ chế điều khiển tinh vi cho một chương trình như vậy được mô tả trong deKleer et al. 1977. Một kỹ thuật khác, không dẫn đến các vấn đề điều khiển nghiêm trọng như vậy, là đưa vào kiến thức đặc biệt, chẳng hạn như các bộ phát hiện các loại vòng lặp cụ thể (Bài tập 4.67). Tuy nhiên, không thể có một cơ chế tổng quát nào đảm bảo ngăn hệ thống đi vào các nhánh vô hạn khi thực hiện suy luận. Hãy tưởng tượng một rule “quái ác” dạng “Để chứng minh $P(x)$ đúng, hãy chứng minh rằng $P(f(x))$ đúng” với một hàm $f$ được chọn phù hợp.</p>
+</div>
+<div class="footnote-definition" id="21"><sup class="footnote-definition-label">21</sup>
+<p>Xét query <code>(not (baseball-fan (Bitdiddle Ben)))</code>. Hệ thống phát hiện rằng <code>(baseball-fan (Bitdiddle Ben))</code> không có trong data base, nên empty frame không thỏa mãn pattern và không bị lọc ra khỏi initial stream (luồng ban đầu) các frames. Kết quả của query do đó là empty frame, được dùng để instantiate query đầu vào để tạo ra <code>(not (baseball-fan (Bitdiddle Ben)))</code>.</p>
+</div>
+<div class="footnote-definition" id="22"><sup class="footnote-definition-label">22</sup>
+<p>Một cuộc thảo luận và biện minh cho cách xử lý <code>not</code> này có thể được tìm thấy trong bài báo của Clark (1978).</p>
+</div>
+<h2 id="444-implementing-the-query-system"><a class="header" href="#444-implementing-the-query-system">4.4.4 Implementing the Query System</a></h2>
+<p>Mục 4.4.2 đã mô tả cách query system (hệ thống truy vấn) hoạt động. Giờ đây, chúng ta sẽ bổ sung chi tiết bằng cách trình bày một implementation (triển khai) hoàn chỉnh của hệ thống.</p>
+<h3 id="4441-the-driver-loop-and-instantiation"><a class="header" href="#4441-the-driver-loop-and-instantiation">4.4.4.1 The Driver Loop and Instantiation</a></h3>
+<p>Driver loop (vòng lặp điều khiển) cho query system liên tục đọc các input expressions (biểu thức đầu vào). Nếu expression là một rule (quy tắc) hoặc assertion (mệnh đề khẳng định) cần được thêm vào data base (cơ sở dữ liệu), thì thông tin đó sẽ được thêm vào. Ngược lại, expression được giả định là một query (truy vấn). Driver sẽ chuyển query này đến evaluator (bộ đánh giá) <code>qeval</code> cùng với một initial frame stream (luồng khung ban đầu) gồm một empty frame (khung rỗng) duy nhất. Kết quả của việc đánh giá là một stream các frames được tạo ra bằng cách thỏa mãn query với các giá trị biến tìm thấy trong data base. Các frames này được dùng để tạo thành một stream mới gồm các bản sao của query gốc, trong đó các biến được instantiate (thay thế) bằng các giá trị được cung cấp bởi stream các frames, và stream cuối cùng này sẽ được in ra tại terminal:</p>
+<p>(... code block here)</p>
+<p>Ở đây, giống như trong các evaluators khác trong chương này, chúng ta sử dụng abstract syntax (cú pháp trừu tượng) cho các expressions của query language (ngôn ngữ truy vấn). Implementation của cú pháp expression, bao gồm predicate (mệnh đề điều kiện) <code>assertion-to-be-added?</code> và selector (bộ chọn) <code>add-assertion-body</code>, được trình bày ở 4.4.4.7. <code>Add-rule-or-assertion!</code> được định nghĩa ở 4.4.4.5.</p>
+<p>Trước khi xử lý bất kỳ input expression nào, driver loop sẽ biến đổi cú pháp của nó thành một dạng giúp việc xử lý hiệu quả hơn. Điều này bao gồm việc thay đổi representation (biểu diễn) của pattern variables (biến mẫu). Khi query được instantiate, bất kỳ biến nào vẫn chưa được gán giá trị sẽ được biến đổi trở lại representation đầu vào trước khi in ra. Các phép biến đổi này được thực hiện bởi hai procedures <code>query-syntax-process</code> và <code>contract-question-mark</code> (4.4.4.7).</p>
+<p>Để instantiate một expression, chúng ta sao chép nó, thay thế bất kỳ biến nào trong expression bằng giá trị của chúng trong một frame đã cho. Các giá trị này cũng được instantiate, vì chúng có thể chứa biến (ví dụ, nếu <code>?x</code> trong <code>exp</code> được gán <code>?y</code> do kết quả của unification và <code>?y</code> lại được gán 5). Hành động cần thực hiện nếu một biến không thể được instantiate được xác định bởi một đối số thủ tục truyền vào <code>instantiate</code>.</p>
+<pre><code class="language-{.scheme}">(define (instantiate 
+         exp frame unbound-var-handler)
+  (define (copy exp)
+    (cond ((var? exp)
+           (let ((binding 
+                  (binding-in-frame 
+                   exp frame)))
+             (if binding
+                 (copy 
+                  (binding-value binding))
+                 (unbound-var-handler 
+                  exp frame))))
+          ((pair? exp)
+           (cons (copy (car exp)) 
+                 (copy (cdr exp))))
+          (else exp)))
+  (copy exp))
+</code></pre>
+<p>Các procedures thao tác với bindings được định nghĩa ở 4.4.4.8.</p>
+<h3 id="4442-the-evaluator"><a class="header" href="#4442-the-evaluator">4.4.4.2 The Evaluator</a></h3>
+<p>Procedure <code>qeval</code>, được gọi bởi <code>query-driver-loop</code>, là basic evaluator (bộ đánh giá cơ bản) của query system. Nó nhận vào một query và một stream các frames, và trả về một stream các extended frames (khung mở rộng). Nó nhận diện các special forms (dạng đặc biệt) bằng một data-directed dispatch (điều phối theo dữ liệu) sử dụng <code>get</code> và <code>put</code>, giống như cách chúng ta đã làm khi triển khai generic operations (phép toán tổng quát) ở Chương 2. Bất kỳ query nào không được nhận diện là special form sẽ được giả định là simple query (truy vấn đơn giản), để được xử lý bởi <code>simple-query</code>.</p>
+<pre><code class="language-{.scheme}">(define (qeval query frame-stream)
+  (let ((qproc (get (type query) 'qeval)))
+    (if qproc
+        (qproc (contents query) frame-stream)
+        (simple-query query frame-stream))))
+</code></pre>
+<p><code>Type</code> và <code>contents</code>, được định nghĩa ở 4.4.4.7, triển khai abstract syntax của các special forms.</p>
+<h3 id="simple-queries-2"><a class="header" href="#simple-queries-2">Simple queries</a></h3>
+<p>Procedure <code>simple-query</code> xử lý simple queries. Nó nhận vào một simple query (một pattern) cùng với một stream các frames, và trả về stream được tạo thành bằng cách mở rộng mỗi frame bởi tất cả các phép so khớp trong data base với query.</p>
+<pre><code class="language-{.scheme}">(define (simple-query query-pattern 
+                      frame-stream)
+  (stream-flatmap
+   (lambda (frame)
+     (stream-append-delayed
+      (find-assertions query-pattern frame)
+      (delay 
+        (apply-rules query-pattern frame))))
+   frame-stream))
+</code></pre>
+<p>Với mỗi frame trong input stream, chúng ta sử dụng <code>find-assertions</code> (4.4.4.3) để so khớp pattern với tất cả các assertions trong data base, tạo ra một stream các extended frames, và sử dụng <code>apply-rules</code> (4.4.4.4) để áp dụng tất cả các rules khả dĩ, tạo ra một stream khác các extended frames. Hai streams này được kết hợp (sử dụng <code>stream-append-delayed</code>, 4.4.4.6) để tạo thành một stream của tất cả các cách mà pattern đã cho có thể được thỏa mãn, nhất quán với frame ban đầu (xem Bài tập 4.71). Các streams cho từng frame đầu vào riêng lẻ được kết hợp bằng <code>stream-flatmap</code> (4.4.4.6) để tạo thành một stream lớn gồm tất cả các cách mà bất kỳ frame nào trong input stream ban đầu có thể được mở rộng để tạo ra một phép so khớp với pattern đã cho.</p>
+<h3 id="compound-queries-2"><a class="header" href="#compound-queries-2">Compound queries</a></h3>
+<p>Các <code>and</code> queries được xử lý như minh họa ở Hình 4.5 bởi procedure <code>conjoin</code>. <code>Conjoin</code> nhận vào các conjuncts (mệnh đề liên kết) và frame stream, trả về stream các extended frames. Trước tiên, <code>conjoin</code> xử lý stream các frames để tìm stream của tất cả các phần mở rộng frame có thể thỏa mãn query đầu tiên trong conjunction (liên kết). Sau đó, sử dụng kết quả này làm frame stream mới, nó đệ quy áp dụng <code>conjoin</code> cho các queries còn lại.</p>
+<pre><code class="language-{.scheme}">(define (conjoin conjuncts frame-stream)
+  (if (empty-conjunction? conjuncts)
+      frame-stream
+      (conjoin (rest-conjuncts conjuncts)
+               (qeval 
+                (first-conjunct conjuncts)
+                frame-stream))))
+</code></pre>
+<p>Biểu thức:</p>
+<pre><code class="language-{.scheme}">(put 'and 'qeval conjoin)
+</code></pre>
+<p>thiết lập để <code>qeval</code> điều phối đến <code>conjoin</code> khi gặp một form <code>and</code>.</p>
+<p>Các <code>or</code> queries được xử lý tương tự, như minh họa ở Hình 4.6. Các output streams cho các disjuncts (mệnh đề rời rạc) khác nhau của <code>or</code> được tính toán riêng biệt và hợp nhất bằng procedure <code>interleave-delayed</code> từ 4.4.4.6. (Xem Bài tập 4.71 và Bài tập 4.72.)</p>
+<pre><code class="language-{.scheme}">(define (disjoin disjuncts frame-stream)
+  (if (empty-disjunction? disjuncts)
+      the-empty-stream
+      (interleave-delayed
+       (qeval (first-disjunct disjuncts) 
+              frame-stream)
+       (delay (disjoin 
+               (rest-disjuncts disjuncts)
+               frame-stream)))))
+(put 'or 'qeval disjoin)
+</code></pre>
+<p>Các predicates và selectors cho cú pháp của conjuncts và disjuncts được trình bày ở 4.4.4.7.</p>
+<h3 id="filters"><a class="header" href="#filters">Filters</a></h3>
+<p><code>Not</code> được xử lý theo phương pháp đã phác thảo ở 4.4.2. Chúng ta cố gắng mở rộng mỗi frame trong input stream (luồng đầu vào) để thỏa mãn query (truy vấn) đang bị phủ định, và chỉ đưa một frame nhất định vào output stream (luồng đầu ra) nếu nó không thể được mở rộng.</p>
+<pre><code class="language-{.scheme}">(define (negate operands frame-stream)
+  (stream-flatmap
+   (lambda (frame)
+     (if (stream-null? 
+          (qeval (negated-query operands)
+                 (singleton-stream frame)))
+         (singleton-stream frame)
+         the-empty-stream))
+   frame-stream))
+(put 'not 'qeval negate)
+</code></pre>
+<p><code>Lisp-value</code> là một bộ lọc tương tự như <code>not</code>. Mỗi frame trong stream được dùng để instantiate (thay thế) các biến trong pattern, áp dụng predicate (mệnh đề điều kiện) đã chỉ định, và các frame mà predicate trả về false sẽ bị lọc ra khỏi input stream. Nếu có các pattern variables chưa được gán giá trị, sẽ xảy ra lỗi.</p>
+<pre><code class="language-{.scheme}">(define (lisp-value call frame-stream)
+  (stream-flatmap
+   (lambda (frame)
+     (if (execute
+          (instantiate
+           call
+           frame
+           (lambda (v f)
+             (error 
+              &quot;Unknown pat var: LISP-VALUE&quot; 
+              v))))
+         (singleton-stream frame)
+         the-empty-stream))
+   frame-stream))
+(put 'lisp-value 'qeval lisp-value)
+</code></pre>
+<p><code>Execute</code>, thao tác áp dụng predicate cho các đối số, phải <code>eval</code> biểu thức predicate để lấy procedure (thủ tục) cần áp dụng. Tuy nhiên, nó không được đánh giá các đối số, vì chúng vốn đã là các đối số thực tế, không phải là các biểu thức mà việc đánh giá (trong Lisp) sẽ tạo ra các đối số đó. Lưu ý rằng <code>execute</code> được triển khai bằng cách sử dụng <code>eval</code> và <code>apply</code> từ hệ thống Lisp nền tảng.</p>
+<pre><code class="language-{.scheme}">(define (execute exp)
+  (apply (eval (predicate exp) 
+               user-initial-environment)
+         (args exp)))
+</code></pre>
+<p>Special form (dạng đặc biệt) <code>always-true</code> cung cấp một query luôn được thỏa mãn. Nó bỏ qua nội dung của mình (thường là rỗng) và đơn giản truyền qua tất cả các frame trong input stream. <code>Always-true</code> được sử dụng bởi selector <code>rule-body</code> (4.4.4.7) để cung cấp body cho các rules được định nghĩa mà không có body (tức là các rules có conclusions luôn được thỏa mãn).</p>
+<pre><code class="language-{.scheme}">(define (always-true ignore frame-stream) 
+  frame-stream)
+(put 'always-true 'qeval always-true)
+</code></pre>
+<p>Các selectors định nghĩa cú pháp của <code>not</code> và <code>lisp-value</code> được trình bày ở 4.4.4.7.</p>
+<h3 id="4443-finding-assertions-by-pattern-matching"><a class="header" href="#4443-finding-assertions-by-pattern-matching">4.4.4.3 Finding Assertions by Pattern Matching</a></h3>
+<p><code>Find-assertions</code>, được gọi bởi <code>simple-query</code> (4.4.4.2), nhận vào một pattern và một frame. Nó trả về một stream các frames, mỗi frame mở rộng frame đã cho bằng một phép so khớp trong data base của pattern đã cho. Nó sử dụng <code>fetch-assertions</code> (4.4.4.5) để lấy một stream tất cả các assertions trong data base cần được kiểm tra so khớp với pattern và frame. Lý do sử dụng <code>fetch-assertions</code> ở đây là vì chúng ta thường có thể áp dụng các kiểm tra đơn giản để loại bỏ nhiều mục trong data base khỏi tập ứng viên cho một phép so khớp thành công. Hệ thống vẫn sẽ hoạt động nếu chúng ta bỏ <code>fetch-assertions</code> và chỉ đơn giản kiểm tra một stream của tất cả các assertions trong data base, nhưng việc tính toán sẽ kém hiệu quả hơn vì cần phải gọi matcher nhiều lần hơn.</p>
+<pre><code class="language-{.scheme}">(define (find-assertions pattern frame)
+  (stream-flatmap 
+    (lambda (datum) 
+      (check-an-assertion datum pattern frame))
+    (fetch-assertions pattern frame)))
+</code></pre>
+<p><code>Check-an-assertion</code> nhận vào một pattern, một data object (đối tượng dữ liệu — assertion), và một frame, trả về hoặc là một one-element stream (luồng một phần tử) chứa frame đã mở rộng, hoặc <code>the-empty-stream</code> nếu phép so khớp thất bại.</p>
+<pre><code class="language-{.scheme}">(define (check-an-assertion 
+         assertion query-pat query-frame)
+  (let ((match-result
+         (pattern-match 
+          query-pat assertion query-frame)))
+    (if (eq? match-result 'failed)
+        the-empty-stream
+        (singleton-stream match-result))))
+</code></pre>
+<p>Basic pattern matcher (bộ so khớp mẫu cơ bản) trả về hoặc symbol <code>failed</code> hoặc một phần mở rộng của frame đã cho. Ý tưởng cơ bản của matcher là kiểm tra pattern với dữ liệu, từng phần tử một, tích lũy các bindings (ràng buộc) cho các pattern variables. Nếu pattern và data object giống nhau, phép so khớp thành công và chúng ta trả về frame các bindings đã tích lũy cho đến thời điểm đó. Ngược lại, nếu pattern là một biến, chúng ta mở rộng frame hiện tại bằng cách gán biến đó với dữ liệu, miễn là điều này nhất quán với các bindings đã có trong frame. Nếu pattern và dữ liệu đều là các cặp (pairs), chúng ta (đệ quy) so khớp <code>car</code> của pattern với <code>car</code> của dữ liệu để tạo ra một frame; trong frame này, chúng ta tiếp tục so khớp <code>cdr</code> của pattern với <code>cdr</code> của dữ liệu. Nếu không trường hợp nào trong số này áp dụng, phép so khớp thất bại và chúng ta trả về symbol <code>failed</code>.</p>
+<pre><code class="language-{.scheme}">(define (pattern-match pat dat frame)
+  (cond ((eq? frame 'failed) 'failed)
+        ((equal? pat dat) frame)
+        ((var? pat) 
+         (extend-if-consistent 
+          pat dat frame))
+        ((and (pair? pat) (pair? dat))
+         (pattern-match 
+          (cdr pat) 
+          (cdr dat)
+          (pattern-match
+           (car pat) (car dat) frame)))
+        (else 'failed)))
+</code></pre>
+<p>Dưới đây là procedure (thủ tục) mở rộng một frame (khung) bằng cách thêm một binding (ràng buộc) mới, nếu điều này nhất quán với các bindings đã có trong frame:</p>
+<pre><code class="language-{.scheme}">(define (extend-if-consistent var dat frame)
+  (let ((binding (binding-in-frame var frame)))
+    (if binding
+        (pattern-match 
+         (binding-value binding) dat frame)
+        (extend var dat frame))))
+</code></pre>
+<p>Nếu không có binding cho biến trong frame, chúng ta chỉ cần thêm binding của biến đó với dữ liệu. Ngược lại, chúng ta so khớp, trong frame, dữ liệu với giá trị của biến trong frame. Nếu giá trị đã lưu chỉ chứa các hằng số, như bắt buộc nếu nó được lưu trong quá trình pattern matching bởi <code>extend-if-consistent</code>, thì phép so khớp chỉ đơn giản kiểm tra xem giá trị đã lưu và giá trị mới có giống nhau không. Nếu giống, nó trả về frame không thay đổi; nếu không, nó trả về thông báo thất bại. Tuy nhiên, giá trị đã lưu có thể chứa các pattern variables nếu nó được lưu trong quá trình unification (xem 4.4.4.4). Phép so khớp đệ quy giữa pattern đã lưu và dữ liệu mới sẽ thêm hoặc kiểm tra các bindings cho các biến trong pattern này. Ví dụ, giả sử chúng ta có một frame trong đó <code>?x</code> được gán <code>(f ?y)</code> và <code>?y</code> chưa được gán, và chúng ta muốn bổ sung frame này bằng binding của <code>?x</code> với <code>(f b)</code>. Chúng ta tra cứu <code>?x</code> và thấy rằng nó được gán <code>(f ?y)</code>. Điều này dẫn đến việc so khớp <code>(f ?y)</code> với giá trị mới đề xuất <code>(f b)</code> trong cùng frame. Cuối cùng, phép so khớp này mở rộng frame bằng cách thêm binding của <code>?y</code> với <code>b</code>. <code>?X</code> vẫn được gán <code>(f ?y)</code>. Chúng ta không bao giờ sửa đổi một binding đã lưu và không bao giờ lưu nhiều hơn một binding cho cùng một biến.</p>
+<p>Các procedures được <code>extend-if-consistent</code> sử dụng để thao tác với bindings được định nghĩa ở 4.4.4.8.</p>
+<h3 id="patterns-with-dotted-tails"><a class="header" href="#patterns-with-dotted-tails">Patterns with dotted tails</a></h3>
+<p>Nếu một pattern chứa một dấu chấm theo sau bởi một pattern variable, thì pattern variable đó sẽ khớp với phần còn lại của data list (thay vì phần tử tiếp theo của data list), đúng như mong đợi với ký pháp dotted-tail được mô tả trong Bài tập 2.20. Mặc dù pattern matcher mà chúng ta vừa triển khai không tìm kiếm dấu chấm, nhưng nó vẫn hoạt động như mong muốn. Điều này là do primitive <code>read</code> của Lisp, được <code>query-driver-loop</code> sử dụng để đọc query và biểu diễn nó dưới dạng cấu trúc danh sách, xử lý dấu chấm theo một cách đặc biệt.</p>
+<p>Khi <code>read</code> gặp một dấu chấm, thay vì tạo phần tử tiếp theo thành phần tử tiếp theo của danh sách (<code>car</code> của một <code>cons</code> có <code>cdr</code> là phần còn lại của danh sách), nó sẽ tạo phần tử tiếp theo thành <code>cdr</code> của cấu trúc danh sách. Ví dụ, cấu trúc danh sách được <code>read</code> tạo ra cho pattern <code>(computer ?type)</code> có thể được xây dựng bằng cách đánh giá biểu thức <code>(cons 'computer (cons '?type '()))</code>, và cấu trúc cho <code>(computer . ?type)</code> có thể được xây dựng bằng cách đánh giá biểu thức <code>(cons 'computer '?type)</code>.</p>
+<p>Do đó, khi <code>pattern-match</code> đệ quy so sánh <code>car</code> và <code>cdr</code> của một data list và một pattern có dấu chấm, nó sẽ cuối cùng so khớp biến sau dấu chấm (là <code>cdr</code> của pattern) với một sublist của data list, gán biến đó với danh sách này. Ví dụ, so khớp pattern <code>(computer . ?type)</code> với <code>(computer programmer trainee)</code> sẽ gán <code>?type</code> với danh sách <code>(programmer trainee)</code>.</p>
+<h3 id="4444-rules-and-unification"><a class="header" href="#4444-rules-and-unification">4.4.4.4 Rules and Unification</a></h3>
+<p><code>Apply-rules</code> là phần tương tự của rules so với <code>find-assertions</code> (4.4.4.3). Nó nhận vào một pattern và một frame, và tạo ra một stream các extension frames bằng cách áp dụng các rules từ data base. <code>Stream-flatmap</code> ánh xạ <code>apply-a-rule</code> xuống stream các rules có thể áp dụng (được chọn bởi <code>fetch-rules</code>, 4.4.4.5) và kết hợp các stream frames kết quả.</p>
+<pre><code class="language-{.scheme}">(define (apply-rules pattern frame)
+  (stream-flatmap 
+   (lambda (rule)
+     (apply-a-rule rule pattern frame))
+   (fetch-rules pattern frame)))
+</code></pre>
+<p><code>Apply-a-rule</code> áp dụng rules theo phương pháp đã mô tả ở 4.4.2. Nó trước tiên mở rộng frame đối số của mình bằng cách unify (hợp nhất) rule conclusion với pattern trong frame đã cho. Nếu thành công, nó sẽ đánh giá rule body trong frame mới này.</p>
+<p>Tuy nhiên, trước khi thực hiện bất kỳ điều gì, chương trình sẽ đổi tên tất cả các biến trong rule thành các tên mới duy nhất. Lý do là để ngăn các biến của các lần áp dụng rule khác nhau bị nhầm lẫn với nhau. Ví dụ, nếu hai rules đều sử dụng một biến tên <code>?x</code>, thì mỗi rule có thể thêm một binding cho <code>?x</code> vào frame khi được áp dụng. Hai <code>?x</code> này không liên quan gì đến nhau, và chúng ta không nên bị đánh lừa nghĩ rằng hai binding này phải nhất quán. Thay vì đổi tên biến, chúng ta có thể thiết kế một cấu trúc environment (môi trường) thông minh hơn; tuy nhiên, cách đổi tên mà chúng ta chọn ở đây là đơn giản nhất, dù không phải hiệu quả nhất. (Xem Bài tập 4.79.) Dưới đây là procedure <code>apply-a-rule</code>:</p>
+<pre><code class="language-{.scheme}">(define (apply-a-rule rule
+                      query-pattern
+                      query-frame)
+  (let ((clean-rule 
+         (rename-variables-in rule)))
+    (let ((unify-result
+           (unify-match query-pattern
+                        (conclusion clean-rule)
+                        query-frame)))
+      (if (eq? unify-result 'failed)
+          the-empty-stream
+          (qeval (rule-body clean-rule)
+                 (singleton-stream 
+                  unify-result))))))
+</code></pre>
+<p>Các selectors <code>rule-body</code> và <code>conclusion</code> để trích xuất các phần của một rule được định nghĩa ở 4.4.4.7.</p>
+<p>Chúng ta tạo ra các tên biến duy nhất bằng cách gắn một định danh duy nhất (chẳng hạn một số) với mỗi lần áp dụng rule và kết hợp định danh này với các tên biến gốc. Ví dụ, nếu định danh của lần áp dụng rule là 7, chúng ta có thể đổi mỗi <code>?x</code> trong rule thành <code>?x-7</code> và mỗi <code>?y</code> thành <code>?y-7</code>. (<code>Make-new-variable</code> và <code>new-rule-application-id</code> được bao gồm cùng với các thủ tục cú pháp ở 4.4.4.7.)</p>
+<pre><code class="language-{.scheme}">(define (rename-variables-in rule)
+  (let ((rule-application-id 
+         (new-rule-application-id)))
+    (define (tree-walk exp)
+      (cond ((var? exp)
+             (make-new-variable 
+              exp 
+              rule-application-id))
+            ((pair? exp)
+             (cons (tree-walk (car exp))
+                   (tree-walk (cdr exp))))
+            (else exp)))
+    (tree-walk rule)))
+</code></pre>
+<p>Thuật toán unification được triển khai như một procedure nhận vào hai patterns và một frame, trả về hoặc frame đã mở rộng hoặc symbol <code>failed</code>. Unifier giống như pattern matcher ngoại trừ việc nó là đối xứng — các biến được phép xuất hiện ở cả hai phía của phép so khớp. <code>Unify-match</code> về cơ bản giống <code>pattern-match</code>, ngoại trừ có thêm đoạn mã (được đánh dấu “<code>***</code>” bên dưới) để xử lý trường hợp đối tượng ở phía bên phải của phép so khớp là một biến.</p>
+<pre><code class="language-{.scheme}">(define (unify-match p1 p2 frame)
+  (cond ((eq? frame 'failed) 'failed)
+        ((equal? p1 p2) frame)
+        ((var? p1)
+         (extend-if-possible p1 p2 frame))
+        ((var? p2)
+         (extend-if-possible 
+          p2 
+          p1 
+          frame))        ; ***
+        ((and (pair? p1) 
+              (pair? p2))
+         (unify-match 
+          (cdr p1) 
+          (cdr p2)
+          (unify-match 
+           (car p1)
+           (car p2)
+           frame)))
+        (else 'failed)))
+</code></pre>
+<p>Trong unification (hợp nhất), cũng như trong one-sided pattern matching (so khớp mẫu một phía), chúng ta chỉ chấp nhận một phần mở rộng đề xuất của frame (khung) nếu nó nhất quán với các bindings (ràng buộc) đã tồn tại. Procedure <code>extend-if-possible</code> được sử dụng trong unification giống với <code>extend-if-consistent</code> được dùng trong pattern matching, ngoại trừ hai kiểm tra đặc biệt, được đánh dấu “<code>***</code>” trong chương trình dưới đây.</p>
+<p>Trường hợp đầu tiên: nếu biến mà chúng ta đang cố gắng so khớp chưa được gán, nhưng giá trị mà chúng ta đang cố gắng so khớp với nó lại là một biến (khác), thì cần kiểm tra xem giá trị đó đã được gán chưa, và nếu có thì so khớp với giá trị đó. Nếu cả hai phía của phép so khớp đều chưa được gán, chúng ta có thể gán một bên với bên kia.</p>
+<p>Kiểm tra thứ hai xử lý các nỗ lực gán một biến với một pattern có chứa chính biến đó. Tình huống này có thể xảy ra bất cứ khi nào một biến được lặp lại trong cả hai patterns. Ví dụ, xét việc unify hai patterns <code>(?x ?x)</code> và <code>(?y ⟨biểu thức chứa ?y⟩)</code> trong một frame mà cả <code>?x</code> và <code>?y</code> đều chưa được gán. Đầu tiên <code>?x</code> được so khớp với <code>?y</code>, tạo ra binding của <code>?x</code> với <code>?y</code>. Sau đó, cùng <code>?x</code> được so khớp với biểu thức chứa <code>?y</code>. Vì <code>?x</code> đã được gán với <code>?y</code>, điều này dẫn đến việc so khớp <code>?y</code> với biểu thức. Nếu chúng ta xem unifier như việc tìm một tập giá trị cho các pattern variables sao cho các patterns giống nhau, thì các patterns này ngụ ý rằng cần tìm một <code>?y</code> sao cho <code>?y</code> bằng biểu thức chứa <code>?y</code>. Không có phương pháp tổng quát nào để giải các phương trình như vậy, vì thế chúng ta từ chối các bindings như vậy; các trường hợp này được nhận diện bởi predicate <code>depends-on?</code><sup class="footnote-reference"><a href="#23">23</a></sup>.</p>
+<p>Mặt khác, chúng ta không muốn từ chối các nỗ lực gán một biến với chính nó. Ví dụ, xét việc unify <code>(?x ?x)</code> và <code>(?y ?y)</code>. Lần thứ hai gán <code>?x</code> với <code>?y</code> sẽ so khớp <code>?y</code> (giá trị đã lưu của <code>?x</code>) với <code>?y</code> (giá trị mới của <code>?x</code>). Trường hợp này được xử lý bởi mệnh đề <code>equal?</code> trong <code>unify-match</code>.</p>
+<pre><code class="language-{.scheme}">(define (extend-if-possible var val frame)
+  (let ((binding (binding-in-frame var frame)))
+    (cond (binding
+           (unify-match
+            (binding-value binding) val frame))
+          ((var? val)                   ; ***
+           (let ((binding 
+                  (binding-in-frame 
+                   val
+                   frame)))
+             (if binding
+                 (unify-match
+                  var 
+                  (binding-value binding) 
+                  frame)
+                 (extend var val frame))))
+          ((depends-on? val var frame)  ; ***
+           'failed)
+          (else (extend var val frame)))))
+</code></pre>
+<p><code>Depends-on?</code> là một predicate kiểm tra xem một biểu thức được đề xuất làm giá trị của một pattern variable có phụ thuộc vào biến đó hay không. Việc này phải được thực hiện tương ứng với frame hiện tại, vì biểu thức có thể chứa các biến mà giá trị của chúng đã phụ thuộc vào biến đang được kiểm tra. Cấu trúc của <code>depends-on?</code> là một tree walk (duyệt cây) đệ quy đơn giản, trong đó chúng ta thay thế các giá trị của biến bất cứ khi nào cần thiết.</p>
+<pre><code class="language-{.scheme}">(define (depends-on? exp var frame)
+  (define (tree-walk e)
+    (cond ((var? e)
+           (if (equal? var e)
+               true
+               (let
+                 ((b (binding-in-frame 
+                      e 
+                      frame)))
+                  (if b
+                      (tree-walk 
+                       (binding-value b))
+                      false))))
+          ((pair? e)
+           (or (tree-walk (car e))
+               (tree-walk (cdr e))))
+          (else false)))
+  (tree-walk exp))
+</code></pre>
+<h3 id="4445-maintaining-the-data-base"><a class="header" href="#4445-maintaining-the-data-base">4.4.4.5 Maintaining the Data Base</a></h3>
+<p>Một vấn đề quan trọng trong việc thiết kế logic programming languages (ngôn ngữ lập trình logic) là sắp xếp sao cho càng ít mục không liên quan trong data base được kiểm tra khi so khớp một pattern càng tốt. Trong hệ thống của chúng ta, ngoài việc lưu trữ tất cả assertions trong một stream lớn, chúng ta còn lưu trữ tất cả assertions có <code>car</code> là constant symbol (ký hiệu hằng) trong các streams riêng biệt, trong một bảng được đánh chỉ mục theo symbol.</p>
+<p>Để truy xuất một assertion có thể khớp với một pattern, trước tiên chúng ta kiểm tra xem <code>car</code> của pattern có phải là một constant symbol không. Nếu có, chúng ta trả về (để được kiểm tra bằng matcher) tất cả các assertions đã lưu có cùng <code>car</code>. Nếu <code>car</code> của pattern không phải là constant symbol, chúng ta trả về tất cả assertions đã lưu. Các phương pháp tinh vi hơn có thể tận dụng thông tin trong frame, hoặc cố gắng tối ưu hóa trường hợp <code>car</code> của pattern không phải là constant symbol. Chúng ta tránh việc tích hợp tiêu chí đánh chỉ mục (sử dụng <code>car</code>, chỉ xử lý trường hợp constant symbol) vào chương trình; thay vào đó, chúng ta gọi các predicates và selectors thể hiện tiêu chí của mình.</p>
+<pre><code class="language-{.scheme}">(define THE-ASSERTIONS the-empty-stream)
+
+(define (fetch-assertions pattern frame)
+  (if (use-index? pattern)
+      (get-indexed-assertions pattern)
+      (get-all-assertions)))
+
+(define (get-all-assertions) THE-ASSERTIONS)
+
+(define (get-indexed-assertions pattern)
+  (get-stream (index-key-of pattern)
+              'assertion-stream))
+</code></pre>
+<p><code>Get-stream</code> tra cứu một stream trong bảng và trả về stream rỗng nếu không có gì được lưu ở đó.</p>
+<pre><code class="language-{.scheme}">(define (get-stream key1 key2)
+  (let ((s (get key1 key2)))
+    (if s s the-empty-stream)))
+</code></pre>
+<p>Rules được lưu trữ tương tự, sử dụng <code>car</code> của rule conclusion. Tuy nhiên, rule conclusions là các patterns tùy ý, vì vậy chúng khác với assertions ở chỗ chúng có thể chứa biến. Một pattern có <code>car</code> là constant symbol có thể khớp với các rules có conclusions bắt đầu bằng biến cũng như các rules có conclusions có cùng <code>car</code>. Do đó, khi truy xuất các rules có thể khớp với một pattern có <code>car</code> là constant symbol, chúng ta truy xuất tất cả các rules có conclusions bắt đầu bằng biến cũng như các rules có conclusions có cùng <code>car</code> với pattern. Để làm điều này, chúng ta lưu tất cả các rules có conclusions bắt đầu bằng biến trong một stream riêng biệt trong bảng, được đánh chỉ mục bằng symbol <code>?</code>.</p>
+<pre><code class="language-{.scheme}">(define THE-RULES the-empty-stream)
+
+(define (fetch-rules pattern frame)
+  (if (use-index? pattern)
+      (get-indexed-rules pattern)
+      (get-all-rules)))
+
+(define (get-all-rules) THE-RULES)
+
+(define (get-indexed-rules pattern)
+  (stream-append
+   (get-stream (index-key-of pattern)
+               'rule-stream)
+   (get-stream '? 'rule-stream)))
+</code></pre>
+<p><code>Add-rule-or-assertion!</code> được <code>query-driver-loop</code> sử dụng để thêm assertions và rules vào data base. Mỗi mục được lưu vào index nếu phù hợp, và vào stream của tất cả assertions hoặc rules trong data base.</p>
+<pre><code class="language-{.scheme}">(define (add-rule-or-assertion! assertion)
+  (if (rule? assertion)
+      (add-rule! assertion)
+      (add-assertion! assertion)))
+
+(define (add-assertion! assertion)
+  (store-assertion-in-index assertion)
+  (let ((old-assertions THE-ASSERTIONS))
+    (set! THE-ASSERTIONS
+          (cons-stream assertion 
+                       old-assertions))
+    'ok))
+
+(define (add-rule! rule)
+  (store-rule-in-index rule)
+  (let ((old-rules THE-RULES))
+    (set! THE-RULES
+          (cons-stream rule old-rules))
+    'ok))
+</code></pre>
+<div class="footnote-definition" id="23"><sup class="footnote-definition-label">23</sup>
+<p>Nói chung, unify <code>?y</code> với một biểu thức chứa <code>?y</code> sẽ yêu cầu chúng ta tìm một fixed point (điểm cố định) của phương trình <code>?y</code> = <code>⟨biểu thức chứa ?y⟩</code>. Đôi khi có thể hình thành một biểu thức có vẻ là nghiệm. Ví dụ, <code>?y</code> = <code>(f ?y)</code> dường như có fixed point là <code>(f (f (f … )))</code>, mà ta có thể tạo ra bằng cách bắt đầu với biểu thức..</p>
+</div>
+<p>Để thực sự lưu trữ một assertion (mệnh đề khẳng định) hoặc một rule (quy tắc), chúng ta kiểm tra xem nó có thể được đánh chỉ mục hay không. Nếu có, chúng ta lưu nó vào stream thích hợp.</p>
+<pre><code class="language-{.scheme}">(define (store-assertion-in-index assertion)
+  (if (indexable? assertion)
+      (let ((key (index-key-of assertion)))
+        (let ((current-assertion-stream
+               (get-stream 
+                key 'assertion-stream)))
+          (put key
+               'assertion-stream
+               (cons-stream 
+                assertion
+                current-assertion-stream))))))
+
+(define (store-rule-in-index rule)
+  (let ((pattern (conclusion rule)))
+    (if (indexable? pattern)
+        (let ((key (index-key-of pattern)))
+          (let ((current-rule-stream
+                 (get-stream 
+                  key 'rule-stream)))
+            (put key
+                 'rule-stream
+                 (cons-stream 
+                  rule
+                  current-rule-stream)))))))
+</code></pre>
+<p>Các procedures sau đây định nghĩa cách sử dụng chỉ mục của data base. Một pattern (một assertion hoặc phần kết luận của một rule) sẽ được lưu vào bảng nếu nó bắt đầu bằng một biến hoặc một constant symbol (ký hiệu hằng).</p>
+<pre><code class="language-{.scheme}">(define (indexable? pat)
+  (or (constant-symbol? (car pat))
+      (var? (car pat))))
+</code></pre>
+<p>Khóa dưới đó một pattern được lưu vào bảng là <code>?</code> (nếu nó bắt đầu bằng một biến) hoặc constant symbol mà nó bắt đầu.</p>
+<pre><code class="language-{.scheme}">(define (index-key-of pat)
+  (let ((key (car pat)))
+    (if (var? key) '? key)))
+</code></pre>
+<p>Chỉ mục sẽ được sử dụng để truy xuất các mục có thể khớp với một pattern nếu pattern bắt đầu bằng một constant symbol.</p>
+<pre><code class="language-{.scheme}">(define (use-index? pat)
+  (constant-symbol? (car pat)))
+</code></pre>
+<h3 id="4446-stream-operations"><a class="header" href="#4446-stream-operations">4.4.4.6 Stream Operations</a></h3>
+<p>Query system sử dụng một vài thao tác trên stream chưa được trình bày trong Chương 3.</p>
+<p><code>Stream-append-delayed</code> và <code>interleave-delayed</code> giống như <code>stream-append</code> và <code>interleave</code> (3.5.3), ngoại trừ việc chúng nhận một đối số bị trì hoãn (giống như procedure <code>integral</code> trong 3.5.4). Điều này giúp trì hoãn vòng lặp trong một số trường hợp (xem Bài tập 4.71).</p>
+<pre><code class="language-{.scheme}">(define (stream-append-delayed s1 delayed-s2)
+  (if (stream-null? s1)
+      (force delayed-s2)
+      (cons-stream
+       (stream-car s1)
+       (stream-append-delayed (stream-cdr s1)
+                              delayed-s2))))
+
+(define (interleave-delayed s1 delayed-s2)
+  (if (stream-null? s1)
+      (force delayed-s2)
+      (cons-stream
+       (stream-car s1)
+       (interleave-delayed 
+        (force delayed-s2)
+        (delay (stream-cdr s1))))))
+</code></pre>
+<p><code>Stream-flatmap</code>, được sử dụng xuyên suốt trong query evaluator để ánh xạ một procedure lên một stream các frames và kết hợp các stream kết quả, là phiên bản trên stream của procedure <code>flatmap</code> đã được giới thiệu cho danh sách thông thường trong 2.2.3. Tuy nhiên, khác với <code>flatmap</code> thông thường, chúng ta tích lũy các streams bằng một quá trình interleaving thay vì chỉ đơn giản là nối chúng lại (xem Bài tập 4.72 và 4.73).</p>
+<pre><code class="language-{.scheme}">(define (stream-flatmap proc s)
+  (flatten-stream (stream-map proc s)))
+
+(define (flatten-stream stream)
+  (if (stream-null? stream)
+      the-empty-stream
+      (interleave-delayed
+       (stream-car stream)
+       (delay (flatten-stream
+               (stream-cdr stream))))))
+</code></pre>
+<p>Evaluator cũng sử dụng procedure đơn giản sau để tạo một stream gồm một phần tử duy nhất:</p>
+<pre><code class="language-{.scheme}">(define (singleton-stream x)
+  (cons-stream x the-empty-stream))
+</code></pre>
+<h3 id="4447-query-syntax-procedures"><a class="header" href="#4447-query-syntax-procedures">4.4.4.7 Query Syntax Procedures</a></h3>
+<p><code>Type</code> và <code>contents</code>, được sử dụng bởi <code>qeval</code> (4.4.4.2), chỉ định rằng một special form được nhận diện bởi symbol trong <code>car</code> của nó. Chúng giống với các procedures <code>type-tag</code> và <code>contents</code> trong 2.4.2, ngoại trừ thông báo lỗi.</p>
+<pre><code class="language-{.scheme}">(define (type exp)
+  (if (pair? exp)
+      (car exp)
+      (error &quot;Unknown expression TYPE&quot;
+             exp)))
+
+(define (contents exp)
+  (if (pair? exp)
+      (cdr exp)
+      (error &quot;Unknown expression CONTENTS&quot;
+             exp)))
+</code></pre>
+<p>Các procedures sau, được sử dụng bởi <code>query-driver-loop</code> (trong 4.4.4.1), chỉ định rằng rules và assertions được thêm vào data base bằng các expressions có dạng <code>(assert! ⟨rule-or-assertion⟩)</code>:</p>
+<pre><code class="language-{.scheme}">(define (assertion-to-be-added? exp)
+  (eq? (type exp) 'assert!))
+
+(define (add-assertion-body exp)
+  (car (contents exp)))
+</code></pre>
+<p>Dưới đây là các định nghĩa cú pháp cho các special forms <code>and</code>, <code>or</code>, <code>not</code>, và <code>lisp-value</code> (4.4.4.2):</p>
+<pre><code class="language-{.scheme}">(define (empty-conjunction? exps) (null? exps))
+(define (first-conjunct exps) (car exps))
+(define (rest-conjuncts exps) (cdr exps))
+(define (empty-disjunction? exps) (null? exps))
+(define (first-disjunct exps) (car exps))
+(define (rest-disjuncts exps) (cdr exps))
+(define (negated-query exps) (car exps))
+(define (predicate exps) (car exps))
+(define (args exps) (cdr exps))
+</code></pre>
+<p>Ba procedures sau định nghĩa cú pháp của rules:</p>
+<pre><code class="language-{.scheme}">(define (rule? statement)
+  (tagged-list? statement 'rule))
+
+(define (conclusion rule) (cadr rule))
+
+(define (rule-body rule)
+  (if (null? (cddr rule))
+      '(always-true)
+      (caddr rule)))
+</code></pre>
+<p><code>Query-driver-loop</code> (4.4.4.1) gọi <code>query-syntax-process</code> để biến đổi các pattern variables (biến mẫu) trong expression (biểu thức), vốn có dạng <code>?symbol</code>, thành định dạng nội bộ <code>(? symbol)</code>. Nói cách khác, một pattern như <code>(job ?x ?y)</code> thực chất được hệ thống biểu diễn nội bộ dưới dạng <code>(job (? x) (? y))</code>. Điều này giúp tăng hiệu quả xử lý truy vấn, vì hệ thống có thể kiểm tra một expression có phải là pattern variable hay không bằng cách kiểm tra xem <code>car</code> của expression có phải là symbol <code>?</code>, thay vì phải tách ký tự từ symbol. Phép biến đổi cú pháp này được thực hiện bởi procedure sau đây:<sup class="footnote-reference"><a href="#24">24</a></sup></p>
+<pre><code class="language-{.scheme}">(define (query-syntax-process exp)
+  (map-over-symbols expand-question-mark exp))
+
+(define (map-over-symbols proc exp)
+  (cond ((pair? exp)
+         (cons (map-over-symbols 
+                proc (car exp))
+               (map-over-symbols 
+                proc (cdr exp))))
+        ((symbol? exp) (proc exp))
+        (else exp)))
+
+(define (expand-question-mark symbol)
+  (let ((chars (symbol-&gt;string symbol)))
+    (if (string=? (substring chars 0 1) &quot;?&quot;)
+        (list '? (string-&gt;symbol
+                  (substring
+                   chars 
+                   1 
+                   (string-length chars))))
+        symbol)))
+</code></pre>
+<p>Khi các biến đã được biến đổi theo cách này, các biến trong một pattern là các danh sách bắt đầu bằng <code>?</code>, còn các constant symbols (ký hiệu hằng) (cần được nhận diện để đánh chỉ mục trong data base, xem 4.4.4.5) chỉ là các symbol.</p>
+<pre><code class="language-{.scheme}">(define (var? exp) (tagged-list? exp '?))
+(define (constant-symbol? exp) (symbol? exp))
+</code></pre>
+<p>Các biến duy nhất được tạo ra trong quá trình áp dụng rule (xem 4.4.4.4) thông qua các procedures sau. Định danh duy nhất cho một lần áp dụng rule là một số, được tăng lên mỗi khi một rule được áp dụng.</p>
+<pre><code class="language-{.scheme}">(define rule-counter 0)
+
+(define (new-rule-application-id)
+  (set! rule-counter (+ 1 rule-counter))
+  rule-counter)
+
+(define (make-new-variable 
+         var rule-application-id)
+  (cons '? (cons rule-application-id
+                 (cdr var))))
+</code></pre>
+<p>Khi <code>query-driver-loop</code> instantiate (thay thế) query để in ra câu trả lời, nó chuyển đổi bất kỳ pattern variable chưa được gán nào trở lại đúng định dạng để in ra, sử dụng:</p>
+<pre><code class="language-{.scheme}">(define (contract-question-mark variable)
+  (string-&gt;symbol
+   (string-append &quot;?&quot;
+     (if (number? (cadr variable))
+         (string-append
+          (symbol-&gt;string (caddr variable))
+          &quot;-&quot;
+          (number-&gt;string (cadr variable)))
+         (symbol-&gt;string (cadr variable))))))
+</code></pre>
+<h3 id="4448-frames-and-bindings"><a class="header" href="#4448-frames-and-bindings">4.4.4.8 Frames and Bindings</a></h3>
+<p>Frames được biểu diễn dưới dạng danh sách các bindings, mỗi binding là một cặp biến-giá trị:</p>
+<pre><code class="language-{.scheme}">(define (make-binding variable value)
+  (cons variable value))
+
+(define (binding-variable binding)
+  (car binding))
+
+(define (binding-value binding)
+  (cdr binding))
+
+(define (binding-in-frame variable frame)
+  (assoc variable frame))
+
+(define (extend variable value frame)
+  (cons (make-binding variable value) frame))
+</code></pre>
+<div class="footnote-definition" id="24"><sup class="footnote-definition-label">24</sup>
+<p>Hầu hết các hệ thống Lisp đều cho phép người dùng sửa đổi procedure <code>read</code> thông thường để thực hiện các phép biến đổi như vậy bằng cách định nghĩa <em>reader macro characters</em>. Các biểu thức được trích dẫn đã được xử lý theo cách này: Trình đọc tự động chuyển <code>'expression</code> thành <code>(quote expression)</code> trước khi evaluator nhìn thấy nó. Chúng ta có thể sắp xếp để <code>?expression</code> được biến đổi thành <code>(? expression)</code> theo cách tương tự; tuy nhiên, để rõ ràng, chúng tôi đã đưa procedure biến đổi vào đây một cách tường minh.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="4-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="5-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="4-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="5-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>A Register-Machine Simulator - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html" class="active"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="52-trình-mô-phỏng-register-machine"><a class="header" href="#52-trình-mô-phỏng-register-machine">5.2 Trình mô phỏng Register-Machine</a></h1>
+<p>Để có được sự hiểu biết tốt về thiết kế của các register machine (máy thanh ghi), chúng ta phải kiểm tra các máy mà mình thiết kế để xem chúng có hoạt động như mong đợi hay không. Một cách để kiểm tra thiết kế là mô phỏng thủ công hoạt động của controller (bộ điều khiển), như trong Bài tập 5.5. Tuy nhiên, điều này cực kỳ tẻ nhạt đối với tất cả trừ những máy đơn giản nhất. Trong phần này, chúng ta sẽ xây dựng một trình mô phỏng cho các máy được mô tả bằng ngôn ngữ register-machine. Trình mô phỏng này là một chương trình Scheme với bốn procedure (thủ tục) giao diện. Procedure đầu tiên sử dụng mô tả của một register machine để xây dựng một mô hình của máy (một cấu trúc dữ liệu mà các thành phần của nó tương ứng với các thành phần của máy cần mô phỏng), và ba procedure còn lại cho phép chúng ta mô phỏng máy bằng cách thao tác trên mô hình:</p>
+<blockquote>
+<pre><code class="language-{.scheme}">(make-machine ⟨register-names⟩
+⟨operations⟩
+⟨controller⟩)
+</code></pre>
+<blockquote>
+<p>tạo và trả về một mô hình của máy với các register, operation và controller đã cho.</p>
+<pre><code class="language-{.scheme}"></code></pre>
+</blockquote>
+<p>(set-register-contents! ⟨machine-model⟩ 
+⟨register-name⟩ 
+⟨value⟩)</p>
+<pre><code>&gt; lưu một giá trị vào một register được mô phỏng trong máy đã cho.
+&gt; ``` {.scheme}
+(get-register-contents ⟨machine-model⟩
+⟨register-name⟩)
+</code></pre>
+<blockquote>
+<p>trả về nội dung của một register được mô phỏng trong máy đã cho.</p>
+<pre><code class="language-{.scheme}"></code></pre>
+</blockquote>
+<p>(start ⟨machine-model⟩)</p>
+<pre><code>&gt; mô phỏng việc thực thi của máy đã cho, bắt đầu từ đầu chuỗi lệnh của controller và dừng lại khi đến cuối chuỗi.
+</code></pre>
+</blockquote>
+<p>Ví dụ về cách sử dụng các procedure này, chúng ta có thể định nghĩa <code>gcd-machine</code> là một mô hình của máy GCD trong 5.1.1 như sau:</p>
+<pre><code class="language-{.scheme}">(define gcd-machine
+  (make-machine
+   '(a b t)
+   (list (list 'rem remainder) (list '= =))
+   '(test-b
+       (test (op =) (reg b) (const 0))
+       (branch (label gcd-done))
+       (assign t (op rem) (reg a) (reg b))
+       (assign a (reg b))
+       (assign b (reg t))
+       (goto (label test-b))
+     gcd-done)))
+</code></pre>
+<p>Đối số đầu tiên của <code>make-machine</code> là một danh sách các tên register. Đối số tiếp theo là một bảng (danh sách các danh sách hai phần tử) ghép mỗi tên operation với một procedure Scheme thực hiện operation đó (nghĩa là, tạo ra cùng giá trị đầu ra khi nhận cùng giá trị đầu vào). Đối số cuối cùng chỉ định controller dưới dạng một danh sách các nhãn và lệnh máy, như trong 5.1.</p>
+<p>Để tính GCD với máy này, chúng ta đặt các register đầu vào, khởi động máy, và kiểm tra kết quả khi mô phỏng kết thúc:</p>
+<pre><code class="language-{.scheme}">(set-register-contents! gcd-machine 'a 206)
+done
+
+(set-register-contents! gcd-machine 'b 40)
+done
+
+(start gcd-machine)
+done
+
+(get-register-contents gcd-machine 'a)
+2
+</code></pre>
+<p>Việc tính toán này sẽ chạy chậm hơn nhiều so với một procedure <code>gcd</code> viết bằng Scheme, bởi vì chúng ta sẽ mô phỏng các lệnh máy mức thấp, chẳng hạn như <code>assign</code>, bằng những thao tác phức tạp hơn nhiều.</p>
+<h2 id="521-mô-hình-máy"><a class="header" href="#521-mô-hình-máy">5.2.1 Mô hình máy</a></h2>
+<p>Mô hình máy được tạo bởi <code>make-machine</code> được biểu diễn dưới dạng một procedure với trạng thái cục bộ, sử dụng kỹ thuật message-passing (truyền thông điệp) được phát triển trong Chương 3. Để xây dựng mô hình này, <code>make-machine</code> bắt đầu bằng cách gọi procedure <code>make-new-machine</code> để tạo ra các thành phần của mô hình máy chung cho tất cả các register machine. Mô hình máy cơ bản này, được tạo bởi <code>make-new-machine</code>, về cơ bản là một bộ chứa cho một số register và một stack, cùng với một cơ chế thực thi xử lý các lệnh của controller từng cái một.</p>
+<p><code>Make-machine</code> sau đó mở rộng mô hình cơ bản này (bằng cách gửi thông điệp cho nó) để bao gồm các register, operation và controller của máy cụ thể đang được định nghĩa. Trước tiên, nó cấp phát một register trong máy mới cho mỗi tên register được cung cấp và cài đặt các operation đã chỉ định vào máy. Sau đó, nó sử dụng một <em>assembler</em> (bộ hợp dịch) (được mô tả bên dưới trong 5.2.2) để biến đổi danh sách controller thành các lệnh cho máy mới và cài đặt chúng như chuỗi lệnh của máy. <code>Make-machine</code> trả về mô hình máy đã được chỉnh sửa này như giá trị của nó.</p>
+<pre><code class="language-{.scheme}">(define (make-machine register-names 
+                      ops 
+                      controller-text)
+  (let ((machine (make-new-machine)))
+    (for-each (lambda (register-name)
+                ((machine 'allocate-register) 
+                 register-name))
+              register-names)
+    ((machine 'install-operations) ops)
+    ((machine 'install-instruction-sequence)
+     (assemble controller-text machine))
+    machine))
+</code></pre>
+<h3 id="registers"><a class="header" href="#registers">Registers</a></h3>
+<p>Chúng ta sẽ biểu diễn một register như một procedure với trạng thái cục bộ, như trong Chương 3. Procedure <code>make-register</code> tạo ra một register giữ một giá trị có thể được truy cập hoặc thay đổi:</p>
+<pre><code class="language-{.scheme}">(define (make-register name)
+  (let ((contents '*unassigned*))
+    (define (dispatch message)
+      (cond ((eq? message 'get) contents)
+            ((eq? message 'set)
+             (lambda (value) 
+               (set! contents value)))
+            (else
+             (error &quot;Unknown request: 
+                     REGISTER&quot;
+                    message))))
+    dispatch))
+</code></pre>
+<p>Các procedure sau được dùng để truy cập register:</p>
+<pre><code class="language-{.scheme}">(define (get-contents register)
+  (register 'get))
+
+(define (set-contents! register value)
+  ((register 'set) value))
+</code></pre>
+<h3 id="stack"><a class="header" href="#stack">Stack</a></h3>
+<p>Chúng ta cũng có thể biểu diễn một stack như một procedure với trạng thái cục bộ. Procedure <code>make-stack</code> tạo ra một stack có trạng thái cục bộ là một danh sách các phần tử trên stack. Một stack chấp nhận các yêu cầu <code>push</code> một phần tử vào stack, <code>pop</code> phần tử trên cùng ra khỏi stack và trả về nó, và <code>initialize</code> stack về rỗng.</p>
+<pre><code class="language-{.scheme}">(define (make-stack)
+  (let ((s '()))
+    (define (push x)
+      (set! s (cons x s)))
+    (define (pop)
+      (if (null? s)
+          (error &quot;Empty stack: POP&quot;)
+          (let ((top (car s)))
+            (set! s (cdr s))
+            top)))
+    (define (initialize)
+      (set! s '())
+      'done)
+    (define (dispatch message)
+      (cond ((eq? message 'push) push)
+            ((eq? message 'pop) (pop))
+            ((eq? message 'initialize) 
+             (initialize))
+            (else 
+             (error &quot;Unknown request: STACK&quot;
+                    message))))
+    dispatch))
+</code></pre>
+<p>Các procedure sau được dùng để truy cập stack:</p>
+<pre><code class="language-{.scheme}">(define (pop stack) (stack 'pop))
+(define (push stack value)
+  ((stack 'push) value))
+</code></pre>
+<h3 id="máy-cơ-bản"><a class="header" href="#máy-cơ-bản">Máy cơ bản</a></h3>
+<p>Procedure (thủ tục) <code>make-new-machine</code>, được minh họa trong Hình 5.13, tạo ra một đối tượng có trạng thái cục bộ bao gồm một stack, một instruction sequence (chuỗi lệnh) ban đầu rỗng, một danh sách các operation ban đầu chứa một operation để khởi tạo stack, và một <em>register table</em> (bảng thanh ghi) ban đầu chứa hai register, tên là <code>flag</code> và <code>pc</code> (viết tắt của “program counter” – bộ đếm chương trình). Procedure nội bộ <code>allocate-register</code> thêm các mục mới vào register table, và procedure nội bộ <code>lookup-register</code> tra cứu các register trong bảng.</p>
+<p><strong>Figure 5.13:</strong> $\downarrow$ The <code>make-new-machine</code> procedure, which implements the basic machine model.</p>
+<pre><code class="language-{.scheme}">(define (make-new-machine)
+  (let ((pc (make-register 'pc))
+        (flag (make-register 'flag))
+        (stack (make-stack))
+        (the-instruction-sequence '()))
+    (let ((the-ops
+           (list 
+            (list 'initialize-stack
+                  (lambda () 
+                    (stack 'initialize)))))
+          (register-table
+           (list (list 'pc pc) 
+                 (list 'flag flag))))
+      (define (allocate-register name)
+        (if (assoc name register-table)
+            (error 
+             &quot;Multiply defined register: &quot; 
+             name)
+            (set! register-table
+                  (cons 
+                   (list name 
+                         (make-register name))
+                   register-table)))
+        'register-allocated)
+      (define (lookup-register name)
+        (let ((val 
+               (assoc name register-table)))
+          (if val
+              (cadr val)
+              (error &quot;Unknown register:&quot; 
+                     name))))
+      (define (execute)
+        (let ((insts (get-contents pc)))
+          (if (null? insts)
+              'done
+              (begin
+                ((instruction-execution-proc 
+                  (car insts)))
+                (execute)))))
+      (define (dispatch message)
+        (cond ((eq? message 'start)
+               (set-contents! 
+                pc
+                the-instruction-sequence)
+               (execute))
+              ((eq? 
+                message 
+                'install-instruction-sequence)
+               (lambda (seq) 
+                 (set! 
+                  the-instruction-sequence 
+                  seq)))
+              ((eq? message 
+                    'allocate-register) 
+               allocate-register)
+              ((eq? message 'get-register) 
+               lookup-register)
+              ((eq? message 
+                    'install-operations)
+               (lambda (ops) 
+                 (set! the-ops 
+                       (append the-ops ops))))
+              ((eq? message 'stack) stack)
+              ((eq? message 'operations) 
+               the-ops)
+              (else (error &quot;Unknown request: 
+                            MACHINE&quot;
+                           message))))
+      dispatch)))
+</code></pre>
+<p>Register <code>flag</code> được dùng để điều khiển việc rẽ nhánh trong máy mô phỏng. Các lệnh <code>test</code> đặt nội dung của <code>flag</code> thành kết quả của phép kiểm tra (đúng hoặc sai). Các lệnh <code>branch</code> quyết định có rẽ nhánh hay không bằng cách kiểm tra nội dung của <code>flag</code>.</p>
+<p>Register <code>pc</code> quyết định trình tự thực thi các lệnh khi máy chạy. Trình tự này được thực hiện bởi procedure nội bộ <code>execute</code>. Trong mô hình mô phỏng, mỗi lệnh máy là một cấu trúc dữ liệu bao gồm một procedure không có đối số, gọi là <em>instruction execution procedure</em> (thủ tục thực thi lệnh), sao cho việc gọi procedure này sẽ mô phỏng việc thực thi lệnh. Khi mô phỏng chạy, <code>pc</code> trỏ đến vị trí trong instruction sequence bắt đầu từ lệnh tiếp theo cần thực thi. <code>Execute</code> lấy lệnh đó, thực thi nó bằng cách gọi instruction execution procedure, và lặp lại chu trình này cho đến khi không còn lệnh nào để thực thi (tức là khi <code>pc</code> trỏ đến cuối instruction sequence).</p>
+<p>Trong quá trình hoạt động, mỗi instruction execution procedure sẽ thay đổi <code>pc</code> để chỉ ra lệnh tiếp theo cần thực thi. Các lệnh <code>branch</code> và <code>goto</code> thay đổi <code>pc</code> để trỏ đến đích mới. Tất cả các lệnh khác chỉ đơn giản tiến <code>pc</code> đến lệnh tiếp theo trong chuỗi. Lưu ý rằng mỗi lần gọi <code>execute</code> lại gọi <code>execute</code> một lần nữa, nhưng điều này không tạo ra vòng lặp vô hạn vì việc chạy instruction execution procedure sẽ thay đổi nội dung của <code>pc</code>.</p>
+<p><code>Make-new-machine</code> trả về một procedure <code>dispatch</code> thực hiện việc truy cập trạng thái nội bộ thông qua message-passing (truyền thông điệp). Lưu ý rằng việc khởi động máy được thực hiện bằng cách đặt <code>pc</code> về đầu của instruction sequence và gọi <code>execute</code>.</p>
+<p>Để thuận tiện, chúng tôi cung cấp một giao diện procedural thay thế cho operation <code>start</code> của máy, cũng như các procedure để đặt và kiểm tra nội dung register, như đã nêu ở đầu mục 5.2:</p>
+<pre><code class="language-{.scheme}">(define (start machine)
+  (machine 'start))
+
+(define (get-register-contents 
+         machine register-name)
+  (get-contents 
+   (get-register machine register-name)))
+
+(define (set-register-contents! 
+         machine register-name value)
+  (set-contents! 
+   (get-register machine register-name) 
+   value)
+  'done)
+</code></pre>
+<p>Các procedure này (và nhiều procedure trong 5.2.2 và 5.2.3) sử dụng đoạn sau để tra cứu register với tên đã cho trong một máy đã cho:</p>
+<pre><code class="language-{.scheme}">(define (get-register machine reg-name)
+  ((machine 'get-register) reg-name))
+</code></pre>
+<h2 id="522-bộ-hợp-dịch-assembler"><a class="header" href="#522-bộ-hợp-dịch-assembler">5.2.2 Bộ hợp dịch (Assembler)</a></h2>
+<p>Assembler biến đổi chuỗi các biểu thức controller của một máy thành một danh sách tương ứng các lệnh máy, mỗi lệnh có execution procedure của riêng nó. Nhìn tổng thể, assembler khá giống với các evaluator mà chúng ta đã nghiên cứu trong Chương 4 — có một ngôn ngữ đầu vào (trong trường hợp này là register-machine language) và chúng ta phải thực hiện hành động thích hợp cho từng loại biểu thức trong ngôn ngữ đó.</p>
+<p>Kỹ thuật tạo ra một execution procedure cho mỗi lệnh chính là kỹ thuật chúng ta đã dùng trong 4.1.7 để tăng tốc evaluator bằng cách tách biệt phân tích và thực thi tại thời gian chạy. Như chúng ta đã thấy trong Chương 4, nhiều phân tích hữu ích của các biểu thức Scheme có thể được thực hiện mà không cần biết giá trị thực của các biến. Ở đây, tương tự, nhiều phân tích hữu ích của các biểu thức register-machine language có thể được thực hiện mà không cần biết nội dung thực của các register trong máy. Ví dụ, chúng ta có thể thay thế các tham chiếu đến register bằng các con trỏ đến đối tượng register, và có thể thay thế các tham chiếu đến label bằng các con trỏ đến vị trí trong instruction sequence mà label đó chỉ định.</p>
+<p>Trước khi có thể tạo ra các instruction execution procedure, assembler phải biết tất cả các label tham chiếu đến đâu, vì vậy nó bắt đầu bằng cách quét controller text để tách các label ra khỏi các lệnh. Khi quét văn bản, nó đồng thời xây dựng một danh sách các lệnh và một bảng liên kết mỗi label với một con trỏ vào danh sách đó. Sau đó assembler bổ sung danh sách lệnh bằng cách chèn execution procedure cho mỗi lệnh.</p>
+<p>Procedure <code>assemble</code> là điểm vào chính của assembler. Nó nhận controller text và mô hình máy làm đối số, và trả về instruction sequence để lưu vào mô hình. <code>Assemble</code> gọi <code>extract-labels</code> để xây dựng danh sách lệnh ban đầu và bảng label từ controller text được cung cấp. Đối số thứ hai của <code>extract-labels</code> là một procedure sẽ được gọi để xử lý các kết quả này: Procedure này sử dụng <code>update-insts!</code> để tạo ra các instruction execution procedure và chèn chúng vào danh sách lệnh, rồi trả về danh sách đã được chỉnh sửa.</p>
+<pre><code class="language-{.scheme}">(define (assemble controller-text machine)
+  (extract-labels controller-text
+    (lambda (insts labels)
+      (update-insts! insts labels machine)
+      insts)))
+</code></pre>
+<p><code>Extract-labels</code> nhận vào một danh sách <code>text</code> (chuỗi các biểu thức lệnh controller) và một procedure <code>receive</code>. <code>Receive</code> sẽ được gọi với hai giá trị: (1) một danh sách <code>insts</code> gồm các cấu trúc dữ liệu lệnh, mỗi cấu trúc chứa một lệnh từ <code>text</code>; và (2) một bảng gọi là <code>labels</code>, liên kết mỗi label từ <code>text</code> với vị trí trong danh sách <code>insts</code> mà label đó chỉ định.</p>
+<pre><code class="language-{.scheme}">(define (extract-labels text receive)
+  (if (null? text)
+      (receive '() '())
+      (extract-labels 
+       (cdr text)
+       (lambda (insts labels)
+         (let ((next-inst (car text)))
+           (if (symbol? next-inst)
+               (receive 
+                   insts
+                   (cons 
+                    (make-label-entry 
+                     next-inst
+                     insts)
+                    labels))
+               (receive 
+                   (cons (make-instruction 
+                          next-inst)
+                         insts)
+                   labels)))))))
+</code></pre>
+<p><code>Extract-labels</code> hoạt động bằng cách quét tuần tự các phần tử của <code>text</code> và tích lũy <code>insts</code> và <code>labels</code>. Nếu một phần tử là một symbol (và do đó là một label) thì một mục thích hợp sẽ được thêm vào bảng <code>labels</code>. Nếu không, phần tử đó sẽ được thêm vào danh sách <code>insts</code><sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
+<p><code>Update-insts!</code> chỉnh sửa danh sách lệnh, vốn ban đầu chỉ chứa phần văn bản của các lệnh, để bao gồm cả execution procedure tương ứng:</p>
+<pre><code class="language-{.scheme}">(define (update-insts! insts labels machine)
+  (let ((pc (get-register machine 'pc))
+        (flag (get-register machine 'flag))
+        (stack (machine 'stack))
+        (ops (machine 'operations)))
+    (for-each
+     (lambda (inst)
+       (set-instruction-execution-proc!
+        inst
+        (make-execution-procedure
+         (instruction-text inst) 
+         labels
+         machine
+         pc
+         flag
+         stack
+         ops)))
+     insts)))
+</code></pre>
+<p>Cấu trúc dữ liệu lệnh máy đơn giản chỉ là cặp giữa phần văn bản lệnh và execution procedure tương ứng. Execution procedure chưa có sẵn khi <code>extract-labels</code> tạo lệnh, và sẽ được chèn vào sau bởi <code>update-insts!</code>.</p>
+<pre><code class="language-{.scheme}">(define (make-instruction text)
+  (cons text '()))
+(define (instruction-text inst) (car inst))
+(define (instruction-execution-proc inst)
+  (cdr inst))
+(define (set-instruction-execution-proc!
+         inst
+         proc)
+  (set-cdr! inst proc))
+</code></pre>
+<p>Phần văn bản lệnh không được sử dụng bởi trình mô phỏng của chúng ta, nhưng giữ lại nó sẽ hữu ích cho việc gỡ lỗi (xem Bài tập 5.16).</p>
+<p>Các phần tử của bảng label là các cặp:</p>
+<pre><code class="language-{.scheme}">(define (make-label-entry label-name insts)
+  (cons label-name insts))
+</code></pre>
+<p>Các mục sẽ được tra cứu trong bảng bằng:</p>
+<pre><code class="language-{.scheme}">(define (lookup-label labels label-name)
+  (let ((val (assoc label-name labels)))
+    (if val
+        (cdr val)
+        (error &quot;Undefined label: ASSEMBLE&quot; 
+               label-name))))
+</code></pre>
+<h2 id="523-sinh-execution-procedure-cho-các-lệnh"><a class="header" href="#523-sinh-execution-procedure-cho-các-lệnh">5.2.3 Sinh Execution Procedure cho các lệnh</a></h2>
+<p>Assembler gọi <code>make-execution-procedure</code> để sinh execution procedure (thủ tục thực thi) cho một lệnh. Giống như procedure <code>analyze</code> trong evaluator ở mục 4.1.7, procedure này phân nhánh (dispatch) dựa trên loại lệnh để tạo ra execution procedure thích hợp.</p>
+<pre><code class="language-{.scheme}">(define (make-execution-procedure 
+         inst labels machine pc flag stack ops)
+  (cond ((eq? (car inst) 'assign)
+         (make-assign 
+          inst machine labels ops pc))
+        ((eq? (car inst) 'test)
+         (make-test 
+          inst machine labels ops flag pc))
+        ((eq? (car inst) 'branch)
+         (make-branch 
+          inst machine labels flag pc))
+        ((eq? (car inst) 'goto)
+         (make-goto inst machine labels pc))
+        ((eq? (car inst) 'save)
+         (make-save inst machine stack pc))
+        ((eq? (car inst) 'restore)
+         (make-restore inst machine stack pc))
+        ((eq? (car inst) 'perform)
+         (make-perform
+          inst machine labels ops pc))
+        (else (error &quot;Unknown instruction 
+                      type: ASSEMBLE&quot;
+                     inst))))
+</code></pre>
+<p>Với mỗi loại lệnh trong register-machine language, có một generator (bộ sinh) tạo ra execution procedure phù hợp. Chi tiết của các procedure này quyết định cả cú pháp và ngữ nghĩa của từng lệnh riêng lẻ trong register-machine language. Chúng ta sử dụng data abstraction (trừu tượng hóa dữ liệu) để tách biệt cú pháp chi tiết của các biểu thức register-machine khỏi cơ chế thực thi tổng quát, giống như cách chúng ta đã làm với evaluator trong 4.1.2, bằng cách sử dụng các syntax procedure để trích xuất và phân loại các thành phần của một lệnh.</p>
+<h3 id="lệnh-assign"><a class="header" href="#lệnh-assign">Lệnh <code>Assign</code></a></h3>
+<p>Procedure <code>make-assign</code> xử lý các lệnh <code>assign</code>:</p>
+<pre><code class="language-{.scheme}">(define (make-assign 
+         inst machine labels operations pc)
+  (let ((target 
+         (get-register 
+          machine 
+          (assign-reg-name inst)))
+        (value-exp (assign-value-exp inst)))
+    (let ((value-proc
+           (if (operation-exp? value-exp)
+               (make-operation-exp
+                value-exp 
+                machine
+                labels
+                operations)
+               (make-primitive-exp
+                (car value-exp)
+                machine
+                labels))))
+      (lambda ()   ; execution procedure
+                   ; for assign
+        (set-contents! target (value-proc))
+        (advance-pc pc)))))
+</code></pre>
+<p><code>Make-assign</code> trích xuất tên register đích (phần tử thứ hai của lệnh) và value expression (biểu thức giá trị – phần còn lại của danh sách tạo thành lệnh) từ lệnh <code>assign</code> bằng cách sử dụng các selector:</p>
+<pre><code class="language-{.scheme}">(define (assign-reg-name assign-instruction)
+  (cadr assign-instruction))
+(define (assign-value-exp assign-instruction)
+  (cddr assign-instruction))
+</code></pre>
+<p>Tên register được tra cứu bằng <code>get-register</code> để tạo ra đối tượng register đích. Value expression được truyền cho <code>make-operation-exp</code> nếu giá trị là kết quả của một operation, và cho <code>make-primitive-exp</code> nếu không phải. Các procedure này (được trình bày bên dưới) phân tích value expression và tạo ra một execution procedure cho giá trị đó. Đây là một procedure không có đối số, gọi là <code>value-proc</code>, sẽ được thực thi trong quá trình mô phỏng để tạo ra giá trị thực tế cần gán cho register. Lưu ý rằng công việc tra cứu tên register và phân tích value expression chỉ được thực hiện một lần tại thời điểm assembly, chứ không phải mỗi lần lệnh được mô phỏng. Việc tiết kiệm công việc này là lý do chúng ta sử dụng execution procedure, và điều này tương ứng trực tiếp với việc tiết kiệm công việc mà chúng ta đạt được khi tách biệt phân tích chương trình khỏi thực thi trong evaluator ở 4.1.7.</p>
+<p>Kết quả trả về từ <code>make-assign</code> là execution procedure cho lệnh <code>assign</code>. Khi procedure này được gọi (bởi procedure <code>execute</code> của mô hình máy), nó sẽ đặt nội dung của register đích thành kết quả thu được từ việc thực thi <code>value-proc</code>. Sau đó, nó tiến <code>pc</code> đến lệnh tiếp theo bằng cách chạy procedure:</p>
+<pre><code class="language-{.scheme}">(define (advance-pc pc)
+  (set-contents! pc (cdr (get-contents pc))))
+</code></pre>
+<p><code>Advance-pc</code> là cách kết thúc bình thường cho tất cả các lệnh ngoại trừ <code>branch</code> và <code>goto</code>.</p>
+<h3 id="lệnh-test-branch-và-goto"><a class="header" href="#lệnh-test-branch-và-goto">Lệnh <code>Test</code>, <code>branch</code>, và <code>goto</code></a></h3>
+<p><code>Make-test</code> xử lý các lệnh <code>test</code> theo cách tương tự. Nó trích xuất biểu thức chỉ định điều kiện cần kiểm tra và tạo ra execution procedure cho điều kiện đó. Tại thời điểm mô phỏng, procedure cho điều kiện được gọi, kết quả được gán vào register <code>flag</code>, và <code>pc</code> được tiến:</p>
+<pre><code class="language-{.scheme}">(define 
+  (make-test 
+   inst machine labels operations flag pc)
+  (let ((condition (test-condition inst)))
+    (if (operation-exp? condition)
+        (let ((condition-proc
+               (make-operation-exp
+                condition 
+                machine
+                labels
+                operations)))
+          (lambda () 
+            (set-contents! 
+             flag (condition-proc))
+            (advance-pc pc)))
+        (error &quot;Bad TEST instruction: 
+                ASSEMBLE&quot; inst))))
+
+(define (test-condition test-instruction)
+  (cdr test-instruction))
+</code></pre>
+<p>Execution procedure cho một lệnh <code>branch</code> kiểm tra nội dung của register <code>flag</code> và hoặc là đặt nội dung của <code>pc</code> thành đích rẽ nhánh (nếu rẽ nhánh được thực hiện) hoặc chỉ tiến <code>pc</code> (nếu không rẽ nhánh). Lưu ý rằng đích được chỉ định trong một lệnh <code>branch</code> phải là một label, và procedure <code>make-branch</code> đảm bảo điều này. Cũng lưu ý rằng label được tra cứu tại thời điểm assembly, chứ không phải mỗi lần lệnh <code>branch</code> được mô phỏng.</p>
+<pre><code class="language-{.scheme}">(define 
+  (make-branch 
+   inst machine labels flag pc)
+  (let ((dest (branch-dest inst)))
+    (if (label-exp? dest)
+        (let ((insts
+               (lookup-label 
+                labels 
+                (label-exp-label dest))))
+          (lambda ()
+            (if (get-contents flag)
+                (set-contents! pc insts)
+                (advance-pc pc))))
+        (error &quot;Bad BRANCH instruction: 
+                ASSEMBLE&quot;
+               inst))))
+
+(define (branch-dest branch-instruction)
+  (cadr branch-instruction))
+</code></pre>
+<p>Một lệnh <code>goto</code> tương tự như <code>branch</code>, ngoại trừ việc đích đến có thể được chỉ định hoặc là một label hoặc là một register, và không có điều kiện nào cần kiểm tra — <code>pc</code> luôn được đặt đến đích mới.</p>
+<pre><code class="language-{.scheme}">(define (make-goto inst machine labels pc)
+  (let ((dest (goto-dest inst)))
+    (cond ((label-exp? dest)
+           (let ((insts
+                  (lookup-label 
+                   labels
+                   (label-exp-label dest))))
+             (lambda () 
+               (set-contents! pc insts))))
+          ((register-exp? dest)
+           (let ((reg
+                  (get-register 
+                   machine
+                   (register-exp-reg dest))))
+             (lambda ()
+               (set-contents! 
+                pc
+                (get-contents reg)))))
+          (else (error &quot;Bad GOTO instruction: 
+                        ASSEMBLE&quot;
+                       inst)))))
+
+(define (goto-dest goto-instruction)
+  (cadr goto-instruction))
+</code></pre>
+<h3 id="các-lệnh-khác"><a class="header" href="#các-lệnh-khác">Các lệnh khác</a></h3>
+<p>Các lệnh stack <code>save</code> và <code>restore</code> đơn giản là sử dụng stack với register được chỉ định và tiến <code>pc</code>:</p>
+<pre><code class="language-{.scheme}">(define (make-save inst machine stack pc)
+  (let ((reg (get-register 
+              machine
+              (stack-inst-reg-name inst))))
+    (lambda ()
+      (push stack (get-contents reg))
+      (advance-pc pc))))
+
+(define (make-restore inst machine stack pc)
+  (let ((reg (get-register
+              machine
+              (stack-inst-reg-name inst))))
+    (lambda ()
+      (set-contents! reg (pop stack))
+      (advance-pc pc))))
+
+(define (stack-inst-reg-name 
+         stack-instruction)
+  (cadr stack-instruction))
+</code></pre>
+<p>Loại lệnh cuối cùng, được xử lý bởi <code>make-perform</code>, tạo ra một execution procedure cho hành động cần thực hiện. Tại thời điểm mô phỏng, action procedure được thực thi và <code>pc</code> được tiến.</p>
+<pre><code class="language-{.scheme}">(define (make-perform 
+         inst machine labels operations pc)
+  (let ((action (perform-action inst)))
+    (if (operation-exp? action)
+        (let ((action-proc
+               (make-operation-exp
+                action
+                machine
+                labels
+                operations)))
+          (lambda ()
+            (action-proc)
+            (advance-pc pc)))
+        (error &quot;Bad PERFORM instruction: 
+                ASSEMBLE&quot;
+               inst))))
+
+(define (perform-action inst) (cdr inst))
+</code></pre>
+<h3 id="execution-procedure-cho-các-biểu-thức-con"><a class="header" href="#execution-procedure-cho-các-biểu-thức-con">Execution procedure cho các biểu thức con</a></h3>
+<p>Giá trị của một biểu thức <code>reg</code>, <code>label</code>, hoặc <code>const</code> có thể cần thiết để gán vào một register (<code>make-assign</code>) hoặc để làm đầu vào cho một operation (<code>make-operation-exp</code>, bên dưới). Procedure sau đây tạo ra execution procedure để sinh giá trị cho các biểu thức này trong quá trình mô phỏng:</p>
+<pre><code class="language-{.scheme}">(define (make-primitive-exp exp machine labels)
+  (cond ((constant-exp? exp)
+         (let ((c (constant-exp-value exp)))
+           (lambda () c)))
+        ((label-exp? exp)
+         (let ((insts
+                (lookup-label 
+                 labels
+                 (label-exp-label exp))))
+           (lambda () insts)))
+        ((register-exp? exp)
+         (let ((r (get-register
+                   machine
+                   (register-exp-reg exp))))
+           (lambda () (get-contents r))))
+        (else (error &quot;Unknown expression type: 
+                      ASSEMBLE&quot;
+                     exp))))
+</code></pre>
+<p>Cú pháp của các biểu thức <code>reg</code>, <code>label</code>, và <code>const</code> được xác định bởi:</p>
+<pre><code class="language-{.scheme}">(define (register-exp? exp)
+  (tagged-list? exp 'reg))
+(define (register-exp-reg exp)
+  (cadr exp))
+(define (constant-exp? exp)
+  (tagged-list? exp 'const))
+(define (constant-exp-value exp)
+  (cadr exp))
+(define (label-exp? exp)
+  (tagged-list? exp 'label))
+(define (label-exp-label exp) 
+  (cadr exp))
+</code></pre>
+<p>Các lệnh <code>assign</code>, <code>perform</code>, và <code>test</code> có thể bao gồm việc áp dụng một machine operation (được chỉ định bởi một biểu thức <code>op</code>) lên một số toán hạng (được chỉ định bởi các biểu thức <code>reg</code> và <code>const</code>). Procedure sau đây tạo ra một execution procedure cho một “operation expression” — một danh sách chứa operation và các biểu thức toán hạng từ lệnh:</p>
+<pre><code class="language-{.scheme}">(define (make-operation-exp
+         exp machine labels operations)
+  (let ((op (lookup-prim 
+             (operation-exp-op exp)
+             operations))
+        (aprocs
+         (map (lambda (e)
+                (make-primitive-exp 
+                 e machine labels))
+              (operation-exp-operands exp))))
+    (lambda () (apply op (map (lambda (p) (p))
+                              aprocs)))))
+</code></pre>
+<p>Cú pháp của operation expression được xác định bởi:</p>
+<pre><code class="language-{.scheme}">(define (operation-exp? exp)
+  (and (pair? exp)
+       (tagged-list? (car exp) 'op)))
+(define (operation-exp-op operation-exp)
+  (cadr (car operation-exp)))
+(define (operation-exp-operands operation-exp)
+  (cdr operation-exp))
+</code></pre>
+<p>Lưu ý rằng cách xử lý operation expression rất giống với cách xử lý procedure application bởi procedure <code>analyze-application</code> trong evaluator ở 4.1.7, ở chỗ chúng ta tạo ra một execution procedure cho mỗi toán hạng. Tại thời điểm mô phỏng, chúng ta gọi các operand procedure và áp dụng procedure Scheme mô phỏng operation lên các giá trị thu được. Procedure mô phỏng được tìm bằng cách tra cứu tên operation trong operation table của máy:</p>
+<pre><code class="language-{.scheme}">(define (lookup-prim symbol operations)
+  (let ((val (assoc symbol operations)))
+    (if val
+        (cadr val)
+        (error &quot;Unknown operation: ASSEMBLE&quot;
+               symbol))))
+</code></pre>
+<h2 id="524-giám-sát-hiệu-năng-của-máy"><a class="header" href="#524-giám-sát-hiệu-năng-của-máy">5.2.4 Giám sát hiệu năng của máy</a></h2>
+<p>Simulation (mô phỏng) hữu ích không chỉ để kiểm tra tính đúng đắn của một thiết kế máy được đề xuất mà còn để đo lường hiệu năng của máy. Ví dụ, chúng ta có thể cài đặt trong chương trình mô phỏng của mình một “meter” (bộ đo) để đếm số lượng thao tác stack được sử dụng trong một phép tính.</p>
+<p>Để làm điều này, chúng ta chỉnh sửa stack mô phỏng để theo dõi số lần các register được lưu (saved) vào stack và độ sâu tối đa mà stack đạt được, đồng thời thêm một thông điệp vào interface của stack để in ra các thống kê, như minh họa bên dưới.</p>
+<p>Chúng ta cũng thêm một operation vào mô hình máy cơ bản để in thống kê stack, bằng cách khởi tạo <code>the-ops</code> trong <code>make-new-machine</code> như sau:</p>
+<pre><code class="language-{.scheme}">(list (list 'initialize-stack
+            (lambda () 
+              (stack 'initialize)))
+      (list 'print-stack-statistics
+            (lambda () 
+              (stack 'print-statistics))))
+</code></pre>
+<p>Dưới đây là phiên bản mới của <code>make-stack</code>:</p>
+<pre><code class="language-{.scheme}">(define (make-stack)
+  (let ((s '())
+        (number-pushes 0)
+        (max-depth 0)
+        (current-depth 0))
+    (define (push x)
+      (set! s (cons x s))
+      (set! number-pushes (+ 1 number-pushes))
+      (set! current-depth (+ 1 current-depth))
+      (set! max-depth 
+            (max current-depth max-depth)))
+    (define (pop)
+      (if (null? s)
+          (error &quot;Empty stack: POP&quot;)
+          (let ((top (car s)))
+            (set! s (cdr s))
+            (set! current-depth
+                  (- current-depth 1))
+            top)))
+    (define (initialize)
+      (set! s '())
+      (set! number-pushes 0)
+      (set! max-depth 0)
+      (set! current-depth 0)
+      'done)
+
+    (define (print-statistics)
+      (newline)
+      (display (list 'total-pushes 
+                     '= 
+                     number-pushes
+                     'maximum-depth
+                     '=
+                     max-depth)))
+    (define (dispatch message)
+      (cond ((eq? message 'push) push)
+            ((eq? message 'pop) (pop))
+            ((eq? message 'initialize)
+             (initialize))
+            ((eq? message 'print-statistics)
+             (print-statistics))
+            (else
+             (error &quot;Unknown request: STACK&quot;
+                    message))))
+    dispatch))
+</code></pre>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>... Chưa dịch</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="5-3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="5-3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

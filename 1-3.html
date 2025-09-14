@@ -1,0 +1,611 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Formulating Abstractions with Higher-Order Procedures - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html" class="active"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="13-hình-thành-các-trừu-tượng-với-higher-order-procedures-thủ-tục-bậc-cao"><a class="header" href="#13-hình-thành-các-trừu-tượng-với-higher-order-procedures-thủ-tục-bậc-cao">1.3 Hình thành các trừu tượng với higher-order procedures (thủ tục bậc cao)</a></h1>
+<p>Chúng ta đã thấy rằng procedures (thủ tục) thực chất là các trừu tượng mô tả những phép toán phức hợp trên các con số, độc lập với các con số cụ thể. Ví dụ, khi chúng ta</p>
+<pre><code class="language-{.scheme}">(define (cube x) (* x x x))
+</code></pre>
+<p>chúng ta không nói về lập phương của một số cụ thể, mà là về một phương pháp để lấy lập phương của bất kỳ số nào. Tất nhiên, chúng ta vẫn có thể làm việc mà không bao giờ định nghĩa thủ tục này, bằng cách luôn viết các biểu thức như</p>
+<pre><code class="language-{.scheme}">(* 3 3 3)
+(* x x x)
+(* y y y)
+</code></pre>
+<p>và không bao giờ nhắc đến <code>cube</code> một cách tường minh. Điều này sẽ đặt chúng ta vào thế bất lợi nghiêm trọng, buộc chúng ta luôn phải làm việc ở mức các phép toán cụ thể vốn là primitives (nguyên thủy) trong ngôn ngữ (trong trường hợp này là phép nhân), thay vì ở mức các phép toán cấp cao hơn. Chương trình của chúng ta sẽ có thể tính lập phương, nhưng ngôn ngữ của chúng ta sẽ thiếu khả năng diễn đạt khái niệm “lập phương hóa”. Một trong những điều chúng ta nên yêu cầu từ một ngôn ngữ lập trình mạnh mẽ là khả năng xây dựng các trừu tượng bằng cách gán tên cho các mẫu chung, và sau đó làm việc trực tiếp với các trừu tượng đó. Procedures cung cấp khả năng này. Đây là lý do tại sao tất cả các ngôn ngữ lập trình, trừ những ngôn ngữ nguyên thủy nhất, đều bao gồm cơ chế định nghĩa procedures.</p>
+<p>Tuy nhiên, ngay cả trong xử lý số học, chúng ta cũng sẽ bị giới hạn nghiêm trọng trong khả năng tạo ra các trừu tượng nếu chúng ta bị ràng buộc vào các procedures mà tham số của chúng phải là số. Thường thì cùng một mẫu lập trình sẽ được sử dụng với nhiều procedures khác nhau. Để diễn đạt những mẫu như vậy thành các khái niệm, chúng ta sẽ cần xây dựng các procedures có thể nhận procedures làm đối số hoặc trả về procedures như giá trị. Các procedures thao tác trên procedures được gọi là <em>higher-order procedures</em>. Phần này sẽ cho thấy cách higher-order procedures có thể đóng vai trò như những cơ chế trừu tượng mạnh mẽ, làm tăng đáng kể sức biểu đạt của ngôn ngữ.</p>
+<h2 id="131-procedures-như-đối-số"><a class="header" href="#131-procedures-như-đối-số">1.3.1 Procedures như đối số</a></h2>
+<p>Xét ba procedures sau. Thủ tục đầu tiên tính tổng các số nguyên từ <code>a</code> đến <code>b</code>:</p>
+<pre><code class="language-{.scheme}">(define (sum-integers a b)
+  (if (&gt; a b) 
+      0 
+      (+ a (sum-integers (+ a 1) b))))
+</code></pre>
+<p>Thủ tục thứ hai tính tổng lập phương của các số nguyên trong khoảng đã cho:</p>
+<pre><code class="language-{.scheme}">(define (sum-cubes a b)
+  (if (&gt; a b) 
+      0 
+      (+ (cube a) 
+         (sum-cubes (+ a 1) b))))
+</code></pre>
+<p>Thủ tục thứ ba tính tổng của một dãy các số hạng trong chuỗi </p>
+<p>$$\frac{1}{1 \cdot 3} + \frac{1}{5 \cdot 7} + \frac{1}{9 \cdot 11} + {\ldots,}$$</p>
+<p>mà hội tụ về $\pi/8$ (rất chậm):<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<pre><code class="language-{.scheme}">(define (pi-sum a b)
+  (if (&gt; a b)
+      0
+      (+ (/ 1.0 (* a (+ a 2))) 
+         (pi-sum (+ a 4) b))))
+</code></pre>
+<p>Ba procedures này rõ ràng chia sẻ một mẫu cơ bản chung. Chúng hầu như giống hệt nhau, chỉ khác ở tên của procedure, hàm của <code>a</code> được dùng để tính số hạng cần cộng, và hàm cung cấp giá trị tiếp theo của <code>a</code>. Chúng ta có thể tạo ra từng procedure bằng cách điền vào các vị trí trống trong cùng một khuôn mẫu:</p>
+<pre><code class="language-{.scheme}">(define (⟨name⟩ a b)
+  (if (&gt; a b)
+      0
+      (+ (⟨term⟩ a) 
+         (⟨name⟩ (⟨next⟩ a) b))))
+</code></pre>
+<p>Sự tồn tại của một mẫu chung như vậy là bằng chứng mạnh mẽ cho thấy có một trừu tượng hữu ích đang chờ được đưa ra ánh sáng. Thật vậy, các nhà toán học từ lâu đã xác định trừu tượng <em>summation of a series</em> (tổng của một chuỗi) và phát minh ra “sigma notation” (ký hiệu sigma), ví dụ như</p>
+<p>$${\sum\limits_{n = a}^{b}f(n)}, = ,{f(a)} + \cdots + {f(b),}$$</p>
+<p>để diễn đạt khái niệm này. Sức mạnh của ký hiệu sigma là nó cho phép các nhà toán học làm việc với khái niệm tổng quát của phép cộng dồn, thay vì chỉ với các tổng cụ thể — ví dụ, để xây dựng các kết quả tổng quát về tổng mà không phụ thuộc vào chuỗi cụ thể đang được cộng.</p>
+<p>Tương tự, với tư cách là những người thiết kế chương trình, chúng ta muốn ngôn ngữ của mình đủ mạnh để có thể viết một procedure diễn đạt khái niệm tổng quát của phép cộng dồn, thay vì chỉ viết các procedures tính những tổng cụ thể. Chúng ta có thể dễ dàng làm điều này trong ngôn ngữ thủ tục của mình bằng cách lấy khuôn mẫu chung ở trên và biến các “vị trí trống” thành các tham số hình thức:</p>
+<pre><code class="language-{.scheme}">(define (sum term a next b)
+  (if (&gt; a b)
+      0
+      (+ (term a)
+         (sum term (next a) next b))))
+</code></pre>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Chuỗi này, thường được viết dưới dạng tương đương $\frac{\pi}{4} = {1 - \frac{1}{3} + \frac{1}{5}} - {\frac{1}{7} + \ldots}$, là do Leibniz. Chúng ta sẽ thấy cách sử dụng nó làm cơ sở cho một số thủ thuật số học thú vị trong mục 3.5.3.</p>
+</div>
+<p>Hãy chú ý rằng <code>sum</code> nhận các đối số là cận dưới <code>a</code> và cận trên <code>b</code> cùng với các procedures (thủ tục) <code>term</code> và <code>next</code>. Chúng ta có thể sử dụng <code>sum</code> giống như bất kỳ procedure nào khác. Ví dụ, chúng ta có thể dùng nó (cùng với một procedure <code>inc</code> tăng đối số của nó lên 1) để định nghĩa <code>sum-cubes</code>:</p>
+<pre><code class="language-{.scheme}">(define (inc n) (+ n 1))
+
+(define (sum-cubes a b)
+  (sum cube a inc b))
+</code></pre>
+<p>Sử dụng cách này, chúng ta có thể tính tổng lập phương của các số nguyên từ 1 đến 10:</p>
+<pre><code class="language-{.scheme}">(sum-cubes 1 10)
+3025
+</code></pre>
+<p>Với sự trợ giúp của một identity procedure để tính số hạng, chúng ta có thể định nghĩa <code>sum-integers</code> dựa trên <code>sum</code>:</p>
+<pre><code class="language-{.scheme}">(define (identity x) x)
+
+(define (sum-integers a b)
+  (sum identity a inc b))
+</code></pre>
+<p>Sau đó, chúng ta có thể cộng các số nguyên từ 1 đến 10:</p>
+<pre><code class="language-{.scheme}">(sum-integers 1 10)
+55
+</code></pre>
+<p>Chúng ta cũng có thể định nghĩa <code>pi-sum</code> theo cùng cách này:<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-{.scheme}">(define (pi-sum a b)
+  (define (pi-term x)
+    (/ 1.0 (* x (+ x 2))))
+  (define (pi-next x)
+    (+ x 4))
+  (sum pi-term a pi-next b))
+</code></pre>
+<p>Sử dụng các procedures này, chúng ta có thể tính gần đúng giá trị của $\pi$:</p>
+<pre><code class="language-{.scheme}">(* 8 (pi-sum 1 1000))
+3.139592655589783
+</code></pre>
+<p>Khi đã có <code>sum</code>, chúng ta có thể dùng nó như một khối xây dựng để hình thành các khái niệm khác. Chẳng hạn, tích phân xác định của một hàm $f$ trong khoảng từ $a$ đến $b$ có thể được xấp xỉ bằng số học theo công thức</p>
+<p>$${\int_{a}^{b}\mspace{-5mu} f}; = ;\left\lbrack ; f\left( a + \frac{dx}{2} \right) \right., + ,{f\left( a + dx + \frac{dx}{2} \right)}, + ,{\left. f\left( a + 2dx + \frac{dx}{2} \right), + ,\ldots; \right\rbrack dx}$$</p>
+<p>với giá trị $dx$ nhỏ. Chúng ta có thể diễn đạt trực tiếp điều này thành một procedure:</p>
+<pre><code class="language-{.scheme}">(define (integral f a b dx)
+  (define (add-dx x) (+ x dx))
+  (* (sum f (+ a (/ dx 2.0)) add-dx b) 
+     dx))
+
+(integral cube 0 1 0.01)
+.24998750000000042
+
+(integral cube 0 1 0.001)
+.249999875000001
+</code></pre>
+<p>(Giá trị chính xác của tích phân của <code>cube</code> từ 0 đến 1 là 1/4.)</p>
+<h2 id="132-xây-dựng-procedures-bằng-lambda"><a class="header" href="#132-xây-dựng-procedures-bằng-lambda">1.3.2 Xây dựng Procedures bằng <code>Lambda</code></a></h2>
+<p>Khi sử dụng <code>sum</code> như trong 1.3.1, việc phải định nghĩa các procedures tầm thường như <code>pi-term</code> và <code>pi-next</code> chỉ để dùng chúng làm đối số cho higher-order procedure thật sự rất bất tiện. Thay vì định nghĩa <code>pi-next</code> và <code>pi-term</code>, sẽ thuận tiện hơn nếu có cách chỉ định trực tiếp “procedure trả về đầu vào của nó cộng thêm 4” và “procedure trả về nghịch đảo của đầu vào nhân với đầu vào cộng 2”. Chúng ta có thể làm điều này bằng cách giới thiệu special form (dạng đặc biệt) <code>lambda</code>, vốn tạo ra procedures. Sử dụng <code>lambda</code>, chúng ta có thể mô tả điều mình muốn như sau:</p>
+<pre><code class="language-{.scheme}">(lambda (x) (+ x 4))
+</code></pre>
+<p>và</p>
+<pre><code class="language-{.scheme}">(lambda (x) (/ 1.0 (* x (+ x 2))))
+</code></pre>
+<p>Khi đó, procedure <code>pi-sum</code> của chúng ta có thể được viết mà không cần định nghĩa bất kỳ procedure phụ nào:</p>
+<pre><code class="language-{.scheme}">(define (pi-sum a b)
+  (sum (lambda (x) (/ 1.0 (* x (+ x 2))))
+       a
+       (lambda (x) (+ x 4))
+       b))
+</code></pre>
+<p>Một lần nữa, sử dụng <code>lambda</code>, chúng ta có thể viết procedure <code>integral</code> mà không cần định nghĩa procedure phụ <code>add-dx</code>:</p>
+<pre><code class="language-{.scheme}">(define (integral f a b dx)
+  (* (sum f (+ a (/ dx 2.0))
+            (lambda (x) (+ x dx))
+            b)
+     dx))
+</code></pre>
+<p>Nói chung, <code>lambda</code> được dùng để tạo procedures giống như <code>define</code>, ngoại trừ việc không chỉ định tên cho procedure:</p>
+<pre><code class="language-{.scheme}">(lambda (⟨formal-parameters⟩) ⟨body⟩)
+</code></pre>
+<p>Procedure thu được cũng giống như bất kỳ procedure nào được tạo bằng <code>define</code>. Điểm khác biệt duy nhất là nó chưa được gán với bất kỳ tên nào trong môi trường. Thực tế,</p>
+<pre><code class="language-{.scheme}">(define (plus4 x) (+ x 4))
+</code></pre>
+<p>tương đương với</p>
+<pre><code class="language-{.scheme}">(define plus4 (lambda (x) (+ x 4)))
+</code></pre>
+<p>Chúng ta có thể đọc một biểu thức <code>lambda</code> như sau:</p>
+<pre><code class="language-{.example}">(lambda                     (x)     (+   x     4))
+    |                        |       |   |     |
+the procedure of an argument x that adds x and 4
+</code></pre>
+<p>Giống như bất kỳ biểu thức nào có giá trị là một procedure, một biểu thức <code>lambda</code> có thể được dùng làm toán tử trong một tổ hợp như</p>
+<pre><code class="language-{.scheme}">((lambda (x y z) (+ x y (square z))) 1 2 3)
+12
+</code></pre>
+<p>hoặc, nói chung hơn, trong bất kỳ ngữ cảnh nào mà thông thường chúng ta sẽ dùng tên của một procedure.<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Lưu ý rằng chúng ta đã sử dụng block structure (cấu trúc khối) (1.1.8) để nhúng định nghĩa của <code>pi-next</code> và <code>pi-term</code> vào bên trong <code>pi-sum</code>, vì các procedures này khó có thể hữu ích cho mục đích nào khác. Chúng ta sẽ thấy cách loại bỏ hoàn toàn chúng trong 1.3.2.<br />
+<sup class="footnote-reference"><a href="#3">3</a></sup>: Sẽ rõ ràng và bớt gây e ngại hơn cho những người học Lisp nếu dùng một tên hiển nhiên hơn <code>lambda</code>, chẳng hạn như <code>make-procedure</code>. Nhưng quy ước này đã ăn sâu. Ký hiệu này được lấy từ λ-calculus, một hệ thống hình thức toán học do nhà logic học toán học Alonzo Church (1941) giới thiệu. Church phát triển λ-calculus để cung cấp một nền tảng chặt chẽ cho việc nghiên cứu các khái niệm về hàm và áp dụng hàm. λ-calculus đã trở thành một công cụ cơ bản cho các nghiên cứu toán học về ngữ nghĩa của ngôn ngữ lập trình.</p>
+</div>
+<h3 id="sử-dụng-let-để-tạo-local-variables-biến-cục-bộ"><a class="header" href="#sử-dụng-let-để-tạo-local-variables-biến-cục-bộ">Sử dụng <code>let</code> để tạo local variables (biến cục bộ)</a></h3>
+<p>Một cách sử dụng khác của <code>lambda</code> là để tạo local variables. Chúng ta thường cần các local variables trong procedures (thủ tục) ngoài những biến đã được ràng buộc như các tham số hình thức. Ví dụ, giả sử chúng ta muốn tính hàm</p>
+<p>$${f(x,y)}, = ,{x(1 + xy)^{2}} + {y(1 - y)} + {(1 + xy)(1 - y),}$$</p>
+<p>mà chúng ta cũng có thể biểu diễn như</p>
+<p>$$\begin{array}{lll}
+a &amp; = &amp; {1 + xy,} \
+{\phantom{(x,y)}b} &amp; = &amp; {1 - y,} \
+{f(x,y)} &amp; = &amp; {{xa^{2}} + {yb} + {ab.}} \
+\end{array}$$</p>
+<p>Khi viết một procedure để tính $f$, chúng ta muốn bao gồm như local variables không chỉ $x$ và $y$ mà còn cả tên của các giá trị trung gian như $a$ và $b$. Một cách để thực hiện điều này là sử dụng một auxiliary procedure (thủ tục phụ) để ràng buộc các local variables:</p>
+<pre><code class="language-{.scheme}">(define (f x y)
+  (define (f-helper a b)
+    (+ (* x (square a))
+       (* y b)
+       (* a b)))
+  (f-helper (+ 1 (* x y)) 
+            (- 1 y)))
+</code></pre>
+<p>Tất nhiên, chúng ta có thể sử dụng một biểu thức <code>lambda</code> để chỉ định một procedure ẩn danh nhằm ràng buộc các local variables. Phần thân của <code>f</code> khi đó trở thành một lời gọi duy nhất tới procedure đó:</p>
+<pre><code class="language-{.scheme}">(define (f x y)
+  ((lambda (a b)
+     (+ (* x (square a)) 
+        (* y b) 
+        (* a b)))
+   (+ 1 (* x y))
+   (- 1 y)))
+</code></pre>
+<p>Cấu trúc này hữu ích đến mức có một special form (dạng đặc biệt) gọi là <code>let</code> để giúp việc sử dụng thuận tiện hơn. Sử dụng <code>let</code>, procedure <code>f</code> có thể được viết như sau:</p>
+<pre><code class="language-{.scheme}">(define (f x y)
+  (let ((a (+ 1 (* x y)))
+        (b (- 1 y)))
+    (+ (* x (square a))
+       (* y b)
+       (* a b))))
+</code></pre>
+<p>Dạng tổng quát của một biểu thức <code>let</code> là:</p>
+<pre><code class="language-{.scheme}">(let ((⟨var₁⟩ ⟨exp₁⟩)
+      (⟨var₂⟩ ⟨exp₂⟩)
+      …
+      (⟨varₙ⟩ ⟨expₙ⟩))
+  ⟨body⟩)
+</code></pre>
+<p>có thể được hiểu như sau:</p>
+<pre><code class="language-{.example}">let ⟨var₁⟩ have the value ⟨exp₁⟩ and
+    ⟨var₂⟩ have the value ⟨exp₂⟩ and
+    …
+    ⟨varₙ⟩ have the value ⟨expₙ⟩
+  in ⟨body⟩
+</code></pre>
+<p>Phần đầu tiên của biểu thức <code>let</code> là một danh sách các cặp tên-biểu thức. Khi <code>let</code> được đánh giá, mỗi tên sẽ được gán với giá trị của biểu thức tương ứng. Phần thân của <code>let</code> được đánh giá với các tên này được ràng buộc như local variables. Cách điều này diễn ra là biểu thức <code>let</code> được diễn giải như một cú pháp thay thế cho:</p>
+<pre><code class="language-{.scheme}">((lambda (⟨var₁⟩ … ⟨varₙ⟩)
+   ⟨body⟩)
+ ⟨exp₁⟩
+ …
+ ⟨expₙ⟩)
+</code></pre>
+<p>Không cần cơ chế mới trong interpreter để cung cấp local variables. Một biểu thức <code>let</code> đơn giản chỉ là syntactic sugar (cú pháp rút gọn) cho việc áp dụng <code>lambda</code> bên dưới.</p>
+<p>Từ sự tương đương này, chúng ta thấy rằng phạm vi (scope) của một biến được chỉ định bởi một biểu thức <code>let</code> là phần thân của <code>let</code>. Điều này ngụ ý rằng:</p>
+<ul>
+<li>
+<p><code>Let</code> cho phép ràng buộc biến một cách cục bộ nhất có thể tại nơi chúng được sử dụng. Ví dụ, nếu giá trị của <code>x</code> là 5, giá trị của biểu thức</p>
+<pre><code class="language-{.scheme}">(+ (let ((x 3))
+     (+ x (* x 10)))
+   x)
+</code></pre>
+<p>là 38. Ở đây, <code>x</code> trong phần thân của <code>let</code> là 3, nên giá trị của biểu thức <code>let</code> là 33. Mặt khác, <code>x</code> là đối số thứ hai của phép cộng ngoài cùng vẫn là 5.</p>
+</li>
+<li>
+<p>Giá trị của các biến được tính toán bên ngoài <code>let</code>. Điều này quan trọng khi các biểu thức cung cấp giá trị cho local variables phụ thuộc vào các biến có cùng tên với chính local variables đó. Ví dụ, nếu giá trị của <code>x</code> là 2, biểu thức</p>
+<pre><code class="language-{.scheme}">(let ((x 3)
+      (y (+ x 2)))
+  (* x y))
+</code></pre>
+<p>sẽ có giá trị 12 vì bên trong phần thân của <code>let</code>, <code>x</code> sẽ là 3 và <code>y</code> sẽ là 4 (là giá trị của <code>x</code> bên ngoài cộng 2).</p>
+</li>
+</ul>
+<p>Đôi khi chúng ta có thể sử dụng internal definitions (định nghĩa bên trong) để đạt cùng hiệu quả như với <code>let</code>. Ví dụ, chúng ta có thể định nghĩa procedure <code>f</code> ở trên như sau:</p>
+<pre><code class="language-{.scheme}">(define (f x y)
+  (define a 
+    (+ 1 (* x y)))
+  (define b (- 1 y))
+  (+ (* x (square a))
+     (* y b)
+     (* a b)))
+</code></pre>
+<p>Tuy nhiên, chúng ta thích sử dụng <code>let</code> trong những tình huống như thế này và chỉ dùng <code>define</code> bên trong cho các internal procedures.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<h2 id="133-procedures-như-các-phương-pháp-tổng-quát"><a class="header" href="#133-procedures-như-các-phương-pháp-tổng-quát">1.3.3 Procedures như các phương pháp tổng quát</a></h2>
+<p>Chúng ta đã giới thiệu compound procedures (thủ tục phức hợp) trong 1.1.4 như một cơ chế để trừu tượng hóa các mẫu của các phép toán số học, nhằm làm cho chúng độc lập với các con số cụ thể liên quan. Với higher-order procedures, chẳng hạn như procedure <code>integral</code> trong 1.3.1, chúng ta bắt đầu thấy một dạng trừu tượng mạnh mẽ hơn: các procedures được sử dụng để diễn đạt các phương pháp tính toán tổng quát, độc lập với các hàm cụ thể liên quan. Trong phần này, chúng ta sẽ thảo luận hai ví dụ phức tạp hơn — các phương pháp tổng quát để tìm zeros (nghiệm) và fixed points (điểm bất động) của hàm — và chỉ ra cách các phương pháp này có thể được diễn đạt trực tiếp dưới dạng procedures.</p>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Hiểu rõ internal definitions đủ để đảm bảo một chương trình có nghĩa như chúng ta dự định đòi hỏi một mô hình đánh giá phức tạp hơn so với những gì đã trình bày trong chương này. Tuy nhiên, những tinh tế này không xuất hiện với các định nghĩa bên trong của procedures. Chúng ta sẽ quay lại vấn đề này ở 4.1.6, sau khi tìm hiểu thêm về quá trình đánh giá.</p>
+</div>
+<h3 id="tìm-nghiệm-của-phương-trình-bằng-half-interval-method-phương-pháp-nửa-khoảng"><a class="header" href="#tìm-nghiệm-của-phương-trình-bằng-half-interval-method-phương-pháp-nửa-khoảng">Tìm nghiệm của phương trình bằng half-interval method (phương pháp nửa khoảng)</a></h3>
+<p><em>Half-interval method</em> là một kỹ thuật đơn giản nhưng mạnh mẽ để tìm nghiệm của phương trình $f(x) = 0$, trong đó $f$ là một hàm liên tục. Ý tưởng là, nếu chúng ta có các điểm $a$ và $b$ sao cho $f(a) &lt; 0 &lt; f(b)$, thì $f$ phải có ít nhất một nghiệm nằm giữa $a$ và $b$. Để xác định một nghiệm, đặt $x$ là trung bình cộng của $a$ và $b$, và tính $f(x)$. Nếu $f(x) &gt; 0$, thì $f$ phải có một nghiệm giữa $a$ và $x$. Nếu $f(x) &lt; 0$, thì $f$ phải có một nghiệm giữa $x$ và $b$. Tiếp tục theo cách này, chúng ta có thể xác định các khoảng ngày càng nhỏ hơn mà trên đó $f$ chắc chắn có một nghiệm. Khi đạt đến một điểm mà khoảng này đủ nhỏ, quá trình dừng lại. Vì khoảng không chắc chắn được giảm một nửa ở mỗi bước, số bước cần thiết tăng theo $\Theta(\log(L,/, T))$, trong đó $L$ là độ dài của khoảng ban đầu và $T$ là sai số cho phép (tức là kích thước của khoảng mà ta coi là “đủ nhỏ”). Dưới đây là một procedure (thủ tục) hiện thực hóa chiến lược này:</p>
+<pre><code class="language-{.scheme}">(define (search f neg-point pos-point)
+  (let ((midpoint 
+         (average neg-point pos-point)))
+    (if (close-enough? neg-point pos-point)
+        midpoint
+        (let ((test-value (f midpoint)))
+          (cond 
+           ((positive? test-value)
+            (search f neg-point midpoint))
+           ((negative? test-value)
+            (search f midpoint pos-point))
+           (else midpoint))))))
+</code></pre>
+<p>Chúng ta giả định rằng ban đầu được cho hàm $f$ cùng với các điểm mà giá trị của nó là âm và dương. Trước tiên, chúng ta tính trung điểm của hai điểm đã cho. Tiếp theo, kiểm tra xem khoảng đã cho có đủ nhỏ hay chưa, nếu có thì trả về trung điểm như kết quả. Nếu không, chúng ta tính giá trị kiểm tra là giá trị của $f$ tại trung điểm. Nếu giá trị kiểm tra là dương, thì tiếp tục quá trình với khoảng mới từ điểm âm ban đầu đến trung điểm. Nếu giá trị kiểm tra là âm, tiếp tục với khoảng từ trung điểm đến điểm dương. Cuối cùng, có khả năng giá trị kiểm tra bằng 0, khi đó trung điểm chính là nghiệm cần tìm.</p>
+<p>Để kiểm tra xem các điểm đầu mút có “đủ gần” nhau hay không, chúng ta có thể dùng một procedure tương tự như trong 1.1.7 để tính căn bậc hai:<sup class="footnote-reference"><a href="#5">5</a></sup></p>
+<pre><code class="language-{.scheme}">(define (close-enough? x y) 
+  (&lt; (abs (- x y)) 0.001))
+</code></pre>
+<p><code>Search</code> khá bất tiện khi dùng trực tiếp, vì chúng ta có thể vô tình đưa vào các điểm mà giá trị của $f$ không có dấu như yêu cầu, dẫn đến kết quả sai. Thay vào đó, chúng ta sẽ dùng <code>search</code> thông qua procedure sau, procedure này kiểm tra xem đầu mút nào có giá trị âm và đầu mút nào có giá trị dương, rồi gọi <code>search</code> tương ứng. Nếu hàm có cùng dấu tại hai điểm đã cho, half-interval method không thể áp dụng, khi đó procedure sẽ báo lỗi.<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<pre><code class="language-{.scheme}">(define (half-interval-method f a b)
+  (let ((a-value (f a))
+        (b-value (f b)))
+    (cond ((and (negative? a-value) 
+                (positive? b-value))
+           (search f a b))
+          ((and (negative? b-value) 
+                (positive? a-value))
+           (search f b a))
+          (else
+           (error &quot;Values are not of 
+                   opposite sign&quot; a b)))))
+</code></pre>
+<p>Ví dụ sau sử dụng half-interval method để xấp xỉ $\pi$ như nghiệm giữa 2 và 4 của $\sin x = 0$:</p>
+<pre><code class="language-{.scheme}">(half-interval-method sin 2.0 4.0)
+3.14111328125
+</code></pre>
+<p>Một ví dụ khác, dùng half-interval method để tìm nghiệm của phương trình $x^{3} - 2x - 3 = 0$ giữa 1 và 2:</p>
+<pre><code class="language-{.scheme}">(half-interval-method 
+ (lambda (x) (- (* x x x) (* 2 x) 3))
+ 1.0
+ 2.0)
+1.89306640625
+</code></pre>
+<h3 id="tìm-fixed-points-điểm-bất-động-của-hàm"><a class="header" href="#tìm-fixed-points-điểm-bất-động-của-hàm">Tìm fixed points (điểm bất động) của hàm</a></h3>
+<p>Một số $x$ được gọi là <em>fixed point</em> của một hàm $f$ nếu $x$ thỏa mãn phương trình $f(x) = x$. Với một số hàm $f$, chúng ta có thể tìm fixed point bằng cách bắt đầu với một giá trị đoán ban đầu và áp dụng $f$ lặp đi lặp lại,</p>
+<p>$${f(x),}\quad{f(f(x)),}\quad{f(f(f(x))),}\quad{\ldots,}$$</p>
+<p>cho đến khi giá trị không thay đổi nhiều. Dựa trên ý tưởng này, chúng ta có thể xây dựng procedure <code>fixed-point</code> nhận đầu vào là một hàm và một giá trị đoán ban đầu, và trả về một xấp xỉ của fixed point của hàm. Chúng ta áp dụng hàm lặp lại cho đến khi tìm được hai giá trị liên tiếp có hiệu nhỏ hơn một sai số cho phép:</p>
+<pre><code class="language-{.scheme}">(define tolerance 0.00001)
+
+(define (fixed-point f first-guess)
+  (define (close-enough? v1 v2)
+    (&lt; (abs (- v1 v2)) 
+       tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+</code></pre>
+<p>Ví dụ, chúng ta có thể dùng phương pháp này để xấp xỉ fixed point của hàm cosine, bắt đầu với 1 làm giá trị xấp xỉ ban đầu:<sup class="footnote-reference"><a href="#7">7</a></sup></p>
+<pre><code class="language-{.scheme}">(fixed-point cos 1.0)
+.7390822985224023
+</code></pre>
+<p>Tương tự, chúng ta có thể tìm nghiệm của phương trình $y = \sin y + \cos y$:</p>
+<pre><code class="language-{.scheme}">(fixed-point (lambda (y) (+ (sin y) (cos y)))
+             1.0)
+1.2587315962971173
+</code></pre>
+<p>Quá trình tìm fixed point gợi nhớ đến quá trình tìm căn bậc hai trong 1.1.7. Cả hai đều dựa trên ý tưởng liên tục cải thiện giá trị đoán cho đến khi kết quả thỏa mãn một tiêu chí nào đó. Thực tế, chúng ta có thể dễ dàng diễn đạt việc tính căn bậc hai như một tìm kiếm fixed point. Tính căn bậc hai của một số $x$ yêu cầu tìm $y$ sao cho $y^{2} = x$. Viết lại phương trình này dưới dạng tương đương $y = x/y$, ta nhận ra rằng chúng ta đang tìm fixed point của hàm<sup class="footnote-reference"><a href="#8">8</a></sup> $y\mapsto x/y$, và do đó có thể thử tính căn bậc hai như sau:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (fixed-point (lambda (y) (/ x y))
+               1.0))
+</code></pre>
+<p>Đáng tiếc, tìm kiếm fixed point này không hội tụ. Xét một giá trị đoán ban đầu $y_{1}$. Giá trị đoán tiếp theo là $y_{2} = x/y_{1}$ và giá trị tiếp theo nữa là $y_{3} = {x/y_{2}} = {x/(x/y_{1})} = y_{1}$. Điều này dẫn đến một vòng lặp vô hạn trong đó hai giá trị đoán $y_{1}$ và $y_{2}$ lặp lại liên tục, dao động quanh đáp án.</p>
+<p>Một cách để kiểm soát dao động như vậy là ngăn các giá trị đoán thay đổi quá nhiều. Vì đáp án luôn nằm giữa giá trị đoán $y$ và $x/y$, chúng ta có thể tạo một giá trị đoán mới không cách xa $y$ như $x/y$ bằng cách lấy trung bình cộng của $y$ và $x/y$, sao cho giá trị đoán tiếp theo sau $y$ là $\frac{1}{2}(y + x/y)$ thay vì $x/y$. Quá trình tạo ra một dãy giá trị đoán như vậy chính là quá trình tìm fixed point của $y\mapsto{\frac{1}{2}(y + x/y)}$:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (fixed-point 
+   (lambda (y) (average y (/ x y)))
+   1.0))
+</code></pre>
+<p>(Lưu ý rằng $y = {\frac{1}{2}(y + x/y)}$ là một phép biến đổi đơn giản của phương trình $y = x/y$; để suy ra nó, cộng $y$ vào cả hai vế của phương trình và chia cho 2.)</p>
+<p>(Note that $y = {\frac{1}{2}(y + x/y)}$ is a simple transformation of the equation $y = x/y;$ to derive it, add $y$ to both sides of the equation and divide by 2.)</p>
+<p>(TODO)</p>
+<p>With this modification, the square-root procedure works. In fact, if we unravel the definitions, we can see that the sequence of approximations to the square root generated here is precisely the same as the one generated by our original square-root procedure of 1.1.7. This approach of averaging successive approximations to a solution, a technique that we call <em>average damping</em>, often aids the convergence of fixed-point searches.</p>
+<h2 id="134-procedures-như-các-giá-trị-trả-về"><a class="header" href="#134-procedures-như-các-giá-trị-trả-về">1.3.4 Procedures như các giá trị trả về</a></h2>
+<p>Các ví dụ ở trên cho thấy khả năng truyền procedures (thủ tục) như đối số đã làm tăng đáng kể sức biểu đạt của ngôn ngữ lập trình. Chúng ta còn có thể đạt được sức biểu đạt mạnh mẽ hơn nữa bằng cách tạo ra các procedures mà giá trị trả về của chúng lại chính là các procedures.</p>
+<p>Chúng ta có thể minh họa ý tưởng này bằng cách xem lại ví dụ fixed-point (điểm bất động) được mô tả ở cuối mục 1.3.3. Chúng ta đã xây dựng một phiên bản mới của procedure tính căn bậc hai như một tìm kiếm fixed-point, bắt đầu từ nhận xét rằng $\sqrt{x}$ là một fixed-point của hàm $y\mapsto x/y$. Sau đó, chúng ta dùng average damping (làm trơn trung bình) để làm cho các giá trị xấp xỉ hội tụ. Average damping tự nó là một kỹ thuật tổng quát hữu ích. Cụ thể, với một hàm $f$, ta xét hàm có giá trị tại $x$ bằng trung bình cộng của $x$ và $f(x)$.</p>
+<p>Chúng ta có thể diễn đạt ý tưởng average damping bằng procedure sau:</p>
+<pre><code class="language-{.scheme}">(define (average-damp f)
+  (lambda (x) 
+    (average x (f x))))
+</code></pre>
+<p><code>Average-damp</code> là một procedure nhận đối số là một procedure <code>f</code> và trả về một procedure (được tạo bởi <code>lambda</code>) mà khi áp dụng cho một số <code>x</code>, sẽ trả về trung bình cộng của <code>x</code> và <code>(f x)</code>. Ví dụ, áp dụng <code>average-damp</code> cho procedure <code>square</code> sẽ tạo ra một procedure có giá trị tại một số $x$ là trung bình cộng của $x$ và $x^{2}$. Áp dụng procedure này cho 10 sẽ trả về trung bình cộng của 10 và 100, tức là 55:<sup class="footnote-reference"><a href="#9">9</a></sup></p>
+<pre><code class="language-{.scheme}">((average-damp square) 10)
+55
+</code></pre>
+<p>Sử dụng <code>average-damp</code>, chúng ta có thể viết lại procedure tính căn bậc hai như sau:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (fixed-point 
+   (average-damp 
+    (lambda (y) (/ x y)))
+   1.0))
+</code></pre>
+<p>Hãy chú ý cách viết này làm rõ ràng ba ý tưởng trong phương pháp: tìm kiếm fixed-point, average damping, và hàm $y\mapsto x/y$. Thật bổ ích khi so sánh cách viết này của phương pháp tính căn bậc hai với phiên bản gốc trong 1.1.7. Hãy nhớ rằng các procedures này diễn đạt cùng một quá trình, và nhận thấy ý tưởng trở nên rõ ràng hơn nhiều khi chúng ta diễn đạt quá trình bằng các trừu tượng này. Nói chung, có nhiều cách để xây dựng một quá trình thành một procedure. Những lập trình viên giàu kinh nghiệm biết cách chọn các cách viết thủ tục đặc biệt sáng sủa, trong đó các thành phần hữu ích của quá trình được tách ra thành các thực thể riêng biệt có thể tái sử dụng trong các ứng dụng khác. Một ví dụ đơn giản về tái sử dụng: căn bậc ba của $x$ là một fixed-point của hàm $y\mapsto x/y^{2}$, vì vậy chúng ta có thể ngay lập tức tổng quát hóa procedure tính căn bậc hai thành một procedure trích xuất căn bậc ba:<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<pre><code class="language-{.scheme}">(define (cube-root x)
+  (fixed-point 
+   (average-damp 
+    (lambda (y) 
+      (/ x (square y))))
+   1.0))
+</code></pre>
+<h3 id="newtons-method"><a class="header" href="#newtons-method">Newton’s method</a></h3>
+<p>Khi lần đầu giới thiệu procedure tính căn bậc hai trong 1.1.7, chúng ta đã đề cập rằng đây là một trường hợp đặc biệt của <em>Newton’s method</em> (phương pháp Newton). Nếu $x\mapsto g(x)$ là một hàm khả vi, thì nghiệm của phương trình $g(x) = 0$ là một fixed-point của hàm $x\mapsto f(x)$, trong đó</p>
+<p>$${f(x)}, = , x - \frac{g(x)}{Dg(x)}$$</p>
+<p>và $Dg(x)$ là đạo hàm của $g$ tại $x$. Newton’s method là việc sử dụng phương pháp fixed-point mà chúng ta đã thấy ở trên để xấp xỉ nghiệm của phương trình bằng cách tìm fixed-point của hàm $f$.<sup class="footnote-reference"><a href="#11">11</a></sup></p>
+<p>Với nhiều hàm $g$ và giá trị đoán ban đầu đủ tốt cho $x$, Newton’s method hội tụ rất nhanh đến nghiệm của $g(x) = 0$.<sup class="footnote-reference"><a href="#12">12</a></sup></p>
+<p>Để hiện thực Newton’s method như một procedure, trước tiên chúng ta phải diễn đạt ý tưởng đạo hàm. Lưu ý rằng “derivative” (đạo hàm), giống như average damping, là một thứ biến đổi một hàm thành một hàm khác. Ví dụ, đạo hàm của hàm $x\mapsto x^{3}$ là hàm $x\mapsto 3x^{2}$. Nói chung, nếu $g$ là một hàm và $dx$ là một số nhỏ, thì đạo hàm $Dg$ của $g$ là hàm có giá trị tại bất kỳ số $x$ nào được cho bởi (trong giới hạn $dx$ nhỏ)</p>
+<p>$$Dg(x), = ,{\frac{g(x + dx) - g(x)}{dx}.}$$</p>
+<p>Do đó, chúng ta có thể diễn đạt ý tưởng đạo hàm (lấy $dx$ chẳng hạn là 0.00001) thành procedure:</p>
+<pre><code class="language-{.scheme}">(define (deriv g)
+  (lambda (x)
+    (/ (- (g (+ x dx)) (g x))
+       dx)))
+</code></pre>
+<p>cùng với định nghĩa:</p>
+<pre><code class="language-{.scheme}">(define dx 0.00001)
+</code></pre>
+<p>Giống như <code>average-damp</code>, <code>deriv</code> là một procedure nhận một procedure làm đối số và trả về một procedure làm giá trị. Ví dụ, để xấp xỉ đạo hàm của $x\mapsto x^{3}$ tại 5 (giá trị chính xác là 75) chúng ta có thể tính:</p>
+<pre><code class="language-{.scheme}">(define (cube x) (* x x x))
+
+((deriv cube) 5)
+75.00014999664018
+</code></pre>
+<p>Với sự trợ giúp của <code>deriv</code>, chúng ta có thể diễn đạt Newton’s method như một quá trình fixed-point:</p>
+<pre><code class="language-{.scheme}">(define (newton-transform g)
+  (lambda (x)
+    (- x (/ (g x) 
+            ((deriv g) x)))))
+
+(define (newtons-method g guess)
+  (fixed-point (newton-transform g) 
+               guess))
+</code></pre>
+<p>Procedure <code>newton-transform</code> diễn đạt công thức ở đầu mục này, và <code>newtons-method</code> được định nghĩa trực tiếp dựa trên đó. Nó nhận đối số là một procedure tính hàm mà ta muốn tìm nghiệm, cùng với một giá trị đoán ban đầu. Ví dụ, để tìm căn bậc hai của $x$, chúng ta có thể dùng Newton’s method để tìm nghiệm của hàm $y\mapsto y^{2} - x$ bắt đầu với giá trị đoán ban đầu là 1.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<p>Điều này mang lại một dạng khác của procedure tính căn bậc hai:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (newtons-method 
+   (lambda (y) 
+     (- (square y) x)) 
+   1.0))
+</code></pre>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Hãy lưu ý rằng đây là một tổ hợp mà toán tử của nó lại là một tổ hợp. Bài tập 1.4 đã minh họa khả năng tạo ra các tổ hợp như vậy, nhưng đó chỉ là một ví dụ minh họa đơn giản. Ở đây, chúng ta bắt đầu thấy nhu cầu thực sự cho các tổ hợp như vậy — khi áp dụng một procedure được tạo ra như giá trị trả về của một higher-order procedure.<br />
+<sup class="footnote-reference"><a href="#10">10</a></sup>: Xem Bài tập 1.45 để biết một tổng quát hóa xa hơn.<br />
+<sup class="footnote-reference"><a href="#11">11</a></sup>: Các sách giáo khoa giải tích sơ cấp thường mô tả Newton’s method dưới dạng dãy xấp xỉ $x_{n + 1} = x_{n} - {g(x_{n}),/Dg(x_{n})}$. Việc có ngôn ngữ để nói về các quá trình và sử dụng ý tưởng fixed-point giúp đơn giản hóa mô tả phương pháp này.<br />
+<sup class="footnote-reference"><a href="#12">12</a></sup>: Newton’s method không phải lúc nào cũng hội tụ đến một đáp án, nhưng có thể chứng minh rằng trong các trường hợp thuận lợi, mỗi lần lặp sẽ nhân đôi số chữ số chính xác của giá trị xấp xỉ nghiệm. Trong các trường hợp như vậy, Newton’s method sẽ hội tụ nhanh hơn nhiều so với half-interval method.<br />
+<sup class="footnote-reference"><a href="#13">13</a></sup>: Đối với việc tìm căn bậc hai, Newton’s method hội tụ nhanh đến nghiệm đúng từ bất kỳ điểm bắt đầu nào.</p>
+</div>
+<h3 id="các-trừu-tượng-và-first-class-procedures-thủ-tục-hạng-nhất"><a class="header" href="#các-trừu-tượng-và-first-class-procedures-thủ-tục-hạng-nhất">Các trừu tượng và first-class procedures (thủ tục hạng nhất)</a></h3>
+<p>Chúng ta đã thấy hai cách để diễn đạt việc tính căn bậc hai như một trường hợp của một phương pháp tổng quát hơn: một lần như một tìm kiếm fixed-point (điểm bất động) và một lần sử dụng Newton’s method (phương pháp Newton). Vì Newton’s method tự nó được diễn đạt như một quá trình fixed-point, nên thực tế chúng ta đã thấy hai cách để tính căn bậc hai như các fixed points. Mỗi phương pháp bắt đầu với một hàm và tìm một fixed point của một phép biến đổi nào đó của hàm đó. Chúng ta có thể diễn đạt ý tưởng tổng quát này thành một procedure (thủ tục):</p>
+<pre><code class="language-{.scheme}">(define (fixed-point-of-transform 
+         g transform guess)
+  (fixed-point (transform g) guess))
+</code></pre>
+<p>Procedure tổng quát này nhận các đối số là một procedure <code>g</code> tính một hàm nào đó, một procedure biến đổi <code>g</code>, và một giá trị đoán ban đầu. Kết quả trả về là một fixed point của hàm đã được biến đổi.</p>
+<p>Sử dụng trừu tượng này, chúng ta có thể viết lại phép tính căn bậc hai đầu tiên trong phần này (nơi chúng ta tìm một fixed point của phiên bản average-damped của $y\mapsto x/y$) như một trường hợp của phương pháp tổng quát này:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (fixed-point-of-transform 
+   (lambda (y) (/ x y))
+   average-damp
+   1.0))
+</code></pre>
+<p>Tương tự, chúng ta có thể diễn đạt phép tính căn bậc hai thứ hai trong phần này (một trường hợp của Newton’s method tìm một fixed point của Newton transform của $y\mapsto y^{2} - x$) như sau:</p>
+<pre><code class="language-{.scheme}">(define (sqrt x)
+  (fixed-point-of-transform 
+   (lambda (y) (- (square y) x))
+   newton-transform
+   1.0))
+</code></pre>
+<p>Chúng ta bắt đầu mục 1.3 với nhận xét rằng compound procedures (thủ tục phức hợp) là một cơ chế trừu tượng quan trọng, vì chúng cho phép chúng ta diễn đạt các phương pháp tính toán tổng quát như những phần tử tường minh trong ngôn ngữ lập trình. Giờ đây, chúng ta đã thấy cách higher-order procedures cho phép thao tác với các phương pháp tổng quát này để tạo ra các trừu tượng mới.</p>
+<p>Với tư cách lập trình viên, chúng ta nên luôn cảnh giác với các cơ hội nhận diện những trừu tượng cơ bản trong chương trình của mình, xây dựng và khái quát hóa chúng để tạo ra các trừu tượng mạnh mẽ hơn. Điều này không có nghĩa là lúc nào cũng phải viết chương trình theo cách trừu tượng nhất có thể; lập trình viên giỏi biết cách chọn mức độ trừu tượng phù hợp với nhiệm vụ. Nhưng điều quan trọng là phải có khả năng tư duy theo các trừu tượng này, để sẵn sàng áp dụng chúng trong các ngữ cảnh mới. Ý nghĩa của higher-order procedures là chúng cho phép chúng ta biểu diễn các trừu tượng này một cách tường minh như các phần tử trong ngôn ngữ lập trình, để chúng có thể được xử lý giống như các phần tử tính toán khác.</p>
+<p>Nói chung, các ngôn ngữ lập trình áp đặt những hạn chế về cách các phần tử tính toán có thể được thao tác. Các phần tử có ít hạn chế nhất được gọi là có trạng thái <em>first-class</em> (hạng nhất). Một số “quyền và đặc quyền” của các phần tử first-class là:<sup class="footnote-reference"><a href="#14">14</a></sup></p>
+<ul>
+<li>Chúng có thể được đặt tên bởi các biến.</li>
+<li>Chúng có thể được truyền làm đối số cho procedures.</li>
+<li>Chúng có thể được trả về như kết quả của procedures.</li>
+<li>Chúng có thể được bao gồm trong data structures (cấu trúc dữ liệu).<sup class="footnote-reference"><a href="#15">15</a></sup></li>
+</ul>
+<p>Lisp, không giống như các ngôn ngữ lập trình phổ biến khác, trao cho procedures trạng thái first-class đầy đủ. Điều này đặt ra những thách thức cho việc hiện thực hiệu quả, nhưng lợi ích về sức biểu đạt thu được là rất lớn.<sup class="footnote-reference"><a href="#16">16</a></sup></p>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p>Khái niệm trạng thái first-class của các phần tử trong ngôn ngữ lập trình là do nhà khoa học máy tính người Anh Christopher Strachey (1916–1975) đưa ra.<br />
+<sup class="footnote-reference"><a href="#15">15</a></sup>: Chúng ta sẽ thấy các ví dụ về điều này sau khi giới thiệu data structures trong Chương 2.<br />
+<sup class="footnote-reference"><a href="#16">16</a></sup>: Chi phí hiện thực chính của first-class procedures là việc cho phép procedures được trả về như giá trị đòi hỏi phải dành bộ nhớ cho các free variables (biến tự do) của procedure ngay cả khi procedure không đang thực thi. Trong hiện thực Scheme mà chúng ta sẽ nghiên cứu ở mục 4.1, các biến này được lưu trữ trong environment (môi trường) của procedure.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="1-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="2-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="1-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="2-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

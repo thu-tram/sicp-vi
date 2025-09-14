@@ -1,0 +1,1098 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Compilation - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html" class="active"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="55-compilation-biên-dịch"><a class="header" href="#55-compilation-biên-dịch">5.5 Compilation (biên dịch)</a></h1>
+<p>Bộ <em>explicit-control evaluator</em> (bộ đánh giá điều khiển tường minh) của mục 5.4 là một <em>register machine</em> (máy thanh ghi) mà <em>controller</em> (bộ điều khiển) của nó thực thi các chương trình Scheme. Trong phần này, chúng ta sẽ xem cách chạy các chương trình Scheme trên một <em>register machine</em> mà <em>controller</em> của nó không phải là một <em>Scheme interpreter</em> (bộ thông dịch Scheme).</p>
+<p>Máy <em>explicit-control evaluator</em> là một máy tính phổ dụng — nó có thể thực hiện bất kỳ quá trình tính toán nào có thể được mô tả trong Scheme. <em>Controller</em> của <em>evaluator</em> điều phối việc sử dụng các <em>data paths</em> (đường dữ liệu) của nó để thực hiện phép tính mong muốn. Do đó, các <em>data paths</em> của <em>evaluator</em> là phổ dụng: Chúng đủ để thực hiện bất kỳ phép tính nào chúng ta muốn, miễn là có một <em>controller</em> thích hợp.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>Các máy tính thương mại đa dụng (<em>commercial general-purpose computers</em>) là các <em>register machine</em> được tổ chức xoay quanh một tập hợp các <em>register</em> và các <em>operation</em> tạo thành một tập hợp <em>data paths</em> phổ dụng, hiệu quả và tiện lợi. <em>Controller</em> cho một máy đa dụng là một <em>interpreter</em> cho một <em>register-machine language</em> (ngôn ngữ máy thanh ghi) giống như loại chúng ta đã sử dụng. Ngôn ngữ này được gọi là <em>native language</em> (ngôn ngữ gốc) của máy, hoặc đơn giản là <em>machine language</em> (ngôn ngữ máy). Các chương trình viết bằng <em>machine language</em> là các dãy lệnh sử dụng <em>data paths</em> của máy. Ví dụ, dãy lệnh của <em>explicit-control evaluator</em> có thể được xem như một chương trình <em>machine language</em> cho một máy tính đa dụng, thay vì là <em>controller</em> cho một máy thông dịch chuyên biệt.</p>
+<p>Có hai chiến lược phổ biến để thu hẹp khoảng cách giữa các ngôn ngữ bậc cao và <em>register-machine language</em>. <em>Explicit-control evaluator</em> minh họa chiến lược <em>interpretation</em> (thông dịch). Một <em>interpreter</em> viết bằng <em>native language</em> của một máy sẽ cấu hình máy đó để thực thi các chương trình viết bằng một ngôn ngữ (gọi là <em>source language</em> — ngôn ngữ nguồn) có thể khác với <em>native language</em> của máy thực hiện việc đánh giá. Các <em>primitive procedure</em> (thủ tục nguyên thủy) của <em>source language</em> được cài đặt như một thư viện các <em>subroutine</em> viết bằng <em>native language</em> của máy đó. Một chương trình cần được thông dịch (gọi là <em>source program</em> — chương trình nguồn) được biểu diễn như một cấu trúc dữ liệu. <em>Interpreter</em> sẽ duyệt qua cấu trúc dữ liệu này, phân tích <em>source program</em>. Khi làm vậy, nó mô phỏng hành vi dự kiến của <em>source program</em> bằng cách gọi các <em>primitive subroutine</em> thích hợp từ thư viện.</p>
+<p>Trong phần này, chúng ta sẽ khám phá chiến lược thay thế là <em>compilation</em> (biên dịch). Một <em>compiler</em> (trình biên dịch) cho một <em>source language</em> và một máy nhất định sẽ dịch một <em>source program</em> thành một chương trình tương đương (gọi là <em>object program</em> — chương trình đích) viết bằng <em>native language</em> của máy đó. <em>Compiler</em> mà chúng ta triển khai trong phần này sẽ dịch các chương trình viết bằng Scheme thành các dãy lệnh được thực thi bằng <em>data paths</em> của máy <em>explicit-control evaluator</em>.<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<p>So với <em>interpretation</em>, <em>compilation</em> có thể mang lại sự gia tăng đáng kể về hiệu suất thực thi chương trình, như chúng ta sẽ giải thích bên dưới trong phần tổng quan về <em>compiler</em>. Mặt khác, một <em>interpreter</em> cung cấp một môi trường mạnh mẽ hơn cho việc phát triển và gỡ lỗi chương trình tương tác, vì <em>source program</em> đang được thực thi có sẵn tại thời điểm chạy để kiểm tra và chỉnh sửa. Ngoài ra, vì toàn bộ thư viện <em>primitive</em> có sẵn, các chương trình mới có thể được xây dựng và thêm vào hệ thống trong quá trình gỡ lỗi.</p>
+<p>Xét đến các ưu điểm bổ sung của <em>compilation</em> và <em>interpretation</em>, các môi trường phát triển chương trình hiện đại thường áp dụng chiến lược kết hợp. Các <em>Lisp interpreter</em> thường được tổ chức sao cho các <em>interpreted procedure</em> và <em>compiled procedure</em> có thể gọi lẫn nhau. Điều này cho phép lập trình viên biên dịch những phần của chương trình được cho là đã gỡ lỗi xong, từ đó tận dụng lợi thế hiệu suất của <em>compilation</em>, đồng thời giữ chế độ thực thi thông dịch cho những phần của chương trình vẫn đang trong quá trình phát triển và gỡ lỗi tương tác. Trong mục 5.5.7, sau khi chúng ta đã triển khai <em>compiler</em>, chúng ta sẽ chỉ ra cách kết nối nó với <em>interpreter</em> của mình để tạo ra một hệ thống phát triển tích hợp <em>interpreter-compiler</em>.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Đây là một phát biểu mang tính lý thuyết. Chúng tôi không khẳng định rằng các <em>data paths</em> của <em>evaluator</em> là một tập hợp <em>data paths</em> đặc biệt tiện lợi hoặc hiệu quả cho một máy tính đa dụng. Ví dụ, chúng không phù hợp để triển khai các phép tính dấu phẩy động hiệu năng cao hoặc các phép tính thao tác mạnh trên <em>bit vector</em>.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Thực tế, máy chạy mã đã biên dịch có thể đơn giản hơn máy thông dịch, vì chúng ta sẽ không sử dụng các <em>register</em> <code>exp</code> và <code>unev</code>. <em>Interpreter</em> dùng chúng để chứa các phần của biểu thức chưa được đánh giá. Tuy nhiên, với <em>compiler</em>, các biểu thức này được xây dựng sẵn trong mã đã biên dịch mà <em>register machine</em> sẽ chạy. Vì lý do tương tự, chúng ta không cần các <em>machine operation</em> xử lý cú pháp biểu thức. Nhưng mã đã biên dịch sẽ sử dụng một vài <em>machine operation</em> bổ sung (để biểu diễn các đối tượng <em>compiled procedure</em>) mà không xuất hiện trong máy <em>explicit-control evaluator</em>.</p>
+</div>
+<h3 id="an-overview-of-the-compiler-tổng-quan-về-compiler"><a class="header" href="#an-overview-of-the-compiler-tổng-quan-về-compiler">An overview of the compiler (Tổng quan về <em>compiler</em>)</a></h3>
+<p><em>Compiler</em> (trình biên dịch) của chúng ta rất giống với <em>interpreter</em> (bộ thông dịch), cả về cấu trúc lẫn chức năng mà nó thực hiện. Do đó, các cơ chế mà <em>compiler</em> sử dụng để phân tích <em>expression</em> (biểu thức) sẽ tương tự như những gì <em>interpreter</em> sử dụng. Hơn nữa, để dễ dàng kết nối giữa mã đã biên dịch và mã thông dịch, chúng ta sẽ thiết kế <em>compiler</em> để sinh ra mã tuân theo cùng một quy ước sử dụng <em>register</em> (thanh ghi) như <em>interpreter</em>: <em>Environment</em> sẽ được giữ trong <em>register</em> <code>env</code>, danh sách đối số sẽ được tích lũy trong <code>argl</code>, một <em>procedure</em> (thủ tục) cần áp dụng sẽ nằm trong <code>proc</code>, các <em>procedure</em> sẽ trả kết quả vào <code>val</code>, và vị trí mà một <em>procedure</em> cần trả về sẽ được giữ trong <code>continue</code>. Nói chung, <em>compiler</em> dịch một <em>source program</em> (chương trình nguồn) thành một <em>object program</em> (chương trình đích) thực hiện về cơ bản cùng các thao tác trên <em>register</em> như <em>interpreter</em> khi đánh giá cùng một <em>source program</em>.</p>
+<p>Mô tả này gợi ý một chiến lược để triển khai một <em>compiler</em> sơ khai: Chúng ta duyệt qua <em>expression</em> theo cùng cách mà <em>interpreter</em> làm. Khi gặp một lệnh trên <em>register</em> mà <em>interpreter</em> sẽ thực hiện khi đánh giá <em>expression</em>, chúng ta không thực thi lệnh đó mà thay vào đó tích lũy nó vào một dãy lệnh. Dãy lệnh thu được sẽ là <em>object code</em> (mã đích). Hãy lưu ý lợi thế về hiệu suất của <em>compilation</em> (biên dịch) so với <em>interpretation</em> (thông dịch). Mỗi lần <em>interpreter</em> đánh giá một <em>expression</em> — ví dụ <code>(f 84 96)</code> — nó thực hiện công việc phân loại <em>expression</em> (phát hiện đây là một <em>procedure application</em> — lời gọi thủ tục) và kiểm tra kết thúc danh sách toán hạng (phát hiện rằng có hai toán hạng). Với <em>compiler</em>, <em>expression</em> chỉ được phân tích một lần, khi dãy lệnh được sinh ra tại thời điểm biên dịch. <em>Object code</em> do <em>compiler</em> tạo ra chỉ chứa các lệnh đánh giá <em>operator</em> và hai toán hạng, lắp ráp danh sách đối số, và áp dụng <em>procedure</em> (trong <code>proc</code>) cho các đối số (trong <code>argl</code>).</p>
+<p>Đây là cùng loại tối ưu hóa mà chúng ta đã triển khai trong <em>analyzing evaluator</em> (bộ đánh giá phân tích) ở mục 4.1.7. Nhưng vẫn còn nhiều cơ hội khác để tăng hiệu suất trong mã đã biên dịch. Khi <em>interpreter</em> chạy, nó tuân theo một quy trình phải áp dụng được cho bất kỳ <em>expression</em> nào trong ngôn ngữ. Ngược lại, một đoạn mã đã biên dịch cụ thể được tạo ra để thực thi một <em>expression</em> nhất định. Điều này có thể tạo ra sự khác biệt lớn, ví dụ trong việc sử dụng <em>stack</em> (ngăn xếp) để lưu <em>register</em>. Khi <em>interpreter</em> đánh giá một <em>expression</em>, nó phải chuẩn bị cho mọi tình huống. Trước khi đánh giá một <em>subexpression</em> (biểu thức con), <em>interpreter</em> lưu tất cả các <em>register</em> sẽ cần sau này, vì <em>subexpression</em> có thể yêu cầu một quá trình đánh giá bất kỳ. <em>Compiler</em>, ngược lại, có thể tận dụng cấu trúc của <em>expression</em> cụ thể mà nó đang xử lý để sinh ra mã tránh các thao tác <em>stack</em> không cần thiết.</p>
+<p>Ví dụ, xét <em>combination</em> <code>(f 84 96)</code>. Trước khi <em>interpreter</em> đánh giá <em>operator</em> của <em>combination</em>, nó chuẩn bị cho việc đánh giá này bằng cách lưu các <em>register</em> chứa các toán hạng và <em>environment</em>, những giá trị sẽ cần sau đó. <em>Interpreter</em> sau đó đánh giá <em>operator</em> để thu kết quả vào <code>val</code>, khôi phục các <em>register</em> đã lưu, và cuối cùng chuyển kết quả từ <code>val</code> sang <code>proc</code>. Tuy nhiên, trong <em>expression</em> cụ thể này, <em>operator</em> là ký hiệu <code>f</code>, việc đánh giá nó được thực hiện bởi <em>machine operation</em> (thao tác máy) <code>lookup-variable-value</code>, vốn không thay đổi bất kỳ <em>register</em> nào. <em>Compiler</em> mà chúng ta triển khai trong phần này sẽ tận dụng điều này và sinh ra mã đánh giá <em>operator</em> bằng lệnh:</p>
+<pre><code class="language-{.scheme}">(assign proc 
+        (op lookup-variable-value)
+        (const f)
+        (reg env))
+</code></pre>
+<p>Đoạn mã này không chỉ tránh việc lưu và khôi phục không cần thiết mà còn gán trực tiếp giá trị tra cứu vào <code>proc</code>, trong khi <em>interpreter</em> sẽ lấy kết quả vào <code>val</code> rồi mới chuyển sang <code>proc</code>.</p>
+<p>Một <em>compiler</em> cũng có thể tối ưu hóa việc truy cập <em>environment</em>. Sau khi phân tích mã, <em>compiler</em> trong nhiều trường hợp có thể biết biến cụ thể nằm ở <em>frame</em> (khung) nào và truy cập trực tiếp <em>frame</em> đó, thay vì thực hiện tìm kiếm <code>lookup-variable-value</code>. Chúng ta sẽ thảo luận cách triển khai việc truy cập biến như vậy ở mục 5.5.6. Cho đến lúc đó, chúng ta sẽ tập trung vào loại tối ưu hóa <em>register</em> và <em>stack</em> như đã mô tả ở trên. Có nhiều tối ưu hóa khác mà <em>compiler</em> có thể thực hiện, chẳng hạn như mã hóa các <em>primitive operation</em> (thao tác nguyên thủy) “<em>in line</em>” thay vì sử dụng cơ chế <code>apply</code> tổng quát (xem Bài tập 5.38); nhưng chúng ta sẽ không nhấn mạnh vào chúng ở đây. Mục tiêu chính của chúng ta trong phần này là minh họa quá trình <em>compilation</em> trong một bối cảnh đơn giản hóa (nhưng vẫn thú vị).</p>
+<h2 id="551-structure-of-the-compiler-cấu-trúc-của-compiler"><a class="header" href="#551-structure-of-the-compiler-cấu-trúc-của-compiler">5.5.1 Structure of the Compiler (Cấu trúc của <em>compiler</em>)</a></h2>
+<p>Trong mục 4.1.7, chúng ta đã chỉnh sửa <em>metacircular interpreter</em> (bộ thông dịch siêu vòng) ban đầu để tách biệt phân tích và thực thi. Chúng ta phân tích từng <em>expression</em> để tạo ra một <em>execution procedure</em> (thủ tục thực thi) nhận <em>environment</em> làm đối số và thực hiện các thao tác cần thiết. Trong <em>compiler</em>, chúng ta về cơ bản sẽ thực hiện cùng một phân tích. Tuy nhiên, thay vì tạo ra các <em>execution procedure</em>, chúng ta sẽ sinh ra các dãy lệnh để chạy trên <em>register machine</em> của mình.</p>
+<p><em>Procedure</em> <code>compile</code> là bộ phân phối (<em>dispatch</em>) cấp cao nhất trong <em>compiler</em>. Nó tương ứng với <em>procedure</em> <code>eval</code> ở mục 4.1.1, <em>procedure</em> <code>analyze</code> ở mục 4.1.7, và điểm vào <code>eval-dispatch</code> của <em>explicit-control-evaluator</em> (bộ đánh giá điều khiển tường minh) ở mục 5.4.1. <em>Compiler</em>, giống như các <em>interpreter</em>, sử dụng các <em>expression-syntax procedure</em> (thủ tục cú pháp biểu thức) được định nghĩa ở mục 4.1.2.<sup class="footnote-reference"><a href="#3">3</a></sup> <code>Compile</code> thực hiện phân tích theo từng trường hợp dựa trên loại cú pháp của <em>expression</em> cần biên dịch. Với mỗi loại <em>expression</em>, nó sẽ phân phối đến một <em>code generator</em> (bộ sinh mã) chuyên biệt:</p>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Tuy nhiên, hãy lưu ý rằng <em>compiler</em> của chúng ta là một chương trình Scheme, và các <em>syntax procedure</em> mà nó sử dụng để thao tác <em>expression</em> chính là các <em>Scheme procedure</em> thực tế được dùng với <em>metacircular evaluator</em>. Ngược lại, với <em>explicit-control evaluator</em>, chúng ta giả định rằng các thao tác cú pháp tương đương có sẵn như các <em>operation</em> cho <em>register machine</em>. (Tất nhiên, khi chúng ta mô phỏng <em>register machine</em> trong Scheme, chúng ta đã sử dụng các <em>Scheme procedure</em> thực tế trong mô phỏng đó.)</p>
+</div>
+<pre><code class="language-{.scheme}">(define (compile exp target linkage)
+  (cond ((self-evaluating? exp)
+         (compile-self-evaluating 
+          exp target linkage))
+        ((quoted? exp) 
+         (compile-quoted exp target linkage))
+        ((variable? exp)
+         (compile-variable 
+          exp target linkage))
+        ((assignment? exp)
+         (compile-assignment
+          exp target linkage))
+        ((definition? exp)
+         (compile-definition
+          exp target linkage))
+        ((if? exp)
+         (compile-if exp target linkage))
+        ((lambda? exp)
+         (compile-lambda exp target linkage))
+        ((begin? exp)
+         (compile-sequence 
+          (begin-actions exp) target linkage))
+        ((cond? exp) 
+         (compile 
+          (cond-&gt;if exp) target linkage))
+        ((application? exp)
+         (compile-application 
+          exp target linkage))
+        (else
+         (error &quot;Unknown expression type: 
+                 COMPILE&quot; 
+                exp))))
+</code></pre>
+<h3 id="targets-and-linkages-mục-tiêu-và-liên-kết"><a class="header" href="#targets-and-linkages-mục-tiêu-và-liên-kết">Targets and linkages (Mục tiêu và liên kết)</a></h3>
+<p><code>Compile</code> và các <em>code generator</em> (bộ sinh mã) mà nó gọi nhận hai đối số bổ sung ngoài <em>expression</em> (biểu thức) cần biên dịch. Có một <em>target</em> (mục tiêu), chỉ định <em>register</em> (thanh ghi) mà mã đã biên dịch sẽ trả về giá trị của <em>expression</em>. Ngoài ra còn có một <em>linkage descriptor</em> (bộ mô tả liên kết), mô tả cách mà mã thu được từ việc biên dịch <em>expression</em> sẽ tiếp tục khi nó đã hoàn tất việc thực thi. <em>Linkage descriptor</em> có thể yêu cầu mã thực hiện một trong ba việc sau:</p>
+<ul>
+<li>tiếp tục tại lệnh kế tiếp trong chuỗi (điều này được chỉ định bởi <em>linkage descriptor</em> <code>next</code>),</li>
+<li>trả về từ <em>procedure</em> (thủ tục) đang được biên dịch (điều này được chỉ định bởi <em>linkage descriptor</em> <code>return</code>), hoặc</li>
+<li>nhảy đến một <em>entry point</em> (điểm vào) được đặt tên (điều này được chỉ định bằng cách sử dụng <em>label</em> được chỉ định làm <em>linkage descriptor</em>).</li>
+</ul>
+<p>Ví dụ, biên dịch <em>expression</em> <code>5</code> (là <em>self-evaluating</em> — tự đánh giá) với <em>target</em> là <em>register</em> <code>val</code> và <em>linkage</em> là <code>next</code> sẽ tạo ra lệnh:</p>
+<pre><code class="language-{.scheme}">(assign val (const 5))
+</code></pre>
+<p>Biên dịch cùng <em>expression</em> đó với <em>linkage</em> là <code>return</code> sẽ tạo ra các lệnh:</p>
+<pre><code class="language-{.scheme}">(assign val (const 5))
+(goto (reg continue))
+</code></pre>
+<p>Trong trường hợp đầu tiên, việc thực thi sẽ tiếp tục với lệnh kế tiếp trong chuỗi. Trong trường hợp thứ hai, chúng ta sẽ trả về từ một lời gọi <em>procedure</em>. Trong cả hai trường hợp, giá trị của <em>expression</em> sẽ được đặt vào <em>target register</em> <code>val</code>.</p>
+<h3 id="instruction-sequences-and-stack-usage-chuỗi-lệnh-và-việc-sử-dụng-stack"><a class="header" href="#instruction-sequences-and-stack-usage-chuỗi-lệnh-và-việc-sử-dụng-stack">Instruction sequences and stack usage (Chuỗi lệnh và việc sử dụng <em>stack</em>)</a></h3>
+<p>Mỗi <em>code generator</em> trả về một <em>instruction sequence</em> (chuỗi lệnh) chứa <em>object code</em> (mã đích) mà nó đã sinh ra cho <em>expression</em>. Việc sinh mã cho một <em>compound expression</em> (biểu thức phức hợp) được thực hiện bằng cách kết hợp đầu ra từ các <em>code generator</em> đơn giản hơn cho các <em>component expression</em> (biểu thức thành phần), tương tự như việc đánh giá một <em>compound expression</em> được thực hiện bằng cách đánh giá các <em>component expression</em>.</p>
+<p>Phương pháp đơn giản nhất để kết hợp các <em>instruction sequence</em> là một <em>procedure</em> gọi là <code>append-instruction-sequences</code>. Nó nhận làm đối số bất kỳ số lượng <em>instruction sequence</em> nào cần được thực thi tuần tự; nó nối chúng lại và trả về chuỗi đã kết hợp. Nghĩa là, nếu $\langle\mspace{2mu} seq_{1}\rangle$ và $\langle\mspace{2mu} seq_{2}\rangle$ là các chuỗi lệnh, thì việc đánh giá</p>
+<pre><code class="language-{.scheme}">(append-instruction-sequences ⟨seq₁⟩ ⟨seq₂⟩)
+</code></pre>
+<p>sẽ tạo ra chuỗi:</p>
+<pre><code class="language-{.scheme}">⟨seq₁⟩
+⟨seq₂⟩
+</code></pre>
+<p>Bất cứ khi nào các <em>register</em> có thể cần được lưu, các <em>code generator</em> của <em>compiler</em> sẽ sử dụng <code>preserving</code>, đây là một phương pháp tinh vi hơn để kết hợp các <em>instruction sequence</em>. <code>Preserving</code> nhận ba đối số: một tập hợp <em>register</em> và hai <em>instruction sequence</em> cần được thực thi tuần tự. Nó nối các chuỗi theo cách mà nội dung của mỗi <em>register</em> trong tập hợp được bảo toàn trong suốt quá trình thực thi chuỗi thứ nhất, nếu điều này là cần thiết cho việc thực thi chuỗi thứ hai. Nghĩa là, nếu chuỗi thứ nhất thay đổi <em>register</em> và chuỗi thứ hai thực sự cần giá trị ban đầu của <em>register</em>, thì <code>preserving</code> sẽ bao bọc một lệnh <code>save</code> và một lệnh <code>restore</code> cho <em>register</em> đó xung quanh chuỗi thứ nhất trước khi nối các chuỗi. Nếu không, <code>preserving</code> chỉ đơn giản trả về các <em>instruction sequence</em> đã được nối. Do đó, ví dụ <code>(preserving (list ⟨reg₁⟩ ⟨reg₂⟩) ⟨seg₁⟩ ⟨seg₂⟩)</code> sẽ tạo ra một trong bốn chuỗi lệnh sau, tùy thuộc vào cách $\langle\mspace{2mu} seq_{1}\rangle$ và $\langle\mspace{2mu} seq_{2}\rangle$ sử dụng $\langle\mspace{2mu} reg_{1}\rangle$ và $\langle\mspace{2mu} reg_{2}\rangle$: </p>
+<p>....</p>
+<p>Bằng cách sử dụng <code>preserving</code> để kết hợp các <em>instruction sequence</em>, <em>compiler</em> tránh được các thao tác <em>stack</em> không cần thiết. Điều này cũng tách biệt chi tiết về việc có sinh ra lệnh <code>save</code> và <code>restore</code> hay không trong <em>procedure</em> <code>preserving</code>, tách chúng khỏi các vấn đề phát sinh khi viết từng <em>code generator</em> riêng lẻ. Thực tế, không có lệnh <code>save</code> hoặc <code>restore</code> nào được sinh ra một cách tường minh bởi các <em>code generator</em>.</p>
+<p>Về nguyên tắc, chúng ta có thể biểu diễn một <em>instruction sequence</em> đơn giản như một danh sách các lệnh. <code>Append-instruction-sequences</code> khi đó có thể kết hợp các <em>instruction sequence</em> bằng cách thực hiện phép nối (<em>append</em>) danh sách thông thường. Tuy nhiên, <code>preserving</code> khi đó sẽ là một thao tác phức tạp, vì nó sẽ phải phân tích từng <em>instruction sequence</em> để xác định cách chuỗi đó sử dụng các <em>register</em>. <code>Preserving</code> sẽ vừa kém hiệu quả vừa phức tạp, vì nó sẽ phải phân tích từng đối số <em>instruction sequence</em> của mình, ngay cả khi các chuỗi này có thể đã được tạo ra bởi các lời gọi <code>preserving</code>, trong trường hợp đó các phần của chúng đã được phân tích rồi. Để tránh việc phân tích lặp lại như vậy, chúng ta sẽ gắn kèm với mỗi <em>instruction sequence</em> một số thông tin về cách nó sử dụng <em>register</em>. Khi chúng ta tạo một <em>instruction sequence</em> cơ bản, chúng ta sẽ cung cấp thông tin này một cách tường minh, và các <em>procedure</em> kết hợp <em>instruction sequence</em> sẽ suy ra thông tin sử dụng <em>register</em> cho chuỗi kết hợp từ thông tin gắn với các chuỗi thành phần.</p>
+<p>Một <em>instruction sequence</em> sẽ chứa ba loại thông tin:</p>
+<ul>
+<li>tập hợp các <em>register</em> phải được khởi tạo trước khi các lệnh trong chuỗi được thực thi (các <em>register</em> này được gọi là <em>needed</em> — cần thiết — bởi chuỗi),</li>
+<li>tập hợp các <em>register</em> có giá trị bị thay đổi bởi các lệnh trong chuỗi, và</li>
+<li>các lệnh thực tế (cũng gọi là <em>statement</em>) trong chuỗi.</li>
+</ul>
+<p>Chúng ta sẽ biểu diễn một <em>instruction sequence</em> như một danh sách gồm ba phần này. <em>Constructor</em> (hàm tạo) cho <em>instruction sequence</em> như sau:</p>
+<pre><code class="language-{.scheme}">(define (make-instruction-sequence 
+         needs modifies statements)
+  (list needs modifies statements))
+</code></pre>
+<p>For example, the two-instruction sequence that looks up the value of the variable <code>x</code> in the current environment, assigns the result to <code>val</code>, and then returns, requires registers <code>env</code> and <code>continue</code> to have been initialized, and modifies register <code>val</code>. This sequence would therefore be constructed as</p>
+<pre><code class="language-{.scheme}">(make-instruction-sequence
+ '(env continue)
+ '(val)
+ '((assign val
+           (op lookup-variable-value)
+           (const x)
+           (reg env))
+   (goto (reg continue))))
+</code></pre>
+<p>We sometimes need to construct an instruction sequence with no statements:</p>
+<pre><code class="language-{.scheme}">(define (empty-instruction-sequence)
+  (make-instruction-sequence '() '() '()))
+</code></pre>
+<h2 id="552-compiling-expressions-biên-dịch-các-biểu-thức"><a class="header" href="#552-compiling-expressions-biên-dịch-các-biểu-thức">5.5.2 Compiling Expressions (Biên dịch các biểu thức)</a></h2>
+<p>Trong phần này và phần tiếp theo, chúng ta sẽ triển khai các <em>code generator</em> (bộ sinh mã) mà <em>procedure</em> (thủ tục) <code>compile</code> sẽ phân phối đến.</p>
+<h3 id="compiling-linkage-code-biên-dịch-mã-liên-kết"><a class="header" href="#compiling-linkage-code-biên-dịch-mã-liên-kết">Compiling linkage code (Biên dịch mã liên kết)</a></h3>
+<p>Nói chung, đầu ra của mỗi <em>code generator</em> sẽ kết thúc bằng các lệnh — được sinh ra bởi <em>procedure</em> <code>compile-linkage</code> — để thực hiện <em>linkage</em> (liên kết) yêu cầu. Nếu <em>linkage</em> là <code>return</code> thì chúng ta phải sinh ra lệnh <code>(goto (reg continue))</code>. Lệnh này cần <em>register</em> <code>continue</code> và không thay đổi bất kỳ <em>register</em> nào. Nếu <em>linkage</em> là <code>next</code>, thì chúng ta không cần thêm bất kỳ lệnh nào khác. Ngược lại, nếu <em>linkage</em> là một <em>label</em> (nhãn), chúng ta sẽ sinh ra một lệnh <code>goto</code> đến <em>label</em> đó, đây là một lệnh không cần hoặc thay đổi bất kỳ <em>register</em> nào.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<pre><code class="language-{.scheme}">(define (compile-linkage linkage)
+  (cond ((eq? linkage 'return)
+         (make-instruction-sequence 
+          '(continue)
+          '()
+          '((goto (reg continue)))))
+        ((eq? linkage 'next)
+         (empty-instruction-sequence))
+        (else
+         (make-instruction-sequence '() '()
+          `((goto (label ,linkage)))))))
+</code></pre>
+<p><em>Mã liên kết</em> được nối vào một <em>instruction sequence</em> (chuỗi lệnh) bằng cách <code>preserving</code> <em>register</em> <code>continue</code>, vì một <em>linkage</em> kiểu <code>return</code> sẽ yêu cầu <em>register</em> <code>continue</code>: Nếu <em>instruction sequence</em> đã cho thay đổi <code>continue</code> và <em>mã liên kết</em> cần nó, <code>continue</code> sẽ được lưu và khôi phục.</p>
+<pre><code class="language-{.scheme}">(define (end-with-linkage 
+         linkage instruction-sequence)
+  (preserving '(continue)
+   instruction-sequence
+   (compile-linkage linkage)))
+</code></pre>
+<h3 id="compiling-simple-expressions-biên-dịch-các-biểu-thức-đơn-giản"><a class="header" href="#compiling-simple-expressions-biên-dịch-các-biểu-thức-đơn-giản">Compiling simple expressions (Biên dịch các biểu thức đơn giản)</a></h3>
+<p>Các <em>code generator</em> cho <em>self-evaluating expression</em> (biểu thức tự đánh giá), <em>quotation</em> (trích dẫn), và <em>variable</em> (biến) sẽ tạo ra các <em>instruction sequence</em> gán giá trị cần thiết vào <em>target register</em> (thanh ghi đích) và sau đó tiếp tục như được chỉ định bởi <em>linkage descriptor</em> (bộ mô tả liên kết).</p>
+<pre><code class="language-{.scheme}">(define (compile-self-evaluating 
+         exp target linkage)
+  (end-with-linkage
+   linkage (make-instruction-sequence 
+            '()
+            (list target)
+            `((assign ,target (const ,exp))))))
+
+(define (compile-quoted exp target linkage)
+  (end-with-linkage
+   linkage
+   (make-instruction-sequence
+    '()
+    (list target)
+    `((assign 
+       ,target
+       (const ,(text-of-quotation exp)))))))
+
+(define (compile-variable
+         exp target linkage)
+  (end-with-linkage 
+   linkage
+   (make-instruction-sequence 
+    '(env)
+    (list target)
+    `((assign ,target
+              (op lookup-variable-value)
+              (const ,exp)
+              (reg env))))))
+</code></pre>
+<p>Tất cả các lệnh gán này đều thay đổi <em>target register</em>, và lệnh tra cứu một biến cần <em>register</em> <code>env</code>.</p>
+<p><em>Assignment</em> (gán) và <em>definition</em> (định nghĩa) được xử lý gần giống như trong <em>interpreter</em>. Chúng ta đệ quy sinh mã tính giá trị sẽ được gán cho biến, và nối vào đó một <em>instruction sequence</em> gồm hai lệnh thực sự đặt hoặc định nghĩa biến và gán giá trị của toàn bộ <em>expression</em> (ký hiệu <code>ok</code>) vào <em>target register</em>. Việc biên dịch đệ quy này có <em>target</em> là <code>val</code> và <em>linkage</em> là <code>next</code> để mã sẽ đặt kết quả vào <code>val</code> và tiếp tục với mã được nối sau nó. Việc nối này được thực hiện với <code>preserving</code> <em>env</em>, vì <em>environment</em> (môi trường) là cần thiết để đặt hoặc định nghĩa biến, và mã cho giá trị biến có thể là kết quả biên dịch của một <em>expression</em> phức tạp có thể thay đổi các <em>register</em> theo nhiều cách khác nhau.</p>
+<pre><code class="language-{.scheme}">(define (compile-assignment 
+         exp target linkage)
+  (let ((var (assignment-variable exp))
+        (get-value-code
+         (compile (assignment-value exp) 
+                  'val
+                  'next)))
+    (end-with-linkage 
+     linkage
+     (preserving 
+      '(env)
+      get-value-code
+      (make-instruction-sequence
+       '(env val)
+       (list target)
+       `((perform (op set-variable-value!)
+                  (const ,var)
+                  (reg val)
+                  (reg env))
+         (assign ,target (const ok))))))))
+
+(define (compile-definition 
+         exp target linkage)
+  (let ((var (definition-variable exp))
+        (get-value-code
+         (compile (definition-value exp)
+                  'val
+                  'next)))
+    (end-with-linkage
+     linkage
+     (preserving 
+      '(env)
+      get-value-code
+      (make-instruction-sequence
+       '(env val)
+       (list target)
+       `((perform (op define-variable!)
+                  (const ,var)
+                  (reg val)
+                  (reg env))
+         (assign ,target (const ok))))))))
+</code></pre>
+<p><em>Instruction sequence</em> gồm hai lệnh được nối thêm này yêu cầu <code>env</code> và <code>val</code> và thay đổi <em>target</em>. Lưu ý rằng mặc dù chúng ta bảo toàn <code>env</code> cho chuỗi này, nhưng chúng ta không bảo toàn <code>val</code>, vì <code>get-value-code</code> được thiết kế để đặt kết quả của nó vào <code>val</code> một cách tường minh để chuỗi này sử dụng. (Thực tế, nếu chúng ta bảo toàn <code>val</code>, chúng ta sẽ gặp lỗi, vì điều này sẽ khiến nội dung trước đó của <code>val</code> được khôi phục ngay sau khi <code>get-value-code</code> chạy.)</p>
+<h3 id="compiling-conditional-expressions-biên-dịch-các-biểu-thức-điều-kiện"><a class="header" href="#compiling-conditional-expressions-biên-dịch-các-biểu-thức-điều-kiện">Compiling conditional expressions (Biên dịch các biểu thức điều kiện)</a></h3>
+<p>Mã cho một <em>if expression</em> (biểu thức if) được biên dịch với một <em>target</em> và <em>linkage</em> cho trước có dạng:</p>
+<pre><code class="language-{.scheme}">⟨compilation of predicate, 
+ target val, linkage next⟩
+ (test (op false?) (reg val))
+ (branch (label false-branch))
+true-branch
+ ⟨compilation of consequent with given 
+  target and given linkage or after-if⟩
+false-branch
+ ⟨compilation of alternative 
+  with given target and linkage⟩
+after-if
+</code></pre>
+<p>Để sinh ra mã này, chúng ta biên dịch <em>predicate</em> (mệnh đề điều kiện), <em>consequent</em> (nhánh đúng), và <em>alternative</em> (nhánh sai), và kết hợp mã thu được với các lệnh để kiểm tra kết quả của <em>predicate</em> cùng với các <em>label</em> mới được tạo để đánh dấu các nhánh đúng và sai, cũng như điểm kết thúc của câu lệnh điều kiện.<sup class="footnote-reference"><a href="#5">5</a></sup> Trong cách sắp xếp mã này, chúng ta phải rẽ nhánh bỏ qua nhánh đúng nếu phép kiểm tra là sai. Chỉ có một chút phức tạp ở cách xử lý <em>linkage</em> cho nhánh đúng. Nếu <em>linkage</em> cho câu điều kiện là <code>return</code> hoặc một <em>label</em>, thì cả nhánh đúng và nhánh sai sẽ cùng sử dụng <em>linkage</em> này. Nếu <em>linkage</em> là <code>next</code>, nhánh đúng sẽ kết thúc bằng một lệnh nhảy qua mã của nhánh sai đến <em>label</em> ở cuối câu điều kiện.</p>
+<pre><code class="language-{.scheme}">(define (compile-if exp target linkage)
+  (let ((t-branch (make-label 'true-branch))
+        (f-branch (make-label 'false-branch))
+        (after-if (make-label 'after-if)))
+    (let ((consequent-linkage
+           (if (eq? linkage 'next) 
+               after-if
+               linkage)))
+      (let ((p-code 
+             (compile (if-predicate exp)
+                      'val
+                      'next))
+            (c-code
+             (compile (if-consequent exp) 
+                      target 
+                      consequent-linkage))
+            (a-code
+             (compile (if-alternative exp)
+                      target
+                      linkage)))
+        (preserving 
+         '(env continue)
+         p-code
+         (append-instruction-sequences
+          (make-instruction-sequence 
+           '(val) 
+           '()
+           `((test (op false?) (reg val))
+             (branch (label ,f-branch))))
+          (parallel-instruction-sequences
+           (append-instruction-sequences 
+            t-branch c-code)
+           (append-instruction-sequences
+            f-branch a-code))
+          after-if))))))
+</code></pre>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p><em>Procedure</em> này sử dụng một tính năng của Lisp gọi là <em>backquote</em> (hoặc <em>quasiquote</em>) rất tiện lợi để xây dựng danh sách. Đặt một ký hiệu <em>backquote</em> trước một danh sách gần giống như trích dẫn (<em>quote</em>) nó, ngoại trừ bất kỳ phần tử nào trong danh sách được đánh dấu bằng dấu phẩy sẽ được đánh giá.</p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Chúng ta không thể chỉ dùng các <em>label</em> <code>true-branch</code>, <code>false-branch</code>, và <code>after-if</code> như minh họa ở trên, vì có thể có nhiều hơn một câu lệnh <code>if</code> trong chương trình. <em>Compiler</em> sử dụng <em>procedure</em> <code>make-label</code> để tạo <em>label</em>. <code>Make-label</code> nhận một <em>symbol</em> làm đối số và trả về một <em>symbol</em> mới bắt đầu bằng <em>symbol</em> đã cho. Ví dụ, các lần gọi liên tiếp <code>(make-label 'a)</code> sẽ trả về <code>a1</code>, <code>a2</code>, v.v. <code>Make-label</code> có thể được triển khai tương tự như việc tạo tên biến duy nhất trong <em>query language</em> (ngôn ngữ truy vấn) như sau.</p>
+</div>
+<p><code>Env</code> được bảo toàn xung quanh mã <em>predicate</em> (mệnh đề điều kiện) vì nó có thể cần được sử dụng bởi cả nhánh đúng và nhánh sai, và <code>continue</code> được bảo toàn vì nó có thể cần cho mã <em>linkage</em> (liên kết) trong các nhánh đó. Mã cho các nhánh đúng và sai (không được thực thi tuần tự) được nối lại bằng một bộ kết hợp đặc biệt <code>parallel-instruction-sequences</code> được mô tả trong mục 5.5.4.</p>
+<p>Lưu ý rằng <code>cond</code> là một <em>derived expression</em> (biểu thức dẫn xuất), vì vậy tất cả những gì <em>compiler</em> (trình biên dịch) cần làm để xử lý nó là áp dụng <em>transformer</em> <code>cond-&gt;if</code> (từ mục 4.1.2) và biên dịch <em>if expression</em> (biểu thức if) thu được.</p>
+<h3 id="compiling-sequences-biên-dịch-các-chuỗi-lệnh"><a class="header" href="#compiling-sequences-biên-dịch-các-chuỗi-lệnh">Compiling sequences (Biên dịch các chuỗi lệnh)</a></h3>
+<p>Việc biên dịch các <em>sequence</em> (chuỗi lệnh) — từ phần thân <em>procedure</em> (thủ tục) hoặc các <em>begin</em> tường minh — tương tự như quá trình đánh giá chúng. Mỗi <em>expression</em> (biểu thức) trong chuỗi được biên dịch — <em>expression</em> cuối cùng với <em>linkage</em> được chỉ định cho chuỗi, và các <em>expression</em> khác với <em>linkage</em> là <code>next</code> (để thực thi phần còn lại của chuỗi). Các <em>instruction sequence</em> (chuỗi lệnh) cho từng <em>expression</em> riêng lẻ được nối lại để tạo thành một <em>instruction sequence</em> duy nhất, sao cho <code>env</code> (cần cho phần còn lại của chuỗi) và <code>continue</code> (có thể cần cho <em>linkage</em> ở cuối chuỗi) được bảo toàn.</p>
+<pre><code class="language-{.scheme}">(define (compile-sequence seq target linkage)
+  (if (last-exp? seq)
+      (compile (first-exp seq) target linkage)
+      (preserving '(env continue)
+       (compile (first-exp seq) target 'next)
+       (compile-sequence (rest-exps seq)
+                         target
+                         linkage))))
+</code></pre>
+<h3 id="compiling-lambda-expressions-biên-dịch-các-biểu-thức-lambda"><a class="header" href="#compiling-lambda-expressions-biên-dịch-các-biểu-thức-lambda">Compiling <code>lambda</code> expressions (Biên dịch các biểu thức <code>lambda</code>)</a></h3>
+<p>Các <em>lambda expression</em> (biểu thức lambda) tạo ra <em>procedure</em>. <em>Object code</em> (mã đích) cho một <em>lambda expression</em> phải có dạng:</p>
+<pre><code class="language-{.scheme}">⟨construct procedure object 
+ and assign it to target register⟩
+⟨linkage⟩
+</code></pre>
+<p>Khi chúng ta biên dịch <em>lambda expression</em>, chúng ta cũng sinh ra mã cho phần thân <em>procedure</em>. Mặc dù phần thân sẽ không được thực thi tại thời điểm tạo <em>procedure</em>, nhưng việc chèn nó vào <em>object code</em> ngay sau mã cho <em>lambda</em> là thuận tiện. Nếu <em>linkage</em> cho <em>lambda expression</em> là một <em>label</em> hoặc <code>return</code>, điều này là ổn. Nhưng nếu <em>linkage</em> là <code>next</code>, chúng ta sẽ cần bỏ qua mã cho phần thân <em>procedure</em> bằng cách sử dụng một <em>linkage</em> nhảy đến một <em>label</em> được chèn sau phần thân. <em>Object code</em> do đó sẽ có dạng:</p>
+<pre><code class="language-{.scheme}">⟨construct procedure object 
+ and assign it to target register⟩
+ ⟨code for given linkage⟩ or 
+  (goto (label after-lambda))
+ ⟨compilation of procedure body⟩
+after-lambda
+</code></pre>
+<p><code>Compile-lambda</code> sinh ra mã để tạo <em>procedure object</em> (đối tượng thủ tục) theo sau là mã cho phần thân <em>procedure</em>. <em>Procedure object</em> sẽ được tạo tại thời gian chạy bằng cách kết hợp <em>environment</em> hiện tại (môi trường tại thời điểm định nghĩa) với <em>entry point</em> (điểm vào) của phần thân <em>procedure</em> đã biên dịch (một <em>label</em> mới được tạo ra)<sup class="footnote-reference"><a href="#6">6</a></sup>.</p>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Chúng ta cần các <em>machine operation</em> (thao tác máy) để triển khai một cấu trúc dữ liệu biểu diễn các <em>compiled procedure</em> (thủ tục đã biên dịch), tương tự như cấu trúc cho <em>compound procedure</em> (thủ tục hợp) được mô tả trong mục 4.1.3.</p>
+</div>
+<pre><code class="language-{.scheme}">(define (compile-lambda exp target linkage)
+  (let ((proc-entry 
+         (make-label 'entry))
+        (after-lambda 
+         (make-label 'after-lambda)))
+    (let ((lambda-linkage
+           (if (eq? linkage 'next)
+               after-lambda
+               linkage)))
+      (append-instruction-sequences
+       (tack-on-instruction-sequence
+        (end-with-linkage 
+         lambda-linkage
+         (make-instruction-sequence 
+          '(env)
+          (list target)
+          `((assign 
+             ,target
+             (op make-compiled-procedure)
+             (label ,proc-entry)
+             (reg env)))))
+        (compile-lambda-body exp proc-entry))
+       after-lambda))))
+</code></pre>
+<p><code>Compile-lambda</code> sử dụng bộ kết hợp đặc biệt <code>tack-on-instruction-sequence</code> thay vì <code>append-instruction-sequences</code> (5.5.4) để nối phần thân <em>procedure</em> (thủ tục) vào mã của <em>lambda expression</em> (biểu thức lambda), bởi vì phần thân không phải là một phần của chuỗi lệnh sẽ được thực thi khi chuỗi kết hợp được bắt đầu; thay vào đó, nó nằm trong chuỗi chỉ vì đó là một vị trí thuận tiện để đặt nó.</p>
+<p><code>Compile-lambda-body</code> tạo mã cho phần thân của <em>procedure</em>. Mã này bắt đầu bằng một <em>label</em> (nhãn) cho <em>entry point</em> (điểm vào). Tiếp theo là các lệnh sẽ khiến <em>run-time evaluation environment</em> (môi trường đánh giá tại thời gian chạy) chuyển sang <em>environment</em> (môi trường) thích hợp để đánh giá phần thân <em>procedure</em> — cụ thể là <em>definition environment</em> (môi trường định nghĩa) của <em>procedure</em>, được mở rộng để bao gồm các <em>binding</em> (ràng buộc) của các <em>formal parameter</em> (tham số hình thức) với các đối số mà <em>procedure</em> được gọi. Sau đó là mã cho chuỗi các <em>expression</em> (biểu thức) tạo thành phần thân <em>procedure</em>. Chuỗi này được biên dịch với <em>linkage</em> là <code>return</code> và <em>target</em> là <code>val</code> để nó sẽ kết thúc bằng việc trả về từ <em>procedure</em> với kết quả nằm trong <code>val</code>.</p>
+<pre><code class="language-{.scheme}">(define (compile-lambda-body exp proc-entry)
+  (let ((formals (lambda-parameters exp)))
+    (append-instruction-sequences
+     (make-instruction-sequence 
+      '(env proc argl)
+      '(env)
+      `(,proc-entry
+        (assign env 
+                (op compiled-procedure-env)
+                (reg proc))
+        (assign env
+                (op extend-environment)
+                (const ,formals)
+                (reg argl)
+                (reg env))))
+     (compile-sequence (lambda-body exp)
+                       'val
+                       'return))))
+</code></pre>
+<h2 id="553-compiling-combinations-biên-dịch-các-tổ-hợp"><a class="header" href="#553-compiling-combinations-biên-dịch-các-tổ-hợp">5.5.3 Compiling Combinations (Biên dịch các tổ hợp)</a></h2>
+<p>Cốt lõi của quá trình <em>compilation</em> (biên dịch) là biên dịch các <em>procedure application</em> (lời gọi thủ tục). Mã cho một <em>combination</em> (tổ hợp) được biên dịch với một <em>target</em> và <em>linkage</em> cho trước có dạng:</p>
+<pre><code class="language-{.scheme}">⟨compilation of operator, 
+ target proc, linkage next⟩
+⟨evaluate operands and construct 
+ argument list in argl⟩
+⟨compilation of procedure call 
+ with given target and linkage⟩
+</code></pre>
+<p>Các <em>register</em> <code>env</code>, <code>proc</code>, và <code>argl</code> có thể cần được lưu và khôi phục trong quá trình đánh giá <em>operator</em> và <em>operand</em>. Lưu ý rằng đây là nơi duy nhất trong <em>compiler</em> (trình biên dịch) mà một <em>target</em> khác <code>val</code> được chỉ định.</p>
+<p>Mã cần thiết được sinh ra bởi <code>compile-application</code>. Thủ tục này đệ quy biên dịch <em>operator</em> để tạo mã đưa <em>procedure</em> cần áp dụng vào <code>proc</code>, và biên dịch các <em>operand</em> để tạo mã đánh giá từng <em>operand</em> riêng lẻ của <em>application</em>. Các <em>instruction sequence</em> (chuỗi lệnh) cho các <em>operand</em> được kết hợp (bởi <code>construct-arglist</code>) với mã tạo danh sách đối số trong <code>argl</code>, và mã danh sách đối số thu được được kết hợp với mã <em>procedure</em> và mã thực hiện lời gọi <em>procedure</em> (được sinh ra bởi <code>compile-procedure-call</code>). Khi nối các chuỗi mã, <em>register</em> <code>env</code> phải được bảo toàn xung quanh việc đánh giá <em>operator</em> (vì việc đánh giá <em>operator</em> có thể thay đổi <code>env</code>, vốn sẽ cần để đánh giá các <em>operand</em>), và <em>register</em> <code>proc</code> phải được bảo toàn xung quanh việc tạo danh sách đối số (vì việc đánh giá các <em>operand</em> có thể thay đổi <code>proc</code>, vốn sẽ cần cho việc áp dụng <em>procedure</em> thực tế). <code>Continue</code> cũng phải được bảo toàn trong suốt quá trình, vì nó cần cho <em>linkage</em> trong lời gọi <em>procedure</em>.</p>
+<pre><code class="language-{.scheme}">(define (compile-application 
+         exp target linkage)
+  (let ((proc-code 
+         (compile (operator exp) 'proc 'next))
+        (operand-codes
+         (map (lambda (operand)
+                (compile operand 'val 'next))
+              (operands exp))))
+    (preserving 
+     '(env continue)
+     proc-code
+     (preserving 
+      '(proc continue)
+      (construct-arglist operand-codes)
+      (compile-procedure-call 
+       target
+       linkage)))))
+</code></pre>
+<p>Mã để tạo danh sách đối số sẽ đánh giá từng <em>operand</em> vào <code>val</code> và sau đó <code>cons</code> giá trị đó vào danh sách đối số đang được tích lũy trong <code>argl</code>. Vì chúng ta <code>cons</code> các đối số vào <code>argl</code> theo thứ tự, chúng ta phải bắt đầu với đối số cuối cùng và kết thúc với đối số đầu tiên, để các đối số xuất hiện theo thứ tự từ đầu đến cuối trong danh sách kết quả. Thay vì lãng phí một lệnh để khởi tạo <code>argl</code> thành danh sách rỗng nhằm chuẩn bị cho chuỗi đánh giá này, chúng ta để chuỗi mã đầu tiên tạo <code>argl</code> ban đầu. Dạng tổng quát của việc tạo danh sách đối số như sau:</p>
+<pre><code class="language-{.scheme}">⟨compilation of last operand, targeted to val⟩
+(assign argl (op list) (reg val))
+⟨compilation of next operand, targeted to val⟩
+(assign argl (op cons) (reg val) (reg argl))
+…
+⟨compilation of first operand, targeted to val⟩
+(assign argl (op cons) (reg val) (reg argl))
+</code></pre>
+<p><code>Argl</code> phải được bảo toàn xung quanh mỗi lần đánh giá <em>operand</em> ngoại trừ lần đầu tiên (để các đối số đã tích lũy không bị mất), và <code>env</code> phải được bảo toàn xung quanh mỗi lần đánh giá <em>operand</em> ngoại trừ lần cuối (để sử dụng cho các lần đánh giá <em>operand</em> tiếp theo).</p>
+<p>Việc biên dịch mã đối số này hơi phức tạp, vì cách xử lý đặc biệt đối với <em>operand</em> đầu tiên được đánh giá và nhu cầu bảo toàn <code>argl</code> và <code>env</code> ở các vị trí khác nhau. <em>Procedure</em> <code>construct-arglist</code> nhận làm đối số mã đánh giá từng <em>operand</em> riêng lẻ. Nếu không có <em>operand</em> nào, nó chỉ đơn giản phát ra lệnh:</p>
+<pre><code class="language-{.scheme}">(assign argl (const ()))
+</code></pre>
+<p>Ngược lại, <code>construct-arglist</code> tạo mã khởi tạo <code>argl</code> với đối số cuối cùng, và nối thêm mã đánh giá các đối số còn lại và gắn chúng vào <code>argl</code> lần lượt. Để xử lý các đối số từ cuối đến đầu, chúng ta phải đảo ngược danh sách các chuỗi mã <em>operand</em> từ thứ tự được cung cấp bởi <code>compile-application</code>.</p>
+<pre><code class="language-{.scheme}">(define (construct-arglist operand-codes)
+  (let ((operand-codes 
+         (reverse operand-codes)))
+    (if (null? operand-codes)
+        (make-instruction-sequence 
+         '() 
+         '(argl)
+         '((assign argl (const ()))))
+        (let ((code-to-get-last-arg
+               (append-instruction-sequences
+                (car operand-codes)
+                (make-instruction-sequence 
+                 '(val)
+                 '(argl)
+                 '((assign argl
+                           (op list)
+                           (reg val)))))))
+          (if (null? (cdr operand-codes))
+              code-to-get-last-arg
+              (preserving 
+               '(env)
+               code-to-get-last-arg
+               (code-to-get-rest-args
+                (cdr operand-codes))))))))
+
+(define (code-to-get-rest-args operand-codes)
+  (let ((code-for-next-arg
+         (preserving 
+          '(argl)
+          (car operand-codes)
+          (make-instruction-sequence 
+           '(val argl)
+           '(argl)
+           '((assign argl
+                     (op cons)
+                     (reg val)
+                     (reg argl)))))))
+    (if (null? (cdr operand-codes))
+        code-for-next-arg
+        (preserving 
+         '(env)
+         code-for-next-arg
+         (code-to-get-rest-args 
+          (cdr operand-codes))))))
+</code></pre>
+<h3 id="applying-procedures-Áp-dụng-các-thủ-tục"><a class="header" href="#applying-procedures-Áp-dụng-các-thủ-tục">Applying procedures (Áp dụng các thủ tục)</a></h3>
+<p>Sau khi đánh giá các thành phần của một <em>combination</em>, mã đã biên dịch phải áp dụng <em>procedure</em> trong <code>proc</code> cho các đối số trong <code>argl</code>. Mã này thực hiện về cơ bản cùng một <em>dispatch</em> (phân phối) như <em>procedure</em> <code>apply</code> trong <em>metacircular evaluator</em> (bộ đánh giá siêu vòng) ở mục 4.1.1 hoặc <em>entry point</em> <code>apply-dispatch</code> trong <em>explicit-control evaluator</em> (bộ đánh giá điều khiển tường minh) ở mục 5.4.1. Nó kiểm tra xem <em>procedure</em> cần áp dụng là <em>primitive procedure</em> (thủ tục nguyên thủy) hay <em>compiled procedure</em> (thủ tục đã biên dịch). Với <em>primitive procedure</em>, nó sử dụng <code>apply-primitive-procedure</code>; chúng ta sẽ sớm thấy cách nó xử lý <em>compiled procedure</em>. Mã áp dụng <em>procedure</em> có dạng sau:</p>
+<pre><code class="language-{.scheme}">(test (op primitive-procedure?) (reg proc))
+ (branch (label primitive-branch))
+compiled-branch
+ ⟨code to apply compiled procedure 
+  with given target and appropriate linkage⟩
+primitive-branch
+ (assign ⟨target⟩
+         (op apply-primitive-procedure)
+         (reg proc)
+         (reg argl))
+ ⟨linkage⟩
+after-call
+</code></pre>
+<p>Lưu ý rằng nhánh <em>compiled</em> phải bỏ qua nhánh <em>primitive</em>. Do đó, nếu <em>linkage</em> cho lời gọi <em>procedure</em> ban đầu là <code>next</code>, nhánh hợp này phải sử dụng một <em>linkage</em> nhảy đến một <em>label</em> được chèn sau nhánh <em>primitive</em>. (Điều này tương tự như <em>linkage</em> được sử dụng cho nhánh đúng trong <code>compile-if</code>.)</p>
+<pre><code class="language-{.scheme}">(define (compile-procedure-call
+         target linkage)
+  (let ((primitive-branch 
+         (make-label 'primitive-branch))
+        (compiled-branch 
+         (make-label 'compiled-branch))
+        (after-call
+         (make-label 'after-call)))
+    (let ((compiled-linkage
+           (if (eq? linkage 'next)
+               after-call
+               linkage)))
+      (append-instruction-sequences
+       (make-instruction-sequence 
+        '(proc)
+        '()
+        `((test 
+           (op primitive-procedure?)
+           (reg proc))
+          (branch 
+           (label ,primitive-branch))))
+       (parallel-instruction-sequences
+        (append-instruction-sequences
+         compiled-branch
+         (compile-proc-appl 
+          target
+          compiled-linkage))
+        (append-instruction-sequences
+         primitive-branch
+         (end-with-linkage
+          linkage
+          (make-instruction-sequence
+           '(proc argl)
+           (list target)
+           `((assign 
+              ,target
+              (op apply-primitive-procedure)
+              (reg proc)
+              (reg argl)))))))
+       after-call))))
+</code></pre>
+<p>Các nhánh <em>primitive</em> (nguyên thủy) và <em>compound</em> (hợp), giống như các nhánh <em>true</em> và <em>false</em> trong <code>compile-if</code>, được nối bằng <code>parallel-instruction-sequences</code> thay vì <code>append-instruction-sequences</code> thông thường, vì chúng sẽ không được thực thi tuần tự.</p>
+<h3 id="applying-compiled-procedures-Áp-dụng-các-thủ-tục-đã-biên-dịch"><a class="header" href="#applying-compiled-procedures-Áp-dụng-các-thủ-tục-đã-biên-dịch">Applying compiled procedures (Áp dụng các thủ tục đã biên dịch)</a></h3>
+<p>Mã xử lý <em>procedure application</em> (lời gọi thủ tục) là phần tinh vi nhất của <em>compiler</em> (trình biên dịch), mặc dù các <em>instruction sequence</em> (chuỗi lệnh) mà nó sinh ra rất ngắn. Một <em>compiled procedure</em> (thủ tục đã biên dịch) — như được tạo bởi <code>compile-lambda</code> — có một <em>entry point</em> (điểm vào), là một <em>label</em> (nhãn) chỉ định nơi mã của <em>procedure</em> bắt đầu. Mã tại <em>entry point</em> này tính toán một kết quả trong <code>val</code> và trả về bằng cách thực thi lệnh <code>(goto (reg continue))</code>. Do đó, chúng ta có thể kỳ vọng mã cho một <em>compiled-procedure application</em> (được sinh ra bởi <code>compile-proc-appl</code>) với một <em>target</em> và <em>linkage</em> cho trước sẽ trông như sau nếu <em>linkage</em> là một <em>label</em>:</p>
+<pre><code class="language-{.scheme}">(assign continue 
+        (label proc-return))
+ (assign val
+         (op compiled-procedure-entry)
+         (reg proc))
+ (goto (reg val))
+proc-return
+ (assign ⟨target⟩ 
+         (reg val))   ; included if target is not val
+ (goto (label ⟨linkage⟩))   ; linkage code
+</code></pre>
+<p>hoặc như sau nếu <em>linkage</em> là <code>return</code>:</p>
+<pre><code class="language-{.scheme}">(save continue)
+ (assign continue 
+         (label proc-return))
+ (assign val 
+         (op compiled-procedure-entry)
+         (reg proc))
+ (goto (reg val))
+proc-return
+ (assign ⟨target⟩
+         (reg val))   ; included if target is not val
+ (restore continue)
+ (goto (reg continue))   ; linkage code
+</code></pre>
+<p>Đoạn mã này thiết lập <code>continue</code> để <em>procedure</em> sẽ trả về một <em>label</em> <code>proc-return</code> và nhảy đến <em>entry point</em> của <em>procedure</em>. Mã tại <code>proc-return</code> sẽ chuyển kết quả của <em>procedure</em> từ <code>val</code> sang <em>target register</em> (nếu cần) và sau đó nhảy đến vị trí được chỉ định bởi <em>linkage</em>. (<em>Linkage</em> luôn là <code>return</code> hoặc một <em>label</em>, vì <code>compile-procedure-call</code> thay thế một <em>linkage</em> <code>next</code> cho nhánh <em>compound-procedure</em> bằng một <em>label</em> <code>after-call</code>.)</p>
+<p>Thực tế, nếu <em>target</em> không phải là <code>val</code>, đó chính xác là mã mà <em>compiler</em> của chúng ta sẽ sinh ra. Tuy nhiên, thông thường <em>target</em> là <code>val</code> (thời điểm duy nhất <em>compiler</em> chỉ định một <em>register</em> khác là khi nhắm mục tiêu đánh giá một <em>operator</em> vào <code>proc</code>), vì vậy kết quả của <em>procedure</em> được đưa trực tiếp vào <em>target register</em> và không cần quay lại một vị trí đặc biệt để sao chép nó. Thay vào đó, chúng ta đơn giản hóa mã bằng cách thiết lập <code>continue</code> để <em>procedure</em> sẽ “trả về” trực tiếp đến vị trí được chỉ định bởi <em>linkage</em> của lời gọi:</p>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Thực ra, chúng ta sẽ báo lỗi khi <em>target</em> không phải là <code>val</code> và <em>linkage</em> là <code>return</code>, vì nơi duy nhất chúng ta yêu cầu <em>linkage</em> <code>return</code> là khi biên dịch <em>procedure</em>, và quy ước của chúng ta là các <em>procedure</em> trả về giá trị của chúng trong <code>val</code>.</p>
+</div>
+<pre><code class="language-{.scheme}">⟨set up continue for linkage⟩
+(assign val 
+        (op compiled-procedure-entry)
+        (reg proc))
+(goto (reg val))
+</code></pre>
+<p>Nếu <em>linkage</em> là một <em>label</em>, chúng ta thiết lập <code>continue</code> để <em>procedure</em> sẽ trả về <em>label</em> đó. (Tức là, <code>(goto (reg continue))</code> mà <em>procedure</em> kết thúc sẽ tương đương với <code>(goto (label ⟨linkage⟩))</code> tại <code>proc-return</code> ở trên.)</p>
+<pre><code class="language-{.scheme}">(assign continue 
+        (label ⟨linkage⟩))
+(assign val
+        (op compiled-procedure-entry)
+        (reg proc))
+(goto (reg val))
+</code></pre>
+<p>Nếu <em>linkage</em> là <code>return</code>, chúng ta không cần thiết lập <code>continue</code> nữa: Nó đã chứa sẵn vị trí mong muốn. (Tức là, <code>(goto (reg continue))</code> mà <em>procedure</em> kết thúc sẽ đi thẳng đến nơi mà <code>(goto (reg continue))</code> tại <code>proc-return</code> sẽ đi tới.)</p>
+<pre><code class="language-{.scheme}">(assign val
+        (op compiled-procedure-entry)
+        (reg proc))
+(goto (reg val))
+</code></pre>
+<p>Với cách triển khai <em>linkage</em> <code>return</code> này, <em>compiler</em> sinh ra mã <em>tail-recursive</em> (đệ quy đuôi). Gọi một <em>procedure</em> như bước cuối cùng trong phần thân <em>procedure</em> sẽ thực hiện một chuyển giao trực tiếp, không lưu bất kỳ thông tin nào trên <em>stack</em>.</p>
+<p>Giả sử thay vào đó, chúng ta xử lý trường hợp gọi <em>procedure</em> với <em>linkage</em> <code>return</code> và <em>target</em> là <code>val</code> như đã trình bày ở trên cho <em>target</em> khác <code>val</code>. Điều này sẽ phá vỡ <em>tail recursion</em> (đệ quy đuôi). Hệ thống của chúng ta vẫn sẽ cho cùng một giá trị cho bất kỳ <em>expression</em> nào. Nhưng mỗi lần gọi <em>procedure</em>, chúng ta sẽ lưu <code>continue</code> và trả về sau lời gọi để hoàn tác việc lưu (vô ích) đó. Các lần lưu thừa này sẽ tích tụ trong một chuỗi lồng nhau của các lời gọi <em>procedure</em><sup class="footnote-reference"><a href="#8">8</a></sup>.</p>
+<p><code>Compile-proc-appl</code> sinh ra mã <em>procedure-application</em> ở trên bằng cách xét bốn trường hợp, tùy thuộc vào việc <em>target</em> cho lời gọi có phải là <code>val</code> hay không và <em>linkage</em> có phải là <code>return</code> hay không. Lưu ý rằng các <em>instruction sequence</em> được khai báo là thay đổi tất cả các <em>register</em>, vì việc thực thi phần thân <em>procedure</em> có thể thay đổi các <em>register</em> theo nhiều cách tùy ý. Cũng lưu ý rằng chuỗi mã cho trường hợp <em>target</em> là <code>val</code> và <em>linkage</em> là <code>return</code> được khai báo là cần <code>continue</code>: Mặc dù <code>continue</code> không được sử dụng tường minh trong chuỗi lệnh gồm hai câu lệnh này, chúng ta phải đảm bảo rằng <code>continue</code> sẽ có giá trị chính xác khi chúng ta vào <em>compiled procedure</em>.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Việc làm cho <em>compiler</em> sinh ra mã <em>tail-recursive</em> có thể có vẻ là một ý tưởng đơn giản. Nhưng hầu hết các <em>compiler</em> cho các ngôn ngữ phổ biến, bao gồm C và Pascal, không làm điều này, và do đó các ngôn ngữ này không thể biểu diễn các quá trình lặp chỉ bằng lời gọi <em>procedure</em>. Khó khăn với <em>tail recursion</em> trong các ngôn ngữ này là việc triển khai của chúng sử dụng <em>stack</em> để lưu trữ đối số và biến cục bộ của <em>procedure</em> cũng như địa chỉ trả về. Các bản triển khai Scheme được mô tả trong sách này lưu trữ đối số và biến trong bộ nhớ để được <em>garbage-collected</em> (thu gom rác). Lý do sử dụng <em>stack</em> cho biến và đối số là để tránh nhu cầu <em>garbage collection</em> trong các ngôn ngữ vốn không yêu cầu nó, và thường được cho là hiệu quả hơn. Các <em>Lisp compiler</em> tinh vi thực tế có thể sử dụng <em>stack</em> cho đối số mà không phá vỡ <em>tail recursion</em>. (Xem Hanson 1990 để biết mô tả.) Cũng có một số tranh luận về việc liệu phân bổ trên <em>stack</em> thực sự hiệu quả hơn <em>garbage collection</em> ngay từ đầu hay không, nhưng chi tiết dường như phụ thuộc vào các yếu tố tinh vi của kiến trúc máy tính. (Xem Appel 1987 và Miller và Rozas 1994 để biết các quan điểm đối lập về vấn đề này.)</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Biến <code>all-regs</code> được gán với danh sách tên của tất cả các <em>register</em>:...</p>
+</div>
+<pre><code class="language-{.scheme}">(define (compile-proc-appl target linkage)
+  (cond ((and (eq? target 'val)
+              (not (eq? linkage 'return)))
+         (make-instruction-sequence 
+          '(proc)
+          all-regs
+          `((assign continue (label ,linkage))
+            (assign 
+             val 
+             (op compiled-procedure-entry)
+             (reg proc))
+            (goto (reg val)))))
+        ((and (not (eq? target 'val))
+              (not (eq? linkage 'return)))
+         (let ((proc-return 
+                (make-label 'proc-return)))
+           (make-instruction-sequence 
+            '(proc)
+            all-regs
+            `((assign continue 
+                      (label ,proc-return))
+              (assign 
+               val 
+               (op compiled-procedure-entry)
+               (reg proc))
+              (goto (reg val))
+              ,proc-return
+              (assign ,target (reg val))
+              (goto (label ,linkage))))))
+        ((and (eq? target 'val)
+              (eq? linkage 'return))
+         (make-instruction-sequence 
+          '(proc continue) 
+          all-regs
+          '((assign 
+             val 
+             (op compiled-procedure-entry)
+             (reg proc))
+            (goto (reg val)))))
+        ((and (not (eq? target 'val))
+              (eq? linkage 'return))
+         (error &quot;return linkage, 
+                 target not val: COMPILE&quot;
+                target))))
+</code></pre>
+<h2 id="554-combining-instruction-sequences-kết-hợp-các-chuỗi-lệnh"><a class="header" href="#554-combining-instruction-sequences-kết-hợp-các-chuỗi-lệnh">5.5.4 Combining Instruction Sequences (Kết hợp các chuỗi lệnh)</a></h2>
+<p>Phần này mô tả chi tiết cách các <em>instruction sequence</em> (chuỗi lệnh) được biểu diễn và kết hợp. Nhắc lại từ mục 5.5.1 rằng một <em>instruction sequence</em> được biểu diễn như một danh sách gồm các <em>register</em> (thanh ghi) cần thiết, các <em>register</em> bị thay đổi, và các lệnh thực tế. Chúng ta cũng sẽ coi một <em>label</em> (nhãn, ký hiệu) là một trường hợp suy biến của <em>instruction sequence</em>, vốn không cần hoặc thay đổi bất kỳ <em>register</em> nào. Vì vậy, để xác định các <em>register</em> cần và bị thay đổi bởi các <em>instruction sequence</em>, chúng ta sử dụng các <em>selector</em> (bộ chọn):</p>
+<pre><code class="language-{.scheme}">(define (registers-needed s)
+  (if (symbol? s) '() (car s)))
+(define (registers-modified s)
+  (if (symbol? s) '() (cadr s)))
+(define (statements s)
+  (if (symbol? s) (list s) (caddr s)))
+</code></pre>
+<p>và để xác định xem một chuỗi cho trước có cần hoặc thay đổi một <em>register</em> cho trước hay không, chúng ta sử dụng các <em>predicate</em> (hàm điều kiện):</p>
+<pre><code class="language-{.scheme}">(define (needs-register? seq reg)
+  (memq reg (registers-needed seq)))
+(define (modifies-register? seq reg)
+  (memq reg (registers-modified seq)))
+</code></pre>
+<p>Dựa trên các <em>predicate</em> và <em>selector</em> này, chúng ta có thể triển khai các bộ kết hợp <em>instruction sequence</em> khác nhau được sử dụng trong toàn bộ <em>compiler</em> (trình biên dịch).</p>
+<p>Bộ kết hợp cơ bản là <code>append-instruction-sequences</code>. Nó nhận một số lượng tùy ý các <em>instruction sequence</em> cần được thực thi tuần tự và trả về một <em>instruction sequence</em> có các <em>statement</em> (câu lệnh) là sự nối tiếp của tất cả các chuỗi. Điểm tinh tế là xác định các <em>register</em> cần và bị thay đổi bởi chuỗi kết quả. Nó thay đổi những <em>register</em> bị thay đổi bởi bất kỳ chuỗi nào; nó cần những <em>register</em> phải được khởi tạo trước khi chuỗi đầu tiên có thể chạy (các <em>register</em> cần bởi chuỗi đầu tiên), cùng với những <em>register</em> cần bởi bất kỳ chuỗi nào khác mà không được khởi tạo (bị thay đổi) bởi các chuỗi trước đó.</p>
+<p>Các chuỗi được nối từng cặp một bởi <code>append-2-sequences</code>. Thủ tục này nhận hai <em>instruction sequence</em> <code>seq1</code> và <code>seq2</code> và trả về một <em>instruction sequence</em> có các <em>statement</em> là các <em>statement</em> của <code>seq1</code> theo sau bởi các <em>statement</em> của <code>seq2</code>, có các <em>register</em> bị thay đổi là hợp của các <em>register</em> bị thay đổi bởi <code>seq1</code> hoặc <code>seq2</code>, và có các <em>register</em> cần là hợp của các <em>register</em> cần bởi <code>seq1</code> với hiệu của các <em>register</em> cần bởi <code>seq2</code> và các <em>register</em> bị thay đổi bởi <code>seq1</code>. (Xét theo phép toán tập hợp, tập <em>register</em> cần mới là hợp của tập <em>register</em> cần bởi <code>seq1</code> với hiệu của tập <em>register</em> cần bởi <code>seq2</code> và tập <em>register</em> bị thay đổi bởi <code>seq1</code>.) Do đó, <code>append-instruction-sequences</code> được triển khai như sau:</p>
+<pre><code class="language-{.scheme}">(define (append-instruction-sequences . seqs)
+  (define (append-2-sequences seq1 seq2)
+    (make-instruction-sequence
+     (list-union 
+      (registers-needed seq1)
+      (list-difference 
+       (registers-needed seq2)
+       (registers-modified seq1)))
+     (list-union
+      (registers-modified seq1)
+      (registers-modified seq2))
+     (append (statements seq1)
+             (statements seq2))))
+  (define (append-seq-list seqs)
+    (if (null? seqs)
+        (empty-instruction-sequence)
+        (append-2-sequences 
+         (car seqs)
+         (append-seq-list (cdr seqs)))))
+  (append-seq-list seqs))
+</code></pre>
+<p>Thủ tục này sử dụng một số phép toán đơn giản để thao tác các tập hợp được biểu diễn dưới dạng danh sách, tương tự như biểu diễn tập hợp (không có thứ tự) được mô tả trong mục 2.3.3:</p>
+<pre><code class="language-{.scheme}">(define (list-union s1 s2)
+  (cond ((null? s1) s2)
+        ((memq (car s1) s2)
+         (list-union (cdr s1) s2))
+        (else
+         (cons (car s1)
+               (list-union (cdr s1) s2)))))
+
+(define (list-difference s1 s2)
+  (cond ((null? s1) '())
+        ((memq (car s1) s2)
+         (list-difference (cdr s1) s2))
+        (else 
+         (cons (car s1)
+               (list-difference (cdr s1)
+                                s2)))))
+</code></pre>
+<p><code>Preserving</code>, bộ kết hợp <em>instruction sequence</em> quan trọng thứ hai, nhận một danh sách <em>register</em> <code>regs</code> và hai <em>instruction sequence</em> <code>seq1</code> và <code>seq2</code> cần được thực thi tuần tự. Nó trả về một <em>instruction sequence</em> có các <em>statement</em> là các <em>statement</em> của <code>seq1</code> theo sau bởi các <em>statement</em> của <code>seq2</code>, với các lệnh <code>save</code> và <code>restore</code> thích hợp bao quanh <code>seq1</code> để bảo vệ các <em>register</em> trong <code>regs</code> bị thay đổi bởi <code>seq1</code> nhưng cần bởi <code>seq2</code>. Để thực hiện điều này, <code>preserving</code> trước tiên tạo một chuỗi có các lệnh <code>save</code> cần thiết theo sau bởi các <em>statement</em> của <code>seq1</code> và tiếp đó là các lệnh <code>restore</code> cần thiết. Chuỗi này cần các <em>register</em> đang được lưu và khôi phục ngoài các <em>register</em> cần bởi <code>seq1</code>, và thay đổi các <em>register</em> bị thay đổi bởi <code>seq1</code> ngoại trừ những <em>register</em> đang được lưu và khôi phục. Chuỗi đã được bổ sung này và <code>seq2</code> sau đó được nối theo cách thông thường. Thủ tục sau triển khai chiến lược này một cách đệ quy, duyệt xuống danh sách các <em>register</em> cần bảo toàn:<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<pre><code class="language-{.scheme}">(define (preserving regs seq1 seq2)
+  (if (null? regs)
+      (append-instruction-sequences seq1 seq2)
+      (let ((first-reg (car regs)))
+        (if (and 
+             (needs-register? seq2 first-reg)
+             (modifies-register? seq1 
+                                 first-reg))
+            (preserving 
+             (cdr regs)
+             (make-instruction-sequence
+              (list-union 
+               (list first-reg)
+               (registers-needed seq1))
+              (list-difference
+               (registers-modified seq1)
+               (list first-reg))
+              (append `((save ,first-reg))
+                      (statements seq1)
+                      `((restore ,first-reg))))
+             seq2)
+            (preserving 
+             (cdr regs)
+             seq1
+             seq2)))))
+</code></pre>
+<p>Một bộ kết hợp chuỗi khác, <code>tack-on-instruction-sequence</code>, được <code>compile-lambda</code> sử dụng để nối phần thân <em>procedure</em> vào một chuỗi khác. Bởi vì phần thân <em>procedure</em> không được thực thi “<em>in line</em>” như một phần của chuỗi kết hợp, việc sử dụng <em>register</em> của nó không ảnh hưởng đến việc sử dụng <em>register</em> của chuỗi mà nó được nhúng vào. Do đó, chúng ta bỏ qua các tập <em>register</em> cần và bị thay đổi của phần thân <em>procedure</em> khi nối nó vào chuỗi khác.</p>
+<pre><code class="language-{.scheme}">(define (tack-on-instruction-sequence 
+         seq body-seq)
+  (make-instruction-sequence
+   (registers-needed seq)
+   (registers-modified seq)
+   (append (statements seq)
+           (statements body-seq))))
+</code></pre>
+<p><code>Compile-if</code> và <code>compile-procedure-call</code> sử dụng một bộ kết hợp đặc biệt gọi là <code>parallel-instruction-sequences</code> để nối hai nhánh thay thế theo sau một phép kiểm tra. Hai nhánh này sẽ không bao giờ được thực thi tuần tự; với mỗi lần đánh giá phép kiểm tra, chỉ một trong hai nhánh được thực thi. Vì lý do này, các <em>register</em> cần bởi nhánh thứ hai vẫn cần cho chuỗi kết hợp, ngay cả khi chúng bị thay đổi bởi nhánh thứ nhất.</p>
+<pre><code class="language-{.scheme}">(define (parallel-instruction-sequences 
+         seq1 seq2)
+  (make-instruction-sequence
+   (list-union (registers-needed seq1)
+               (registers-needed seq2))
+   (list-union (registers-modified seq1)
+               (registers-modified seq2))
+   (append (statements seq1)
+           (statements seq2))))
+</code></pre>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Lưu ý rằng <code>preserving</code> gọi <code>append</code> với ba đối số. Mặc dù định nghĩa của <code>append</code> được trình bày trong sách này chỉ chấp.....</p>
+</div>
+<h2 id="555-một-ví-dụ-về-mã-đã-biên-dịch"><a class="header" href="#555-một-ví-dụ-về-mã-đã-biên-dịch">5.5.5 Một ví dụ về mã đã biên dịch</a></h2>
+<p>Bây giờ khi chúng ta đã thấy tất cả các thành phần của <em>compiler</em> (trình biên dịch), hãy xem xét một ví dụ về mã đã biên dịch để thấy cách mọi thứ kết hợp với nhau. Chúng ta sẽ biên dịch định nghĩa của một <em>procedure</em> (thủ tục) đệ quy <code>factorial</code> bằng cách gọi <code>compile</code>:</p>
+<pre><code class="language-{.scheme}">(compile
+ '(define (factorial n)
+    (if (= n 1)
+        1
+        (* (factorial (- n 1)) n)))
+ 'val
+ 'next)
+</code></pre>
+<p>Chúng ta đã chỉ định rằng giá trị của <em>expression</em> <code>define</code> sẽ được đặt vào <em>register</em> <code>val</code>. Chúng ta không quan tâm mã đã biên dịch sẽ làm gì sau khi thực thi <code>define</code>, vì vậy việc chọn <code>next</code> làm <em>linkage descriptor</em> (bộ mô tả liên kết) là tùy ý.</p>
+<p><code>Compile</code> xác định rằng <em>expression</em> là một <em>definition</em> (định nghĩa), vì vậy nó gọi <code>compile-definition</code> để biên dịch mã tính giá trị sẽ được gán (với <em>target</em> là <code>val</code>), tiếp theo là mã cài đặt định nghĩa, tiếp theo là mã đặt giá trị của <code>define</code> (là ký hiệu <code>ok</code>) vào <em>target register</em>, và cuối cùng là mã <em>linkage</em>. <code>Env</code> được bảo toàn xung quanh quá trình tính giá trị, vì nó cần thiết để cài đặt định nghĩa. Vì <em>linkage</em> là <code>next</code>, nên trong trường hợp này không có mã <em>linkage</em>. Khung của mã đã biên dịch do đó là:</p>
+<pre><code class="language-{.scheme}">⟨save env if modified by code to compute value⟩
+  ⟨compilation of definition value, 
+   target val, linkage next⟩
+  ⟨restore env if saved above⟩
+  (perform (op define-variable!)
+           (const factorial)
+           (reg val)
+           (reg env))
+  (assign val (const ok))
+</code></pre>
+<p><em>Expression</em> sẽ được biên dịch để tạo giá trị cho biến <code>factorial</code> là một <em>lambda expression</em> (biểu thức lambda) mà giá trị của nó là <em>procedure</em> tính giai thừa. <code>Compile</code> xử lý điều này bằng cách gọi <code>compile-lambda</code>, biên dịch phần thân <em>procedure</em>, gán nhãn nó như một <em>entry point</em> (điểm vào) mới, và sinh ra lệnh sẽ kết hợp phần thân <em>procedure</em> tại <em>entry point</em> mới với <em>run-time environment</em> (môi trường tại thời gian chạy) và gán kết quả vào <code>val</code>. Chuỗi lệnh sau đó bỏ qua mã <em>procedure</em> đã biên dịch, vốn được chèn vào tại điểm này. Mã <em>procedure</em> bắt đầu bằng việc mở rộng <em>definition environment</em> (môi trường định nghĩa) của <em>procedure</em> bằng một <em>frame</em> (khung) ràng buộc <em>formal parameter</em> (tham số hình thức) <code>n</code> với đối số của <em>procedure</em>. Sau đó là phần thân <em>procedure</em> thực tế. Vì mã này cho giá trị của biến không thay đổi <em>register</em> <code>env</code>, nên các lệnh <code>save</code> và <code>restore</code> tùy chọn được hiển thị ở trên sẽ không được sinh ra. (Mã <em>procedure</em> tại <code>entry2</code> không được thực thi tại thời điểm này, nên việc nó sử dụng <code>env</code> là không liên quan.) Do đó, khung của mã đã biên dịch trở thành:</p>
+<pre><code class="language-{.scheme}">  (assign val (op make-compiled-procedure)
+              (label entry2)
+              (reg env))
+  (goto (label after-lambda1))
+entry2
+  (assign env (op compiled-procedure-env)
+              (reg proc))
+  (assign env (op extend-environment)
+              (const (n))
+              (reg argl)
+              (reg env))
+  ⟨compilation of procedure body⟩
+after-lambda1
+  (perform (op define-variable!)
+           (const factorial)
+           (reg val) (reg env))
+  (assign val (const ok))
+</code></pre>
+<p>Phần thân <em>procedure</em> luôn được biên dịch (bởi <code>compile-lambda-body</code>) như một <em>sequence</em> (chuỗi) với <em>target</em> là <code>val</code> và <em>linkage</em> là <code>return</code>. Chuỗi trong trường hợp này bao gồm một <em>if expression</em> (biểu thức if) duy nhất:</p>
+<pre><code class="language-{.scheme}">(if (= n 1)
+    1
+    (* (factorial (- n 1)) n))
+</code></pre>
+<p><code>Compile-if</code> sinh ra mã đầu tiên tính <em>predicate</em> (mệnh đề điều kiện) (với <em>target</em> là <code>val</code>), sau đó kiểm tra kết quả và rẽ nhánh bỏ qua nhánh đúng nếu <em>predicate</em> là sai. <code>Env</code> và <code>continue</code> được bảo toàn xung quanh mã <em>predicate</em>, vì chúng có thể cần cho phần còn lại của <em>if expression</em>. Vì <em>if expression</em> là <em>expression</em> cuối cùng (và duy nhất) trong <em>sequence</em> tạo thành phần thân <em>procedure</em>, <em>target</em> của nó là <code>val</code> và <em>linkage</em> là <code>return</code>, nên cả nhánh đúng và nhánh sai đều được biên dịch với <em>target</em> là <code>val</code> và <em>linkage</em> là <code>return</code>. (Tức là, giá trị của câu điều kiện — giá trị được tính bởi một trong hai nhánh — chính là giá trị của <em>procedure</em>.)</p>
+<pre><code class="language-{.scheme}">⟨save continue, env if modified by 
+ predicate and needed by branches⟩
+  ⟨compilation of predicate, 
+   target val, linkage next⟩
+  ⟨restore continue, env if saved above⟩
+  (test (op false?) (reg val))
+  (branch (label false-branch4))
+true-branch5
+  ⟨compilation of true branch, 
+   target val, linkage return⟩
+false-branch4
+  ⟨compilation of false branch, 
+   target val, linkage return⟩
+after-if3
+</code></pre>
+<p><em>Predicate</em> <code>(= n 1)</code> là một <em>procedure call</em> (lời gọi thủ tục). Điều này tra cứu <em>operator</em> (toán tử) (ký hiệu <code>=</code>) và đặt giá trị này vào <code>proc</code>. Sau đó nó lắp ráp các đối số <code>1</code> và giá trị của <code>n</code> vào <code>argl</code>. Tiếp theo, nó kiểm tra xem <code>proc</code> chứa một <em>primitive procedure</em> (thủ tục nguyên thủy) hay một <em>compound procedure</em> (thủ tục hợp), và phân nhánh đến nhánh <em>primitive</em> hoặc <em>compound</em> tương ứng. Cả hai nhánh đều tiếp tục tại <em>label</em> <code>after-call</code>. Yêu cầu bảo toàn <em>register</em> xung quanh việc đánh giá <em>operator</em> và <em>operand</em> không dẫn đến việc lưu <em>register</em> nào, vì trong trường hợp này các phép đánh giá đó không thay đổi các <em>register</em> liên quan.</p>
+<pre><code class="language-{.scheme}">  (assign proc (op lookup-variable-value)
+               (const =) 
+               (reg env))
+  (assign val (const 1))
+  (assign argl (op list) (reg val))
+  (assign val (op lookup-variable-value)
+              (const n)
+              (reg env))
+  (assign argl (op cons) (reg val) (reg argl))
+  (test (op primitive-procedure?) (reg proc))
+  (branch (label primitive-branch17))
+compiled-branch16
+  (assign continue (label after-call15))
+  (assign val (op compiled-procedure-entry)
+              (reg proc))
+  (goto (reg val))
+primitive-branch17
+  (assign val (op apply-primitive-procedure)
+              (reg proc)
+              (reg argl))
+after-call15
+</code></pre>
+<p>Nhánh đúng, là hằng số 1, được biên dịch (với <em>target</em> là <code>val</code> và <em>linkage</em> là <code>return</code>) thành:</p>
+<pre><code class="language-{.scheme}">(assign val (const 1))
+(goto (reg continue))
+</code></pre>
+<p>Mã cho nhánh sai là một <em>procedure call</em> khác, trong đó <em>procedure</em> là giá trị của ký hiệu <code>*</code>, và các đối số là <code>n</code> và kết quả của một <em>procedure call</em> khác (gọi đến <code>factorial</code>). Mỗi lời gọi này thiết lập <code>proc</code> và <code>argl</code> và có các nhánh <em>primitive</em> và <em>compound</em> riêng. Hình 5.17 cho thấy toàn bộ quá trình biên dịch định nghĩa của <em>procedure</em> <code>factorial</code>. Lưu ý rằng các lệnh <code>save</code> và <code>restore</code> có thể có của <code>continue</code> và <code>env</code> xung quanh <em>predicate</em>, như đã hiển thị ở trên, thực tế được sinh ra, vì các <em>register</em> này bị thay đổi bởi lời gọi <em>procedure</em> trong <em>predicate</em> và cần cho lời gọi <em>procedure</em> và <em>linkage</em> <code>return</code> trong các nhánh.</p>
+<h2 id="556-lexical-addressing-Địa-chỉ-từ-vựng"><a class="header" href="#556-lexical-addressing-Địa-chỉ-từ-vựng">5.5.6 Lexical Addressing (Địa chỉ từ vựng)</a></h2>
+<p>Một trong những tối ưu hóa phổ biến nhất được thực hiện bởi <em>compiler</em> (trình biên dịch) là tối ưu hóa việc tra cứu biến. <em>Compiler</em> của chúng ta, như đã triển khai cho đến nay, sinh ra mã sử dụng thao tác <code>lookup-variable-value</code> của <em>evaluator machine</em> (máy đánh giá). Thao tác này tìm kiếm một biến bằng cách so sánh nó với từng biến hiện đang được ràng buộc, làm việc từng <em>frame</em> (khung) từ trong ra ngoài thông qua <em>run-time environment</em> (môi trường tại thời gian chạy). Việc tìm kiếm này có thể tốn kém nếu các <em>frame</em> lồng nhau sâu hoặc nếu có nhiều biến. Ví dụ, hãy xem xét vấn đề tra cứu giá trị của <code>x</code> khi đánh giá <em>expression</em> (biểu thức) <code>(* x y z)</code> trong một lần áp dụng <em>procedure</em> (thủ tục) được trả về bởi:</p>
+<pre><code class="language-{.scheme}">(let ((x 3) (y 4))
+  (lambda (a b c d e)
+    (let ((y (* a b x))
+          (z (+ c d x)))
+      (* x y z))))
+</code></pre>
+<p>Vì một <em>let expression</em> (biểu thức let) chỉ là cú pháp rút gọn của một <em>lambda combination</em> (tổ hợp lambda), nên biểu thức này tương đương với:</p>
+<pre><code class="language-{.scheme}">((lambda (x y)
+   (lambda (a b c d e)
+     ((lambda (y z) (* x y z))
+      (* a b x)
+      (+ c d x))))
+ 3
+ 4)
+</code></pre>
+<p>Mỗi lần <code>lookup-variable-value</code> tìm kiếm <code>x</code>, nó phải xác định rằng ký hiệu <code>x</code> không <code>eq?</code> với <code>y</code> hoặc <code>z</code> (trong <em>frame</em> đầu tiên), cũng không với <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>, hoặc <code>e</code> (trong <em>frame</em> thứ hai). Chúng ta sẽ giả định, tạm thời, rằng các chương trình của chúng ta không sử dụng <code>define</code> — rằng các biến chỉ được ràng buộc bằng <code>lambda</code>. Bởi vì ngôn ngữ của chúng ta là <em>lexically scoped</em> (phạm vi từ vựng), <em>run-time environment</em> cho bất kỳ <em>expression</em> nào sẽ có cấu trúc song song với cấu trúc từ vựng của chương trình trong đó <em>expression</em> xuất hiện.<sup class="footnote-reference"><a href="#11">11</a></sup> Do đó, <em>compiler</em> có thể biết, khi phân tích biểu thức trên, rằng mỗi lần <em>procedure</em> được áp dụng, biến <code>x</code> trong <code>(* x y z)</code> sẽ được tìm thấy ở hai <em>frame</em> bên ngoài <em>frame</em> hiện tại và sẽ là biến đầu tiên trong <em>frame</em> đó.</p>
+<p>Chúng ta có thể khai thác điều này bằng cách tạo ra một loại thao tác tra cứu biến mới, <code>lexical-address-lookup</code>, nhận đối số là một <em>environment</em> và một <em>lexical address</em> (địa chỉ từ vựng) gồm hai số: một <em>frame number</em> (số khung), chỉ định cần bỏ qua bao nhiêu <em>frame</em>, và một <em>displacement number</em> (số dịch chuyển), chỉ định cần bỏ qua bao nhiêu biến trong <em>frame</em> đó. <code>Lexical-address-lookup</code> sẽ trả về giá trị của biến được lưu tại <em>lexical address</em> đó so với <em>environment</em> hiện tại. Nếu chúng ta thêm thao tác <code>lexical-address-lookup</code> vào máy, chúng ta có thể làm cho <em>compiler</em> sinh ra mã tham chiếu biến bằng thao tác này, thay vì <code>lookup-variable-value</code>. Tương tự, mã đã biên dịch của chúng ta có thể sử dụng thao tác mới <code>lexical-address-set!</code> thay cho <code>set-variable-value!</code>.</p>
+<p>Để sinh ra mã như vậy, <em>compiler</em> phải có khả năng xác định <em>lexical address</em> của một biến mà nó sắp biên dịch tham chiếu đến. <em>Lexical address</em> của một biến trong chương trình phụ thuộc vào vị trí trong mã. Ví dụ, trong chương trình sau, địa chỉ của <code>x</code> trong <em>expression</em> <code>⟨e1⟩</code> là (2, 0) — lùi hai <em>frame</em> và là biến đầu tiên trong <em>frame</em>. Tại thời điểm đó, <code>y</code> ở địa chỉ (0, 0) và <code>c</code> ở địa chỉ (1, 2). Trong <em>expression</em> <code>⟨e2⟩</code>, <code>x</code> ở (1, 0), <code>y</code> ở (1, 1), và <code>c</code> ở (0, 2).</p>
+<pre><code class="language-{.scheme}">((lambda (x y)
+   (lambda (a b c d e)
+     ((lambda (y z) ⟨e1⟩)
+      ⟨e2⟩
+      (+ c d x))))
+ 3
+ 4)
+</code></pre>
+<p>Một cách để <em>compiler</em> sinh ra mã sử dụng <em>lexical addressing</em> là duy trì một cấu trúc dữ liệu gọi là <em>compile-time environment</em> (môi trường tại thời gian biên dịch). Cấu trúc này theo dõi biến nào sẽ ở vị trí nào trong <em>frame</em> nào của <em>run-time environment</em> khi một thao tác truy cập biến cụ thể được thực thi. <em>Compile-time environment</em> là một danh sách các <em>frame</em>, mỗi <em>frame</em> chứa một danh sách các biến. (Tất nhiên sẽ không có giá trị nào được ràng buộc với các biến, vì giá trị không được tính tại thời gian biên dịch.) <em>Compile-time environment</em> trở thành một đối số bổ sung cho <code>compile</code> và được truyền đến mỗi <em>code generator</em> (bộ sinh mã). Lời gọi <em>compile</em> ở cấp cao nhất sử dụng một <em>compile-time environment</em> rỗng. Khi một phần thân <code>lambda</code> được biên dịch, <code>compile-lambda-body</code> mở rộng <em>compile-time environment</em> bằng một <em>frame</em> chứa các tham số của <em>procedure</em>, để chuỗi tạo thành phần thân được biên dịch với <em>environment</em> đã mở rộng đó. Tại mỗi điểm trong quá trình biên dịch, <code>compile-variable</code> và <code>compile-assignment</code> sử dụng <em>compile-time environment</em> để sinh ra các <em>lexical address</em> thích hợp.</p>
+<h2 id="557-interfacing-compiled-code-to-the-evaluator-kết-nối-mã-đã-biên-dịch-với-evaluator"><a class="header" href="#557-interfacing-compiled-code-to-the-evaluator-kết-nối-mã-đã-biên-dịch-với-evaluator">5.5.7 Interfacing Compiled Code to the Evaluator (Kết nối mã đã biên dịch với <em>evaluator</em>)</a></h2>
+<p>Chúng ta vẫn chưa giải thích cách nạp mã đã biên dịch vào <em>evaluator machine</em> hoặc cách chạy nó. Chúng ta sẽ giả định rằng <em>explicit-control-evaluator machine</em> (máy đánh giá điều khiển tường minh) đã được định nghĩa như trong mục 5.4.4, với các thao tác bổ sung được chỉ định trong Chú thích 323. Chúng ta sẽ triển khai một <em>procedure</em> <code>compile-and-go</code> để biên dịch một <em>Scheme expression</em>, nạp <em>object code</em> (mã đối tượng) thu được vào <em>evaluator machine</em>, và khiến máy chạy mã đó trong <em>evaluator global environment</em> (môi trường toàn cục của bộ đánh giá), in kết quả, và vào vòng lặp điều khiển của <em>evaluator</em>. Chúng ta cũng sẽ sửa đổi <em>evaluator</em> để các <em>expression</em> thông dịch có thể gọi các <em>compiled procedure</em> cũng như các <em>interpreted procedure</em>. Khi đó, chúng ta có thể đưa một <em>compiled procedure</em> vào máy và sử dụng <em>evaluator</em> để gọi nó:</p>
+<pre><code class="language-{.scheme}">(compile-and-go
+ '(define (factorial n)
+    (if (= n 1)
+        1
+        (* (factorial (- n 1)) n))))
+
+;;; EC-Eval value:
+ok
+
+;;; EC-Eval input:
+(factorial 5)
+
+;;; EC-Eval value:
+120
+</code></pre>
+<p>Để cho phép <em>evaluator</em> xử lý <em>compiled procedure</em> (ví dụ, để đánh giá lời gọi đến <code>factorial</code> ở trên), chúng ta cần thay đổi mã tại <code>apply-dispatch</code> (5.4.1) để nó nhận diện <em>compiled procedure</em> (phân biệt với <em>compound procedure</em> hoặc <em>primitive procedure</em>) và chuyển điều khiển trực tiếp đến <em>entry point</em> của mã đã biên dịch:<sup class="footnote-reference"><a href="#12">12</a></sup></p>
+<pre><code class="language-{.scheme}">apply-dispatch
+  (test (op primitive-procedure?) (reg proc))
+  (branch (label primitive-apply))
+  (test (op compound-procedure?) (reg proc))
+  (branch (label compound-apply))
+  (test (op compiled-procedure?) (reg proc))
+  (branch (label compiled-apply))
+  (goto (label unknown-procedure-type))
+
+compiled-apply
+  (restore continue)
+  (assign val
+          (op compiled-procedure-entry)
+          (reg proc))
+  (goto (reg val))
+</code></pre>
+<p>Lưu ý việc khôi phục <code>continue</code> tại <code>compiled-apply</code>. Hãy nhớ rằng <em>evaluator</em> được sắp xếp sao cho tại <code>apply-dispatch</code>, <em>continuation</em> sẽ ở trên đỉnh <em>stack</em>. <em>Entry point</em> của mã đã biên dịch, ngược lại, mong đợi <em>continuation</em> nằm trong <code>continue</code>, vì vậy <code>continue</code> phải được khôi phục trước khi mã đã biên dịch được thực thi.</p>
+<p>Để cho phép chúng ta chạy một số mã đã biên dịch khi khởi động <em>evaluator machine</em> (máy đánh giá), chúng ta thêm một lệnh <code>branch</code> vào đầu <em>evaluator machine</em>, lệnh này sẽ khiến máy chuyển đến một <em>entry point</em> (điểm vào) mới nếu <em>register</em> <code>flag</code> được thiết lập.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<pre><code class="language-{.scheme}">;; branches if flag is set:
+(branch (label external-entry)) 
+read-eval-print-loop
+  (perform (op initialize-stack))
+  …
+</code></pre>
+<p><code>External-entry</code> giả định rằng máy được khởi động với <code>val</code> chứa vị trí của một <em>instruction sequence</em> (chuỗi lệnh) đặt một kết quả vào <code>val</code> và kết thúc bằng <code>(goto (reg continue))</code>. Bắt đầu tại <em>entry point</em> này sẽ nhảy đến vị trí được chỉ định bởi <code>val</code>, nhưng trước tiên gán <code>continue</code> để việc thực thi sẽ quay lại <code>print-result</code>, nơi in giá trị trong <code>val</code> và sau đó quay lại đầu vòng lặp <em>read-eval-print</em> của <em>evaluator</em>.<sup class="footnote-reference"><a href="#14">14</a></sup></p>
+<pre><code class="language-{.scheme}">external-entry
+  (perform (op initialize-stack))
+  (assign env (op get-global-environment))
+  (assign continue (label print-result))
+  (goto (reg val))
+</code></pre>
+<p>Bây giờ chúng ta có thể sử dụng <em>procedure</em> (thủ tục) sau để biên dịch một định nghĩa <em>procedure</em>, thực thi mã đã biên dịch, và chạy vòng lặp <em>read-eval-print</em> để thử <em>procedure</em>. Bởi vì chúng ta muốn mã đã biên dịch trả về vị trí trong <code>continue</code> với kết quả trong <code>val</code>, chúng ta biên dịch <em>expression</em> với <em>target</em> là <code>val</code> và <em>linkage</em> là <code>return</code>. Để biến <em>object code</em> (mã đối tượng) do <em>compiler</em> sinh ra thành các lệnh thực thi cho <em>evaluator register machine</em> (máy thanh ghi của bộ đánh giá), chúng ta sử dụng <em>procedure</em> <code>assemble</code> từ <em>register-machine simulator</em> (trình mô phỏng máy thanh ghi) (5.2.2). Sau đó, chúng ta khởi tạo <em>register</em> <code>val</code> để trỏ đến danh sách các lệnh, thiết lập <code>flag</code> để <em>evaluator</em> sẽ chuyển đến <code>external-entry</code>, và khởi động <em>evaluator</em>.</p>
+<pre><code class="language-{.scheme}">(define (compile-and-go expression)
+  (let ((instructions
+         (assemble 
+          (statements
+           (compile 
+            expression 'val 'return))
+          eceval)))
+    (set! the-global-environment
+          (setup-environment))
+    (set-register-contents! 
+     eceval 'val instructions)
+    (set-register-contents! 
+     eceval 'flag true)
+    (start eceval)))
+</code></pre>
+<p>Nếu chúng ta đã thiết lập giám sát <em>stack</em> (ngăn xếp), như ở cuối mục 5.4.4, chúng ta có thể kiểm tra mức sử dụng <em>stack</em> của mã đã biên dịch:</p>
+<pre><code class="language-{.scheme}">(compile-and-go
+ '(define (factorial n)
+    (if (= n 1)
+        1
+        (* (factorial (- n 1)) n))))
+(total-pushes = 0, maximum-depth = 0)
+
+;;; EC-Eval value:
+ok
+
+;;; EC-Eval input:
+(factorial 5)
+(total-pushes = 31, maximum-depth = 14)
+
+;;; EC-Eval value:
+120
+</code></pre>
+<p>So sánh ví dụ này với việc đánh giá <code>(factorial 5)</code> bằng phiên bản thông dịch của cùng <em>procedure</em>, được hiển thị ở cuối mục 5.4.4. Phiên bản thông dịch yêu cầu 144 lần <em>push</em> và độ sâu <em>stack</em> tối đa là 28. Điều này minh họa sự tối ưu hóa đạt được từ chiến lược biên dịch của chúng ta.</p>
+<h3 id="interpretation-and-compilation-thông-dịch-và-biên-dịch"><a class="header" href="#interpretation-and-compilation-thông-dịch-và-biên-dịch">Interpretation and compilation (Thông dịch và biên dịch)</a></h3>
+<p>Với các chương trình trong phần này, chúng ta bây giờ có thể thử nghiệm các chiến lược thực thi thay thế là <em>interpretation</em> (thông dịch) và <em>compilation</em> (biên dịch).<sup class="footnote-reference"><a href="#15">15</a></sup> Một <em>interpreter</em> (bộ thông dịch) nâng cấp máy lên mức của chương trình người dùng; một <em>compiler</em> hạ chương trình người dùng xuống mức của <em>machine language</em> (ngôn ngữ máy). Chúng ta có thể coi ngôn ngữ Scheme (hoặc bất kỳ ngôn ngữ lập trình nào) như một hệ thống các trừu tượng được xây dựng trên <em>machine language</em>. <em>Interpreter</em> thích hợp cho việc phát triển và gỡ lỗi chương trình tương tác vì các bước thực thi chương trình được tổ chức theo các trừu tượng này, do đó dễ hiểu hơn đối với lập trình viên. Mã đã biên dịch có thể thực thi nhanh hơn, vì các bước thực thi chương trình được tổ chức theo <em>machine language</em>, và <em>compiler</em> có thể tự do thực hiện các tối ưu hóa vượt qua các trừu tượng cấp cao hơn.<sup class="footnote-reference"><a href="#16">16</a></sup></p>
+<p>Các lựa chọn giữa <em>interpretation</em> và <em>compilation</em> cũng dẫn đến các chiến lược khác nhau để <em>porting</em> (chuyển đổi) ngôn ngữ sang các máy tính mới. Giả sử chúng ta muốn triển khai Lisp cho một máy mới. Một chiến lược là bắt đầu với <em>explicit-control evaluator</em> (bộ đánh giá điều khiển tường minh) ở mục 5.4 và dịch các lệnh của nó sang các lệnh cho máy mới. Một chiến lược khác là bắt đầu với <em>compiler</em> và thay đổi các <em>code generator</em> (bộ sinh mã) để chúng sinh ra mã cho máy mới. Chiến lược thứ hai cho phép chúng ta chạy bất kỳ chương trình Lisp nào trên máy mới bằng cách biên dịch nó trước với <em>compiler</em> chạy trên hệ thống Lisp gốc của chúng ta, và liên kết nó với một phiên bản đã biên dịch của <em>run-time library</em> (thư viện thời gian chạy).<sup class="footnote-reference"><a href="#17">17</a></sup> Tốt hơn nữa, chúng ta có thể biên dịch chính <em>compiler</em>, và chạy nó trên máy mới để biên dịch các chương trình Lisp khác.<sup class="footnote-reference"><a href="#18">18</a></sup> Hoặc chúng ta có thể biên dịch một trong các <em>interpreter</em> của mục 4.1 để tạo ra một <em>interpreter</em> chạy trên máy mới.</p>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Đọc dòng bên dưới
+<sup class="footnote-reference"><a href="#12">12</a></sup>: Hiện tại footnote đang lỗi, mà lười đọc lại sửa lắm :&gt; sr mn nhìu nhé.
+<sup class="footnote-reference"><a href="#13">13</a></sup>: Bây giờ khi <em>evaluator machine</em> bắt đầu với một lệnh <code>branch</code>, chúng ta phải luôn khởi tạo <em>register</em> <code>flag</code> trước khi khởi động <em>evaluator machine</em>. Để khởi động máy ở vòng lặp <em>read-eval-print</em> thông thường, chúng ta có thể dùng…<br />
+<sup class="footnote-reference"><a href="#14">14</a></sup>: Vì một <em>compiled procedure</em> (thủ tục đã biên dịch) là một đối tượng mà hệ thống có thể cố gắng in ra, chúng ta cũng sửa đổi thao tác in của hệ thống <code>user-print</code> (từ mục 4.1.4) để nó không cố gắng in các thành phần của một <em>compiled procedure</em>.<br />
+<sup class="footnote-reference"><a href="#15">15</a></sup>: Chúng ta có thể làm tốt hơn nữa bằng cách mở rộng <em>compiler</em> để cho phép mã đã biên dịch gọi các <em>interpreted procedure</em>. Xem Bài tập 5.47.<br />
+<sup class="footnote-reference"><a href="#16">16</a></sup>: Bất kể chiến lược thực thi nào, chúng ta sẽ chịu chi phí đáng kể nếu khăng khăng rằng các lỗi gặp phải khi thực thi chương trình người dùng phải được phát hiện và báo hiệu, thay vì để chúng làm hỏng hệ thống hoặc tạo ra kết quả sai. Ví dụ, một tham chiếu mảng vượt giới hạn có thể được phát hiện bằng cách kiểm tra tính hợp lệ của tham chiếu trước khi thực hiện. Tuy nhiên, chi phí của việc kiểm tra này có thể gấp nhiều lần chi phí của chính tham chiếu mảng, và lập trình viên nên cân nhắc giữa tốc độ và độ an toàn khi quyết định có nên thực hiện kiểm tra như vậy hay không. Một <em>compiler</em> tốt nên có khả năng sinh ra mã với các kiểm tra như vậy, tránh các kiểm tra dư thừa, và cho phép lập trình viên kiểm soát phạm vi và loại kiểm tra lỗi trong mã đã biên dịch.<br />
+<sup class="footnote-reference"><a href="#17">17</a></sup>: Tất nhiên, với cả chiến lược <em>interpretation</em> hoặc <em>compilation</em>, chúng ta cũng phải triển khai cho máy mới việc cấp phát bộ nhớ, nhập và xuất dữ liệu, và tất cả các thao tác khác mà chúng ta đã coi là “<em>primitive</em>” trong phần thảo luận về <em>evaluator</em> và <em>compiler</em>. Một chiến lược để giảm thiểu công việc ở đây là viết càng nhiều thao tác này càng tốt bằng Lisp và sau đó biên dịch chúng cho máy mới. Cuối cùng, mọi thứ được rút gọn thành một <em>kernel</em> nhỏ (chẳng hạn như <em>garbage collection</em> và cơ chế áp dụng các <em>machine primitive</em> thực tế) được viết tay cho máy mới.<br />
+<sup class="footnote-reference"><a href="#18">18</a></sup>: Chiến lược này dẫn đến những thử nghiệm thú vị về tính đúng đắn của <em>compiler</em>, chẳng hạn như kiểm tra xem việc biên dịch một chương trình trên máy mới, sử dụng <em>compiled compiler</em>, có giống hệt với việc biên dịch chương trình đó trên hệ thống Lisp gốc hay không. Việc lần theo nguyên nhân của các khác biệt là thú vị nhưng thường gây khó chịu, vì kết quả cực kỳ nhạy cảm với các chi tiết rất nhỏ.  </p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5-4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5-4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

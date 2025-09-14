@@ -1,0 +1,762 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Variations on a Scheme — Nondeterministic Computing - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html" class="active"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="43-các-biến-thể-của-scheme--nondeterministic-computing-tính-toán-phi-tất-định"><a class="header" href="#43-các-biến-thể-của-scheme--nondeterministic-computing-tính-toán-phi-tất-định">4.3 Các biến thể của Scheme — Nondeterministic Computing (tính toán phi tất định)</a></h1>
+<p>Trong phần này, chúng ta mở rộng <strong>Scheme evaluator</strong> để hỗ trợ một mô hình lập trình gọi là <em>nondeterministic computing</em> (&quot;tính toán phi tất định&quot;) bằng cách tích hợp vào evaluator một cơ chế hỗ trợ tìm kiếm tự động. Đây là một thay đổi sâu sắc hơn nhiều đối với ngôn ngữ so với việc giới thiệu <strong>lazy evaluation</strong> (đánh giá lười) ở mục 4.2.</p>
+<p><strong>Nondeterministic computing</strong>, giống như <strong>stream processing</strong> (xử lý luồng), hữu ích cho các ứng dụng “generate and test” (&quot;tạo và kiểm tra&quot;). Hãy xem xét bài toán bắt đầu với hai danh sách các số nguyên dương và tìm một cặp số nguyên — một từ danh sách thứ nhất và một từ danh sách thứ hai — sao cho tổng của chúng là số nguyên tố. Chúng ta đã thấy cách xử lý điều này bằng các phép toán trên <strong>finite sequence</strong> (dãy hữu hạn) ở mục 2.2.3 và với <strong>infinite streams</strong> (luồng vô hạn) ở mục 3.5.3. Cách tiếp cận của chúng ta là tạo ra dãy tất cả các cặp có thể và lọc ra các cặp có tổng là số nguyên tố. Việc chúng ta thực sự tạo toàn bộ dãy cặp trước như ở Chương 2, hay xen kẽ giữa việc tạo và lọc như ở Chương 3, không ảnh hưởng đến hình ảnh cốt lõi về cách tổ chức tính toán.</p>
+<p>Cách tiếp cận <strong>nondeterministic</strong> gợi ra một hình ảnh khác. Hãy tưởng tượng đơn giản rằng chúng ta chọn (bằng một cách nào đó) một số từ danh sách thứ nhất và một số từ danh sách thứ hai, rồi yêu cầu (bằng một cơ chế nào đó) rằng tổng của chúng là số nguyên tố. Điều này được biểu diễn bằng <strong>procedure</strong> (thủ tục) sau:</p>
+<pre><code class="language-{.scheme}">(define (prime-sum-pair list1 list2)
+  (let ((a (an-element-of list1))
+        (b (an-element-of list2)))
+    (require (prime? (+ a b)))
+    (list a b)))
+</code></pre>
+<p>Thoạt nhìn, thủ tục này dường như chỉ lặp lại phát biểu của bài toán, thay vì chỉ ra cách giải quyết nó. Tuy nhiên, đây là một <strong>nondeterministic program</strong> hợp lệ.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>Ý tưởng then chốt ở đây là các biểu thức trong một ngôn ngữ <strong>nondeterministic</strong> có thể có nhiều hơn một giá trị khả dĩ. Ví dụ, <code>an-element-of</code> có thể trả về bất kỳ phần tử nào của danh sách cho trước. <strong>Nondeterministic program evaluator</strong> sẽ hoạt động bằng cách tự động chọn một giá trị khả dĩ và ghi nhớ lựa chọn đó. Nếu một yêu cầu tiếp theo không được thỏa mãn, evaluator sẽ thử một lựa chọn khác, và tiếp tục thử các lựa chọn mới cho đến khi việc đánh giá thành công, hoặc cho đến khi hết lựa chọn. Cũng giống như <strong>lazy evaluator</strong> giúp lập trình viên không phải bận tâm đến chi tiết về cách giá trị được trì hoãn và buộc thực hiện, <strong>nondeterministic program evaluator</strong> sẽ giúp lập trình viên không phải bận tâm đến chi tiết về cách các lựa chọn được thực hiện.</p>
+<p>Thật hữu ích khi so sánh các hình ảnh về thời gian mà <strong>nondeterministic evaluation</strong> và <strong>stream processing</strong> gợi ra. <strong>Stream processing</strong> sử dụng <strong>lazy evaluation</strong> để tách biệt thời điểm khi luồng các câu trả lời khả dĩ được tạo ra khỏi thời điểm khi các phần tử thực tế của luồng được sinh ra. Evaluator hỗ trợ ảo giác rằng tất cả các câu trả lời khả dĩ đều được bày ra trước mắt ta trong một dãy phi thời gian. Với <strong>nondeterministic evaluation</strong>, một biểu thức đại diện cho việc khám phá một tập hợp các &quot;thế giới khả dĩ&quot;, mỗi thế giới được xác định bởi một tập hợp các lựa chọn. Một số thế giới khả dĩ dẫn đến ngõ cụt, trong khi những thế giới khác có giá trị hữu ích. <strong>Nondeterministic program evaluator</strong> hỗ trợ ảo giác rằng thời gian phân nhánh, và các chương trình của chúng ta có những lịch sử thực thi khả dĩ khác nhau. Khi chúng ta gặp ngõ cụt, ta có thể quay lại một điểm lựa chọn trước đó và tiếp tục theo một nhánh khác.</p>
+<p><strong>Nondeterministic program evaluator</strong> được triển khai dưới đây được gọi là <strong><code>amb</code> evaluator</strong> vì nó dựa trên một <strong>special form</strong> (dạng đặc biệt) mới gọi là <code>amb</code>. Chúng ta có thể gõ định nghĩa <code>prime-sum-pair</code> ở trên vào vòng lặp điều khiển của <strong><code>amb</code> evaluator</strong> (cùng với định nghĩa của <code>prime?</code>, <code>an-element-of</code>, và <code>require</code>) và chạy thủ tục như sau:</p>
+<pre><code class="language-{.scheme}">;;; Amb-Eval input:
+(prime-sum-pair '(1 3 5 8) '(20 35 110))
+
+;;; Starting a new problem
+;;; Amb-Eval value:
+(3 20)
+</code></pre>
+<p>Giá trị trả về thu được sau khi evaluator liên tục chọn các phần tử từ mỗi danh sách, cho đến khi tìm được một lựa chọn thành công.</p>
+<p>Mục 4.3.1 giới thiệu <code>amb</code> và giải thích cách nó hỗ trợ <strong>nondeterminism</strong> thông qua cơ chế tìm kiếm tự động của evaluator. Mục 4.3.2 trình bày các ví dụ về <strong>nondeterministic programs</strong>, và mục 4.3.3 đưa ra chi tiết cách triển khai <strong><code>amb</code> evaluator</strong> bằng cách sửa đổi <strong>ordinary Scheme evaluator</strong>.</p>
+<h2 id="431-amb-và-search"><a class="header" href="#431-amb-và-search">4.3.1 Amb và Search</a></h2>
+<p>Để mở rộng Scheme hỗ trợ <strong>nondeterminism</strong>, chúng ta giới thiệu một <strong>special form</strong> mới gọi là <code>amb</code>.<sup class="footnote-reference"><a href="#2">2</a></sup> Biểu thức</p>
+<pre><code class="language-{.scheme}">(amb ⟨e₁⟩ ⟨e₂⟩ … ⟨eₙ⟩)
+</code></pre>
+<p>trả về giá trị của một trong $n$ biểu thức $\langle\mspace{1mu} e_{i}\rangle$ một cách “mơ hồ” (ambiguously). Ví dụ, biểu thức</p>
+<pre><code class="language-{.scheme}">(list (amb 1 2 3) (amb 'a 'b))
+</code></pre>
+<p>có thể có sáu giá trị khả dĩ:</p>
+<pre><code class="language-{.example}">(1 a) (1 b) (2 a) (2 b) (3 a) (3 b)
+</code></pre>
+<p><code>Amb</code> với một lựa chọn duy nhất sẽ tạo ra một giá trị thông thường (đơn).</p>
+<p><code>Amb</code> không có lựa chọn nào — biểu thức <code>(amb)</code> — là một biểu thức không có giá trị chấp nhận được. Về mặt thao tác, ta có thể coi <code>(amb)</code> là một biểu thức khi được đánh giá sẽ khiến quá trình tính toán “thất bại”: quá trình bị hủy bỏ và không tạo ra giá trị nào. Sử dụng ý tưởng này, ta có thể biểu diễn yêu cầu rằng một biểu thức <strong>predicate</strong> <code>p</code> phải đúng như sau:</p>
+<pre><code class="language-{.scheme}">(define (require p)
+  (if (not p) (amb)))
+</code></pre>
+<p>Với <code>amb</code> và <code>require</code>, ta có thể triển khai <strong><code>an-element-of</code> procedure</strong> đã dùng ở trên:</p>
+<pre><code class="language-{.scheme}">(define (an-element-of items)
+  (require (not (null? items)))
+  (amb (car items) 
+       (an-element-of (cdr items))))
+</code></pre>
+<p><code>An-element-of</code> thất bại nếu danh sách rỗng. Ngược lại, nó trả về một cách mơ hồ hoặc phần tử đầu tiên của danh sách, hoặc một phần tử được chọn từ phần còn lại của danh sách.</p>
+<p>Chúng ta cũng có thể biểu diễn các phạm vi lựa chọn vô hạn. Thủ tục sau đây có thể trả về bất kỳ số nguyên nào lớn hơn hoặc bằng một số $n$ cho trước:</p>
+<pre><code class="language-{.scheme}">(define (an-integer-starting-from n)
+  (amb n (an-integer-starting-from (+ n 1))))
+</code></pre>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Chúng ta giả định rằng đã định nghĩa trước một <strong>procedure</strong> <code>prime?</code> để kiểm tra một số có phải là số nguyên tố hay không. Ngay cả khi <code>prime?</code> đã được định nghĩa, thủ tục <code>prime-sum-pair</code> vẫn có thể trông giống một cách đáng ngờ với nỗ lực “pseudo-Lisp” vô ích nhằm định nghĩa hàm căn bậc hai, mà chúng ta đã mô tả ở đầu mục 1.1.7. Thực tế, một thủ tục căn bậc hai theo hướng đó hoàn toàn có thể được xây dựng như một <strong>nondeterministic program</strong>. Bằng cách tích hợp cơ chế tìm kiếm vào evaluator, chúng ta đang làm mờ ranh giới giữa mô tả thuần túy mang tính khai báo và đặc tả mang tính mệnh lệnh về cách tính toán câu trả lời. Chúng ta sẽ tiến xa hơn theo hướng này ở mục 4.4.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Ý tưởng về <code>amb</code> cho lập trình <strong>nondeterministic</strong> lần đầu tiên được mô tả vào năm 1961 bởi John McCarthy (xem McCarthy 1963)</p>
+</div>
+<p>Điều này giống như <strong>stream procedure</strong> <code>integers-starting-from</code> được mô tả ở mục 3.5.2, nhưng có một điểm khác biệt quan trọng: <strong>Stream procedure</strong> trả về một đối tượng đại diện cho dãy tất cả các số nguyên bắt đầu từ $n$, trong khi <strong><code>amb</code> procedure</strong> trả về một số nguyên duy nhất.<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<p>Về mặt trừu tượng, ta có thể hình dung rằng việc đánh giá một biểu thức <code>amb</code> khiến thời gian phân nhánh, trong đó quá trình tính toán tiếp tục trên mỗi nhánh với một trong các giá trị khả dĩ của biểu thức. Ta nói rằng <code>amb</code> đại diện cho một <em>nondeterministic choice point</em> (&quot;điểm lựa chọn phi tất định&quot;). Nếu chúng ta có một máy với số lượng bộ xử lý đủ lớn và có thể cấp phát động, ta có thể triển khai việc tìm kiếm một cách trực tiếp. Quá trình thực thi sẽ diễn ra như trên một máy tuần tự, cho đến khi gặp một biểu thức <code>amb</code>. Tại thời điểm này, nhiều bộ xử lý hơn sẽ được cấp phát và khởi tạo để tiếp tục tất cả các quá trình thực thi song song được ngụ ý bởi lựa chọn đó. Mỗi bộ xử lý sẽ tiếp tục tuần tự như thể nó là lựa chọn duy nhất, cho đến khi hoặc kết thúc do gặp thất bại, hoặc tiếp tục phân nhánh thêm, hoặc hoàn tất.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<p>Mặt khác, nếu chúng ta có một máy chỉ có thể thực thi một tiến trình (hoặc một vài tiến trình đồng thời), ta phải xem xét các lựa chọn theo cách tuần tự. Có thể hình dung việc sửa đổi một <strong>evaluator</strong> để chọn ngẫu nhiên một nhánh để theo mỗi khi gặp một <strong>choice point</strong>. Tuy nhiên, lựa chọn ngẫu nhiên có thể dễ dàng dẫn đến các giá trị thất bại. Ta có thể thử chạy evaluator nhiều lần, đưa ra các lựa chọn ngẫu nhiên và hy vọng tìm được một giá trị không thất bại, nhưng tốt hơn là <em>systematically search</em> (&quot;tìm kiếm có hệ thống&quot;) tất cả các đường thực thi khả dĩ. <strong><code>amb</code> evaluator</strong> mà chúng ta sẽ phát triển và sử dụng trong phần này triển khai một tìm kiếm có hệ thống như sau: Khi evaluator gặp một ứng dụng của <code>amb</code>, nó ban đầu sẽ chọn phương án đầu tiên. Lựa chọn này có thể tự nó dẫn đến một lựa chọn khác. Evaluator sẽ luôn chọn phương án đầu tiên tại mỗi <strong>choice point</strong>. Nếu một lựa chọn dẫn đến thất bại, evaluator sẽ <em>automagically</em><sup class="footnote-reference"><a href="#5">5</a></sup> <em>backtrack</em> (&quot;quay lui&quot;) về <strong>choice point</strong> gần nhất và thử phương án tiếp theo. Nếu hết phương án tại bất kỳ <strong>choice point</strong> nào, evaluator sẽ quay lui về <strong>choice point</strong> trước đó và tiếp tục từ đó. Quá trình này dẫn đến một chiến lược tìm kiếm được gọi là <em>depth-first search</em> (&quot;tìm kiếm theo chiều sâu&quot;) hoặc <em>chronological backtracking</em> (&quot;quay lui theo trình tự thời gian&quot;).<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<h3 id="driver-loop"><a class="header" href="#driver-loop">Driver loop</a></h3>
+<p><strong>Driver loop</strong> cho <strong><code>amb</code> evaluator</strong> có một số đặc điểm bất thường. Nó đọc một biểu thức và in ra giá trị của lần thực thi đầu tiên không thất bại, như trong ví dụ <code>prime-sum-pair</code> đã trình bày ở trên. Nếu chúng ta muốn xem giá trị của lần thực thi thành công tiếp theo, ta có thể yêu cầu <strong>interpreter</strong> quay lui và cố gắng tạo ra một lần thực thi không thất bại thứ hai. Điều này được báo hiệu bằng cách gõ ký hiệu <code>try-again</code>. Nếu nhập bất kỳ biểu thức nào khác ngoài <code>try-again</code>, interpreter sẽ bắt đầu một bài toán mới, loại bỏ các phương án chưa được khám phá trong bài toán trước. Dưới đây là một ví dụ tương tác:</p>
+<pre><code class="language-{.scheme}">;;; Amb-Eval input:
+(prime-sum-pair '(1 3 5 8) '(20 35 110))
+
+;;; Starting a new problem
+;;; Amb-Eval value:
+(3 20)
+
+;;; Amb-Eval input:
+try-again
+
+;;; Amb-Eval value:
+(3 110)
+
+;;; Amb-Eval input:
+try-again
+
+;;; Amb-Eval value:
+(8 35)
+
+;;; Amb-Eval input:
+try-again
+
+;;; There are no more values of
+(prime-sum-pair 
+ (quote (1 3 5 8)) 
+ (quote (20 35 110)))
+
+;;; Amb-Eval input:
+(prime-sum-pair '(19 27 30) '(11 36 58))
+
+;;; Starting a new problem
+;;; Amb-Eval value:
+(30 11)
+</code></pre>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Trên thực tế, sự khác biệt giữa việc trả về một lựa chọn duy nhất theo cách phi tất định và trả về tất cả các lựa chọn phụ thuộc phần nào vào góc nhìn của chúng ta. Từ góc nhìn của mã sử dụng giá trị, lựa chọn phi tất định trả về một giá trị duy nhất. Từ góc nhìn của lập trình viên thiết kế mã, lựa chọn phi tất định có thể trả về tất cả các giá trị khả dĩ, và quá trình tính toán sẽ phân nhánh để mỗi giá trị được khảo sát riêng biệt.</p>
+</div>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Có thể có người phản đối rằng đây là một cơ chế cực kỳ kém hiệu quả. Có thể cần đến hàng triệu bộ xử lý để giải một bài toán được phát biểu đơn giản theo cách này, và hầu hết thời gian, phần lớn các bộ xử lý đó sẽ ở trạng thái nhàn rỗi. Sự phản đối này nên được đặt trong bối cảnh lịch sử. Bộ nhớ từng được coi là một tài nguyên đắt đỏ như vậy. Năm 1964, một megabyte RAM có giá khoảng $400,000. Giờ đây, mỗi máy tính cá nhân đều có nhiều megabyte RAM, và hầu hết thời gian, phần lớn RAM đó không được sử dụng. Thật khó để đánh giá thấp chi phí của các thiết bị điện tử sản xuất hàng loạt.</p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p><em>Automagically</em>: “Tự động, nhưng theo một cách mà vì lý do nào đó (thường là vì quá phức tạp, quá xấu xí, hoặc thậm chí quá tầm thường), người nói không muốn giải thích.” (Steele et al. 1983, Raymond 1993)</p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Việc tích hợp các chiến lược tìm kiếm tự động vào ngôn ngữ lập trình đã có một lịch sử dài và nhiều thăng trầm. Những gợi ý đầu tiên rằng các thuật toán phi tất định có thể được mã hóa một cách tao nhã trong một ngôn ngữ lập trình với tìm kiếm và quay lui tự động đến từ Robert Floyd (1967). Carl Hewitt (1969) phát minh ra một ngôn ngữ lập trình gọi là Planner, hỗ trợ rõ ràng quay lui tự động theo trình tự thời gian, cung cấp một chiến lược tìm kiếm theo chiều sâu tích hợp sẵn. Sussman et al. (1971) triển khai một tập con của ngôn ngữ này, gọi là MicroPlanner, được sử dụng để hỗ trợ công việc giải quyết vấn đề và lập kế hoạch cho robot. Các ý tưởng tương tự, xuất phát từ logic và chứng minh định lý, đã dẫn đến sự ra đời ở Edinburgh và Marseille của ngôn ngữ tao nhã Prolog (sẽ được thảo luận ở mục 4.4). Sau khi đủ thất vọng với tìm kiếm tự động, McDermott và Sussman (1972) phát triển một ngôn ngữ gọi là Conniver, bao gồm các cơ chế cho phép lập trình viên kiểm soát chiến lược tìm kiếm. Tuy nhiên, điều này tỏ ra khó sử dụng, và Sussman cùng Stallman (1975) đã tìm ra một cách tiếp cận khả thi hơn khi nghiên cứu các phương pháp phân tích ký hiệu cho mạch điện. Họ phát triển một sơ đồ quay lui phi tuần tự dựa trên việc truy vết các quan hệ phụ thuộc logic kết nối các sự kiện, một kỹ thuật được gọi là <em>dependency-directed backtracking</em>. Mặc dù phương pháp của họ phức tạp, nó tạo ra các chương trình khá hiệu quả vì ít thực hiện tìm kiếm dư thừa. Doyle (1979) và McAllester (1978; 1980) đã khái quát và làm rõ các phương pháp của Stallman và Sussman, phát triển một mô hình mới để xây dựng tìm kiếm, hiện được gọi là <em>truth maintenance</em>. Các hệ thống giải quyết vấn đề hiện đại đều sử dụng một dạng hệ thống duy trì sự thật như một nền tảng. Xem Forbus và deKleer (1993) để biết thảo luận về các cách xây dựng hệ thống duy trì sự thật và ứng dụng một cách tao nhã. Zabih et al. (1987) mô tả một phần mở rộng phi tất định cho Scheme dựa trên <code>amb</code>; nó tương tự như <strong>interpreter</strong> được mô tả trong phần này, nhưng tinh vi hơn vì nó sử dụng <em>dependency-directed backtracking</em> thay vì <em>chronological backtracking</em>. Winston (1992) đưa ra phần giới thiệu về cả hai loại quay lui này.</p>
+</div>
+<h2 id="432-các-ví-dụ-về-nondeterministic-programs"><a class="header" href="#432-các-ví-dụ-về-nondeterministic-programs">4.3.2 Các ví dụ về Nondeterministic Programs</a></h2>
+<p>Mục 4.3.3 sẽ mô tả cách triển khai <strong><code>amb</code> evaluator</strong>. Tuy nhiên, trước tiên, chúng ta sẽ đưa ra một số ví dụ về cách nó có thể được sử dụng. Ưu điểm của <strong>nondeterministic programming</strong> (lập trình phi tất định) là chúng ta có thể lược bỏ các chi tiết về cách tìm kiếm được thực hiện, từ đó biểu đạt chương trình ở mức trừu tượng cao hơn.</p>
+<h3 id="logic-puzzles"><a class="header" href="#logic-puzzles">Logic Puzzles</a></h3>
+<p>Câu đố sau (lấy từ Dinesman 1968) là ví dụ điển hình của một lớp lớn các câu đố logic đơn giản:</p>
+<blockquote>
+<p>Baker, Cooper, Fletcher, Miller và Smith sống ở các tầng khác nhau của một tòa nhà chung cư chỉ có năm tầng. Baker không sống ở tầng trên cùng. Cooper không sống ở tầng dưới cùng. Fletcher không sống ở tầng trên cùng hoặc tầng dưới cùng. Miller sống ở tầng cao hơn Cooper. Smith không sống ở tầng liền kề với Fletcher. Fletcher không sống ở tầng liền kề với Cooper. Hỏi mỗi người sống ở tầng nào?</p>
+</blockquote>
+<p>Chúng ta có thể xác định ai sống ở mỗi tầng một cách trực tiếp bằng cách liệt kê tất cả các khả năng và áp đặt các ràng buộc đã cho:<sup class="footnote-reference"><a href="#7">7</a></sup></p>
+<pre><code class="language-{.scheme}">(define (multiple-dwelling)
+  (let ((baker (amb 1 2 3 4 5))
+        (cooper (amb 1 2 3 4 5))
+        (fletcher (amb 1 2 3 4 5))
+        (miller (amb 1 2 3 4 5))
+        (smith (amb 1 2 3 4 5)))
+    (require
+     (distinct? (list baker cooper fletcher 
+                      miller smith)))
+    (require (not (= baker 5)))
+    (require (not (= cooper 1)))
+    (require (not (= fletcher 5)))
+    (require (not (= fletcher 1)))
+    (require (&gt; miller cooper))
+    (require
+     (not (= (abs (- smith fletcher)) 1)))
+    (require 
+     (not (= (abs (- fletcher cooper)) 1)))
+    (list (list 'baker baker)
+          (list 'cooper cooper)
+          (list 'fletcher fletcher)
+          (list 'miller miller)
+          (list 'smith smith))))
+</code></pre>
+<p>Khi đánh giá biểu thức <code>(multiple-dwelling)</code> sẽ cho kết quả:</p>
+<pre><code class="language-{.scheme}">((baker 3) (cooper 2) (fletcher 4)
+ (miller 5) (smith 1))
+</code></pre>
+<p>Mặc dù <strong>procedure</strong> đơn giản này hoạt động, nhưng nó rất chậm. Bài tập 4.39 và 4.40 sẽ thảo luận một số cải tiến khả dĩ.</p>
+<h3 id="phân-tích-cú-pháp-ngôn-ngữ-tự-nhiên"><a class="header" href="#phân-tích-cú-pháp-ngôn-ngữ-tự-nhiên">Phân tích cú pháp ngôn ngữ tự nhiên</a></h3>
+<p>Các chương trình được thiết kế để chấp nhận ngôn ngữ tự nhiên làm đầu vào thường bắt đầu bằng việc cố gắng <em>parse</em> (phân tích cú pháp) đầu vào, tức là so khớp đầu vào với một cấu trúc ngữ pháp nào đó. Ví dụ, chúng ta có thể thử nhận dạng các câu đơn giản gồm một <strong>article</strong> (mạo từ) theo sau bởi một <strong>noun</strong> (danh từ) và tiếp theo là một <strong>verb</strong> (động từ), chẳng hạn như “The cat eats.” Để thực hiện phân tích như vậy, chúng ta phải có khả năng xác định <strong>part of speech</strong> (loại từ) của từng từ riêng lẻ. Ta có thể bắt đầu với một số danh sách phân loại các từ khác nhau:<sup class="footnote-reference"><a href="#8">8</a></sup></p>
+<pre><code class="language-{.scheme}">(define nouns 
+  '(noun student professor cat class))
+
+(define verbs 
+  '(verb studies lectures eats sleeps))
+
+(define articles '(article the a))
+</code></pre>
+<p>Chúng ta cũng cần một <em>grammar</em> (ngữ pháp), tức là một tập hợp các quy tắc mô tả cách các thành phần ngữ pháp được tạo thành từ các thành phần đơn giản hơn. Một ngữ pháp rất đơn giản có thể quy định rằng một câu luôn gồm hai phần — một <strong>noun phrase</strong> (cụm danh từ) theo sau bởi một <strong>verb</strong> — và rằng một <strong>noun phrase</strong> gồm một <strong>article</strong> theo sau bởi một <strong>noun</strong>. Với ngữ pháp này, câu “The cat eats” sẽ được phân tích như sau:</p>
+<pre><code class="language-{.scheme}">(sentence
+ (noun-phrase (article the) (noun cat))
+ (verb eats))
+</code></pre>
+<p>Chúng ta có thể tạo ra một phân tích như vậy bằng một chương trình đơn giản có các <strong>procedure</strong> riêng cho từng quy tắc ngữ pháp. Để phân tích một câu, ta xác định hai thành phần cấu thành của nó và trả về một danh sách gồm hai phần tử này, được gắn nhãn bằng ký hiệu <code>sentence</code>:</p>
+<pre><code class="language-{.scheme}">(define (parse-sentence)
+  (list 'sentence
+         (parse-noun-phrase)
+         (parse-word verbs)))
+</code></pre>
+<p>Tương tự, một <strong>noun phrase</strong> được phân tích bằng cách tìm một <strong>article</strong> theo sau bởi một <strong>noun</strong>:</p>
+<pre><code class="language-{.scheme}">(define (parse-noun-phrase)
+  (list 'noun-phrase
+        (parse-word articles)
+        (parse-word nouns)))
+</code></pre>
+<p>Ở mức thấp nhất, việc phân tích cú pháp quy về việc lặp lại kiểm tra xem từ chưa được phân tích tiếp theo có thuộc danh sách các từ của loại từ yêu cầu hay không. Để triển khai điều này, chúng ta duy trì một biến toàn cục <code>*unparsed*</code>, là phần đầu vào chưa được phân tích. Mỗi lần kiểm tra một từ, ta yêu cầu rằng <code>*unparsed*</code> không được rỗng và nó phải bắt đầu bằng một từ thuộc danh sách đã chỉ định. Nếu đúng, ta loại bỏ từ đó khỏi <code>*unparsed*</code> và trả về từ đó cùng với loại từ của nó (nằm ở đầu danh sách):<sup class="footnote-reference"><a href="#9">9</a></sup></p>
+<pre><code class="language-{.scheme}">(define (parse-word word-list)
+  (require (not (null? *unparsed*)))
+  (require (memq (car *unparsed*) 
+                 (cdr word-list)))
+  (let ((found-word (car *unparsed*)))
+    (set! *unparsed* (cdr *unparsed*))
+    (list (car word-list) found-word)))
+</code></pre>
+<p>Để bắt đầu phân tích cú pháp, tất cả những gì chúng ta cần làm là gán <code>*unparsed*</code> bằng toàn bộ đầu vào, thử phân tích một câu, và kiểm tra rằng không còn gì sót lại:</p>
+<pre><code class="language-{.scheme}">(define *unparsed* '())
+(define (parse input)
+  (set! *unparsed* input)
+  (let ((sent (parse-sentence)))
+    (require (null? *unparsed*))
+    sent))
+</code></pre>
+<p>Bây giờ chúng ta có thể thử <strong>parser</strong> và kiểm tra rằng nó hoạt động với câu thử nghiệm đơn giản:</p>
+<pre><code class="language-{.scheme}">;;; Amb-Eval input:
+(parse '(the cat eats))
+
+;;; Starting a new problem
+;;; Amb-Eval value:
+(sentence 
+ (noun-phrase (article the) (noun cat))
+ (verb eats))
+</code></pre>
+<p><strong><code>amb</code> evaluator</strong> hữu ích ở đây vì nó cho phép biểu đạt các ràng buộc phân tích cú pháp một cách thuận tiện với sự hỗ trợ của <code>require</code>. Tuy nhiên, khả năng tìm kiếm tự động và quay lui thực sự phát huy tác dụng khi chúng ta xét đến các ngữ pháp phức tạp hơn, nơi có nhiều lựa chọn về cách phân tách các đơn vị.</p>
+<p>Hãy thêm vào ngữ pháp của chúng ta một danh sách <strong>prepositions</strong> (giới từ):</p>
+<pre><code class="language-{.scheme}">(define prepositions 
+  '(prep for to in by with))
+</code></pre>
+<p>và định nghĩa một <strong>prepositional phrase</strong> (cụm giới từ) — ví dụ “for the cat” — là một <strong>preposition</strong> theo sau bởi một <strong>noun phrase</strong>:</p>
+<pre><code class="language-{.scheme}">(define (parse-prepositional-phrase)
+  (list 'prep-phrase
+        (parse-word prepositions)
+        (parse-noun-phrase)))
+</code></pre>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Chương trình của chúng ta sử dụng <strong>procedure</strong> sau để xác định các phần tử của một danh sách có khác nhau hay không.<br />
+<sup class="footnote-reference"><a href="#8">8</a></sup>: Ở đây chúng ta sử dụng quy ước rằng phần tử đầu tiên của mỗi danh sách chỉ định loại từ cho các từ còn lại trong danh sách.<br />
+<sup class="footnote-reference"><a href="#9">9</a></sup>: Lưu ý rằng <code>parse-word</code> sử dụng <code>set!</code> để thay đổi danh sách đầu vào chưa được phân tích. Để điều này hoạt động, <strong><code>amb</code> evaluator</strong> của chúng ta phải hoàn tác các tác động của các phép gán <code>set!</code> khi nó quay lui.</p>
+</div>
+<p>Bây giờ chúng ta có thể định nghĩa một <strong>sentence</strong> (câu) là một <strong>noun phrase</strong> (cụm danh từ) theo sau bởi một <strong>verb phrase</strong> (cụm động từ), trong đó một <strong>verb phrase</strong> có thể là một <strong>verb</strong> hoặc một <strong>verb phrase</strong> được mở rộng bởi một <strong>prepositional phrase</strong> (cụm giới từ):<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<pre><code class="language-{.scheme}">(define (parse-sentence)
+  (list 'sentence
+         (parse-noun-phrase)
+         (parse-verb-phrase)))
+
+(define (parse-verb-phrase)
+  (define (maybe-extend verb-phrase)
+    (amb 
+     verb-phrase
+     (maybe-extend 
+      (list 'verb-phrase
+            verb-phrase
+            (parse-prepositional-phrase)))))
+  (maybe-extend (parse-word verbs)))
+</code></pre>
+<p>Nhân tiện, chúng ta cũng có thể mở rộng định nghĩa của <strong>noun phrase</strong> để cho phép những cấu trúc như “a cat in the class.” Cái mà trước đây chúng ta gọi là <strong>noun phrase</strong>, bây giờ sẽ gọi là <strong>simple noun phrase</strong> (cụm danh từ đơn), và một <strong>noun phrase</strong> giờ đây sẽ là hoặc một <strong>simple noun phrase</strong> hoặc một <strong>noun phrase</strong> được mở rộng bởi một <strong>prepositional phrase</strong>:</p>
+<pre><code class="language-{.scheme}">(define (parse-simple-noun-phrase)
+  (list 'simple-noun-phrase
+        (parse-word articles)
+        (parse-word nouns)))
+
+(define (parse-noun-phrase)
+  (define (maybe-extend noun-phrase)
+    (amb 
+     noun-phrase
+     (maybe-extend 
+      (list 'noun-phrase
+            noun-phrase
+            (parse-prepositional-phrase)))))
+  (maybe-extend (parse-simple-noun-phrase)))
+</code></pre>
+<p>Ngữ pháp mới của chúng ta cho phép phân tích các câu phức tạp hơn. Ví dụ:</p>
+<pre><code class="language-{.scheme}">(parse '(the student with the cat 
+         sleeps in the class))
+</code></pre>
+<p>cho ra kết quả:</p>
+<pre><code class="language-{.scheme}">(sentence
+ (noun-phrase
+  (simple-noun-phrase (article the) 
+                      (noun student))
+  (prep-phrase (prep with)
+               (simple-noun-phrase
+                (article the)
+                (noun cat))))
+ (verb-phrase
+  (verb sleeps)
+  (prep-phrase (prep in)
+               (simple-noun-phrase
+                (article the)
+                (noun class)))))
+</code></pre>
+<p>Lưu ý rằng một đầu vào nhất định có thể có nhiều cách phân tích hợp lệ. Trong câu “The professor lectures to the student with the cat,” có thể là giáo sư đang giảng bài cùng với con mèo, hoặc là sinh viên có con mèo. Chương trình <strong>nondeterministic</strong> của chúng ta tìm ra cả hai khả năng:</p>
+<pre><code class="language-{.scheme}">(parse '(the professor lectures to 
+         the student with the cat))
+</code></pre>
+<p>cho ra kết quả:</p>
+<pre><code class="language-{.scheme}">(sentence
+ (simple-noun-phrase (article the) 
+                     (noun professor))
+ (verb-phrase
+  (verb-phrase
+   (verb lectures)
+   (prep-phrase (prep to)
+                (simple-noun-phrase
+                 (article the) 
+                 (noun student))))
+  (prep-phrase (prep with)
+               (simple-noun-phrase
+                (article the) 
+                (noun cat)))))
+</code></pre>
+<p>Yêu cầu <strong>evaluator</strong> thử lại sẽ cho ra:</p>
+<pre><code class="language-{.scheme}">(sentence
+ (simple-noun-phrase (article the) 
+                     (noun professor))
+ (verb-phrase (verb lectures)
+              (prep-phrase 
+               (prep to)
+               (noun-phrase
+                (simple-noun-phrase
+                 (article the) 
+                 (noun student))
+                (prep-phrase 
+                 (prep with)
+                 (simple-noun-phrase
+                  (article the) 
+                  (noun cat)))))))
+</code></pre>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Lưu ý rằng định nghĩa này là <strong>recursive</strong> (đệ quy) — một <strong>verb</strong> có thể được theo sau bởi bất kỳ số lượng <strong>prepositional phrase</strong> nào.</p>
+</div>
+<h2 id="433-triển-khai-amb-evaluator"><a class="header" href="#433-triển-khai-amb-evaluator">4.3.3 Triển khai <code>Amb</code> Evaluator</a></h2>
+<p>Việc đánh giá một biểu thức Scheme thông thường có thể trả về một giá trị, có thể không bao giờ kết thúc, hoặc có thể báo lỗi. Trong <strong>nondeterministic Scheme</strong> (Scheme phi tất định), việc đánh giá một biểu thức ngoài những khả năng trên còn có thể dẫn đến việc phát hiện ra một ngõ cụt, khi đó quá trình đánh giá phải <em>backtrack</em> (quay lui) về một <strong>choice point</strong> (điểm lựa chọn) trước đó. Việc diễn giải <strong>nondeterministic Scheme</strong> trở nên phức tạp hơn bởi trường hợp bổ sung này.</p>
+<p>Chúng ta sẽ xây dựng <strong><code>amb</code> evaluator</strong> cho <strong>nondeterministic Scheme</strong> bằng cách sửa đổi <strong>analyzing evaluator</strong> (bộ phân tích và thực thi) ở mục 4.1.7.<sup class="footnote-reference"><a href="#11">11</a></sup> Giống như trong <strong>analyzing evaluator</strong>, việc đánh giá một biểu thức được thực hiện bằng cách gọi một <strong>execution procedure</strong> (thủ tục thực thi) được tạo ra từ quá trình phân tích biểu thức đó. Sự khác biệt giữa việc diễn giải Scheme thông thường và Scheme phi tất định sẽ hoàn toàn nằm ở các <strong>execution procedure</strong>.</p>
+<h3 id="execution-procedures-và-continuations"><a class="header" href="#execution-procedures-và-continuations">Execution procedures và Continuations</a></h3>
+<p>Hãy nhớ rằng các <strong>execution procedure</strong> của <strong>ordinary evaluator</strong> nhận một đối số: <strong>environment</strong> (môi trường thực thi). Ngược lại, các <strong>execution procedure</strong> trong <strong><code>amb</code> evaluator</strong> nhận ba đối số: <strong>environment</strong>, và hai <strong>procedure</strong> gọi là <em>continuation procedures</em> (thủ tục tiếp diễn). Việc đánh giá một biểu thức sẽ kết thúc bằng việc gọi một trong hai continuation này: Nếu việc đánh giá cho ra một giá trị, <em>success continuation</em> (tiếp diễn thành công) sẽ được gọi với giá trị đó; nếu việc đánh giá dẫn đến phát hiện một ngõ cụt, <em>failure continuation</em> (tiếp diễn thất bại) sẽ được gọi. Việc xây dựng và gọi các continuation thích hợp chính là cơ chế mà <strong>nondeterministic evaluator</strong> sử dụng để thực hiện <em>backtracking</em>.</p>
+<p>Nhiệm vụ của <strong>success continuation</strong> là nhận một giá trị và tiếp tục quá trình tính toán. Cùng với giá trị đó, <strong>success continuation</strong> được truyền thêm một <strong>failure continuation</strong> khác, sẽ được gọi sau này nếu việc sử dụng giá trị đó dẫn đến ngõ cụt.</p>
+<p>Nhiệm vụ của <strong>failure continuation</strong> là thử một nhánh khác của quá trình phi tất định. Bản chất của ngôn ngữ phi tất định nằm ở chỗ các biểu thức có thể biểu diễn các lựa chọn giữa nhiều phương án. Việc đánh giá một biểu thức như vậy phải tiếp tục với một trong các phương án đã chỉ ra, mặc dù chưa biết trước phương án nào sẽ dẫn đến kết quả chấp nhận được. Để xử lý điều này, <strong>evaluator</strong> chọn một trong các phương án và truyền giá trị này cho <strong>success continuation</strong>. Cùng với giá trị này, <strong>evaluator</strong> tạo và truyền kèm một <strong>failure continuation</strong> có thể được gọi sau đó để chọn một phương án khác.</p>
+<p>Một thất bại được kích hoạt trong quá trình đánh giá (tức là một <strong>failure continuation</strong> được gọi) khi chương trình của người dùng rõ ràng từ chối hướng xử lý hiện tại (ví dụ, một lời gọi đến <code>require</code> có thể dẫn đến việc thực thi <code>(amb)</code>, một biểu thức luôn thất bại — xem mục 4.3.1). <strong>Failure continuation</strong> hiện có tại thời điểm đó sẽ khiến <strong>choice point</strong> gần nhất chọn một phương án khác. Nếu không còn phương án nào để xem xét tại <strong>choice point</strong> đó, một thất bại tại <strong>choice point</strong> trước đó sẽ được kích hoạt, và cứ thế tiếp tục. <strong>Failure continuation</strong> cũng được gọi bởi <strong>driver loop</strong> khi nhận yêu cầu <code>try-again</code>, để tìm một giá trị khác của biểu thức.</p>
+<p>Ngoài ra, nếu một thao tác <strong>side-effect</strong> (tác động phụ) — chẳng hạn như gán giá trị cho một biến — xảy ra trên một nhánh của quá trình xuất phát từ một lựa chọn, thì khi quá trình đó gặp ngõ cụt, có thể cần phải hoàn tác tác động phụ trước khi thực hiện lựa chọn mới. Điều này được thực hiện bằng cách để thao tác <strong>side-effect</strong> tạo ra một <strong>failure continuation</strong> có nhiệm vụ hoàn tác tác động phụ và lan truyền thất bại.</p>
+<p>Tóm lại, <strong>failure continuation</strong> được tạo ra bởi:</p>
+<ul>
+<li>Các biểu thức <code>amb</code> — để cung cấp cơ chế lựa chọn phương án thay thế nếu phương án hiện tại do biểu thức <code>amb</code> chọn dẫn đến ngõ cụt;</li>
+<li><strong>Top-level driver</strong> — để cung cấp cơ chế báo lỗi khi đã hết các lựa chọn;</li>
+<li>Các phép gán — để chặn các thất bại và hoàn tác phép gán trong quá trình <em>backtracking</em>.</li>
+</ul>
+<p>Các thất bại chỉ được khởi tạo khi gặp ngõ cụt. Điều này xảy ra:</p>
+<ul>
+<li>nếu chương trình người dùng thực thi <code>(amb)</code>;</li>
+<li>nếu người dùng nhập <code>try-again</code> tại <strong>top-level driver</strong>.</li>
+</ul>
+<p><strong>Failure continuation</strong> cũng được gọi trong quá trình xử lý một thất bại:</p>
+<ul>
+<li>Khi <strong>failure continuation</strong> được tạo bởi một phép gán hoàn tất việc hoàn tác tác động phụ, nó sẽ gọi <strong>failure continuation</strong> mà nó đã chặn, để lan truyền thất bại trở lại <strong>choice point</strong> đã dẫn đến phép gán này hoặc về mức <strong>top-level</strong>.</li>
+<li>Khi <strong>failure continuation</strong> của một <code>amb</code> hết các lựa chọn, nó sẽ gọi <strong>failure continuation</strong> ban đầu được truyền cho <code>amb</code>, để lan truyền thất bại trở lại <strong>choice point</strong> trước đó hoặc về mức <strong>top-level</strong>.</li>
+</ul>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Chúng tôi đã chọn triển khai <strong>lazy evaluator</strong> (bộ đánh giá lười) ở mục 4.2 như một sửa đổi của <strong>ordinary metacircular evaluator</strong> (bộ đánh giá siêu vòng lặp thông thường) ở mục 4.1.1. Ngược lại, chúng tôi sẽ dựa trên <strong>analyzing evaluator</strong> ở mục 4.1.7 để xây dựng <strong><code>amb</code> evaluator</strong>, vì các <strong>execution procedure</strong> trong bộ đánh giá đó cung cấp một khuôn khổ thuận tiện để triển khai <em>backtracking</em>.</p>
+</div>
+<h3 id="cấu-trúc-của-evaluator"><a class="header" href="#cấu-trúc-của-evaluator">Cấu trúc của evaluator</a></h3>
+<p>Các <strong>syntax procedure</strong> (thủ tục cú pháp) và <strong>data-representation procedure</strong> (thủ tục biểu diễn dữ liệu) cho <strong><code>amb</code> evaluator</strong>, cũng như <strong><code>analyze</code> procedure</strong> cơ bản, giống hệt với các thủ tục trong <strong>evaluator</strong> ở mục 4.1.7, ngoại trừ việc chúng ta cần thêm các <strong>syntax procedure</strong> để nhận diện <strong>special form</strong> <code>amb</code>:<sup class="footnote-reference"><a href="#12">12</a></sup></p>
+<pre><code class="language-{.scheme}">(define (amb? exp) (tagged-list? exp 'amb))
+(define (amb-choices exp) (cdr exp))
+</code></pre>
+<p>Chúng ta cũng phải thêm vào phần <strong>dispatch</strong> trong <code>analyze</code> một mệnh đề để nhận diện <strong>special form</strong> này và tạo ra một <strong>execution procedure</strong> thích hợp:</p>
+<pre><code class="language-{.scheme}">((amb? exp) (analyze-amb exp))
+</code></pre>
+<p><strong>Top-level procedure</strong> <code>ambeval</code> (tương tự phiên bản <code>eval</code> ở mục 4.1.7) sẽ phân tích biểu thức được cung cấp và áp dụng <strong>execution procedure</strong> thu được cho <strong>environment</strong> (môi trường) đã cho, cùng với hai <strong>continuation</strong> (tiếp diễn) được truyền vào:</p>
+<pre><code class="language-{.scheme}">(define (ambeval exp env succeed fail)
+  ((analyze exp) env succeed fail))
+</code></pre>
+<p>Một <strong>success continuation</strong> là một <strong>procedure</strong> nhận hai đối số: giá trị vừa thu được và một <strong>failure continuation</strong> khác sẽ được dùng nếu giá trị đó dẫn đến một thất bại tiếp theo. Một <strong>failure continuation</strong> là một <strong>procedure</strong> không nhận đối số nào. Do đó, dạng tổng quát của một <strong>execution procedure</strong> là:</p>
+<pre><code class="language-{.scheme}">(lambda (env succeed fail)
+  ;; succeed is (lambda (value fail) …)
+  ;; fail is (lambda () …)
+  …)
+</code></pre>
+<p>Ví dụ, thực thi:</p>
+<pre><code class="language-{.scheme}">(ambeval ⟨exp⟩
+         the-global-environment
+         (lambda (value fail) value)
+         (lambda () 'failed))
+</code></pre>
+<p>sẽ cố gắng đánh giá biểu thức đã cho và sẽ trả về hoặc giá trị của biểu thức (nếu đánh giá thành công) hoặc ký hiệu <code>failed</code> (nếu đánh giá thất bại). Lời gọi <code>ambeval</code> trong <strong>driver loop</strong> được trình bày bên dưới sử dụng các <strong>continuation procedure</strong> phức tạp hơn nhiều, cho phép tiếp tục vòng lặp và hỗ trợ yêu cầu <code>try-again</code>.</p>
+<p>Phần lớn độ phức tạp của <strong><code>amb</code> evaluator</strong> xuất phát từ cơ chế truyền các <strong>continuation</strong> qua lại khi các <strong>execution procedure</strong> gọi lẫn nhau. Khi đọc đoạn mã dưới đây, bạn nên so sánh từng <strong>execution procedure</strong> với <strong>procedure</strong> tương ứng trong <strong>ordinary evaluator</strong> ở mục 4.1.7.</p>
+<h3 id="simple-expressions"><a class="header" href="#simple-expressions">Simple expressions</a></h3>
+<p>Các <strong>execution procedure</strong> cho các loại biểu thức đơn giản nhất về cơ bản giống với các thủ tục trong <strong>ordinary evaluator</strong>, ngoại trừ việc cần quản lý các <strong>continuation</strong>. Các <strong>execution procedure</strong> này đơn giản là thành công với giá trị của biểu thức, đồng thời truyền tiếp <strong>failure continuation</strong> mà chúng nhận được.</p>
+<pre><code class="language-{.scheme}">(define (analyze-self-evaluating exp)
+  (lambda (env succeed fail)
+    (succeed exp fail)))
+
+(define (analyze-quoted exp)
+  (let ((qval (text-of-quotation exp)))
+    (lambda (env succeed fail)
+      (succeed qval fail))))
+
+(define (analyze-variable exp)
+  (lambda (env succeed fail)
+    (succeed (lookup-variable-value exp env)
+             fail)))
+
+(define (analyze-lambda exp)
+  (let ((vars (lambda-parameters exp))
+        (bproc (analyze-sequence 
+                (lambda-body exp))))
+    (lambda (env succeed fail)
+      (succeed (make-procedure vars bproc env)
+               fail))))
+</code></pre>
+<p>Lưu ý rằng việc tra cứu một biến luôn “thành công”. Nếu <code>lookup-variable-value</code> không tìm thấy biến, nó sẽ báo lỗi như thường lệ. Một “thất bại” như vậy cho thấy lỗi lập trình — tham chiếu đến một biến chưa được ràng buộc; đây không phải là dấu hiệu cho thấy chúng ta nên thử một lựa chọn phi tất định khác thay cho lựa chọn hiện tại.</p>
+<h3 id="conditionals-và-sequences"><a class="header" href="#conditionals-và-sequences">Conditionals và sequences</a></h3>
+<p><strong>Conditionals</strong> cũng được xử lý tương tự như trong <strong>ordinary evaluator</strong>. <strong>Execution procedure</strong> được tạo bởi <code>analyze-if</code> sẽ gọi <strong>predicate execution procedure</strong> <code>pproc</code> với một <strong>success continuation</strong> kiểm tra xem giá trị của <strong>predicate</strong> có đúng hay không, và tiếp tục thực thi <strong>consequent</strong> hoặc <strong>alternative</strong>. Nếu việc thực thi <code>pproc</code> thất bại, <strong>failure continuation</strong> ban đầu của biểu thức <code>if</code> sẽ được gọi.</p>
+<pre><code class="language-{.scheme}">(define (analyze-if exp)
+  (let ((pproc (analyze (if-predicate exp)))
+        (cproc (analyze (if-consequent exp)))
+        (aproc (analyze (if-alternative exp))))
+    (lambda (env succeed fail)
+      (pproc env
+             ;; success continuation for evaluating
+             ;; the predicate to obtain pred-value
+             (lambda (pred-value fail2)
+               (if (true? pred-value)
+                   (cproc env succeed fail2)
+                   (aproc env succeed fail2)))
+             ;; failure continuation for
+             ;; evaluating the predicate
+             fail))))
+</code></pre>
+<p><strong>Sequences</strong> cũng được xử lý giống như trong <strong>evaluator</strong> trước đó, ngoại trừ các thao tác trong <strong>subprocedure</strong> <code>sequentially</code> cần thiết để truyền các <strong>continuation</strong>. Cụ thể, để thực thi tuần tự <code>a</code> rồi đến <code>b</code>, ta gọi <code>a</code> với một <strong>success continuation</strong> sẽ gọi <code>b</code>.</p>
+<pre><code class="language-{.scheme}">(define (analyze-sequence exps)
+  (define (sequentially a b)
+    (lambda (env succeed fail)
+      (a env
+         ;; success continuation for calling a
+         (lambda (a-value fail2)
+           (b env succeed fail2))
+         ;; failure continuation for calling a
+         fail)))
+  (define (loop first-proc rest-procs)
+    (if (null? rest-procs)
+        first-proc
+        (loop (sequentially first-proc 
+                            (car rest-procs))
+              (cdr rest-procs))))
+  (let ((procs (map analyze exps)))
+    (if (null? procs)
+        (error &quot;Empty sequence: ANALYZE&quot;))
+    (loop (car procs) (cdr procs))))
+</code></pre>
+<h3 id="definitions-và-assignments"><a class="header" href="#definitions-và-assignments">Definitions và assignments</a></h3>
+<p><strong>Definitions</strong> là một trường hợp khác mà chúng ta phải xử lý cẩn thận để quản lý các <strong>continuation</strong>, vì cần phải đánh giá biểu thức <strong>definition-value</strong> trước khi thực sự định nghĩa biến mới. Để thực hiện điều này, <strong>definition-value execution procedure</strong> <code>vproc</code> được gọi với <strong>environment</strong>, một <strong>success continuation</strong>, và <strong>failure continuation</strong>. Nếu việc thực thi <code>vproc</code> thành công, thu được giá trị <code>val</code> cho biến được định nghĩa, biến sẽ được định nghĩa và thành công được truyền tiếp:</p>
+<pre><code class="language-{.scheme}">(define (analyze-definition exp)
+  (let ((var (definition-variable exp))
+        (vproc (analyze 
+                (definition-value exp))))
+    (lambda (env succeed fail)
+      (vproc env
+             (lambda (val fail2)
+               (define-variable! var val env)
+               (succeed 'ok fail2))
+             fail))))
+</code></pre>
+<p><strong>Assignments</strong> thú vị hơn. Đây là nơi đầu tiên chúng ta thực sự <em>sử dụng</em> các <strong>continuation</strong>, thay vì chỉ truyền chúng đi. <strong>Execution procedure</strong> cho <strong>assignment</strong> bắt đầu giống như cho <strong>definition</strong>. Nó trước tiên cố gắng lấy giá trị mới sẽ gán cho biến. Nếu việc đánh giá <code>vproc</code> thất bại, phép gán thất bại.</p>
+<p>Tuy nhiên, nếu <code>vproc</code> thành công và chúng ta tiến hành gán, ta phải xem xét khả năng rằng nhánh tính toán này có thể thất bại sau đó, khi đó sẽ cần <em>backtrack</em> để hoàn tác phép gán. Do đó, chúng ta phải sắp xếp để hoàn tác phép gán như một phần của quá trình <em>backtracking</em>.<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<p>Điều này được thực hiện bằng cách truyền cho <code>vproc</code> một <strong>success continuation</strong> (được đánh dấu “*1*” bên dưới) lưu giá trị cũ của biến trước khi gán giá trị mới và tiếp tục từ phép gán. <strong>Failure continuation</strong> được truyền kèm với giá trị của phép gán (được đánh dấu “*2*” bên dưới) sẽ khôi phục giá trị cũ của biến trước khi tiếp tục thất bại. Nói cách khác, một phép gán thành công sẽ cung cấp một <strong>failure continuation</strong> để chặn một thất bại xảy ra sau đó; bất kỳ thất bại nào lẽ ra sẽ gọi <code>fail2</code> thì thay vào đó sẽ gọi thủ tục này, để hoàn tác phép gán trước khi thực sự gọi <code>fail2</code>.</p>
+<pre><code class="language-{.scheme}">(define (analyze-assignment exp)
+  (let ((var (assignment-variable exp))
+        (vproc (analyze 
+                (assignment-value exp))))
+    (lambda (env succeed fail)
+      (vproc env
+             (lambda (val fail2)    ; *1*
+               (let ((old-value
+                      (lookup-variable-value 
+                       var 
+                       env)))
+                 (set-variable-value!
+                  var 
+                  val 
+                  env)
+                 (succeed 
+                  'ok
+                  (lambda ()    ; *2*
+                    (set-variable-value! 
+                     var
+                     old-value
+                     env)
+                    (fail2)))))
+               fail))))
+</code></pre>
+<h3 id="procedure-applications"><a class="header" href="#procedure-applications">Procedure applications</a></h3>
+<p><strong>Execution procedure</strong> (thủ tục thực thi) cho <strong>applications</strong> (lời gọi thủ tục) không chứa ý tưởng mới nào ngoại trừ độ phức tạp kỹ thuật trong việc quản lý các <strong>continuation</strong>. Độ phức tạp này phát sinh trong <code>analyze-application</code>, do cần phải theo dõi <strong>success continuation</strong> và <strong>failure continuation</strong> khi chúng ta đánh giá các toán hạng. Chúng ta sử dụng một <strong>procedure</strong> <code>get-args</code> để đánh giá danh sách các toán hạng, thay vì một phép <code>map</code> đơn giản như trong <strong>ordinary evaluator</strong>.</p>
+<pre><code class="language-{.scheme}">(define (analyze-application exp)
+  (let ((fproc (analyze (operator exp)))
+        (aprocs (map analyze (operands exp))))
+    (lambda (env succeed fail)
+      (fproc env
+             (lambda (proc fail2)
+               (get-args 
+                aprocs
+                env
+                (lambda (args fail3)
+                  (execute-application
+                   proc args succeed fail3))
+                fail2))
+             fail))))
+</code></pre>
+<p>Trong <code>get-args</code>, hãy chú ý cách việc duyệt xuống danh sách các <strong>execution procedure</strong> <code>aproc</code> bằng <code>cdr</code> và xây dựng (<code>cons</code>) danh sách <code>args</code> kết quả được thực hiện bằng cách gọi từng <code>aproc</code> trong danh sách với một <strong>success continuation</strong> gọi đệ quy <code>get-args</code>. Mỗi lời gọi đệ quy này đến <code>get-args</code> có một <strong>success continuation</strong> mà giá trị của nó là phép <code>cons</code> đối số vừa thu được vào danh sách các đối số đã tích lũy:</p>
+<pre><code class="language-{.scheme}">(define (get-args aprocs env succeed fail)
+  (if (null? aprocs)
+      (succeed '() fail)
+      ((car aprocs) 
+       env
+       ;; success continuation for this aproc
+       (lambda (arg fail2)
+         (get-args 
+          (cdr aprocs)
+          env
+          ;; success continuation for
+          ;; recursive call to get-args
+          (lambda (args fail3)
+            (succeed (cons arg args)
+                     fail3))
+          fail2))
+       fail)))
+</code></pre>
+<p>Việc áp dụng <strong>procedure</strong> thực tế, được thực hiện bởi <code>execute-application</code>, được tiến hành giống như trong <strong>ordinary evaluator</strong>, ngoại trừ việc cần quản lý các <strong>continuation</strong>.</p>
+<pre><code class="language-{.scheme}">(define (execute-application 
+         proc args succeed fail)
+  (cond ((primitive-procedure? proc)
+         (succeed 
+          (apply-primitive-procedure 
+           proc args)
+          fail))
+        ((compound-procedure? proc)
+         ((procedure-body proc)
+          (extend-environment 
+           (procedure-parameters proc)
+           args
+           (procedure-environment proc))
+          succeed
+          fail))
+        (else (error &quot;Unknown procedure type: 
+                      EXECUTE-APPLICATION&quot;
+                     proc))))
+</code></pre>
+<h3 id="evaluating-amb-expressions"><a class="header" href="#evaluating-amb-expressions">Evaluating <code>amb</code> expressions</a></h3>
+<p><strong>Special form</strong> <code>amb</code> là yếu tố then chốt trong ngôn ngữ <strong>nondeterministic</strong>. Ở đây, chúng ta thấy bản chất của quá trình diễn giải và lý do cần theo dõi các <strong>continuation</strong>. <strong>Execution procedure</strong> cho <code>amb</code> định nghĩa một vòng lặp <code>try-next</code> để lần lượt duyệt qua các <strong>execution procedure</strong> cho tất cả các giá trị khả dĩ của biểu thức <code>amb</code>. Mỗi <strong>execution procedure</strong> được gọi với một <strong>failure continuation</strong> sẽ thử giá trị tiếp theo. Khi không còn phương án nào để thử, toàn bộ biểu thức <code>amb</code> sẽ thất bại.</p>
+<pre><code class="language-{.scheme}">(define (analyze-amb exp)
+  (let ((cprocs
+         (map analyze (amb-choices exp))))
+    (lambda (env succeed fail)
+      (define (try-next choices)
+        (if (null? choices)
+            (fail)
+            ((car choices) 
+             env
+             succeed
+             (lambda ()
+               (try-next (cdr choices))))))
+      (try-next cprocs))))
+</code></pre>
+<h3 id="driver-loop-1"><a class="header" href="#driver-loop-1">Driver loop</a></h3>
+<p><strong>Driver loop</strong> cho <strong><code>amb</code> evaluator</strong> phức tạp do cơ chế cho phép người dùng thử lại khi đánh giá một biểu thức. <strong>Driver</strong> sử dụng một <strong>procedure</strong> gọi là <code>internal-loop</code>, nhận đối số là một <strong>procedure</strong> <code>try-again</code>. Ý tưởng là khi gọi <code>try-again</code> sẽ tiếp tục với phương án chưa thử tiếp theo trong quá trình đánh giá phi tất định. <code>Internal-loop</code> hoặc gọi <code>try-again</code> khi người dùng nhập <code>try-again</code> tại <strong>driver loop</strong>, hoặc bắt đầu một lần đánh giá mới bằng cách gọi <code>ambeval</code>.</p>
+<p><strong>Failure continuation</strong> cho lời gọi <code>ambeval</code> này sẽ thông báo cho người dùng rằng không còn giá trị nào nữa và gọi lại <strong>driver loop</strong>.</p>
+<p><strong>Success continuation</strong> cho lời gọi <code>ambeval</code> tinh tế hơn. Chúng ta in ra giá trị thu được và sau đó gọi lại <strong>internal loop</strong> với một <strong>procedure</strong> <code>try-again</code> có thể thử phương án tiếp theo. <strong>Procedure</strong> <code>next-alternative</code> này là đối số thứ hai được truyền cho <strong>success continuation</strong>. Thông thường, chúng ta coi đối số thứ hai này là một <strong>failure continuation</strong> sẽ được dùng nếu nhánh đánh giá hiện tại thất bại sau đó. Tuy nhiên, trong trường hợp này, chúng ta đã hoàn tất một lần đánh giá thành công, nên có thể gọi nhánh “thất bại” thay thế để tìm thêm các lần đánh giá thành công khác.</p>
+<pre><code class="language-{.scheme}">(define input-prompt  &quot;;;; Amb-Eval input:&quot;)
+(define output-prompt &quot;;;; Amb-Eval value:&quot;)
+
+(define (driver-loop)
+  (define (internal-loop try-again)
+    (prompt-for-input input-prompt)
+    (let ((input (read)))
+      (if (eq? input 'try-again)
+          (try-again)
+          (begin
+            (newline)
+            (display 
+             &quot;;;; Starting a new problem &quot;)
+            (ambeval 
+             input
+             the-global-environment
+             ;; ambeval success
+             (lambda (val next-alternative)
+               (announce-output 
+                output-prompt)
+               (user-print val)
+               (internal-loop 
+                next-alternative))
+             ;; ambeval failure
+             (lambda ()
+               (announce-output
+                &quot;;;; There are no 
+                 more values of&quot;)
+               (user-print input)
+               (driver-loop)))))))
+  (internal-loop
+   (lambda ()
+     (newline)
+     (display 
+      &quot;;;; There is no current problem&quot;)
+     (driver-loop))))
+</code></pre>
+<p>Lời gọi ban đầu đến <code>internal-loop</code> sử dụng một <strong>procedure</strong> <code>try-again</code> thông báo rằng không có vấn đề hiện tại và khởi động lại <strong>driver loop</strong>. Đây là hành vi sẽ xảy ra nếu người dùng nhập <code>try-again</code> khi không có quá trình đánh giá nào đang diễn ra.</p>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p>Chúng ta giả định rằng <strong>evaluator</strong> hỗ trợ <code>let</code> (xem Bài tập 4.22), vốn đã được sử dụng trong các chương trình phi tất định của chúng ta.</p>
+</div>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>...</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="4-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="4-4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="4-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="4-4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

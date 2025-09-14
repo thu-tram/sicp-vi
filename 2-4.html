@@ -1,0 +1,633 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Multiple Representations for Abstract Data - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html" class="active"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="24-nhiều-cách-biểu-diễn-cho-abstract-data-dữ-liệu-trừu-tượng"><a class="header" href="#24-nhiều-cách-biểu-diễn-cho-abstract-data-dữ-liệu-trừu-tượng">2.4 Nhiều cách biểu diễn cho Abstract Data (dữ liệu trừu tượng)</a></h1>
+<p>Chúng ta đã giới thiệu <em>data abstraction</em> (trừu tượng hóa dữ liệu), một phương pháp luận để cấu trúc hệ thống sao cho phần lớn chương trình có thể được đặc tả độc lập với các lựa chọn liên quan đến việc hiện thực các <em>data object</em> (đối tượng dữ liệu) mà chương trình thao tác.<br />
+Ví dụ, trong 2.1.1 chúng ta đã thấy cách tách biệt nhiệm vụ thiết kế một chương trình sử dụng <em>rational numbers</em> (số hữu tỉ) khỏi nhiệm vụ hiện thực <em>rational numbers</em> dựa trên các cơ chế nguyên thủy của ngôn ngữ máy tính để xây dựng <em>compound data</em> (dữ liệu phức hợp).<br />
+Ý tưởng then chốt là dựng nên một <em>abstraction barrier</em> (rào chắn trừu tượng) – trong trường hợp này là các <em>selector</em> (bộ chọn) và <em>constructor</em> (bộ dựng) cho <em>rational numbers</em> (<code>make-rat</code>, <code>numer</code>, <code>denom</code>) — nhằm tách biệt cách sử dụng <em>rational numbers</em> khỏi cách biểu diễn bên dưới của chúng dựa trên <em>list structure</em> (cấu trúc danh sách).<br />
+Một <em>abstraction barrier</em> tương tự cũng tách biệt chi tiết của các <em>procedure</em> (thủ tục) thực hiện <em>rational arithmetic</em> (<code>add-rat</code>, <code>sub-rat</code>, <code>mul-rat</code>, và <code>div-rat</code>) khỏi các <em>procedure</em> “cấp cao hơn” sử dụng <em>rational numbers</em>. Chương trình thu được có cấu trúc như trong Hình 2.1.</p>
+<p>Những <em>data-abstraction barrier</em> này là công cụ mạnh mẽ để kiểm soát độ phức tạp. Bằng cách cô lập các cách biểu diễn bên dưới của <em>data object</em>, chúng ta có thể chia nhiệm vụ thiết kế một chương trình lớn thành các nhiệm vụ nhỏ hơn có thể thực hiện độc lập.<br />
+Tuy nhiên, dạng <em>data abstraction</em> này vẫn chưa đủ mạnh, vì không phải lúc nào cũng hợp lý khi nói về “cách biểu diễn bên dưới” của một <em>data object</em>.</p>
+<p>Một lý do là có thể tồn tại nhiều cách biểu diễn hữu ích cho cùng một <em>data object</em>, và chúng ta có thể muốn thiết kế các hệ thống có khả năng xử lý nhiều cách biểu diễn.<br />
+Lấy ví dụ đơn giản, <em>complex numbers</em> (số phức) có thể được biểu diễn theo hai cách gần như tương đương: dạng <em>rectangular form</em> (dạng hình chữ nhật – phần thực và phần ảo) và dạng <em>polar form</em> (dạng cực – độ lớn và góc).<br />
+Đôi khi <em>rectangular form</em> phù hợp hơn, đôi khi <em>polar form</em> lại phù hợp hơn. Thực tế, hoàn toàn hợp lý khi hình dung một hệ thống mà trong đó <em>complex numbers</em> được biểu diễn theo cả hai cách, và các <em>procedure</em> thao tác trên <em>complex numbers</em> có thể làm việc với bất kỳ cách biểu diễn nào.</p>
+<p>Quan trọng hơn, các hệ thống lập trình thường được thiết kế bởi nhiều người làm việc trong thời gian dài, chịu tác động của các yêu cầu thay đổi theo thời gian. Trong môi trường như vậy, đơn giản là không thể để mọi người thống nhất trước về lựa chọn cách biểu diễn dữ liệu.<br />
+Vì vậy, ngoài các <em>data-abstraction barrier</em> tách biệt biểu diễn khỏi cách sử dụng, chúng ta cần các <em>abstraction barrier</em> tách biệt các lựa chọn thiết kế khác nhau và cho phép chúng cùng tồn tại trong một chương trình.<br />
+Hơn nữa, vì các chương trình lớn thường được tạo ra bằng cách kết hợp các <em>module</em> (mô-đun) có sẵn được thiết kế độc lập, chúng ta cần các quy ước cho phép lập trình viên tích hợp các <em>module</em> vào hệ thống lớn hơn theo cách <em>additively</em> (bổ sung), tức là không cần thiết kế lại hoặc hiện thực lại các <em>module</em> này.</p>
+<p>Trong phần này, chúng ta sẽ học cách xử lý dữ liệu có thể được biểu diễn theo nhiều cách khác nhau ở các phần khác nhau của chương trình. Điều này đòi hỏi xây dựng các <em>generic procedure</em> (thủ tục tổng quát) — các <em>procedure</em> có thể thao tác trên dữ liệu được biểu diễn theo nhiều cách.<br />
+Kỹ thuật chính của chúng ta để xây dựng <em>generic procedure</em> sẽ là làm việc với các <em>data object</em> có <em>type tag</em> (nhãn kiểu), tức là các <em>data object</em> chứa thông tin tường minh về cách chúng cần được xử lý.<br />
+Chúng ta cũng sẽ thảo luận về <em>data-directed</em> programming (lập trình điều hướng theo dữ liệu), một chiến lược hiện thực mạnh mẽ và tiện lợi để lắp ráp các hệ thống có <em>generic operation</em> (phép toán tổng quát) theo cách bổ sung.</p>
+<p>Chúng ta bắt đầu với ví dụ đơn giản về <em>complex number</em>. Chúng ta sẽ thấy cách <em>type tag</em> và phong cách <em>data-directed</em> cho phép thiết kế riêng biệt <em>rectangular representation</em> và <em>polar representation</em> cho <em>complex numbers</em> trong khi vẫn duy trì khái niệm về một <em>complex-number</em> như một <em>data object</em> trừu tượng.<br />
+Chúng ta sẽ thực hiện điều này bằng cách định nghĩa các <em>arithmetic procedure</em> cho <em>complex numbers</em> (<code>add-complex</code>, <code>sub-complex</code>, <code>mul-complex</code>, và <code>div-complex</code>) dựa trên các <em>generic selector</em> truy cập thành phần của một <em>complex number</em> mà không phụ thuộc vào cách biểu diễn của nó.<br />
+Hệ thống <em>complex-number</em> thu được, như trong Hình 2.19, chứa hai loại <em>abstraction barrier</em> khác nhau. Các <em>abstraction barrier</em> “ngang” đóng vai trò giống như trong Hình 2.1: chúng tách biệt các phép toán “cấp cao” khỏi các biểu diễn “cấp thấp”. Ngoài ra, còn có một <em>barrier</em> “dọc” cho phép chúng ta thiết kế và cài đặt riêng biệt các cách biểu diễn thay thế.</p>
+<p><img src="fig/Fig2.19a.jpg" alt="" /></p>
+<p><strong>Figure 2.19:</strong> Data-abstraction barriers in the complex-number system.</p>
+<p>Trong 2.5, chúng ta sẽ chỉ ra cách sử dụng <em>type tag</em> và phong cách <em>data-directed</em> để phát triển một <em>generic arithmetic package</em> (gói số học tổng quát). Gói này cung cấp các <em>procedure</em> (<code>add</code>, <code>mul</code>, v.v.) có thể được dùng để thao tác mọi loại “số” và có thể dễ dàng mở rộng khi cần thêm một loại số mới.<br />
+Trong 2.5.3, chúng ta sẽ chỉ ra cách sử dụng <em>generic arithmetic</em> trong một hệ thống thực hiện <em>symbolic algebra</em> (đại số ký hiệu).</p>
+<h2 id="241-representations-for-complex-numbers"><a class="header" href="#241-representations-for-complex-numbers">2.4.1 Representations for Complex Numbers</a></h2>
+<p>Chúng ta sẽ phát triển một hệ thống thực hiện các phép toán số học trên <em>complex numbers</em> như một ví dụ đơn giản nhưng không thực tế của một chương trình sử dụng <em>generic operations</em>.<br />
+Chúng ta bắt đầu bằng cách thảo luận hai cách biểu diễn hợp lý cho <em>complex numbers</em> dưới dạng <em>ordered pair</em> (cặp có thứ tự): <em>rectangular form</em> (phần thực và phần ảo) và <em>polar form</em> (độ lớn và góc).<sup class="footnote-reference"><a href="#1">1</a></sup><br />
+Phần 2.4.2 sẽ chỉ ra cách cả hai cách biểu diễn này có thể cùng tồn tại trong một hệ thống thông qua việc sử dụng <em>type tag</em> và <em>generic operation</em>.</p>
+<p>Giống như <em>rational numbers</em>, <em>complex numbers</em> tự nhiên được biểu diễn dưới dạng <em>ordered pair</em>. Tập hợp <em>complex numbers</em> có thể được xem như một không gian hai chiều với hai trục vuông góc: trục “thực” và trục “ảo” (xem Hình 2.20).<br />
+Từ góc nhìn này, <em>complex number</em> $z = x + iy$ (với $i^{\mspace{2mu} 2} = \text{−1}$) có thể được xem như điểm trong mặt phẳng có tọa độ thực là $x$ và tọa độ ảo là $y$.<br />
+Phép cộng <em>complex numbers</em> trong cách biểu diễn này được rút gọn thành phép cộng tọa độ:</p>
+<p>$$\begin{array}{lll}
+{\text{Real-part}(z_{1} + z_{2})} &amp; = &amp; {\text{Real-part}(z_{1}) +} \
+&amp; &amp; {\text{Real-part}(z_{2}),} \
+{\text{Imaginary-part}(z_{1} + z_{2})} &amp; = &amp; {\text{Imaginary-part}(z_{1}) +} \
+&amp; &amp; {\text{Imaginary-part}(z_{2}).} \
+\end{array}$$</p>
+<p><img src="fig/Fig2.20.jpg" alt="" /></p>
+<p><strong>Figure 2.20:</strong> Complex numbers as points in the plane.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Trong các hệ thống tính toán thực tế, <em>rectangular form</em> thường được ưa chuộng hơn <em>polar form</em> hầu hết thời gian vì lỗi làm tròn khi chuyển đổi giữa <em>rectangular form</em> và <em>polar form</em>. Đây là lý do tại sao ví dụ về <em>complex number</em> này là không thực tế. Tuy nhiên, nó cung cấp một minh họa rõ ràng về thiết kế của một hệ thống sử dụng <em>generic operations</em> và là ...</p>
+</div>
+<p>Khi nhân <em>complex numbers</em> (số phức), cách tự nhiên hơn là nghĩ đến việc biểu diễn một <em>complex number</em> ở dạng <em>polar form</em> (dạng cực), như một <em>magnitude</em> (độ lớn) và một <em>angle</em> (góc) ($r$ và $A$ trong Hình 2.20). Tích của hai <em>complex numbers</em> là véc-tơ thu được bằng cách kéo giãn một <em>complex number</em> theo độ dài của số kia và sau đó quay nó theo góc của số kia:</p>
+<p>$$\begin{array}{lll}
+{\text{Magnitude}(z_{1} \cdot z_{2})} &amp; = &amp; {\text{Magnitude}(z_{1}) \cdot \text{Magnitude}(z_{2}),} \
+{\text{Angle}(z_{1} \cdot z_{2})} &amp; = &amp; {\text{Angle}(z_{1}) + \text{Angle}(z_{2}).} \
+\end{array}$$</p>
+<p>Như vậy, có hai cách biểu diễn khác nhau cho <em>complex numbers</em>, mỗi cách phù hợp cho các phép toán khác nhau. Tuy nhiên, từ góc nhìn của người viết chương trình sử dụng <em>complex numbers</em>, nguyên tắc của <em>data abstraction</em> (trừu tượng hóa dữ liệu) gợi ý rằng tất cả các phép toán để thao tác <em>complex numbers</em> nên khả dụng bất kể máy tính đang dùng cách biểu diễn nào.<br />
+Ví dụ, thường rất hữu ích khi có thể tìm <em>magnitude</em> của một <em>complex number</em> được cho bởi tọa độ <em>rectangular</em> (hình chữ nhật). Tương tự, cũng thường hữu ích khi xác định <em>real part</em> (phần thực) của một <em>complex number</em> được cho bởi tọa độ <em>polar</em>.</p>
+<p>Để thiết kế một hệ thống như vậy, ta có thể áp dụng cùng chiến lược <em>data abstraction</em> như khi thiết kế <em>rational-number package</em> (gói số hữu tỉ) ở 2.1.1.<br />
+Giả sử rằng các phép toán trên <em>complex numbers</em> được hiện thực thông qua bốn <em>selector</em> (bộ chọn): <code>real-part</code>, <code>imag-part</code>, <code>magnitude</code>, và <code>angle</code>.<br />
+Cũng giả sử rằng ta có hai <em>procedure</em> (thủ tục) để tạo <em>complex numbers</em>:</p>
+<ul>
+<li><code>make-from-real-imag</code> trả về một <em>complex number</em> với <em>real part</em> và <em>imaginary part</em> (phần ảo) được chỉ định.</li>
+<li><code>make-from-mag-ang</code> trả về một <em>complex number</em> với <em>magnitude</em> và <em>angle</em> được chỉ định.</li>
+</ul>
+<p>Các <em>procedure</em> này có tính chất rằng, với bất kỳ <em>complex number</em> <code>z</code> nào, cả</p>
+<pre><code class="language-scheme">(make-from-real-imag (real-part z) 
+                     (imag-part z))
+</code></pre>
+<p>và</p>
+<pre><code class="language-scheme">(make-from-mag-ang (magnitude z) 
+                   (angle z))
+</code></pre>
+<p>đều tạo ra <em>complex numbers</em> bằng với <code>z</code>.</p>
+<p>Sử dụng các <em>constructor</em> (bộ dựng) và <em>selector</em> này, ta có thể hiện thực các phép toán số học trên <em>complex numbers</em> bằng “<em>abstract data</em>” (dữ liệu trừu tượng) được đặc tả bởi các <em>constructor</em> và <em>selector</em>, giống như đã làm với <em>rational numbers</em> ở 2.1.1.<br />
+Như các công thức trên cho thấy, ta có thể cộng và trừ <em>complex numbers</em> dựa trên <em>real part</em> và <em>imaginary part</em>, trong khi nhân và chia <em>complex numbers</em> dựa trên <em>magnitude</em> và <em>angle</em>:</p>
+<pre><code class="language-scheme">(define (add-complex z1 z2)
+  (make-from-real-imag 
+   (+ (real-part z1) (real-part z2))
+   (+ (imag-part z1) (imag-part z2))))
+
+(define (sub-complex z1 z2)
+  (make-from-real-imag 
+   (- (real-part z1) (real-part z2))
+   (- (imag-part z1) (imag-part z2))))
+
+(define (mul-complex z1 z2)
+  (make-from-mag-ang 
+   (* (magnitude z1) (magnitude z2))
+   (+ (angle z1) (angle z2))))
+
+(define (div-complex z1 z2)
+  (make-from-mag-ang 
+   (/ (magnitude z1) (magnitude z2))
+   (- (angle z1) (angle z2))))
+</code></pre>
+<p>Để hoàn thiện <em>complex-number package</em>, ta phải chọn một cách biểu diễn và hiện thực các <em>constructor</em> và <em>selector</em> dựa trên <em>primitive numbers</em> (số nguyên thủy) và <em>primitive list structure</em> (cấu trúc danh sách nguyên thủy).<br />
+Có hai cách rõ ràng để làm điều này:</p>
+<ul>
+<li>Biểu diễn một <em>complex number</em> ở dạng “<em>rectangular form</em>” như một cặp (<em>real part</em>, <em>imaginary part</em>).</li>
+<li>Hoặc ở dạng “<em>polar form</em>” như một cặp (<em>magnitude</em>, <em>angle</em>).</li>
+</ul>
+<p>Vậy ta sẽ chọn cách nào?</p>
+<p>Để làm rõ các lựa chọn khác nhau, hãy tưởng tượng có hai lập trình viên, <strong>Ben Bitdiddle</strong> và <strong>Alyssa P. Hacker</strong>, đang độc lập thiết kế các cách biểu diễn cho hệ thống <em>complex-number</em>.<br />
+Ben chọn biểu diễn <em>complex numbers</em> ở dạng <em>rectangular form</em>. Với lựa chọn này, việc lấy <em>real part</em> và <em>imaginary part</em> của một <em>complex number</em> là đơn giản, cũng như việc tạo một <em>complex number</em> với <em>real part</em> và <em>imaginary part</em> cho trước.<br />
+Để tìm <em>magnitude</em> và <em>angle</em>, hoặc để tạo một <em>complex number</em> với <em>magnitude</em> và <em>angle</em> cho trước, anh ấy sử dụng các công thức lượng giác:</p>
+<p>$$\begin{array}{lll}
+x &amp; = &amp; {r\cos A,} \
+y &amp; = &amp; {r\sin A,} \
+r &amp; = &amp; \sqrt{x^{2} + y^{2},} \
+A &amp; = &amp; {\arctan(y,x),} \
+\end{array}$$</p>
+<p>các công thức này liên hệ <em>real part</em> và <em>imaginary part</em> $(x,y)$ với <em>magnitude</em> và <em>angle</em> $(r,A)$.<sup class="footnote-reference"><a href="#2">2</a></sup><br />
+Biểu diễn của Ben do đó được cho bởi các <em>selector</em> và <em>constructor</em> sau:</p>
+<pre><code class="language-scheme">(define (real-part z) (car z))
+(define (imag-part z) (cdr z))
+
+(define (magnitude z)
+  (sqrt (+ (square (real-part z)) 
+           (square (imag-part z)))))
+
+(define (angle z)
+  (atan (imag-part z) (real-part z)))
+
+(define (make-from-real-imag x y) 
+  (cons x y))
+
+(define (make-from-mag-ang r a)
+  (cons (* r (cos a)) (* r (sin a))))
+</code></pre>
+<p>Ngược lại, Alyssa chọn biểu diễn <em>complex numbers</em> ở dạng <em>polar form</em>. Với cô, việc lấy <em>magnitude</em> và <em>angle</em> là đơn giản, nhưng cô phải dùng các công thức lượng giác để lấy <em>real part</em> và <em>imaginary part</em>.<br />
+Biểu diễn của Alyssa là:</p>
+<pre><code class="language-scheme">(define (real-part z)
+  (* (magnitude z) (cos (angle z))))
+
+(define (imag-part z)
+  (* (magnitude z) (sin (angle z))))
+
+(define (magnitude z) (car z))
+(define (angle z) (cdr z))
+
+(define (make-from-real-imag x y)
+  (cons (sqrt (+ (square x) (square y)))
+        (atan y x)))
+
+(define (make-from-mag-ang r a) 
+  (cons r a))
+</code></pre>
+<p>Nguyên tắc của <em>data abstraction</em> đảm bảo rằng cùng một hiện thực của <code>add-complex</code>, <code>sub-complex</code>, <code>mul-complex</code>, và <code>div-complex</code> sẽ hoạt động với cả biểu diễn của Ben hoặc của Alyssa.</p>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p><em>The arctangent function referred to here, computed by Scheme’s <code>atan</code> procedure, is defined so as to take two arguments $y$ and $x$ and to return the angle whose tangent is $y/x$. The signs of the arguments determine the quadrant of the angle.</em></p>
+</div>
+<h2 id="242-tagged-data-dữ-liệu-có-gắn-nhãn"><a class="header" href="#242-tagged-data-dữ-liệu-có-gắn-nhãn">2.4.2 Tagged data (dữ liệu có gắn nhãn)</a></h2>
+<p>Một cách để nhìn nhận <em>data abstraction</em> (trừu tượng hóa dữ liệu) là như một ứng dụng của “<em>principle of least commitment</em>” (nguyên tắc cam kết tối thiểu).<br />
+Khi hiện thực hệ thống <em>complex-number</em> (số phức) ở 2.4.1, chúng ta có thể sử dụng hoặc <em>rectangular representation</em> (biểu diễn hình chữ nhật) của Ben hoặc <em>polar representation</em> (biểu diễn cực) của Alyssa.<br />
+<em>Abstraction barrier</em> (rào chắn trừu tượng) được hình thành bởi các <em>selector</em> (bộ chọn) và <em>constructor</em> (bộ dựng) cho phép chúng ta trì hoãn đến thời điểm muộn nhất việc lựa chọn một cách biểu diễn cụ thể cho các <em>data object</em> (đối tượng dữ liệu) của mình, và nhờ đó giữ được sự linh hoạt tối đa trong thiết kế hệ thống.</p>
+<p>Nguyên tắc cam kết tối thiểu có thể được đẩy đến mức cực đoan hơn nữa. Nếu muốn, chúng ta có thể duy trì sự mơ hồ về cách biểu diễn ngay cả <em>sau khi</em> đã thiết kế các <em>selector</em> và <em>constructor</em>, và quyết định sử dụng cả biểu diễn của Ben <em>lẫn</em> của Alyssa.<br />
+Tuy nhiên, nếu cả hai cách biểu diễn được đưa vào cùng một hệ thống, chúng ta sẽ cần một cách để phân biệt dữ liệu ở dạng <em>polar</em> với dữ liệu ở dạng <em>rectangular</em>.<br />
+Nếu không, chẳng hạn khi được yêu cầu tìm <code>magnitude</code> của cặp (3, 4), chúng ta sẽ không biết nên trả lời là 5 (diễn giải số đó ở dạng <em>rectangular</em>) hay 3 (diễn giải ở dạng <em>polar</em>).<br />
+Một cách đơn giản để thực hiện sự phân biệt này là thêm một <em>type tag</em> (nhãn kiểu) — ký hiệu <code>rectangular</code> hoặc <code>polar</code> — như một phần của mỗi <em>complex number</em>. Khi cần thao tác trên một <em>complex number</em>, chúng ta có thể dùng nhãn này để quyết định áp dụng <em>selector</em> nào.</p>
+<p>Để thao tác với <em>tagged data</em> (dữ liệu có gắn nhãn), chúng ta giả định rằng có các <em>procedure</em> (thủ tục) <code>type-tag</code> và <code>contents</code> dùng để trích xuất từ một <em>data object</em> phần nhãn và phần nội dung thực (tọa độ <em>polar</em> hoặc <em>rectangular</em> trong trường hợp <em>complex number</em>).<br />
+Chúng ta cũng giả định có một <em>procedure</em> <code>attach-tag</code> nhận vào một nhãn và nội dung, rồi tạo ra một <em>tagged data object</em>.<br />
+Một cách đơn giản để hiện thực điều này là sử dụng <em>list structure</em> (cấu trúc danh sách) thông thường:</p>
+<pre><code class="language-scheme">(define (attach-tag type-tag contents)
+  (cons type-tag contents))
+
+(define (type-tag datum)
+  (if (pair? datum)
+      (car datum)
+      (error &quot;Bad tagged datum: 
+              TYPE-TAG&quot; datum)))
+
+(define (contents datum)
+  (if (pair? datum)
+      (cdr datum)
+      (error &quot;Bad tagged datum: 
+              CONTENTS&quot; datum)))
+</code></pre>
+<p>Sử dụng các <em>procedure</em> này, chúng ta có thể định nghĩa các <em>predicate</em> (mệnh đề kiểm tra) <code>rectangular?</code> và <code>polar?</code>, lần lượt nhận diện số ở dạng <em>rectangular</em> và <em>polar</em>:</p>
+<pre><code class="language-scheme">(define (rectangular? z)
+  (eq? (type-tag z) 'rectangular))
+
+(define (polar? z)
+  (eq? (type-tag z) 'polar))
+</code></pre>
+<p>Với <em>type tag</em>, Ben và Alyssa giờ đây có thể chỉnh sửa mã của họ để hai cách biểu diễn khác nhau có thể cùng tồn tại trong cùng một hệ thống.<br />
+Bất cứ khi nào Ben tạo một <em>complex number</em>, anh ấy gắn nhãn nó là <em>rectangular</em>.<br />
+Bất cứ khi nào Alyssa tạo một <em>complex number</em>, cô ấy gắn nhãn nó là <em>polar</em>.<br />
+Ngoài ra, Ben và Alyssa phải đảm bảo rằng tên các <em>procedure</em> của họ không bị trùng nhau.<br />
+Một cách để làm điều này là Ben thêm hậu tố <code>rectangular</code> vào tên mỗi <em>procedure</em> biểu diễn của mình, còn Alyssa thêm hậu tố <code>polar</code> vào tên các <em>procedure</em> của cô.<br />
+Dưới đây là phiên bản đã chỉnh sửa của <em>rectangular representation</em> của Ben từ 2.4.1:</p>
+<pre><code class="language-scheme">(define (real-part-rectangular z) (car z))
+(define (imag-part-rectangular z) (cdr z))
+
+(define (magnitude-rectangular z)
+  (sqrt (+ (square (real-part-rectangular z))
+           (square (imag-part-rectangular z)))))
+
+(define (angle-rectangular z)
+  (atan (imag-part-rectangular z)
+        (real-part-rectangular z)))
+
+(define (make-from-real-imag-rectangular x y)
+  (attach-tag 'rectangular (cons x y)))
+
+(define (make-from-mag-ang-rectangular r a)
+  (attach-tag 
+   'rectangular
+   (cons (* r (cos a)) (* r (sin a)))))
+</code></pre>
+<p>và đây là phiên bản đã chỉnh sửa của <em>polar representation</em> của Alyssa:</p>
+<pre><code class="language-scheme">(define (real-part-polar z)
+  (* (magnitude-polar z) 
+     (cos (angle-polar z))))
+
+(define (imag-part-polar z)
+  (* (magnitude-polar z) 
+     (sin (angle-polar z))))
+
+(define (magnitude-polar z) (car z))
+(define (angle-polar z) (cdr z))
+
+(define (make-from-real-imag-polar x y)
+  (attach-tag 
+   'polar
+   (cons (sqrt (+ (square x) (square y)))
+         (atan y x))))
+
+(define (make-from-mag-ang-polar r a)
+  (attach-tag 'polar (cons r a)))
+</code></pre>
+<p>Mỗi <em>generic selector</em> (bộ chọn tổng quát) được hiện thực như một <em>procedure</em> kiểm tra <em>tag</em> của đối số và gọi <em>procedure</em> thích hợp để xử lý dữ liệu thuộc kiểu đó.<br />
+Ví dụ, để lấy <em>real part</em> của một <em>complex number</em>, <code>real-part</code> sẽ kiểm tra <em>tag</em> để xác định nên dùng <code>real-part-rectangular</code> của Ben hay <code>real-part-polar</code> của Alyssa.<br />
+Trong cả hai trường hợp, chúng ta dùng <code>contents</code> để trích xuất dữ liệu thô (không gắn nhãn) và gửi nó đến <em>procedure</em> <em>rectangular</em> hoặc <em>polar</em> tương ứng:</p>
+<pre><code class="language-scheme">(define (real-part z)
+  (cond ((rectangular? z)
+         (real-part-rectangular (contents z)))
+        ((polar? z)
+         (real-part-polar (contents z)))
+        (else (error &quot;Unknown type: 
+               REAL-PART&quot; z))))
+
+(define (imag-part z)
+  (cond ((rectangular? z)
+         (imag-part-rectangular (contents z)))
+        ((polar? z)
+         (imag-part-polar (contents z)))
+        (else (error &quot;Unknown type: 
+               IMAG-PART&quot; z))))
+
+(define (magnitude z)
+  (cond ((rectangular? z)
+         (magnitude-rectangular (contents z)))
+        ((polar? z)
+         (magnitude-polar (contents z)))
+        (else (error &quot;Unknown type: 
+               MAGNITUDE&quot; z))))
+
+(define (angle z)
+  (cond ((rectangular? z)
+         (angle-rectangular (contents z)))
+        ((polar? z)
+         (angle-polar (contents z)))
+        (else (error &quot;Unknown type: 
+               ANGLE&quot; z))))
+</code></pre>
+<p>Để hiện thực các phép toán số học trên <em>complex number</em> (số phức), chúng ta có thể sử dụng lại các <em>procedure</em> (thủ tục) <code>add-complex</code>, <code>sub-complex</code>, <code>mul-complex</code>, và <code>div-complex</code> từ 2.4.1, bởi vì các <em>selector</em> (bộ chọn) mà chúng gọi là <em>generic</em> (tổng quát), nên sẽ hoạt động với bất kỳ cách biểu diễn nào.<br />
+Ví dụ, <em>procedure</em> <code>add-complex</code> vẫn là:</p>
+<pre><code class="language-scheme">(define (add-complex z1 z2)
+  (make-from-real-imag 
+   (+ (real-part z1) (real-part z2))
+   (+ (imag-part z1) (imag-part z2))))
+</code></pre>
+<p>Cuối cùng, chúng ta phải chọn xem sẽ tạo <em>complex number</em> bằng cách biểu diễn của Ben hay của Alyssa.<br />
+Một lựa chọn hợp lý là tạo số ở dạng <em>rectangular</em> (hình chữ nhật) bất cứ khi nào chúng ta có <em>real part</em> (phần thực) và <em>imaginary part</em> (phần ảo), và tạo số ở dạng <em>polar</em> (cực) bất cứ khi nào chúng ta có <em>magnitude</em> (độ lớn) và <em>angle</em> (góc):</p>
+<pre><code class="language-scheme">(define (make-from-real-imag x y)
+  (make-from-real-imag-rectangular x y))
+
+(define (make-from-mag-ang r a)
+  (make-from-mag-ang-polar r a))
+</code></pre>
+<p>Hệ thống <em>complex-number</em> thu được có cấu trúc như trong Hình 2.21.<br />
+Hệ thống này được phân tách thành ba phần tương đối độc lập: các phép toán số học trên <em>complex number</em>, phần hiện thực <em>polar</em> của Alyssa, và phần hiện thực <em>rectangular</em> của Ben.<br />
+Phần hiện thực <em>polar</em> và <em>rectangular</em> có thể được Ben và Alyssa viết riêng biệt, và cả hai đều có thể được sử dụng làm cách biểu diễn bên dưới bởi một lập trình viên thứ ba, người hiện thực các <em>procedure</em> số học phức dựa trên <em>abstract constructor/selector interface</em> (giao diện trừu tượng bộ dựng/bộ chọn).</p>
+<p><img src="fig/Fig2.21a.jpg" alt="" /></p>
+<p><strong>Figure 2.21:</strong> Structure of the generic complex-arithmetic system.</p>
+<p>Vì mỗi <em>data object</em> (đối tượng dữ liệu) được gắn nhãn kiểu (<em>type</em>), các <em>selector</em> hoạt động trên dữ liệu theo cách tổng quát.<br />
+Nói cách khác, mỗi <em>selector</em> được định nghĩa để có hành vi phụ thuộc vào kiểu dữ liệu cụ thể mà nó được áp dụng.<br />
+Hãy chú ý cơ chế tổng quát để giao tiếp giữa các cách biểu diễn riêng biệt:<br />
+Bên trong một hiện thực biểu diễn nhất định (ví dụ, <em>polar package</em> của Alyssa), một <em>complex number</em> là một cặp không có nhãn (<em>untyped pair</em>) (<em>magnitude</em>, <em>angle</em>).<br />
+Khi một <em>generic selector</em> hoạt động trên một số có <em>type</em> <code>polar</code>, nó sẽ gỡ bỏ nhãn và chuyển phần nội dung cho mã của Alyssa.<br />
+Ngược lại, khi Alyssa tạo một số để sử dụng chung, cô gắn nhãn kiểu cho nó để có thể được nhận diện đúng bởi các <em>procedure</em> cấp cao hơn.<br />
+Nguyên tắc gỡ bỏ và gắn nhãn khi các <em>data object</em> được truyền từ tầng này sang tầng khác có thể là một chiến lược tổ chức quan trọng, như chúng ta sẽ thấy ở 2.5.</p>
+<h2 id="243-data-directed-programming-lập-trình-điều-hướng-theo-dữ-liệu-và-additivity-tính-bổ-sung"><a class="header" href="#243-data-directed-programming-lập-trình-điều-hướng-theo-dữ-liệu-và-additivity-tính-bổ-sung">2.4.3 Data-Directed Programming (lập trình điều hướng theo dữ liệu) và Additivity (tính bổ sung)</a></h2>
+<p>Chiến lược tổng quát của việc kiểm tra kiểu của một <em>datum</em> (dữ liệu) và gọi <em>procedure</em> thích hợp được gọi là <em>dispatching on type</em> (phân phối theo kiểu).<br />
+Đây là một chiến lược mạnh mẽ để đạt được tính mô-đun trong thiết kế hệ thống.<br />
+Mặt khác, việc hiện thực <em>dispatch</em> như trong 2.4.2 có hai điểm yếu đáng kể.</p>
+<p>Một điểm yếu là các <em>generic interface procedure</em> (<code>real-part</code>, <code>imag-part</code>, <code>magnitude</code>, và <code>angle</code>) phải biết về tất cả các cách biểu diễn khác nhau.<br />
+Ví dụ, giả sử chúng ta muốn tích hợp một cách biểu diễn mới cho <em>complex numbers</em> vào hệ thống <em>complex-number</em> của mình.<br />
+Chúng ta sẽ cần gán cách biểu diễn mới này một <em>type</em>, và sau đó thêm một mệnh đề vào mỗi <em>generic interface procedure</em> để kiểm tra <em>type</em> mới và áp dụng <em>selector</em> thích hợp cho cách biểu diễn đó.</p>
+<p>Một điểm yếu khác của kỹ thuật này là mặc dù các cách biểu diễn riêng lẻ có thể được thiết kế độc lập, chúng ta phải đảm bảo rằng không có hai <em>procedure</em> nào trong toàn bộ hệ thống trùng tên.<br />
+Đây là lý do tại sao Ben và Alyssa phải đổi tên các <em>procedure</em> gốc của họ từ 2.4.1.</p>
+<p>Vấn đề cơ bản của cả hai điểm yếu này là kỹ thuật hiện thực <em>generic interface</em> không mang tính <em>additive</em> (bổ sung).<br />
+Người hiện thực các <em>generic selector procedure</em> phải chỉnh sửa các <em>procedure</em> này mỗi khi một cách biểu diễn mới được thêm vào, và những người giao tiếp với các cách biểu diễn riêng lẻ phải chỉnh sửa mã của họ để tránh xung đột tên.<br />
+Trong cả hai trường hợp, các thay đổi cần thực hiện đối với mã đều đơn giản, nhưng vẫn phải thực hiện, và đây là nguồn gây bất tiện cũng như lỗi.<br />
+Điều này không phải là vấn đề lớn đối với hệ thống <em>complex-number</em> hiện tại, nhưng giả sử không chỉ có hai mà có hàng trăm cách biểu diễn khác nhau cho <em>complex numbers</em>.<br />
+Và giả sử có rất nhiều <em>generic selector</em> cần được duy trì trong <em>abstract-data interface</em> (giao diện dữ liệu trừu tượng).<br />
+Giả sử, thực tế là, không một lập trình viên nào biết tất cả các <em>interface procedure</em> hoặc tất cả các cách biểu diễn.<br />
+Vấn đề này là có thật và phải được giải quyết trong các chương trình như hệ thống quản lý cơ sở dữ liệu quy mô lớn (<em>large-scale data-base-management systems</em>).</p>
+<p>Điều chúng ta cần là một phương pháp để mô-đun hóa thiết kế hệ thống hơn nữa.<br />
+Điều này được cung cấp bởi kỹ thuật lập trình gọi là <em>data-directed programming</em>.<br />
+Để hiểu cách <em>data-directed programming</em> hoạt động, hãy bắt đầu với nhận xét rằng bất cứ khi nào chúng ta xử lý một tập hợp các <em>generic operation</em> (phép toán tổng quát) chung cho một tập hợp các kiểu khác nhau, thì thực chất chúng ta đang xử lý một bảng hai chiều, trong đó một trục chứa các phép toán khả dĩ và trục kia chứa các kiểu khả dĩ.<br />
+Các ô trong bảng là các <em>procedure</em> hiện thực mỗi phép toán cho mỗi kiểu đối số được đưa vào.<br />
+Trong hệ thống <em>complex-number</em> được phát triển ở phần trước, sự tương ứng giữa tên phép toán, kiểu dữ liệu và <em>procedure</em> thực tế được phân tán trong các mệnh đề điều kiện khác nhau của các <em>generic interface procedure</em>.<br />
+Nhưng cùng một thông tin đó có thể được tổ chức trong một bảng, như minh họa ở Hình 2.22.</p>
+<p><img src="fig/Fig2.22.jpg" alt="" /></p>
+<p><strong>Figure 2.22:</strong> Table of operations for the complex-number system.</p>
+<p><em>Data-directed programming</em> (lập trình điều hướng theo dữ liệu) là kỹ thuật thiết kế chương trình để làm việc trực tiếp với một bảng như vậy.<br />
+Trước đây, chúng ta đã hiện thực cơ chế kết nối mã số học phức (<em>complex-arithmetic code</em>) với hai <em>representation package</em> (gói biểu diễn) dưới dạng một tập hợp các <em>procedure</em> (thủ tục), mỗi thủ tục thực hiện một phép <em>dispatch on type</em> (phân phối theo kiểu) tường minh.<br />
+Ở đây, chúng ta sẽ hiện thực phần giao tiếp này như một <em>procedure</em> duy nhất, tra cứu sự kết hợp giữa tên phép toán và kiểu đối số trong bảng để tìm <em>procedure</em> đúng cần áp dụng, rồi áp dụng nó lên phần nội dung của đối số.<br />
+Nếu làm như vậy, khi muốn thêm một <em>representation package</em> mới vào hệ thống, chúng ta không cần thay đổi bất kỳ <em>procedure</em> hiện có nào; chỉ cần thêm các mục mới vào bảng.</p>
+<p>Để hiện thực kế hoạch này, giả sử chúng ta có hai <em>procedure</em> <code>put</code> và <code>get</code> để thao tác với bảng <em>operation-and-type</em> (phép toán và kiểu):</p>
+<ul>
+<li><code>(put ⟨op⟩ ⟨type⟩ ⟨item⟩)</code> cài đặt <code>⟨item⟩</code> vào bảng, được đánh chỉ mục bởi <code>⟨op⟩</code> và <code>⟨type⟩</code>.</li>
+<li><code>(get ⟨op⟩ ⟨type⟩)</code> tra cứu mục <code>⟨op⟩</code>, <code>⟨type⟩</code> trong bảng và trả về mục tìm thấy. Nếu không tìm thấy, <code>get</code> trả về false.</li>
+</ul>
+<p>Hiện tại, chúng ta có thể giả định rằng <code>put</code> và <code>get</code> đã có sẵn trong ngôn ngữ. Trong Chương 3 (3.3.3) chúng ta sẽ thấy cách hiện thực các thao tác này và các thao tác khác để làm việc với bảng.</p>
+<p>Dưới đây là cách <em>data-directed programming</em> có thể được sử dụng trong hệ thống <em>complex-number</em>.<br />
+Ben, người phát triển <em>rectangular representation</em> (biểu diễn hình chữ nhật), hiện thực mã của mình giống như ban đầu.<br />
+Anh định nghĩa một tập hợp các <em>procedure</em>, hay một <em>package</em>, và kết nối chúng với phần còn lại của hệ thống bằng cách thêm các mục vào bảng, cho hệ thống biết cách thao tác với các số <em>rectangular</em>.<br />
+Điều này được thực hiện bằng cách gọi <em>procedure</em> sau:</p>
+<pre><code class="language-scheme">(define (install-rectangular-package)
+  ;; internal procedures
+  (define (real-part z) (car z))
+  (define (imag-part z) (cdr z))
+  (define (make-from-real-imag x y) 
+    (cons x y))
+  (define (magnitude z)
+    (sqrt (+ (square (real-part z))
+             (square (imag-part z)))))
+  (define (angle z)
+    (atan (imag-part z) (real-part z)))
+  (define (make-from-mag-ang r a)
+    (cons (* r (cos a)) (* r (sin a))))
+  ;; interface to the rest of the system
+  (define (tag x) 
+    (attach-tag 'rectangular x))
+  (put 'real-part '(rectangular) real-part)
+  (put 'imag-part '(rectangular) imag-part)
+  (put 'magnitude '(rectangular) magnitude)
+  (put 'angle '(rectangular) angle)
+  (put 'make-from-real-imag 'rectangular
+       (lambda (x y) 
+         (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'rectangular
+       (lambda (r a) 
+         (tag (make-from-mag-ang r a))))
+  'done)
+</code></pre>
+<p>Hãy chú ý rằng các <em>internal procedure</em> (thủ tục nội bộ) ở đây chính là các <em>procedure</em> từ 2.4.1 mà Ben đã viết khi làm việc độc lập.<br />
+Không cần thay đổi gì để kết nối chúng với phần còn lại của hệ thống.<br />
+Hơn nữa, vì các định nghĩa <em>procedure</em> này là nội bộ trong <em>installation procedure</em> (thủ tục cài đặt), Ben không cần lo về xung đột tên với các <em>procedure</em> khác bên ngoài <em>rectangular package</em>.<br />
+Để kết nối chúng với hệ thống, Ben cài đặt <em>procedure</em> <code>real-part</code> của mình dưới tên phép toán <code>real-part</code> và kiểu <code>(rectangular)</code>, và tương tự cho các <em>selector</em> khác.<sup class="footnote-reference"><a href="#3">3</a></sup><br />
+Phần giao tiếp cũng định nghĩa các <em>constructor</em> (bộ dựng) sẽ được hệ thống bên ngoài sử dụng.<sup class="footnote-reference"><a href="#4">4</a></sup><br />
+Chúng giống hệt các <em>constructor</em> nội bộ của Ben, ngoại trừ việc chúng gắn thêm <em>tag</em>.</p>
+<p><em>Polar package</em> của Alyssa là tương tự:</p>
+<pre><code class="language-scheme">(define (install-polar-package)
+  ;; internal procedures
+  (define (magnitude z) (car z))
+  (define (angle z) (cdr z))
+  (define (make-from-mag-ang r a) (cons r a))
+  (define (real-part z)
+    (* (magnitude z) (cos (angle z))))
+  (define (imag-part z)
+    (* (magnitude z) (sin (angle z))))
+  (define (make-from-real-imag x y)
+    (cons (sqrt (+ (square x) (square y)))
+          (atan y x)))
+  ;; interface to the rest of the system
+  (define (tag x) (attach-tag 'polar x))
+  (put 'real-part '(polar) real-part)
+  (put 'imag-part '(polar) imag-part)
+  (put 'magnitude '(polar) magnitude)
+  (put 'angle '(polar) angle)
+  (put 'make-from-real-imag 'polar
+       (lambda (x y) 
+         (tag (make-from-real-imag x y))))
+  (put 'make-from-mag-ang 'polar
+       (lambda (r a) 
+         (tag (make-from-mag-ang r a))))
+  'done)
+</code></pre>
+<p>Mặc dù Ben và Alyssa đều vẫn sử dụng các <em>procedure</em> gốc được định nghĩa với cùng tên như của nhau (ví dụ: <code>real-part</code>), nhưng các định nghĩa này giờ đây là nội bộ trong các <em>procedure</em> khác nhau (xem 1.1.8), nên không có xung đột tên.</p>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Chúng ta sử dụng danh sách <code>(rectangular)</code> thay vì ký hiệu <code>rectangular</code> để cho phép khả năng có các phép toán với nhiều đối số, không phải tất cả đều cùng kiểu.<br />
+<sup class="footnote-reference"><a href="#4">4</a></sup>: Kiểu mà các <em>constructor</em> được cài đặt không cần là một danh sách vì một <em>constructor</em> luôn được dùng để tạo ra một đối tượng của một kiểu cụ thể.</p>
+</div>
+<p>Các <em>selector</em> (bộ chọn) của <em>complex-arithmetic</em> (số học phức) truy cập bảng thông qua một <em>procedure</em> (thủ tục) “operation” (phép toán) tổng quát gọi là <code>apply-generic</code>, thủ tục này áp dụng một <em>generic operation</em> (phép toán tổng quát) lên một số đối số.<br />
+<code>Apply-generic</code> tra cứu trong bảng theo tên của phép toán và các kiểu của các đối số, rồi áp dụng <em>procedure</em> thu được nếu có tồn tại:<sup class="footnote-reference"><a href="#5">5</a></sup></p>
+<pre><code class="language-scheme">(define (apply-generic op . args)
+  (let ((type-tags (map type-tag args)))
+    (let ((proc (get op type-tags)))
+      (if proc
+          (apply proc (map contents args))
+          (error
+            &quot;No method for these types: 
+             APPLY-GENERIC&quot;
+            (list op type-tags))))))
+</code></pre>
+<p>Sử dụng <code>apply-generic</code>, chúng ta có thể định nghĩa các <em>generic selector</em> như sau:</p>
+<pre><code class="language-scheme">(define (real-part z) 
+  (apply-generic 'real-part z))
+(define (imag-part z) 
+  (apply-generic 'imag-part z))
+(define (magnitude z) 
+  (apply-generic 'magnitude z))
+(define (angle z) 
+  (apply-generic 'angle z))
+</code></pre>
+<p>Hãy lưu ý rằng các định nghĩa này hoàn toàn không thay đổi nếu một cách biểu diễn mới được thêm vào hệ thống.</p>
+<p>Chúng ta cũng có thể lấy ra từ bảng các <em>constructor</em> (bộ dựng) để các chương trình bên ngoài các <em>package</em> sử dụng khi tạo <em>complex number</em> từ <em>real part</em> và <em>imaginary part</em>, hoặc từ <em>magnitude</em> và <em>angle</em>.<br />
+Như trong 2.4.2, chúng ta tạo số <em>rectangular</em> bất cứ khi nào có <em>real part</em> và <em>imaginary part</em>, và tạo số <em>polar</em> bất cứ khi nào có <em>magnitude</em> và <em>angle</em>:</p>
+<pre><code class="language-scheme">(define (make-from-real-imag x y)
+  ((get 'make-from-real-imag 
+        'rectangular) 
+   x y))
+
+(define (make-from-mag-ang r a)
+  ((get 'make-from-mag-ang 
+        'polar) 
+   r a))
+</code></pre>
+<h3 id="message-passing"><a class="header" href="#message-passing">Message passing</a></h3>
+<p>Ý tưởng then chốt của <em>data-directed programming</em> (lập trình điều hướng theo dữ liệu) là xử lý các <em>generic operation</em> trong chương trình bằng cách làm việc tường minh với các bảng <em>operation-and-type</em> (phép toán và kiểu), như bảng trong Hình 2.22.<br />
+Phong cách lập trình mà chúng ta đã sử dụng trong 2.4.2 tổ chức việc <em>dispatch on type</em> (phân phối theo kiểu) cần thiết bằng cách để mỗi phép toán tự xử lý việc phân phối của chính nó.<br />
+Thực chất, điều này phân tách bảng <em>operation-and-type</em> thành các hàng, với mỗi <em>generic operation procedure</em> đại diện cho một hàng của bảng.</p>
+<p>Một chiến lược hiện thực thay thế là phân tách bảng thành các cột và, thay vì sử dụng các “<em>intelligent operations</em>” (phép toán thông minh) phân phối theo kiểu dữ liệu, thì làm việc với các “<em>intelligent data objects</em>” (đối tượng dữ liệu thông minh) phân phối theo tên phép toán.<br />
+Chúng ta có thể làm điều này bằng cách sắp xếp sao cho một <em>data object</em>, chẳng hạn một số <em>rectangular</em>, được biểu diễn như một <em>procedure</em> nhận vào tên phép toán cần thực hiện và thực hiện phép toán đó.<br />
+Theo nguyên tắc này, <code>make-from-real-imag</code> có thể được viết như sau:</p>
+<pre><code class="language-scheme">(define (make-from-real-imag x y)
+  (define (dispatch op)
+    (cond ((eq? op 'real-part) x)
+          ((eq? op 'imag-part) y)
+          ((eq? op 'magnitude)
+           (sqrt (+ (square x) (square y))))
+          ((eq? op 'angle) (atan y x))
+          (else
+           (error &quot;Unknown op: 
+            MAKE-FROM-REAL-IMAG&quot; op))))
+  dispatch)
+</code></pre>
+<p><em>Procedure</em> <code>apply-generic</code> tương ứng, áp dụng một <em>generic operation</em> lên một đối số, giờ đây chỉ đơn giản là truyền tên phép toán cho <em>data object</em> và để đối tượng đó thực hiện công việc:<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<pre><code class="language-scheme">(define (apply-generic op arg) (arg op))
+</code></pre>
+<p>Hãy lưu ý rằng giá trị trả về của <code>make-from-real-imag</code> là một <em>procedure</em> — <em>procedure</em> nội bộ <code>dispatch</code>. Đây chính là <em>procedure</em> được gọi khi <code>apply-generic</code> yêu cầu thực hiện một phép toán.</p>
+<p>Phong cách lập trình này được gọi là <em>message passing</em> (truyền thông điệp).<br />
+Tên gọi xuất phát từ hình ảnh một <em>data object</em> là một thực thể nhận tên phép toán được yêu cầu như một “thông điệp”.<br />
+Chúng ta đã thấy một ví dụ về <em>message passing</em> trong 2.1.3, nơi chúng ta thấy cách <code>cons</code>, <code>car</code>, và <code>cdr</code> có thể được định nghĩa mà không cần <em>data object</em> nào, chỉ với các <em>procedure</em>.<br />
+Ở đây, chúng ta thấy rằng <em>message passing</em> không phải là một mẹo toán học, mà là một kỹ thuật hữu ích để tổ chức các hệ thống có <em>generic operation</em>.<br />
+Trong phần còn lại của chương này, chúng ta sẽ tiếp tục sử dụng <em>data-directed programming</em> thay vì <em>message passing</em> để thảo luận về các phép toán số học tổng quát.<br />
+Trong Chương 3, chúng ta sẽ quay lại <em>message passing</em> và sẽ thấy rằng nó có thể là một công cụ mạnh mẽ để cấu trúc các chương trình mô phỏng.</p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p><code>Apply-generic</code> sử dụng cú pháp <em>dotted-tail notation</em> (ký pháp đuôi chấm) được mô tả trong Bài tập 2.20, vì các <em>generic operation</em> khác nhau có thể nhận số lượng đối số khác nhau. Trong <code>apply-generic</code>, <code>op</code> có giá trị là đối số đầu tiên truyền vào <code>apply-generic</code> và <code>args</code> có giá trị là một danh sách các đối số còn lại.<br />
+<sup class="footnote-reference"><a href="#6">6</a></sup>: Một hạn chế của cách tổ chức này là nó chỉ cho phép các <em>generic procedure</em> có một đối số.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="2-5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="2-5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

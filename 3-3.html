@@ -1,0 +1,1086 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Modeling with Mutable Data - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html" class="active"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="33-mô-hình-hóa-với-mutable-data-dữ-liệu-có-thể-thay-đổi"><a class="header" href="#33-mô-hình-hóa-với-mutable-data-dữ-liệu-có-thể-thay-đổi">3.3 Mô hình hóa với Mutable Data (dữ liệu có thể thay đổi)</a></h1>
+<p>Chương 2 đã đề cập đến compound data (dữ liệu hợp) như một phương tiện để xây dựng các computational objects (đối tượng tính toán) có nhiều thành phần, nhằm mô hình hóa các đối tượng trong thế giới thực vốn có nhiều khía cạnh. Trong chương đó, chúng ta đã giới thiệu nguyên tắc của data abstraction (trừu tượng hóa dữ liệu), theo đó các cấu trúc dữ liệu được đặc tả thông qua các constructors (hàm tạo), dùng để tạo ra các data objects (đối tượng dữ liệu), và các selectors (hàm chọn), dùng để truy cập các phần của compound data objects. Nhưng giờ đây chúng ta biết rằng còn một khía cạnh khác của dữ liệu mà chương 2 chưa đề cập. Mong muốn mô hình hóa các hệ thống bao gồm các đối tượng có trạng thái thay đổi dẫn chúng ta đến nhu cầu phải <strong>sửa đổi</strong> các compound data objects, cũng như xây dựng và chọn lọc từ chúng. Để mô hình hóa các compound objects có trạng thái thay đổi, chúng ta sẽ thiết kế các data abstractions bao gồm, ngoài selectors và constructors, các phép toán gọi là <em>mutators</em> (bộ biến đổi), dùng để sửa đổi data objects.</p>
+<p>Ví dụ, mô hình hóa một hệ thống ngân hàng đòi hỏi chúng ta phải thay đổi số dư tài khoản. Do đó, một cấu trúc dữ liệu để biểu diễn tài khoản ngân hàng có thể cho phép một phép toán:</p>
+<pre><code class="language-{.scheme}">(set-balance! ⟨account⟩ ⟨new-value⟩)
+</code></pre>
+<p>Phép toán này thay đổi số dư của tài khoản được chỉ định thành giá trị mới được chỉ định. Các data objects mà có định nghĩa mutators được gọi là <em>mutable data objects</em> (đối tượng dữ liệu có thể thay đổi).</p>
+<p>Chương 2 đã giới thiệu pairs (cặp) như một “chất keo” đa dụng để tổng hợp compound data. Chúng ta bắt đầu phần này bằng cách định nghĩa các mutators cơ bản cho pairs, để pairs có thể đóng vai trò là các khối xây dựng cho việc tạo ra mutable data objects. Các mutators này tăng cường đáng kể khả năng biểu diễn của pairs, cho phép chúng ta xây dựng các cấu trúc dữ liệu khác ngoài các sequences (dãy) và trees (cây) mà chúng ta đã làm việc trong 2.2. Chúng ta cũng sẽ trình bày một số ví dụ về các mô phỏng, trong đó các hệ thống phức tạp được mô hình hóa như tập hợp các đối tượng có local state (trạng thái cục bộ).</p>
+<h2 id="331-cấu-trúc-danh-sách-có-thể-thay-đổi"><a class="header" href="#331-cấu-trúc-danh-sách-có-thể-thay-đổi">3.3.1 Cấu trúc danh sách có thể thay đổi</a></h2>
+<p>Các phép toán cơ bản trên pairs — <code>cons</code>, <code>car</code>, và <code>cdr</code> — có thể được dùng để xây dựng list structure (cấu trúc danh sách) và để chọn các phần từ list structure, nhưng chúng không thể sửa đổi list structure. Điều này cũng đúng với các phép toán trên danh sách mà chúng ta đã dùng cho đến nay, như <code>append</code> và <code>list</code>, vì chúng có thể được định nghĩa dựa trên <code>cons</code>, <code>car</code>, và <code>cdr</code>. Để sửa đổi list structures, chúng ta cần các phép toán mới.</p>
+<p>Các primitive mutators (bộ biến đổi nguyên thủy) cho pairs là <code>set-car!</code> và <code>set-cdr!</code>. <code>Set-car!</code> nhận hai đối số, trong đó đối số thứ nhất phải là một pair. Nó sửa đổi pair này, thay thế con trỏ <code>car</code> bằng một con trỏ tới đối số thứ hai của <code>set-car!</code> <sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
+<p>Ví dụ, giả sử <code>x</code> được gán tới danh sách <code>((a b) c d)</code> và <code>y</code> tới danh sách <code>(e f)</code> như minh họa trong Hình 3.12. Việc thực thi biểu thức <code>(set-car! x y)</code> sẽ sửa đổi pair mà <code>x</code> trỏ tới, thay thế <code>car</code> của nó bằng giá trị của <code>y</code>. Kết quả của phép toán được thể hiện trong Hình 3.13. Cấu trúc <code>x</code> đã bị thay đổi và giờ sẽ được in ra là <code>((e f) c d)</code>. Các pairs biểu diễn danh sách <code>(a b)</code>, được xác định bởi con trỏ đã bị thay thế, giờ bị tách ra khỏi cấu trúc ban đầu <sup class="footnote-reference"><a href="#2">2</a></sup>.</p>
+<p><img src="fig/Fig3.12b.jpg" alt="" /></p>
+<p><strong>Figure 3.12:</strong> Lists <code>x</code>: <code>((a b) c d)</code> and <code>y</code>: <code>(e f)</code>.</p>
+<p><img src="fig/Fig3.13b.jpg" alt="" /></p>
+<p><strong>Figure 3.13:</strong> Effect of <code>(set-car! x y)</code> on the lists in Figure 3.12.</p>
+<p>So sánh Hình 3.13 với Hình 3.14, minh họa kết quả của việc thực thi <code>(define z (cons y (cdr x)))</code> khi <code>x</code> và <code>y</code> được gán tới các danh sách ban đầu của Hình 3.12. Biến <code>z</code> giờ được gán tới một pair mới được tạo bởi phép toán <code>cons</code>; danh sách mà <code>x</code> trỏ tới không thay đổi.</p>
+<p><img src="fig/Fig3.14b.jpg" alt="" /></p>
+<p><strong>Figure 3.14:</strong> Effect of <code>(define z (cons y (cdr x)))</code> on the lists in Figure 3.12.</p>
+<p>Phép toán <code>set-cdr!</code> tương tự như <code>set-car!</code>. Điểm khác biệt duy nhất là con trỏ <code>cdr</code> của pair, thay vì con trỏ <code>car</code>, sẽ bị thay thế. Kết quả của việc thực thi <code>(set-cdr! x y)</code> trên các danh sách của Hình 3.12 được thể hiện trong Hình 3.15. Ở đây, con trỏ <code>cdr</code> của <code>x</code> đã bị thay thế bằng con trỏ tới <code>(e f)</code>. Ngoài ra, danh sách <code>(c d)</code>, vốn trước đây là <code>cdr</code> của <code>x</code>, giờ bị tách ra khỏi cấu trúc.</p>
+<p><img src="fig/Fig3.15b.jpg" alt="" /></p>
+<p><strong>Figure 3.15:</strong> Effect of <code>(set-cdr! x y)</code> on the lists in Figure 3.12.</p>
+<p><code>Cons</code> xây dựng list structure mới bằng cách tạo ra các pairs mới, trong khi <code>set-car!</code> và <code>set-cdr!</code> sửa đổi các pairs hiện có. Thực tế, chúng ta có thể cài đặt <code>cons</code> dựa trên hai mutators này, cùng với một procedure <code>get-new-pair</code>, trả về một pair mới không thuộc bất kỳ list structure nào hiện có. Chúng ta lấy pair mới, đặt các con trỏ <code>car</code> và <code>cdr</code> của nó tới các đối tượng được chỉ định, và trả về pair mới này như kết quả của <code>cons</code> <sup class="footnote-reference"><a href="#3">3</a></sup>.</p>
+<pre><code class="language-{.scheme}">(define (cons x y)
+  (let ((new (get-new-pair)))
+    (set-car! new x)
+    (set-cdr! new y)
+    new))
+</code></pre>
+<h3 id="chia-sẻ-và-định-danh"><a class="header" href="#chia-sẻ-và-định-danh">Chia sẻ và định danh</a></h3>
+<p>Chúng ta đã đề cập trong 3.1.3 về các vấn đề lý thuyết của “sự đồng nhất” và “sự thay đổi” được đặt ra bởi việc giới thiệu assignment (gán). Những vấn đề này xuất hiện trong thực tế khi các pairs riêng lẻ được <em>shared</em> (chia sẻ) giữa các data objects khác nhau. Ví dụ, xét cấu trúc được tạo bởi:</p>
+<pre><code class="language-{.scheme}">(define x (list 'a 'b))
+(define z1 (cons x x))
+</code></pre>
+<p>Như thể hiện trong Hình 3.16, <code>z1</code> là một pair mà cả <code>car</code> và <code>cdr</code> đều trỏ tới cùng một pair <code>x</code>. Việc chia sẻ <code>x</code> bởi <code>car</code> và <code>cdr</code> của <code>z1</code> là hệ quả của cách cài đặt trực tiếp của <code>cons</code>. Nói chung, việc dùng <code>cons</code> để xây dựng danh sách sẽ tạo ra một cấu trúc liên kết của các pairs, trong đó nhiều pairs riêng lẻ được chia sẻ bởi nhiều cấu trúc khác nhau.</p>
+<p><img src="fig/Fig3.16b.jpg" alt="" /></p>
+<p><strong>Figure 3.16:</strong> The list <code>z1</code> formed by <code>(cons x x)</code>.</p>
+<p>Trái ngược với Hình 3.16, Hình 3.17 cho thấy cấu trúc được tạo bởi:</p>
+<pre><code class="language-{.scheme}">(define z2 
+  (cons (list 'a 'b) (list 'a 'b)))
+</code></pre>
+<p><img src="fig/Fig3.17b.jpg" alt="" /></p>
+<p><strong>Figure 3.17:</strong> The list <code>z2</code> formed by <code>(cons (list 'a 'b) (list 'a 'b))</code>.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><code>Set-car!</code> và <code>set-cdr!</code> trả về các giá trị phụ thuộc vào cách cài đặt. Giống như <code>set!</code>, chúng chỉ nên được dùng cho tác dụng phụ của chúng.<br />
+<sup class="footnote-reference"><a href="#2">2</a></sup>: Từ đây ta thấy rằng các phép toán thay đổi trên danh sách có thể tạo ra “garbage” (rác) không thuộc bất kỳ cấu trúc nào có thể truy cập. Chúng ta sẽ thấy trong 5.3.2 rằng các hệ thống quản lý bộ nhớ của Lisp bao gồm một <em>garbage collector</em> (bộ gom rác), dùng để xác định và tái sử dụng vùng nhớ được dùng bởi các pairs không còn cần thiết.<br />
+<sup class="footnote-reference"><a href="#3">3</a></sup>: ....</p>
+</div>
+<p>Trong cấu trúc này, các pairs trong hai danh sách <code>(a b)</code> là khác nhau, mặc dù các symbol (ký hiệu) thực tế được chia sẻ <sup class="footnote-reference"><a href="#4">4</a></sup>.</p>
+<p>Khi được xem như một danh sách, <code>z1</code> và <code>z2</code> đều biểu diễn “cùng một” danh sách, <code>((a b) a b)</code>. Nói chung, việc chia sẻ là hoàn toàn không thể phát hiện nếu chúng ta thao tác trên danh sách chỉ bằng <code>cons</code>, <code>car</code>, và <code>cdr</code>. Tuy nhiên, nếu chúng ta cho phép các mutators trên list structure, việc chia sẻ trở nên quan trọng. Ví dụ về sự khác biệt mà chia sẻ có thể tạo ra, hãy xét procedure (thủ tục) sau, thủ tục này sửa đổi <code>car</code> của cấu trúc mà nó được áp dụng:</p>
+<pre><code class="language-{.scheme}">(define (set-to-wow! x)
+  (set-car! (car x) 'wow)
+  x)
+</code></pre>
+<p>Mặc dù <code>z1</code> và <code>z2</code> là “cùng một” cấu trúc, việc áp dụng <code>set-to-wow!</code> cho chúng cho ra các kết quả khác nhau. Với <code>z1</code>, việc thay đổi <code>car</code> cũng thay đổi <code>cdr</code>, vì trong <code>z1</code> thì <code>car</code> và <code>cdr</code> là cùng một pair. Với <code>z2</code>, <code>car</code> và <code>cdr</code> là khác nhau, nên <code>set-to-wow!</code> chỉ sửa đổi <code>car</code>:</p>
+<pre><code class="language-{.scheme}">z1
+((a b) a b)
+
+(set-to-wow! z1)
+((wow b) wow b)
+
+z2
+((a b) a b)
+
+(set-to-wow! z2)
+((wow b) a b)
+</code></pre>
+<p>Một cách để phát hiện chia sẻ trong list structures là dùng predicate <code>eq?</code>, mà chúng ta đã giới thiệu trong 2.3.1 như một cách để kiểm tra xem hai symbols có bằng nhau hay không. Tổng quát hơn, <code>(eq? x y)</code> kiểm tra xem <code>x</code> và <code>y</code> có phải là cùng một object (nghĩa là, <code>x</code> và <code>y</code> có bằng nhau về con trỏ hay không). Do đó, với <code>z1</code> và <code>z2</code> như được định nghĩa trong Hình 3.16 và Hình 3.17, <code>(eq? (car z1) (cdr z1))</code> là đúng và <code>(eq? (car z2) (cdr z2))</code> là sai.</p>
+<p>Như sẽ thấy trong các phần tiếp theo, chúng ta có thể khai thác việc chia sẻ để mở rộng đáng kể tập hợp các cấu trúc dữ liệu có thể được biểu diễn bằng pairs. Mặt khác, chia sẻ cũng có thể nguy hiểm, vì các sửa đổi được thực hiện trên một cấu trúc cũng sẽ ảnh hưởng đến các cấu trúc khác tình cờ chia sẻ các phần đã bị sửa đổi. Các phép toán mutation <code>set-car!</code> và <code>set-cdr!</code> nên được sử dụng cẩn thận; trừ khi chúng ta hiểu rõ cách các data objects của mình được chia sẻ, mutation có thể dẫn đến các kết quả không lường trước <sup class="footnote-reference"><a href="#5">5</a></sup>.</p>
+<h3 id="mutation-chỉ-là-assignment-gán"><a class="header" href="#mutation-chỉ-là-assignment-gán">Mutation chỉ là assignment (gán)</a></h3>
+<p>Khi chúng ta giới thiệu compound data, chúng ta đã quan sát trong 2.1.3 rằng pairs có thể được biểu diễn hoàn toàn bằng procedures:</p>
+<pre><code class="language-{.scheme}">(define (cons x y)
+  (define (dispatch m)
+    (cond ((eq? m 'car) x)
+          ((eq? m 'cdr) y)
+          (else (error &quot;Undefined 
+                 operation: CONS&quot; m))))
+  dispatch)
+
+(define (car z) (z 'car))
+(define (cdr z) (z 'cdr))
+</code></pre>
+<p>Quan sát tương tự cũng đúng với mutable data. Chúng ta có thể cài đặt mutable data objects dưới dạng procedures sử dụng assignment và local state. Ví dụ, chúng ta có thể mở rộng cài đặt pair ở trên để xử lý <code>set-car!</code> và <code>set-cdr!</code> theo cách tương tự như cách chúng ta đã cài đặt tài khoản ngân hàng bằng <code>make-account</code> trong 3.1.1:</p>
+<pre><code class="language-{.scheme}">(define (cons x y)
+  (define (set-x! v) (set! x v))
+  (define (set-y! v) (set! y v))
+  (define (dispatch m)
+    (cond ((eq? m 'car) x)
+          ((eq? m 'cdr) y)
+          ((eq? m 'set-car!) set-x!)
+          ((eq? m 'set-cdr!) set-y!)
+          (else (error &quot;Undefined 
+                 operation: CONS&quot; m))))
+  dispatch)
+
+(define (car z) (z 'car))
+(define (cdr z) (z 'cdr))
+
+(define (set-car! z new-value)
+  ((z 'set-car!) new-value)
+  z)
+
+(define (set-cdr! z new-value)
+  ((z 'set-cdr!) new-value)
+  z)
+</code></pre>
+<p>Về mặt lý thuyết, assignment là tất cả những gì cần thiết để giải thích hành vi của mutable data. Ngay khi chúng ta chấp nhận <code>set!</code> vào ngôn ngữ, chúng ta đã đặt ra tất cả các vấn đề, không chỉ của assignment, mà còn của mutable data nói chung <sup class="footnote-reference"><a href="#6">6</a></sup>.</p>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Hai pairs là khác nhau vì mỗi lần gọi <code>cons</code> trả về một pair mới. Các symbols được chia sẻ; trong Scheme chỉ tồn tại một symbol duy nhất cho mỗi tên cho trước. Vì Scheme không cung cấp cách nào để thay đổi một symbol, nên việc chia sẻ này là không thể phát hiện. Cũng cần lưu ý rằng việc chia sẻ này cho phép chúng ta so sánh các symbols bằng <code>eq?</code>, vốn chỉ đơn giản kiểm tra sự bằng nhau của các con trỏ.<br />
+<sup class="footnote-reference"><a href="#5">5</a></sup>: Những tinh tế trong việc xử lý chia sẻ của mutable data objects phản ánh các vấn đề cơ bản về “sự đồng nhất” và “sự thay đổi” đã được nêu trong 3.1.3. Chúng ta đã đề cập rằng việc chấp nhận thay đổi trong ngôn ngữ đòi hỏi một compound object phải có một “identity” (định danh) khác với các phần cấu thành của nó. Trong Lisp, chúng ta coi “identity” này là thuộc tính được kiểm tra bởi <code>eq?</code>, tức là bằng nhau về con trỏ. Vì trong hầu hết các cài đặt Lisp, một con trỏ về cơ bản là một địa chỉ bộ nhớ, nên chúng ta “giải quyết vấn đề” định nghĩa định danh của các đối tượng bằng cách quy định rằng một data object “tự nó” là thông tin được lưu trữ trong một tập hợp vị trí bộ nhớ cụ thể trong máy tính. Điều này là đủ cho các chương trình Lisp đơn giản, nhưng khó có thể là một cách tổng quát để giải quyết vấn đề “sự đồng nhất” trong các mô hình tính toán.<br />
+<sup class="footnote-reference"><a href="#6">6</a></sup>: Mặt khác, từ góc độ cài đặt, assignment yêu cầu chúng ta sửa đổi environment (môi trường), vốn tự nó là một mutable data structure. Do đó, assignment và mutation là tương đương về khả năng: mỗi cái có thể được cài đặt dựa trên cái kia.</p>
+</div>
+<h2 id="332-biểu-diễn-queues-hàng-đợi"><a class="header" href="#332-biểu-diễn-queues-hàng-đợi">3.3.2 Biểu diễn Queues (hàng đợi)</a></h2>
+<p>Các mutators <code>set-car!</code> và <code>set-cdr!</code> cho phép chúng ta sử dụng pairs để xây dựng các cấu trúc dữ liệu mà không thể tạo ra chỉ với <code>cons</code>, <code>car</code>, và <code>cdr</code>. Phần này cho thấy cách sử dụng pairs để biểu diễn một cấu trúc dữ liệu gọi là queue (hàng đợi). Phần 3.3.3 sẽ trình bày cách biểu diễn các cấu trúc dữ liệu gọi là tables (bảng).</p>
+<p>Một <em>queue</em> là một sequence (dãy) trong đó các phần tử được chèn vào ở một đầu (gọi là <em>rear</em> — cuối hàng đợi) và bị xóa ở đầu kia (gọi là <em>front</em> — đầu hàng đợi). Hình 3.18 cho thấy một queue ban đầu rỗng, trong đó các phần tử <code>a</code> và <code>b</code> được chèn vào. Sau đó <code>a</code> bị xóa, <code>c</code> và <code>d</code> được chèn vào, và <code>b</code> bị xóa. Bởi vì các phần tử luôn bị xóa theo đúng thứ tự mà chúng được chèn vào, một queue đôi khi được gọi là bộ đệm <em>FIFO</em> (first in, first out — vào trước, ra trước).</p>
+<p><img src="fig/Fig3.18.jpg" alt="" /></p>
+<p><strong>Figure 3.18:</strong> Queue operations.</p>
+<p>Xét theo data abstraction (trừu tượng hóa dữ liệu), chúng ta có thể coi một queue được định nghĩa bởi tập hợp các phép toán sau:</p>
+<ul>
+<li>
+<p>Một constructor: <code>(make-queue)</code> trả về một queue rỗng (một queue không chứa phần tử nào).</p>
+</li>
+<li>
+<p>Hai selectors:</p>
+<pre><code class="language-{.scheme}">(empty-queue? ⟨queue⟩)
+</code></pre>
+<p>kiểm tra xem queue có rỗng hay không.</p>
+<pre><code class="language-{.scheme}">(front-queue ⟨queue⟩)
+</code></pre>
+<p>trả về đối tượng ở đầu queue, báo lỗi nếu queue rỗng; phép toán này không sửa đổi queue.</p>
+</li>
+<li>
+<p>Hai mutators:</p>
+<pre><code class="language-{.scheme}">(insert-queue! ⟨queue⟩ ⟨item⟩)
+</code></pre>
+<p>chèn phần tử vào cuối queue và trả về queue đã được sửa đổi như giá trị của nó.</p>
+<pre><code class="language-{.scheme}">(delete-queue! ⟨queue⟩)
+</code></pre>
+<p>xóa phần tử ở đầu queue và trả về queue đã được sửa đổi như giá trị của nó, báo lỗi nếu queue rỗng trước khi xóa.</p>
+</li>
+</ul>
+<p>Bởi vì một queue là một sequence các phần tử, chúng ta hoàn toàn có thể biểu diễn nó như một danh sách thông thường; đầu queue sẽ là <code>car</code> của danh sách, chèn một phần tử vào queue sẽ tương đương với việc nối thêm một phần tử mới vào cuối danh sách, và xóa một phần tử khỏi queue sẽ chỉ là lấy <code>cdr</code> của danh sách. Tuy nhiên, cách biểu diễn này không hiệu quả, vì để chèn một phần tử chúng ta phải duyệt danh sách cho đến khi tới cuối. Do phương pháp duy nhất mà chúng ta có để duyệt danh sách là thực hiện liên tiếp các phép toán <code>cdr</code>, việc duyệt này cần $\Theta(n)$ bước đối với một danh sách có $n$ phần tử. Một chỉnh sửa đơn giản đối với cách biểu diễn danh sách có thể khắc phục nhược điểm này bằng cách cho phép các phép toán trên queue được cài đặt sao cho chúng chỉ cần $\Theta(1)$ bước; nghĩa là, số bước cần thiết không phụ thuộc vào độ dài của queue.</p>
+<p>Khó khăn của cách biểu diễn bằng danh sách xuất phát từ việc cần phải duyệt để tìm phần cuối của danh sách. Lý do chúng ta cần duyệt là vì, mặc dù cách biểu diễn tiêu chuẩn của danh sách như một chuỗi các pairs cung cấp cho chúng ta một con trỏ tới phần đầu danh sách, nó không cho chúng ta một con trỏ dễ truy cập tới phần cuối. Chỉnh sửa để tránh nhược điểm này là biểu diễn queue như một danh sách, kèm theo một con trỏ bổ sung chỉ tới pair cuối cùng trong danh sách. Bằng cách đó, khi chèn một phần tử, chúng ta có thể dùng con trỏ rear và tránh phải duyệt danh sách.</p>
+<p>Một queue được biểu diễn như một cặp con trỏ, <code>front-ptr</code> và <code>rear-ptr</code>, lần lượt chỉ tới pair đầu tiên và pair cuối cùng trong một danh sách thông thường. Vì chúng ta muốn queue là một đối tượng có thể nhận diện được, chúng ta có thể dùng <code>cons</code> để kết hợp hai con trỏ này. Do đó, bản thân queue sẽ là <code>cons</code> của hai con trỏ. Hình 3.19 minh họa cách biểu diễn này.</p>
+<p><img src="fig/Fig3.19b.jpg" alt="" /></p>
+<p><strong>Figure 3.19:</strong> Implementation of a queue as a list with front and rear pointers.</p>
+<p>Để định nghĩa các phép toán trên queue, chúng ta sử dụng các procedures sau, cho phép chọn và sửa đổi các con trỏ front và rear của một queue:</p>
+<pre><code class="language-{.scheme}">(define (front-ptr queue) (car queue))
+(define (rear-ptr queue) (cdr queue))
+(define (set-front-ptr! queue item) 
+  (set-car! queue item))
+(define (set-rear-ptr! queue item) 
+  (set-cdr! queue item))
+</code></pre>
+<p>Giờ chúng ta có thể cài đặt các phép toán queue thực sự. Chúng ta sẽ coi một queue là rỗng nếu con trỏ front của nó là danh sách rỗng:</p>
+<pre><code class="language-{.scheme}">(define (empty-queue? queue) 
+  (null? (front-ptr queue)))
+</code></pre>
+<p>Constructor <code>make-queue</code> trả về, như một queue ban đầu rỗng, một pair mà cả <code>car</code> và <code>cdr</code> đều là danh sách rỗng:</p>
+<pre><code class="language-{.scheme}">(define (make-queue) (cons '() '()))
+</code></pre>
+<p>Để chọn phần tử ở đầu queue, chúng ta trả về <code>car</code> của pair được chỉ bởi con trỏ front:</p>
+<pre><code class="language-{.scheme}">(define (front-queue queue)
+  (if (empty-queue? queue)
+      (error &quot;FRONT called with an 
+              empty queue&quot; queue)
+      (car (front-ptr queue))))
+</code></pre>
+<p>Để chèn một phần tử vào queue, chúng ta làm theo phương pháp mà kết quả được minh họa trong Hình 3.20. Trước tiên, chúng ta tạo một pair mới có <code>car</code> là phần tử cần chèn và <code>cdr</code> là danh sách rỗng. Nếu queue ban đầu rỗng, chúng ta đặt cả con trỏ front và rear của queue trỏ tới pair mới này. Ngược lại, chúng ta sửa đổi pair cuối cùng trong queue để trỏ tới pair mới, đồng thời đặt con trỏ rear trỏ tới pair mới đó.</p>
+<p><img src="fig/Fig3.20c.jpg" alt="" /></p>
+<p><strong>Figure 3.20:</strong> Result of using <code>(insert-queue! q 'd)</code> on the queue of Figure 3.19.</p>
+<pre><code class="language-{.scheme}">(define (insert-queue! queue item)
+  (let ((new-pair (cons item '())))
+    (cond ((empty-queue? queue)
+           (set-front-ptr! queue new-pair)
+           (set-rear-ptr! queue new-pair)
+           queue)
+          (else (set-cdr! (rear-ptr queue) 
+                          new-pair)
+                (set-rear-ptr! queue new-pair)
+                queue))))
+</code></pre>
+<p>Để xóa phần tử ở đầu queue, chúng ta chỉ cần sửa đổi con trỏ front sao cho nó trỏ tới phần tử thứ hai trong queue, phần tử này có thể được tìm bằng cách lần theo con trỏ <code>cdr</code> của phần tử đầu tiên (xem Hình 3.21) <sup class="footnote-reference"><a href="#7">7</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (delete-queue! queue)
+  (cond ((empty-queue? queue)
+         (error &quot;DELETE! called with 
+                 an empty queue&quot; queue))
+        (else (set-front-ptr! 
+               queue 
+               (cdr (front-ptr queue)))
+              queue)))
+</code></pre>
+<p><img src="fig/Fig3.21c.jpg" alt="" /></p>
+<p><strong>Figure 3.21:</strong> Result of using <code>(delete-queue!  q)</code> on the queue of Figure 3.20.</p>
+<h2 id="333-biểu-diễn-tables-bảng"><a class="header" href="#333-biểu-diễn-tables-bảng">3.3.3 Biểu diễn Tables (bảng)</a></h2>
+<p>Khi chúng ta nghiên cứu các cách khác nhau để biểu diễn sets (tập hợp) trong Chương 2, chúng ta đã đề cập trong 2.3.3 đến nhiệm vụ duy trì một bảng các records (bản ghi) được đánh chỉ mục bằng các keys (khóa) định danh. Trong việc cài đặt data-directed programming (lập trình điều khiển bởi dữ liệu) ở 2.4.3, chúng ta đã sử dụng nhiều các bảng hai chiều, trong đó thông tin được lưu trữ và truy xuất bằng hai keys. Ở đây, chúng ta sẽ thấy cách xây dựng tables như các mutable list structures (cấu trúc danh sách có thể thay đổi).</p>
+<p>Trước tiên, chúng ta xét một bảng một chiều, trong đó mỗi giá trị được lưu dưới một key duy nhất. Chúng ta cài đặt bảng như một danh sách các records, mỗi record được cài đặt như một pair gồm một key và giá trị liên kết. Các records được nối lại để tạo thành một danh sách bằng các pairs mà <code>car</code> của chúng trỏ tới các records liên tiếp. Các pairs nối này được gọi là <em>backbone</em> (xương sống) của bảng. Để có một vị trí mà chúng ta có thể thay đổi khi thêm một record mới vào bảng, chúng ta xây dựng bảng như một <em>headed list</em> (danh sách có tiêu đề). Một headed list có một pair backbone đặc biệt ở đầu, chứa một “record” giả — trong trường hợp này là symbol được chọn tùy ý <code>*table*</code>. Hình 3.22 cho thấy sơ đồ box-and-pointer cho bảng:</p>
+<pre><code class="language-{.scheme}">a:  1
+b:  2
+c:  3
+</code></pre>
+<p><img src="fig/Fig3.22c.jpg" alt="" /></p>
+<p><strong>Figure 3.22:</strong> A table represented as a headed list.</p>
+<p>Để trích xuất thông tin từ một bảng, chúng ta sử dụng procedure <code>lookup</code>, nhận một key làm đối số và trả về giá trị liên kết (hoặc false nếu không có giá trị nào được lưu dưới key đó). <code>Lookup</code> được định nghĩa dựa trên phép toán <code>assoc</code>, phép toán này nhận một key và một danh sách các records làm đối số. Lưu ý rằng <code>assoc</code> không bao giờ thấy record giả. <code>Assoc</code> trả về record có key đã cho là <code>car</code> của nó <sup class="footnote-reference"><a href="#8">8</a></sup>. <code>Lookup</code> sau đó kiểm tra để đảm bảo record trả về từ <code>assoc</code> không phải là false, và trả về giá trị (phần <code>cdr</code>) của record.</p>
+<pre><code class="language-{.scheme}">(define (lookup key table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+        (cdr record)
+        false)))
+
+(define (assoc key records)
+  (cond ((null? records) false)
+        ((equal? key (caar records)) 
+         (car records))
+        (else (assoc key (cdr records)))))
+</code></pre>
+<p>Để chèn một giá trị vào bảng dưới một key xác định, trước tiên chúng ta dùng <code>assoc</code> để xem đã có record nào trong bảng với key này chưa. Nếu chưa, chúng ta tạo một record mới bằng cách <code>cons</code> key với giá trị, và chèn record này vào đầu danh sách records của bảng, ngay sau record giả. Nếu đã có record với key này, chúng ta đặt <code>cdr</code> của record đó thành giá trị mới được chỉ định. Phần header của bảng cung cấp cho chúng ta một vị trí cố định để sửa đổi khi chèn record mới <sup class="footnote-reference"><a href="#9">9</a></sup>.</p>
+<pre><code class="language-{.scheme}">(define (insert! key value table)
+  (let ((record (assoc key (cdr table))))
+    (if record
+        (set-cdr! record value)
+        (set-cdr! table
+                  (cons (cons key value) 
+                        (cdr table)))))
+  'ok)
+</code></pre>
+<p>Để tạo một bảng mới, chúng ta chỉ cần tạo một danh sách chứa symbol <code>*table*</code>:</p>
+<pre><code class="language-{.scheme}">(define (make-table)
+  (list '*table*))
+</code></pre>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Nếu phần tử đầu tiên là phần tử cuối cùng trong queue, con trỏ front sẽ là danh sách rỗng sau khi xóa, điều này sẽ đánh dấu queue là rỗng; chúng ta không cần lo lắng về việc cập nhật con trỏ rear, vốn vẫn sẽ trỏ tới phần tử đã bị xóa, vì <code>empty-queue?</code> chỉ kiểm tra con trỏ front.<br />
+<sup class="footnote-reference"><a href="#8">8</a></sup>: Vì <code>assoc</code> sử dụng <code>equal?</code>, nó có thể nhận diện các keys là symbols, numbers, hoặc list structure.<br />
+<sup class="footnote-reference"><a href="#9">9</a></sup>: Do đó, pair backbone đầu tiên là đối tượng đại diện cho bảng “tự nó”; nghĩa là, một con trỏ tới bảng là một con trỏ tới pair này. Pair backbone này luôn bắt đầu bảng. Nếu chúng ta không sắp xếp theo cách này, <code>insert!</code> sẽ phải trả về một giá trị mới cho phần bắt đầu của bảng khi thêm một record mới.</p>
+</div>
+<h3 id="two-dimensional-tables-bảng-hai-chiều"><a class="header" href="#two-dimensional-tables-bảng-hai-chiều">Two-dimensional tables (bảng hai chiều)</a></h3>
+<p>Trong một two-dimensional table, mỗi giá trị được đánh chỉ mục bởi hai keys. Chúng ta có thể xây dựng một bảng như vậy dưới dạng một one-dimensional table, trong đó mỗi key xác định một subtable (bảng con). Hình 3.23 cho thấy sơ đồ box-and-pointer cho bảng:</p>
+<pre><code class="language-{.example}">math:  +: 43    letters:  a: 97
+       -: 45              b: 98
+       *: 42
+</code></pre>
+<p>Bảng này có hai subtables. (Các subtables không cần một header symbol đặc biệt, vì key xác định subtable đã đóng vai trò này.)</p>
+<p><img src="fig/Fig3.23b.jpg" alt="" /></p>
+<p><strong>Figure 3.23:</strong> A two-dimensional table.</p>
+<p>Khi tra cứu một mục, chúng ta dùng key thứ nhất để xác định subtable đúng. Sau đó, chúng ta dùng key thứ hai để xác định record trong subtable.</p>
+<pre><code class="language-{.scheme}">(define (lookup key-1 key-2 table)
+  (let ((subtable (assoc key-1 (cdr table))))
+    (if subtable
+        (let ((record 
+               (assoc key-2 (cdr subtable))))
+          (if record (cdr record) false))
+        false)))
+</code></pre>
+<p>Để chèn một mục mới dưới một cặp keys, chúng ta dùng <code>assoc</code> để xem có subtable nào được lưu dưới key thứ nhất hay không. Nếu không, chúng ta tạo một subtable mới chứa một record duy nhất (<code>key-2</code>, <code>value</code>) và chèn nó vào bảng dưới key thứ nhất. Nếu đã tồn tại một subtable cho key thứ nhất, chúng ta chèn record mới vào subtable này, sử dụng phương pháp chèn cho one-dimensional tables đã mô tả ở trên:</p>
+<pre><code class="language-{.scheme}">(define (insert! key-1 key-2 value table)
+  (let ((subtable (assoc key-1 (cdr table))))
+    (if subtable
+        (let ((record 
+               (assoc key-2 (cdr subtable))))
+          (if record
+              (set-cdr! record value)
+              (set-cdr! 
+               subtable
+               (cons (cons key-2 value)
+                     (cdr subtable)))))
+        (set-cdr! 
+         table
+         (cons (list key-1 (cons key-2 value))
+               (cdr table)))))
+  'ok)
+</code></pre>
+<h3 id="creating-local-tables-tạo-bảng-cục-bộ"><a class="header" href="#creating-local-tables-tạo-bảng-cục-bộ">Creating local tables (tạo bảng cục bộ)</a></h3>
+<p>Các phép toán <code>lookup</code> và <code>insert!</code> được định nghĩa ở trên nhận bảng làm đối số. Điều này cho phép chúng ta sử dụng các chương trình truy cập nhiều bảng. Một cách khác để xử lý nhiều bảng là có các procedures <code>lookup</code> và <code>insert!</code> riêng cho từng bảng. Chúng ta có thể làm điều này bằng cách biểu diễn một bảng theo kiểu procedural (thủ tục), như một đối tượng duy trì một bảng nội bộ như một phần của local state (trạng thái cục bộ) của nó. Khi nhận một thông điệp thích hợp, “table object” này sẽ cung cấp procedure để thao tác trên bảng nội bộ. Sau đây là một bộ sinh (generator) cho các two-dimensional tables được biểu diễn theo cách này:</p>
+<pre><code class="language-{.scheme}">(define (make-table)
+  (let ((local-table (list '*table*)))
+    (define (lookup key-1 key-2)
+      (let ((subtable 
+             (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record 
+                   (assoc key-2 
+                          (cdr subtable))))
+              (if record (cdr record) false))
+            false)))
+    (define (insert! key-1 key-2 value)
+      (let ((subtable 
+             (assoc key-1 (cdr local-table))))
+        (if subtable
+            (let ((record 
+                   (assoc key-2 
+                          (cdr subtable))))
+              (if record
+                  (set-cdr! record value)
+                  (set-cdr! 
+                   subtable
+                   (cons (cons key-2 value)
+                         (cdr subtable)))))
+            (set-cdr! 
+             local-table
+             (cons (list key-1
+                         (cons key-2 value))
+                   (cdr local-table)))))
+      'ok)
+    (define (dispatch m)
+      (cond ((eq? m 'lookup-proc) lookup)
+            ((eq? m 'insert-proc!) insert!)
+            (else (error &quot;Unknown operation: 
+                          TABLE&quot; m))))
+    dispatch))
+</code></pre>
+<p>Sử dụng <code>make-table</code>, chúng ta có thể cài đặt các phép toán <code>get</code> và <code>put</code> được dùng trong 2.4.3 cho data-directed programming, như sau:</p>
+<pre><code class="language-{.scheme}">(define operation-table (make-table))
+(define get (operation-table 'lookup-proc))
+(define put (operation-table 'insert-proc!))
+</code></pre>
+<p><code>Get</code> nhận hai keys làm đối số, và <code>put</code> nhận hai keys cùng một giá trị. Cả hai phép toán đều truy cập cùng một bảng cục bộ, bảng này được đóng gói bên trong đối tượng được tạo bởi lời gọi <code>make-table</code>.</p>
+<h2 id="334-a-simulator-for-digital-circuits-một-bộ-mô-phỏng-mạch-số"><a class="header" href="#334-a-simulator-for-digital-circuits-một-bộ-mô-phỏng-mạch-số">3.3.4 A Simulator for Digital Circuits (một bộ mô phỏng mạch số)</a></h2>
+<p>Thiết kế các hệ thống số phức tạp, chẳng hạn như máy tính, là một hoạt động kỹ thuật quan trọng. Các hệ thống số được xây dựng bằng cách liên kết các phần tử đơn giản. Mặc dù hành vi của từng phần tử riêng lẻ là đơn giản, nhưng mạng lưới của chúng có thể có hành vi rất phức tạp. Việc mô phỏng trên máy tính các thiết kế mạch được đề xuất là một công cụ quan trọng được các kỹ sư hệ thống số sử dụng. Trong phần này, chúng ta thiết kế một hệ thống để thực hiện các mô phỏng logic số. Hệ thống này là điển hình cho một loại chương trình gọi là <em>event-driven simulation</em> (mô phỏng điều khiển bởi sự kiện), trong đó các hành động (“events”) kích hoạt các sự kiện tiếp theo xảy ra ở một thời điểm sau đó, và các sự kiện này lại kích hoạt thêm các sự kiện khác, cứ thế tiếp diễn.</p>
+<p>Mô hình tính toán của chúng ta về một mạch sẽ bao gồm các objects tương ứng với các thành phần cơ bản cấu thành mạch. Có các <em>wires</em> (dây dẫn), mang <em>digital signals</em> (tín hiệu số). Một digital signal tại bất kỳ thời điểm nào chỉ có thể có một trong hai giá trị, 0 hoặc 1. Cũng có nhiều loại <em>function boxes</em> (hộp chức năng) số khác nhau, kết nối các dây mang tín hiệu đầu vào tới các dây đầu ra khác. Các hộp này tạo ra tín hiệu đầu ra được tính toán từ các tín hiệu đầu vào của chúng. Tín hiệu đầu ra bị trễ một khoảng thời gian phụ thuộc vào loại function box. Ví dụ, một <em>inverter</em> (mạch đảo) là một function box nguyên thủy đảo ngược đầu vào của nó. Nếu tín hiệu đầu vào của inverter thay đổi thành 0, thì sau một khoảng inverter-delay, inverter sẽ thay đổi tín hiệu đầu ra thành 1. Nếu tín hiệu đầu vào của inverter thay đổi thành 1, thì sau một khoảng inverter-delay, inverter sẽ thay đổi tín hiệu đầu ra thành 0. Chúng ta vẽ inverter một cách ký hiệu như trong Hình 3.24. Một <em>and-gate</em> (cổng AND), cũng được thể hiện trong Hình 3.24, là một function box nguyên thủy có hai đầu vào và một đầu ra. Nó điều khiển tín hiệu đầu ra thành giá trị là <em>logical and</em> (phép AND logic) của các đầu vào. Nghĩa là, nếu cả hai tín hiệu đầu vào đều trở thành 1, thì sau một khoảng and-gate-delay, and-gate sẽ buộc tín hiệu đầu ra thành 1; nếu không thì đầu ra sẽ là 0. Một <em>or-gate</em> (cổng OR) là một function box nguyên thủy hai đầu vào tương tự, điều khiển tín hiệu đầu ra thành giá trị là <em>logical or</em> (phép OR logic) của các đầu vào. Nghĩa là, đầu ra sẽ trở thành 1 nếu ít nhất một trong các tín hiệu đầu vào là 1; nếu không thì đầu ra sẽ là 0.</p>
+<p><img src="fig/Fig3.24a.jpg" alt="" /></p>
+<p><strong>Figure 3.24:</strong> Primitive functions in the digital logic simulator.</p>
+<p>Chúng ta có thể kết nối các primitive functions (hàm nguyên thủy) lại với nhau để tạo thành các hàm phức tạp hơn. Để thực hiện điều này, chúng ta nối đầu ra của một số function boxes (hộp chức năng) vào đầu vào của các function boxes khác. Ví dụ, mạch <em>half-adder</em> (bộ cộng nửa) được minh họa trong Hình 3.25 bao gồm một or-gate (cổng OR), hai and-gates (cổng AND), và một inverter (mạch đảo). Mạch này nhận hai tín hiệu đầu vào, A và B, và có hai tín hiệu đầu ra, S và C. S sẽ trở thành 1 khi và chỉ khi đúng một trong A hoặc B là 1, và C sẽ trở thành 1 khi cả A và B đều là 1. Từ hình vẽ, chúng ta có thể thấy rằng, do các khoảng trễ liên quan, các đầu ra có thể được tạo ra tại các thời điểm khác nhau. Nhiều khó khăn trong thiết kế mạch số bắt nguồn từ thực tế này.</p>
+<p><img src="fig/Fig3.25c.jpg" alt="" /></p>
+<p><strong>Figure 3.25:</strong> A half-adder circuit.</p>
+<p>Bây giờ chúng ta sẽ xây dựng một chương trình để mô hình hóa các mạch logic số mà chúng ta muốn nghiên cứu. Chương trình sẽ tạo ra các computational objects (đối tượng tính toán) mô hình hóa các wires (dây dẫn), vốn sẽ “giữ” các tín hiệu. Các function boxes sẽ được mô hình hóa bằng các procedures (thủ tục) đảm bảo mối quan hệ đúng đắn giữa các tín hiệu.</p>
+<p>Một thành phần cơ bản của mô phỏng này sẽ là procedure <code>make-wire</code>, dùng để tạo các dây dẫn. Ví dụ, chúng ta có thể tạo sáu dây dẫn như sau:</p>
+<pre><code class="language-{.scheme}">(define a (make-wire))
+(define b (make-wire))
+(define c (make-wire))
+(define d (make-wire))
+(define e (make-wire))
+(define s (make-wire))
+</code></pre>
+<p>Chúng ta gắn một function box vào một tập các dây dẫn bằng cách gọi một procedure tạo ra loại hộp đó. Các đối số của constructor procedure là các dây dẫn sẽ được gắn vào hộp. Ví dụ, giả sử chúng ta có thể tạo and-gates, or-gates, và inverters, chúng ta có thể nối dây để tạo thành half-adder như trong Hình 3.25:</p>
+<pre><code class="language-{.scheme}">(or-gate a b d)
+ok
+
+(and-gate a b c)
+ok
+
+(inverter c e)
+ok
+
+(and-gate d e s)
+ok
+</code></pre>
+<p>Tốt hơn nữa, chúng ta có thể đặt tên rõ ràng cho thao tác này bằng cách định nghĩa một procedure <code>half-adder</code> tạo ra mạch này, với bốn dây dẫn bên ngoài được gắn vào half-adder:</p>
+<pre><code class="language-{.scheme}">(define (half-adder a b s c)
+  (let ((d (make-wire)) (e (make-wire)))
+    (or-gate a b d)
+    (and-gate a b c)
+    (inverter c e)
+    (and-gate d e s)
+    'ok))
+</code></pre>
+<p>Ưu điểm của việc định nghĩa này là chúng ta có thể sử dụng <code>half-adder</code> như một khối xây dựng để tạo ra các mạch phức tạp hơn. Hình 3.26, chẳng hạn, cho thấy một <em>full-adder</em> (bộ cộng đầy đủ) được tạo thành từ hai half-adders và một or-gate <sup class="footnote-reference"><a href="#10">10</a></sup>. Chúng ta có thể tạo một full-adder như sau:</p>
+<pre><code class="language-{.scheme}">(define (full-adder a b c-in sum c-out)
+  (let ((c1 (make-wire)) 
+        (c2 (make-wire))
+        (s  (make-wire)))
+    (half-adder b c-in s c1)
+    (half-adder a s sum c2)
+    (or-gate c1 c2 c-out)
+    'ok))
+</code></pre>
+<p><img src="fig/Fig3.26.jpg" alt="" /></p>
+<p><strong>Figure 3.26:</strong> A full-adder circuit.</p>
+<p>Sau khi đã định nghĩa <code>full-adder</code> như một procedure, chúng ta có thể sử dụng nó như một khối xây dựng để tạo ra các mạch còn phức tạp hơn nữa. (Ví dụ, xem Bài tập 3.30.)</p>
+<p>Về bản chất, bộ mô phỏng của chúng ta cung cấp các công cụ để xây dựng một ngôn ngữ của các mạch. Nếu chúng ta áp dụng quan điểm tổng quát về ngôn ngữ mà chúng ta đã dùng khi nghiên cứu Lisp trong 1.1, chúng ta có thể nói rằng các primitive function boxes tạo thành các phần tử nguyên thủy của ngôn ngữ, việc nối các hộp lại với nhau cung cấp một phương tiện kết hợp, và việc đặc tả các mẫu nối dây dưới dạng procedures đóng vai trò như một phương tiện trừu tượng hóa.</p>
+<h3 id="primitive-function-boxes"><a class="header" href="#primitive-function-boxes">Primitive function boxes</a></h3>
+<p>Các primitive function boxes thực hiện các “lực” mà qua đó sự thay đổi tín hiệu trên một dây dẫn ảnh hưởng đến các tín hiệu trên các dây dẫn khác. Để xây dựng các function boxes, chúng ta sử dụng các phép toán sau trên wires:</p>
+<ul>
+<li>
+<p><code>(get-signal ⟨wire⟩)</code></p>
+<p>trả về giá trị hiện tại của tín hiệu trên dây dẫn.</p>
+</li>
+<li>
+<p><code>(set-signal! ⟨wire⟩ ⟨new value⟩)</code></p>
+<p>thay đổi giá trị của tín hiệu trên dây dẫn thành giá trị mới.</p>
+</li>
+<li>
+<p><code>(add-action! ⟨wire⟩ ⟨procedure of no arguments⟩)</code></p>
+<p>xác nhận rằng procedure được chỉ định sẽ được chạy bất cứ khi nào tín hiệu trên dây dẫn thay đổi giá trị. Các procedures như vậy là phương tiện để truyền đạt sự thay đổi giá trị tín hiệu trên dây dẫn tới các dây dẫn khác.</p>
+</li>
+</ul>
+<p>Ngoài ra, chúng ta sẽ sử dụng một procedure <code>after-delay</code> nhận một khoảng thời gian trễ và một procedure cần chạy, và thực thi procedure đó sau khoảng trễ đã cho.</p>
+<p>Sử dụng các procedures này, chúng ta có thể định nghĩa các hàm logic số nguyên thủy. Để kết nối một đầu vào với một đầu ra thông qua một inverter, chúng ta dùng <code>add-action!</code> để gắn với dây đầu vào một procedure sẽ được chạy bất cứ khi nào tín hiệu trên dây đầu vào thay đổi giá trị. Procedure này tính <code>logical-not</code> của tín hiệu đầu vào, và sau một <code>inverter-delay</code>, đặt tín hiệu đầu ra thành giá trị mới này:</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>A full-adder là một phần tử mạch cơ bản được dùng để cộng hai số nhị phân. Ở đây A và B là các bit tại các vị trí tương ứng trong hai số cần cộng, và $C_{in}$ là bit nhớ từ phép cộng ở vị trí bên phải. Mạch tạo ra SUM, là bit tổng tại vị trí tương ứng, và $C_{out}$, là bit nhớ được truyền sang bên trái.</p>
+</div>
+<pre><code class="language-{.scheme}">(define (inverter input output)
+  (define (invert-input)
+    (let ((new-value 
+           (logical-not (get-signal input))))
+      (after-delay 
+       inverter-delay
+       (lambda ()
+         (set-signal! output new-value)))))
+  (add-action! input invert-input)
+  'ok)
+
+(define (logical-not s)
+  (cond ((= s 0) 1)
+        ((= s 1) 0)
+        (else (error &quot;Invalid signal&quot; s))))
+</code></pre>
+<p>Một and-gate (cổng AND) phức tạp hơn một chút. Action procedure (thủ tục hành động) phải được chạy nếu một trong hai đầu vào của cổng thay đổi. Nó tính <code>logical-and</code> (sử dụng một procedure tương tự như <code>logical-not</code>) của các giá trị tín hiệu trên các dây đầu vào và thiết lập một thay đổi sang giá trị mới sẽ xảy ra trên dây đầu ra sau một khoảng <code>and-gate-delay</code>.</p>
+<pre><code class="language-{.scheme}">(define (and-gate a1 a2 output)
+  (define (and-action-procedure)
+    (let ((new-value
+           (logical-and (get-signal a1) 
+                        (get-signal a2))))
+      (after-delay 
+       and-gate-delay
+       (lambda ()
+         (set-signal! output new-value)))))
+  (add-action! a1 and-action-procedure)
+  (add-action! a2 and-action-procedure)
+  'ok)
+</code></pre>
+<h3 id="representing-wires-biểu-diễn-dây-dẫn"><a class="header" href="#representing-wires-biểu-diễn-dây-dẫn">Representing wires (biểu diễn dây dẫn)</a></h3>
+<p>Một wire (dây dẫn) trong mô phỏng của chúng ta sẽ là một computational object (đối tượng tính toán) với hai biến trạng thái cục bộ: một <code>signal-value</code> (giá trị tín hiệu, ban đầu được lấy là 0) và một tập hợp các <code>action-procedures</code> sẽ được chạy khi tín hiệu thay đổi giá trị. Chúng ta cài đặt wire này theo phong cách message-passing (truyền thông điệp), như một tập hợp các local procedures (thủ tục cục bộ) cùng với một procedure <code>dispatch</code> chọn thao tác cục bộ thích hợp, giống như chúng ta đã làm với đối tượng bank-account đơn giản trong 3.1.1:</p>
+<pre><code class="language-{.scheme}">(define (make-wire)
+  (let ((signal-value 0) 
+        (action-procedures '()))
+    (define (set-my-signal! new-value)
+      (if (not (= signal-value new-value))
+          (begin (set! signal-value new-value)
+                 (call-each 
+                  action-procedures))
+          'done))
+    (define (accept-action-procedure! proc)
+      (set! action-procedures 
+            (cons proc action-procedures))
+      (proc))
+    (define (dispatch m)
+      (cond ((eq? m 'get-signal) 
+             signal-value)
+            ((eq? m 'set-signal!) 
+             set-my-signal!)
+            ((eq? m 'add-action!) 
+             accept-action-procedure!)
+            (else (error &quot;Unknown operation: 
+                          WIRE&quot; m))))
+    dispatch))
+</code></pre>
+<p>Local procedure <code>set-my-signal!</code> kiểm tra xem giá trị tín hiệu mới có thay đổi tín hiệu trên dây hay không. Nếu có, nó chạy từng action procedure, sử dụng procedure <code>call-each</code> dưới đây, procedure này gọi từng phần tử trong một danh sách các procedures không có đối số:</p>
+<pre><code class="language-{.scheme}">(define (call-each procedures)
+  (if (null? procedures)
+      'done
+      (begin ((car procedures))
+             (call-each (cdr procedures)))))
+</code></pre>
+<p>Local procedure <code>accept-action-procedure!</code> thêm procedure được truyền vào vào danh sách các procedures sẽ được chạy, và sau đó chạy procedure mới này một lần. (Xem Bài tập 3.31.)</p>
+<p>Với local procedure <code>dispatch</code> được thiết lập như đã mô tả, chúng ta có thể cung cấp các procedures sau để truy cập các thao tác cục bộ trên wires <sup class="footnote-reference"><a href="#11">11</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (get-signal wire)
+  (wire 'get-signal))
+(define (set-signal! wire new-value)
+  ((wire 'set-signal!) new-value))
+(define (add-action! wire action-procedure)
+  ((wire 'add-action!) action-procedure))
+</code></pre>
+<p>Các wires, vốn có tín hiệu thay đổi theo thời gian và có thể được gắn dần vào các thiết bị, là điển hình của các mutable objects (đối tượng có thể thay đổi). Chúng ta đã mô hình hóa chúng như các procedures với các biến trạng thái cục bộ được thay đổi bằng phép gán. Khi một wire mới được tạo, một tập biến trạng thái mới được cấp phát (bởi biểu thức <code>let</code> trong <code>make-wire</code>) và một procedure <code>dispatch</code> mới được tạo và trả về, đóng gói môi trường với các biến trạng thái mới này.</p>
+<p>Các wires được chia sẻ giữa nhiều thiết bị khác nhau đã được kết nối với chúng. Do đó, một thay đổi được thực hiện bởi một thiết bị sẽ ảnh hưởng đến tất cả các thiết bị khác được gắn vào dây đó. Wire truyền đạt sự thay đổi này tới các thiết bị lân cận bằng cách gọi các action procedures đã được cung cấp cho nó khi các kết nối được thiết lập.</p>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Các procedures này chỉ đơn giản là <em>syntactic sugar</em> (cú pháp thuận tiện) cho phép chúng ta sử dụng cú pháp thủ tục thông thường để truy cập các local procedures của objects. Điều đáng chú ý là chúng ta có thể hoán đổi vai trò của “procedures” và “data” một cách đơn giản như vậy. Ví dụ, nếu chúng ta viết <code>(wire 'get-signal)</code> chúng ta coi <code>wire</code> như một procedure được gọi với thông điệp <code>get-signal</code> làm đầu vào. Ngược lại, viết <code>(get-signal wire)</code> khiến chúng ta coi <code>wire</code> như một data object là đầu vào của procedure <code>get-signal</code>. Thực tế là, trong một ngôn ngữ mà chúng ta có thể xử lý procedures như các objects, không có sự khác biệt cơ bản nào giữa “procedures” và “data”, và chúng ta có thể chọn cú pháp thuận tiện để lập trình theo bất kỳ phong cách nào mà chúng ta muốn.</p>
+</div>
+<h3 id="the-agenda-lịch-trình"><a class="header" href="#the-agenda-lịch-trình">The agenda (lịch trình)</a></h3>
+<p>Điều duy nhất cần để hoàn thiện bộ mô phỏng là <code>after-delay</code>. Ý tưởng ở đây là chúng ta duy trì một cấu trúc dữ liệu gọi là <em>agenda</em> (lịch trình), chứa một danh sách các công việc cần thực hiện. Các phép toán sau được định nghĩa cho agendas:</p>
+<ul>
+<li><code>(make-agenda)</code> trả về một agenda mới rỗng.</li>
+<li><code>(empty-agenda? ⟨agenda⟩)</code> trả về true nếu agenda được chỉ định là rỗng.</li>
+<li><code>(first-agenda-item ⟨agenda⟩)</code> trả về mục đầu tiên trong agenda.</li>
+<li><code>(remove-first-agenda-item! ⟨agenda⟩)</code> sửa đổi agenda bằng cách xóa mục đầu tiên.</li>
+<li><code>(add-to-agenda! ⟨time⟩ ⟨action⟩ ⟨agenda⟩)</code> sửa đổi agenda bằng cách thêm action procedure (thủ tục hành động) được chỉ định để chạy tại thời điểm đã cho.</li>
+<li><code>(current-time ⟨agenda⟩)</code> trả về thời gian mô phỏng hiện tại.</li>
+</ul>
+<p>Agenda cụ thể mà chúng ta sử dụng được ký hiệu là <code>the-agenda</code>. Procedure <code>after-delay</code> thêm các phần tử mới vào <code>the-agenda</code>:</p>
+<pre><code class="language-{.scheme}">(define (after-delay delay action)
+  (add-to-agenda! 
+   (+ delay (current-time the-agenda))
+   action
+   the-agenda))
+</code></pre>
+<p>Quá trình mô phỏng được điều khiển bởi procedure <code>propagate</code>, hoạt động trên <code>the-agenda</code>, thực thi tuần tự từng procedure trong agenda. Nói chung, khi mô phỏng chạy, các mục mới sẽ được thêm vào agenda, và <code>propagate</code> sẽ tiếp tục mô phỏng miễn là còn các mục trong agenda:</p>
+<pre><code class="language-{.scheme}">(define (propagate)
+  (if (empty-agenda? the-agenda)
+      'done
+      (let ((first-item 
+             (first-agenda-item the-agenda)))
+        (first-item)
+        (remove-first-agenda-item! the-agenda)
+        (propagate))))
+</code></pre>
+<h3 id="a-sample-simulation-một-mô-phỏng-mẫu"><a class="header" href="#a-sample-simulation-một-mô-phỏng-mẫu">A sample simulation (một mô phỏng mẫu)</a></h3>
+<p>Procedure sau đây, đặt một “probe” (đầu dò) lên một wire, cho thấy bộ mô phỏng hoạt động. Probe báo cho wire rằng, bất cứ khi nào tín hiệu của nó thay đổi giá trị, nó sẽ in ra giá trị tín hiệu mới, cùng với thời gian hiện tại và tên định danh của wire:</p>
+<pre><code class="language-{.scheme}">(define (probe name wire)
+  (add-action! 
+   wire
+   (lambda ()
+     (newline)
+     (display name)
+     (display &quot; &quot;)
+     (display (current-time the-agenda))
+     (display &quot;  New-value = &quot;)
+     (display (get-signal wire)))))
+</code></pre>
+<p>Chúng ta bắt đầu bằng cách khởi tạo agenda và chỉ định các khoảng trễ cho các primitive function boxes:</p>
+<pre><code class="language-{.scheme}">(define the-agenda (make-agenda))
+(define inverter-delay 2)
+(define and-gate-delay 3)
+(define or-gate-delay 5)
+</code></pre>
+<p>Bây giờ chúng ta định nghĩa bốn wires, đặt probes lên hai trong số đó:</p>
+<pre><code class="language-{.scheme}">(define input-1 (make-wire))
+(define input-2 (make-wire))
+(define sum (make-wire))
+(define carry (make-wire))
+
+(probe 'sum sum)
+sum 0  New-value = 0
+
+(probe 'carry carry)
+carry 0  New-value = 0
+</code></pre>
+<p>Tiếp theo, chúng ta kết nối các wires trong một mạch half-adder (như trong Hình 3.25), đặt tín hiệu trên <code>input-1</code> thành 1, và chạy mô phỏng:</p>
+<pre><code class="language-{.scheme}">(half-adder input-1 input-2 sum carry)
+ok
+
+(set-signal! input-1 1)
+done
+
+(propagate)
+sum 8  New-value = 1
+done
+</code></pre>
+<p>Tín hiệu <code>sum</code> thay đổi thành 1 tại thời điểm 8. Chúng ta hiện đang ở thời điểm tám đơn vị thời gian kể từ khi bắt đầu mô phỏng. Tại thời điểm này, chúng ta có thể đặt tín hiệu trên <code>input-2</code> thành 1 và cho phép các giá trị lan truyền:</p>
+<pre><code class="language-{.scheme}">(set-signal! input-2 1)
+done
+
+(propagate)
+carry 11  New-value = 1
+sum 16  New-value = 0
+done
+</code></pre>
+<p>Tín hiệu <code>carry</code> thay đổi thành 1 tại thời điểm 11 và <code>sum</code> thay đổi thành 0 tại thời điểm 16.</p>
+<h3 id="implementing-the-agenda-cài-đặt-agenda"><a class="header" href="#implementing-the-agenda-cài-đặt-agenda">Implementing the agenda (Cài đặt agenda)</a></h3>
+<p>Cuối cùng, chúng ta trình bày chi tiết về cấu trúc dữ liệu agenda, cấu trúc này chứa các procedures được lên lịch để thực thi trong tương lai.</p>
+<p>Agenda được tạo thành từ các <em>time segments</em> (đoạn thời gian). Mỗi time segment là một pair gồm một số (thời gian) và một queue (xem Bài tập 3.32) chứa các procedures được lên lịch chạy trong đoạn thời gian đó.</p>
+<pre><code class="language-{.scheme}">(define (make-time-segment time queue)
+  (cons time queue))
+(define (segment-time s) (car s))
+(define (segment-queue s) (cdr s))
+</code></pre>
+<p>Chúng ta sẽ thao tác trên các time-segment queues bằng cách sử dụng các phép toán trên queue đã được mô tả trong 3.3.2.</p>
+<p>Bản thân agenda là một one-dimensional table (bảng một chiều) của các time segments. Nó khác với các bảng được mô tả trong 3.3.3 ở chỗ các segments sẽ được sắp xếp theo thứ tự thời gian tăng dần. Ngoài ra, chúng ta lưu trữ <em>current time</em> (thời gian hiện tại — tức là thời gian của hành động cuối cùng đã được xử lý) ở phần đầu của agenda. Một agenda mới được tạo sẽ không có time segments và có current time bằng 0 <sup class="footnote-reference"><a href="#12">12</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (make-agenda) (list 0))
+(define (current-time agenda) (car agenda))
+(define (set-current-time! agenda time)
+  (set-car! agenda time))
+(define (segments agenda) (cdr agenda))
+(define (set-segments! agenda segments)
+  (set-cdr! agenda segments))
+(define (first-segment agenda) 
+  (car (segments agenda)))
+(define (rest-segments agenda) 
+  (cdr (segments agenda)))
+</code></pre>
+<p>Một agenda là rỗng nếu nó không có time segments:</p>
+<pre><code class="language-{.scheme}">(define (empty-agenda? agenda)
+  (null? (segments agenda)))
+</code></pre>
+<p>Để thêm một action vào agenda, trước tiên chúng ta kiểm tra xem agenda có rỗng hay không. Nếu rỗng, chúng ta tạo một time segment cho action và gắn nó vào agenda. Nếu không, chúng ta duyệt qua agenda, kiểm tra thời gian của từng segment. Nếu tìm thấy một segment cho thời gian đã định, chúng ta thêm action vào queue liên kết với segment đó. Nếu gặp một thời gian muộn hơn thời gian đã định, chúng ta chèn một time segment mới vào agenda ngay trước nó. Nếu đến cuối agenda, chúng ta phải tạo một time segment mới ở cuối.</p>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p>Agenda là một headed list (danh sách có tiêu đề), giống như các bảng trong 3.3.3, nhưng vì danh sách được bắt đầu bằng thời gian nên chúng ta không cần một header giả bổ sung (như symbol <code>*table*</code> được dùng với các bảng).</p>
+</div>
+<pre><code class="language-{.scheme}">(define (add-to-agenda! time action agenda)
+  (define (belongs-before? segments)
+    (or (null? segments)
+        (&lt; time 
+           (segment-time (car segments)))))
+  (define (make-new-time-segment time action)
+    (let ((q (make-queue)))
+      (insert-queue! q action)
+      (make-time-segment time q)))
+  (define (add-to-segments! segments)
+    (if (= (segment-time (car segments)) time)
+        (insert-queue! 
+         (segment-queue (car segments))
+         action)
+        (let ((rest (cdr segments)))
+          (if (belongs-before? rest)
+              (set-cdr!
+               segments
+               (cons (make-new-time-segment 
+                      time 
+                      action)
+                     (cdr segments)))
+              (add-to-segments! rest)))))
+  (let ((segments (segments agenda)))
+    (if (belongs-before? segments)
+        (set-segments!
+         agenda
+         (cons (make-new-time-segment 
+                time 
+                action)
+               segments))
+        (add-to-segments! segments))))
+</code></pre>
+<p>Procedure (thủ tục) xóa mục đầu tiên khỏi agenda sẽ xóa mục ở đầu queue trong time segment đầu tiên. Nếu việc xóa này làm cho time segment rỗng, chúng ta sẽ loại bỏ nó khỏi danh sách các segments <sup class="footnote-reference"><a href="#13">13</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (remove-first-agenda-item! agenda)
+  (let ((q (segment-queue 
+            (first-segment agenda))))
+    (delete-queue! q)
+    (if (empty-queue? q)
+        (set-segments! 
+         agenda 
+         (rest-segments agenda)))))
+</code></pre>
+<p>Mục đầu tiên của agenda được tìm thấy ở đầu queue trong time segment đầu tiên. Bất cứ khi nào chúng ta lấy một mục ra, chúng ta cũng cập nhật current time <sup class="footnote-reference"><a href="#14">14</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (first-agenda-item agenda)
+  (if (empty-agenda? agenda)
+      (error &quot;Agenda is empty: 
+              FIRST-AGENDA-ITEM&quot;)
+      (let ((first-seg 
+             (first-segment agenda)))
+        (set-current-time! 
+         agenda 
+         (segment-time first-seg))
+        (front-queue 
+         (segment-queue first-seg)))))
+</code></pre>
+<h2 id="335-propagation-of-constraints-lan-truyền-ràng-buộc"><a class="header" href="#335-propagation-of-constraints-lan-truyền-ràng-buộc">3.3.5 Propagation of Constraints (Lan truyền ràng buộc)</a></h2>
+<p>Các chương trình máy tính truyền thống thường được tổ chức như các phép tính một chiều, thực hiện các thao tác trên các đối số đã được chỉ định trước để tạo ra kết quả mong muốn. Mặt khác, chúng ta thường mô hình hóa các hệ thống theo các quan hệ giữa các đại lượng. Ví dụ, một mô hình toán học của một cấu trúc cơ khí có thể bao gồm thông tin rằng độ võng $d$ của một thanh kim loại liên quan đến lực $F$ tác dụng lên thanh, chiều dài $L$ của thanh, diện tích mặt cắt ngang $A$, và mô đun đàn hồi $E$ thông qua phương trình </p>
+<p>$${dAE}, = ,{FL.}$$</p>
+<p>Phương trình như vậy không phải là một chiều. Cho bất kỳ bốn trong số các đại lượng, chúng ta có thể sử dụng nó để tính đại lượng thứ năm. Tuy nhiên, việc dịch phương trình này sang một ngôn ngữ lập trình truyền thống sẽ buộc chúng ta phải chọn một trong các đại lượng để tính theo bốn đại lượng còn lại. Do đó, một procedure để tính diện tích $A$ sẽ không thể được sử dụng để tính độ võng $d$, mặc dù cả hai phép tính $A$ và $d$ đều xuất phát từ cùng một phương trình <sup class="footnote-reference"><a href="#15">15</a></sup>.</p>
+<p>Trong phần này, chúng ta phác thảo thiết kế của một ngôn ngữ cho phép chúng ta làm việc trực tiếp với các quan hệ. Các phần tử nguyên thủy của ngôn ngữ là <em>primitive constraints</em> (ràng buộc nguyên thủy), mô tả rằng một số quan hệ nhất định tồn tại giữa các đại lượng. Ví dụ, <code>(adder a b c)</code> chỉ ra rằng các đại lượng $a$, $b$, và $c$ phải có quan hệ theo phương trình $a + b = c$, <code>(multiplier x y z)</code> biểu diễn ràng buộc $xy = z$, và <code>(constant 3.14 x)</code> nói rằng giá trị của $x$ phải là 3.14.</p>
+<p>Ngôn ngữ của chúng ta cung cấp một phương tiện để kết hợp các primitive constraints nhằm biểu diễn các quan hệ phức tạp hơn. Chúng ta kết hợp các constraints bằng cách xây dựng <em>constraint networks</em> (mạng ràng buộc), trong đó các constraints được nối với nhau bởi các <em>connectors</em> (bộ nối). Một connector là một đối tượng “giữ” một giá trị có thể tham gia vào một hoặc nhiều constraints. Ví dụ, chúng ta biết rằng mối quan hệ giữa nhiệt độ Fahrenheit và Celsius là </p>
+<p>$${9C}, = ,{5(F - 32).}$$</p>
+<p>Ràng buộc như vậy có thể được coi như một mạng bao gồm các constraints nguyên thủy adder, multiplier, và constant (Figure 3.28). Trong hình, ở bên trái là một multiplier box với ba đầu nối, được gắn nhãn $m1$, $m2$, và $p$. Chúng kết nối multiplier này với phần còn lại của mạng như sau: Đầu $m1$ được nối với một connector $C$, sẽ giữ giá trị nhiệt độ Celsius. Đầu $m2$ được nối với một connector $w$, connector này cũng được nối với một constant box chứa giá trị 9. Đầu $p$, mà multiplier box ràng buộc phải là tích của $m1$ và $m2$, được nối với đầu $p$ của một multiplier box khác, multiplier này có $m2$ nối với một constant 5 và $m1$ nối với một trong các hạng tử của một tổng.</p>
+<p><img src="fig/Fig3.28.jpg" alt="" /></p>
+<p><strong>Figure 3.28:</strong> The relation $9C = 5(F - 32)$ expressed as a constraint network.</p>
+<p>Việc tính toán bởi một mạng như vậy diễn ra như sau: Khi một connector được gán một giá trị (bởi người dùng hoặc bởi một constraint box mà nó được nối tới), nó sẽ đánh thức tất cả các constraints liên kết với nó (ngoại trừ constraint vừa đánh thức nó) để thông báo rằng nó đã có giá trị. Mỗi constraint box được đánh thức sau đó sẽ kiểm tra các connectors của nó để xem có đủ thông tin để xác định giá trị cho một connector hay không. Nếu có, box đó sẽ đặt giá trị cho connector này, và connector đó lại đánh thức tất cả các constraints liên kết với nó, và cứ thế tiếp tục. Ví dụ, trong việc chuyển đổi giữa Celsius và Fahrenheit, $w$, $x$, và $y$ được các constant boxes đặt ngay lập tức thành 9, 5, và 32, tương ứng. Các connectors này đánh thức các multipliers và adder, nhưng chúng xác định rằng chưa đủ thông tin để tiếp tục. Nếu người dùng (hoặc một phần khác của mạng) đặt $C$ thành một giá trị (ví dụ 25), multiplier ngoài cùng bên trái sẽ được đánh thức, và nó sẽ đặt $u$ thành $25 \cdot 9 = 225$. Sau đó $u$ đánh thức multiplier thứ hai, multiplier này đặt $v$ thành 45, và $v$ đánh thức adder, adder này đặt $f$ thành 77.</p>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>Lưu ý rằng biểu thức <code>if</code> trong procedure này không có biểu thức <code>⟨alternative⟩</code>. Một “one-armed if statement” (câu lệnh if một nhánh) được dùng để quyết định có thực hiện một việc hay không, thay vì chọn giữa hai biểu thức. Một biểu thức <code>if</code> trả về một giá trị không xác định nếu điều kiện sai và không có <code>⟨alternative⟩</code>.<br />
+<sup class="footnote-reference"><a href="#14">14</a></sup>: Theo cách này, current time sẽ luôn là thời gian của hành động vừa được xử lý gần nhất. Việc lưu trữ thời gian này ở đầu agenda đảm bảo rằng nó vẫn có sẵn ngay cả khi time segment liên quan đã bị xóa.<br />
+<sup class="footnote-reference"><a href="#15">15</a></sup>: Constraint propagation (lan truyền ràng buộc) lần đầu tiên xuất hiện trong hệ thống SKETCHPAD mang tính tiên phong của Ivan Sutherland (1963). Một hệ thống lan truyền ràng buộc tuyệt đẹp dựa trên ngôn ngữ Smalltalk được phát triển bởi Alan Borning (1977) tại Xerox Palo Alto Research Center. Sussman, Stallman, và Steele đã áp dụng lan truyền ràng buộc vào phân tích mạch điện (Sussman and Stallman 1975; Sussman and Steele 1980). TK!Solver (Konopasek and Jayaraman 1984) là một môi trường mô hình hóa phong phú dựa trên các ràng buộc.</p>
+</div>
+<h3 id="using-the-constraint-system-sử-dụng-hệ-thống-ràng-buộc"><a class="header" href="#using-the-constraint-system-sử-dụng-hệ-thống-ràng-buộc">Using the constraint system (Sử dụng hệ thống ràng buộc)</a></h3>
+<p>Để sử dụng constraint system (hệ thống ràng buộc) thực hiện phép tính nhiệt độ đã mô tả ở trên, trước tiên chúng ta tạo hai connectors <code>C</code> và <code>F</code> bằng cách gọi constructor <code>make-connector</code>, và liên kết <code>C</code> và <code>F</code> trong một network (mạng) thích hợp:</p>
+<pre><code class="language-{.scheme}">(define C (make-connector))
+(define F (make-connector))
+(celsius-fahrenheit-converter C F)
+ok
+</code></pre>
+<p>Procedure tạo network này được định nghĩa như sau:</p>
+<pre><code class="language-{.scheme}">(define (celsius-fahrenheit-converter c f)
+  (let ((u (make-connector))
+        (v (make-connector))
+        (w (make-connector))
+        (x (make-connector))
+        (y (make-connector)))
+    (multiplier c w u)
+    (multiplier v x u)
+    (adder v y f)
+    (constant 9 w)
+    (constant 5 x)
+    (constant 32 y)
+    'ok))
+</code></pre>
+<p>Procedure này tạo các connectors nội bộ <code>u</code>, <code>v</code>, <code>w</code>, <code>x</code>, và <code>y</code>, và liên kết chúng như minh họa trong Hình 3.28 bằng cách sử dụng các primitive constraint constructors <code>adder</code>, <code>multiplier</code>, và <code>constant</code>. Giống như với bộ mô phỏng mạch số ở 3.3.4, việc biểu diễn các tổ hợp phần tử nguyên thủy này dưới dạng procedures tự động cung cấp cho ngôn ngữ của chúng ta một phương tiện trừu tượng hóa cho các compound objects (đối tượng hợp).</p>
+<p>Để quan sát network hoạt động, chúng ta có thể đặt probes lên các connectors <code>C</code> và <code>F</code>, sử dụng procedure <code>probe</code> tương tự như procedure đã dùng để giám sát wires trong 3.3.4. Đặt một probe lên một connector sẽ khiến một thông báo được in ra bất cứ khi nào connector đó được gán giá trị:</p>
+<pre><code class="language-{.scheme}">(probe &quot;Celsius temp&quot; C)
+(probe &quot;Fahrenheit temp&quot; F)
+</code></pre>
+<p>Tiếp theo, chúng ta đặt giá trị của <code>C</code> thành 25. (Đối số thứ ba của <code>set-value!</code> cho <code>C</code> biết rằng chỉ thị này đến từ <code>user</code>.)</p>
+<pre><code class="language-{.scheme}">(set-value! C 25 'user)
+Probe: Celsius temp = 25
+Probe: Fahrenheit temp = 77
+done
+</code></pre>
+<p>Probe trên <code>C</code> được kích hoạt và báo cáo giá trị. <code>C</code> cũng lan truyền giá trị của nó qua network như đã mô tả ở trên. Điều này đặt <code>F</code> thành 77, và giá trị này được báo cáo bởi probe trên <code>F</code>.</p>
+<p>Bây giờ chúng ta thử đặt <code>F</code> thành một giá trị mới, chẳng hạn 212:</p>
+<pre><code class="language-{.scheme}">(set-value! F 212 'user)
+Error! Contradiction (77 212)
+</code></pre>
+<p>Connector báo rằng nó phát hiện mâu thuẫn: Giá trị hiện tại của nó là 77, và có ai đó đang cố gán nó thành 212. Nếu chúng ta thực sự muốn tái sử dụng network với các giá trị mới, chúng ta có thể yêu cầu <code>C</code> quên giá trị cũ:</p>
+<pre><code class="language-{.scheme}">(forget-value! C 'user)
+Probe: Celsius temp = ?
+Probe: Fahrenheit temp = ?
+done
+</code></pre>
+<p><code>C</code> nhận thấy rằng <code>user</code>, người đã đặt giá trị ban đầu cho nó, hiện đang rút lại giá trị đó, nên <code>C</code> đồng ý bỏ giá trị của mình, như được thể hiện qua probe, và thông báo điều này cho phần còn lại của network. Thông tin này cuối cùng lan truyền đến <code>F</code>, và <code>F</code> nhận thấy rằng nó không còn lý do để tiếp tục giữ giá trị 77. Do đó, <code>F</code> cũng bỏ giá trị của mình, như được thể hiện qua probe.</p>
+<p>Bây giờ khi <code>F</code> không còn giá trị, chúng ta có thể tự do đặt nó thành 212:</p>
+<pre><code class="language-{.scheme}">(set-value! F 212 'user)
+Probe: Fahrenheit temp = 212
+Probe: Celsius temp = 100
+done
+</code></pre>
+<p>Giá trị mới này, khi được lan truyền qua network, buộc <code>C</code> phải có giá trị 100, và điều này được ghi nhận bởi probe trên <code>C</code>. Lưu ý rằng cùng một network này đang được sử dụng để tính <code>C</code> khi biết <code>F</code> và để tính <code>F</code> khi biết <code>C</code>. Tính chất không định hướng của phép tính này là đặc điểm nổi bật của các hệ thống dựa trên ràng buộc.</p>
+<h3 id="implementing-the-constraint-system-cài-đặt-hệ-thống-ràng-buộc"><a class="header" href="#implementing-the-constraint-system-cài-đặt-hệ-thống-ràng-buộc">Implementing the constraint system (Cài đặt hệ thống ràng buộc)</a></h3>
+<p>Constraint system (hệ thống ràng buộc) được cài đặt thông qua các procedural objects (đối tượng thủ tục) với local state (trạng thái cục bộ), theo cách rất giống với bộ mô phỏng mạch số ở 3.3.4. Mặc dù các đối tượng nguyên thủy của constraint system phức tạp hơn đôi chút, nhưng toàn bộ hệ thống lại đơn giản hơn, vì không cần quan tâm đến agendas và logic delays (độ trễ logic).</p>
+<p>Các phép toán cơ bản trên connectors (bộ nối) như sau:</p>
+<ul>
+<li><code>(has-value? ⟨connector⟩)</code> cho biết connector có giá trị hay không.</li>
+<li><code>(get-value ⟨connector⟩)</code> trả về giá trị hiện tại của connector.</li>
+<li><code>(set-value! ⟨connector⟩ ⟨new-value⟩ ⟨informant⟩)</code> cho biết rằng informant (nguồn thông tin) đang yêu cầu connector đặt giá trị của nó thành giá trị mới.</li>
+<li><code>(forget-value! ⟨connector⟩ ⟨retractor⟩)</code> báo cho connector rằng retractor (thành phần rút giá trị) đang yêu cầu nó quên giá trị của mình.</li>
+<li><code>(connect ⟨connector⟩ ⟨new-constraint⟩)</code> báo cho connector tham gia vào new constraint (ràng buộc mới).</li>
+</ul>
+<p>Các connectors giao tiếp với các constraints thông qua các procedures <code>inform-about-value</code>, báo cho constraint đã cho biết rằng connector có giá trị, và <code>inform-about-no-value</code>, báo cho constraint rằng connector đã mất giá trị.</p>
+<p><code>Adder</code> tạo một adder constraint (ràng buộc cộng) giữa các summand connectors <code>a1</code> và <code>a2</code> và một connector <code>sum</code>. Một adder được cài đặt như một procedure với local state (procedure <code>me</code> dưới đây):</p>
+<pre><code class="language-{.scheme}">(define (adder a1 a2 sum)
+  (define (process-new-value)
+    (cond ((and (has-value? a1) 
+                (has-value? a2))
+           (set-value! sum
+                       (+ (get-value a1) 
+                          (get-value a2))
+                       me))
+          ((and (has-value? a1) 
+                (has-value? sum))
+           (set-value! a2
+                       (- (get-value sum) 
+                          (get-value a1))
+                       me))
+          ((and (has-value? a2) 
+                (has-value? sum))
+           (set-value! a1
+                       (- (get-value sum) 
+                          (get-value a2))
+                       me))))
+  (define (process-forget-value)
+    (forget-value! sum me)
+    (forget-value! a1 me)
+    (forget-value! a2 me)
+    (process-new-value))
+  (define (me request)
+    (cond ((eq? request 'I-have-a-value)
+           (process-new-value))
+          ((eq? request 'I-lost-my-value)
+           (process-forget-value))
+          (else (error &quot;Unknown request: 
+                        ADDER&quot; request))))
+  (connect a1 me)
+  (connect a2 me)
+  (connect sum me)
+  me)
+</code></pre>
+<p><code>Adder</code> kết nối adder mới với các connectors được chỉ định và trả về nó như giá trị của mình. Procedure <code>me</code>, đại diện cho adder, hoạt động như một bộ phân phối (dispatch) tới các local procedures. Các “syntax interfaces” (giao diện cú pháp) sau (xem Footnote 155 trong 3.3.4) được sử dụng kết hợp với dispatch:</p>
+<pre><code class="language-{.scheme}">(define (inform-about-value constraint)
+  (constraint 'I-have-a-value))
+(define (inform-about-no-value constraint)
+  (constraint 'I-lost-my-value))
+</code></pre>
+<p>Local procedure <code>process-new-value</code> của adder được gọi khi adder được thông báo rằng một trong các connectors của nó có giá trị. Adder trước tiên kiểm tra xem cả <code>a1</code> và <code>a2</code> có giá trị hay không. Nếu có, nó báo cho <code>sum</code> đặt giá trị của mình thành tổng của hai số hạng. Đối số <code>informant</code> của <code>set-value!</code> là <code>me</code>, tức chính đối tượng adder. Nếu <code>a1</code> và <code>a2</code> không đồng thời có giá trị, adder sẽ kiểm tra xem <code>a1</code> và <code>sum</code> có giá trị hay không. Nếu có, nó đặt <code>a2</code> thành hiệu của hai giá trị này. Cuối cùng, nếu <code>a2</code> và <code>sum</code> có giá trị, điều này cung cấp đủ thông tin để adder đặt <code>a1</code>. Nếu adder được thông báo rằng một trong các connectors của nó đã mất giá trị, nó sẽ yêu cầu tất cả các connectors của mình mất giá trị. (Chỉ những giá trị được đặt bởi adder này mới thực sự bị mất.) Sau đó, nó chạy <code>process-new-value</code>. Lý do cho bước cuối này là vì một hoặc nhiều connectors vẫn có thể giữ giá trị (tức là một connector có thể có giá trị không phải do adder đặt ban đầu), và các giá trị này có thể cần được lan truyền ngược qua adder.</p>
+<p>Một multiplier (bộ nhân) rất giống với một adder. Nó sẽ đặt <code>product</code> (tích) của mình thành 0 nếu một trong các thừa số bằng 0, ngay cả khi thừa số còn lại chưa được biết.</p>
+<pre><code class="language-{.scheme}">(define (multiplier m1 m2 product)
+  (define (process-new-value)
+    (cond ((or (and (has-value? m1) 
+                    (= (get-value m1) 0))
+               (and (has-value? m2) 
+                    (= (get-value m2) 0)))
+           (set-value! product 0 me))
+          ((and (has-value? m1) 
+                (has-value? m2))
+           (set-value! product
+                       (* (get-value m1) 
+                          (get-value m2))
+                       me))
+          ((and (has-value? product) 
+                (has-value? m1))
+           (set-value! m2
+                       (/ (get-value product) 
+                          (get-value m1))
+                       me))
+          ((and (has-value? product) 
+                (has-value? m2))
+           (set-value! m1
+                       (/ (get-value product) 
+                          (get-value m2))
+                       me))))
+  (define (process-forget-value)
+    (forget-value! product me)
+    (forget-value! m1 me)
+    (forget-value! m2 me)
+    (process-new-value))
+  (define (me request)
+    (cond ((eq? request 'I-have-a-value)
+           (process-new-value))
+          ((eq? request 'I-lost-my-value)
+           (process-forget-value))
+          (else
+           (error &quot;Unknown request: 
+                   MULTIPLIER&quot; 
+                  request))))
+  (connect m1 me)
+  (connect m2 me)
+  (connect product me)
+  me)
+</code></pre>
+<p>Một <code>constant</code> constructor (hàm tạo hằng số) đơn giản chỉ đặt giá trị cho connector (bộ nối) được chỉ định. Bất kỳ thông điệp <code>I-have-a-value</code> hoặc <code>I-lost-my-value</code> nào được gửi tới constant box sẽ tạo ra một lỗi.</p>
+<pre><code class="language-{.scheme}">(define (constant value connector)
+  (define (me request)
+    (error &quot;Unknown request: CONSTANT&quot; 
+           request))
+  (connect connector me)
+  (set-value! connector value me)
+  me)
+</code></pre>
+<p>Cuối cùng, một probe (đầu dò) in ra thông báo về việc đặt hoặc bỏ đặt giá trị của connector được chỉ định:</p>
+<pre><code class="language-{.scheme}">(define (probe name connector)
+  (define (print-probe value)
+    (newline) (display &quot;Probe: &quot;)
+    (display name) (display &quot; = &quot;)
+    (display value))
+  (define (process-new-value)
+    (print-probe (get-value connector)))
+  (define (process-forget-value)
+    (print-probe &quot;?&quot;))
+  (define (me request)
+    (cond ((eq? request 'I-have-a-value)
+           (process-new-value))
+          ((eq? request 'I-lost-my-value)
+           (process-forget-value))
+          (else (error &quot;Unknown request: 
+                        PROBE&quot; request))))
+  (connect connector me)
+  me)
+</code></pre>
+<h3 id="representing-connectors-biểu-diễn-connectors"><a class="header" href="#representing-connectors-biểu-diễn-connectors">Representing connectors (Biểu diễn connectors)</a></h3>
+<p>Một connector được biểu diễn như một procedural object (đối tượng thủ tục) với các biến trạng thái cục bộ <code>value</code> — giá trị hiện tại của connector; <code>informant</code> — đối tượng đã đặt giá trị cho connector; và <code>constraints</code> — danh sách các constraints (ràng buộc) mà connector tham gia.</p>
+<pre><code class="language-{.scheme}">(define (make-connector)
+  (let ((value false) 
+        (informant false) 
+        (constraints '()))
+    (define (set-my-value newval setter)
+      (cond ((not (has-value? me))
+             (set! value newval)
+             (set! informant setter)
+             (for-each-except 
+              setter
+              inform-about-value
+              constraints))
+            ((not (= value newval))
+             (error &quot;Contradiction&quot; 
+                    (list value newval)))
+            (else 'ignored)))
+    (define (forget-my-value retractor)
+      (if (eq? retractor informant)
+          (begin (set! informant false)
+                 (for-each-except 
+                  retractor
+                  inform-about-no-value
+                  constraints))
+          'ignored))
+    (define (connect new-constraint)
+      (if (not (memq new-constraint 
+                     constraints))
+          (set! constraints
+                (cons new-constraint 
+                      constraints)))
+      (if (has-value? me)
+          (inform-about-value new-constraint))
+      'done)
+    (define (me request)
+      (cond ((eq? request 'has-value?)
+             (if informant true false))
+            ((eq? request 'value) value)
+            ((eq? request 'set-value!) 
+             set-my-value)
+            ((eq? request 'forget) 
+             forget-my-value)
+            ((eq? request 'connect) connect)
+            (else (error &quot;Unknown operation: 
+                          CONNECTOR&quot;
+                         request))))
+    me))
+</code></pre>
+<p>Local procedure (thủ tục cục bộ) <code>set-my-value</code> của connector được gọi khi có yêu cầu đặt giá trị cho connector. Nếu connector hiện chưa có giá trị, nó sẽ đặt giá trị và ghi nhớ <code>informant</code> là constraint đã yêu cầu đặt giá trị đó <sup class="footnote-reference"><a href="#Người `setter` (thiết lập giá trị) có thể không phải là một constraint. Trong ví dụ về nhiệt độ, chúng ta đã dùng `user` làm `setter`">16</a></sup>. Sau đó, connector sẽ thông báo cho tất cả các constraints mà nó tham gia, ngoại trừ constraint đã yêu cầu đặt giá trị. Điều này được thực hiện bằng iterator (bộ lặp) sau, áp dụng một procedure được chỉ định cho tất cả các phần tử trong danh sách ngoại trừ một phần tử cho trước:</p>
+<pre><code class="language-{.scheme}">(define (for-each-except exception 
+                         procedure 
+                         list)
+  (define (loop items)
+    (cond ((null? items) 'done)
+          ((eq? (car items) exception) 
+           (loop (cdr items)))
+          (else (procedure (car items))
+                (loop (cdr items)))))
+  (loop list))
+</code></pre>
+<p>Nếu một connector được yêu cầu quên giá trị của nó, nó sẽ chạy local procedure <code>forget-my-value</code>, thủ tục này trước tiên kiểm tra để đảm bảo rằng yêu cầu đến từ cùng một đối tượng đã đặt giá trị ban đầu. Nếu đúng, connector sẽ thông báo cho các constraints liên kết của nó về việc mất giá trị.</p>
+<p>Local procedure <code>connect</code> thêm constraint mới được chỉ định vào danh sách constraints nếu nó chưa có trong danh sách. Sau đó, nếu connector đang có giá trị, nó sẽ thông báo cho constraint mới về điều này.</p>
+<p>Procedure <code>me</code> của connector đóng vai trò như một bộ phân phối (dispatch) tới các thủ tục nội bộ khác và cũng đại diện cho connector như một đối tượng. Các procedures sau cung cấp một giao diện cú pháp cho dispatch:</p>
+<pre><code class="language-{.scheme}">(define (has-value? connector)
+  (connector 'has-value?))
+(define (get-value connector)
+  (connector 'value))
+(define (set-value! connector 
+                    new-value 
+                    informant)
+  ((connector 'set-value!) 
+   new-value 
+   informant))
+(define (forget-value! connector retractor)
+  ((connector 'forget) retractor))
+(define (connect connector new-constraint)
+  ((connector 'connect) new-constraint))
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="3-2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="3-4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="3-2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="3-4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Streams - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html" class="active"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="35-streams"><a class="header" href="#35-streams">3.5 Streams</a></h1>
+<p>Chúng ta đã có được một sự hiểu biết tốt về assignment (gán) như một công cụ trong việc mô hình hóa, cũng như nhận thức được những vấn đề phức tạp mà assignment gây ra. Đã đến lúc đặt câu hỏi liệu chúng ta có thể tiếp cận vấn đề theo một cách khác, để tránh một số vấn đề này hay không. Trong phần này, chúng ta sẽ khám phá một cách tiếp cận thay thế để mô hình hóa state (trạng thái), dựa trên các cấu trúc dữ liệu gọi là <em>streams</em> (“luồng”). Như chúng ta sẽ thấy, streams có thể giảm bớt một số độ phức tạp của việc mô hình hóa state.</p>
+<p>Hãy lùi lại và xem xét nguồn gốc của sự phức tạp này. Trong nỗ lực mô hình hóa các hiện tượng trong thế giới thực, chúng ta đã đưa ra một số quyết định có vẻ hợp lý: Chúng ta mô hình hóa các đối tượng trong thế giới thực với local state (trạng thái cục bộ) bằng các computational objects (đối tượng tính toán) với local variables (biến cục bộ). Chúng ta đồng nhất sự thay đổi theo thời gian trong thế giới thực với sự thay đổi theo thời gian trong máy tính. Chúng ta hiện thực hóa sự thay đổi theo thời gian của trạng thái của các đối tượng mô hình trong máy tính bằng các assignment tới các local variables của các đối tượng mô hình.</p>
+<p>Liệu có cách tiếp cận nào khác không? Chúng ta có thể tránh việc đồng nhất thời gian trong máy tính với thời gian trong thế giới được mô hình hóa không? Chúng ta có bắt buộc phải làm cho mô hình thay đổi theo thời gian để mô hình hóa các hiện tượng trong một thế giới đang thay đổi không? Hãy suy nghĩ về vấn đề này dưới góc độ các hàm toán học. Chúng ta có thể mô tả hành vi thay đổi theo thời gian của một đại lượng $x$ như một hàm của thời gian $x(t)$. Nếu chúng ta tập trung vào $x$ tại từng thời điểm, chúng ta sẽ nghĩ về nó như một đại lượng đang thay đổi. Tuy nhiên, nếu chúng ta tập trung vào toàn bộ lịch sử giá trị theo thời gian, chúng ta sẽ không nhấn mạnh sự thay đổi — bản thân hàm đó không thay đổi.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>Nếu thời gian được đo bằng các bước rời rạc, thì chúng ta có thể mô hình hóa một hàm theo thời gian như một sequence (dãy) (có thể là vô hạn). Trong phần này, chúng ta sẽ thấy cách mô hình hóa sự thay đổi thông qua các sequence biểu diễn lịch sử thời gian của các hệ thống đang được mô hình hóa. Để làm được điều này, chúng ta giới thiệu các cấu trúc dữ liệu mới gọi là <em>streams</em>. Ở góc độ trừu tượng, một stream đơn giản chỉ là một sequence. Tuy nhiên, chúng ta sẽ thấy rằng việc hiện thực trực tiếp streams như lists (danh sách) (như trong 2.2.1) không bộc lộ hết sức mạnh của stream processing (xử lý luồng). Như một giải pháp thay thế, chúng ta giới thiệu kỹ thuật <em>delayed evaluation</em> (đánh giá trì hoãn), cho phép chúng ta biểu diễn các sequence rất lớn (thậm chí vô hạn) dưới dạng streams.</p>
+<p>Stream processing cho phép chúng ta mô hình hóa các hệ thống có state mà không bao giờ sử dụng assignment hoặc mutable data (dữ liệu có thể thay đổi). Điều này có những ý nghĩa quan trọng, cả về lý thuyết lẫn thực tiễn, vì chúng ta có thể xây dựng các mô hình tránh được những nhược điểm vốn có khi đưa assignment vào. Mặt khác, framework (khuôn khổ) stream cũng đặt ra những khó khăn riêng, và câu hỏi về việc kỹ thuật mô hình hóa nào dẫn đến các hệ thống có tính module cao hơn và dễ bảo trì hơn vẫn còn bỏ ngỏ.</p>
+<h2 id="351-streams-are-delayed-lists"><a class="header" href="#351-streams-are-delayed-lists">3.5.1 Streams Are Delayed Lists</a></h2>
+<p>Như chúng ta đã thấy trong 2.2.3, sequences có thể đóng vai trò như các giao diện chuẩn để kết hợp các program modules (mô-đun chương trình). Chúng ta đã xây dựng các abstraction (trừu tượng hóa) mạnh mẽ để thao tác với sequences, chẳng hạn như <code>map</code>, <code>filter</code>, và <code>accumulate</code>, giúp nắm bắt nhiều loại thao tác theo cách vừa súc tích vừa tao nhã.</p>
+<p>Thật không may, nếu chúng ta biểu diễn sequences dưới dạng lists, sự tao nhã này phải trả giá bằng sự kém hiệu quả nghiêm trọng cả về thời gian và bộ nhớ cần thiết cho các phép tính. Khi chúng ta biểu diễn các thao tác trên sequences như các phép biến đổi của lists, chương trình của chúng ta phải tạo và sao chép các cấu trúc dữ liệu (có thể rất lớn) ở mỗi bước của quá trình.</p>
+<p>Để thấy tại sao điều này đúng, hãy so sánh hai chương trình tính tổng tất cả các số nguyên tố trong một khoảng. Chương trình đầu tiên được viết theo phong cách iterative (lặp) tiêu chuẩn:<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<pre><code class="language-{.scheme}">(define (sum-primes a b)
+  (define (iter count accum)
+    (cond ((&gt; count b) accum)
+          ((prime? count)
+           (iter (+ count 1)
+                 (+ count accum)))
+          (else (iter (+ count 1) accum))))
+  (iter a 0))
+</code></pre>
+<p>Chương trình thứ hai thực hiện cùng phép tính đó bằng cách sử dụng các thao tác sequence trong 2.2.3:</p>
+<pre><code class="language-{.scheme}">(define (sum-primes a b)
+  (accumulate 
+   +
+   0
+   (filter prime? (enumerate-interval a b))))
+</code></pre>
+<p>Khi thực hiện phép tính, chương trình đầu tiên chỉ cần lưu trữ tổng đang được cộng dồn. Ngược lại, <code>filter</code> trong chương trình thứ hai không thể thực hiện bất kỳ kiểm tra nào cho đến khi <code>enumerate-interval</code> đã tạo ra toàn bộ list các số trong khoảng. <code>filter</code> tạo ra một list khác, sau đó được truyền cho <code>accumulate</code> trước khi được rút gọn để tạo thành tổng. Việc lưu trữ trung gian lớn như vậy là không cần thiết đối với chương trình đầu tiên, mà chúng ta có thể coi như đang liệt kê khoảng một cách tuần tự, cộng từng số nguyên tố vào tổng ngay khi nó được tạo ra.</p>
+<p>Sự kém hiệu quả khi sử dụng lists trở nên rõ rệt nếu chúng ta dùng mô hình sequence để tính số nguyên tố thứ hai trong khoảng từ 10.000 đến 1.000.000 bằng cách đánh giá biểu thức:</p>
+<pre><code class="language-{.scheme}">(car (cdr 
+      (filter 
+       prime?
+       (enumerate-interval 10000 1000000))))
+</code></pre>
+<p>Biểu thức này đúng là tìm ra số nguyên tố thứ hai, nhưng chi phí tính toán là quá lớn. Chúng ta tạo ra một list gần một triệu số nguyên, lọc list này bằng cách kiểm tra tính nguyên tố của từng phần tử, rồi bỏ qua gần như toàn bộ kết quả. Trong một phong cách lập trình truyền thống hơn, chúng ta sẽ xen kẽ việc liệt kê và lọc, và dừng lại khi tìm được số nguyên tố thứ hai.</p>
+<p>Streams là một ý tưởng thông minh cho phép sử dụng các thao tác sequence mà không phải chịu chi phí của việc thao tác sequences dưới dạng lists. Với streams, chúng ta có thể đạt được cả hai ưu điểm: Viết chương trình một cách tao nhã như các thao tác sequence, đồng thời đạt hiệu quả của tính toán tuần tự. Ý tưởng cơ bản là chỉ tạo một phần của stream, và truyền phần đã tạo đó cho chương trình tiêu thụ stream. Nếu chương trình tiêu thụ cố gắng truy cập một phần của stream chưa được tạo, stream sẽ tự động tạo thêm vừa đủ để sinh ra phần cần thiết, nhờ đó duy trì ảo giác rằng toàn bộ stream đã tồn tại. Nói cách khác, mặc dù chúng ta viết chương trình như thể đang xử lý toàn bộ sequence, nhưng chúng ta thiết kế việc hiện thực stream để tự động và minh bạch xen kẽ việc tạo stream với việc sử dụng nó.</p>
+<p>Bề ngoài, streams chỉ là lists với các tên khác cho các procedure thao tác trên chúng. Có một constructor (hàm tạo) <code>cons-stream</code>, và hai selectors (hàm chọn) <code>stream-car</code> và <code>stream-cdr</code>, thỏa mãn các ràng buộc:</p>
+<pre><code class="language-{.example}">(stream-car (cons-stream x y)) = x
+(stream-cdr (cons-stream x y)) = y
+</code></pre>
+<p>Có một đối tượng đặc biệt, <code>the-empty-stream</code>, không thể là kết quả của bất kỳ phép <code>cons-stream</code> nào, và có thể được nhận diện bằng predicate <code>stream-null?</code>.<sup class="footnote-reference"><a href="#3">3</a></sup> Do đó, chúng ta có thể tạo và sử dụng streams, giống như cách chúng ta tạo và sử dụng lists, để biểu diễn dữ liệu tổng hợp được sắp xếp theo một sequence. Đặc biệt, chúng ta có thể xây dựng các phiên bản stream tương tự như các phép toán trên list từ Chương 2, chẳng hạn như <code>list-ref</code>, <code>map</code>, và <code>for-each</code>:<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Physicists đôi khi áp dụng quan điểm này bằng cách giới thiệu “world lines” (đường thế giới) của các hạt như một công cụ để suy luận về chuyển động...
+<sup class="footnote-reference"><a href="#2">2</a></sup>: ...
+<sup class="footnote-reference"><a href="#3">3</a></sup>: ...
+<sup class="footnote-reference"><a href="#4">4</a></sup>: ...</p>
+</div>
+<pre><code class="language-{.scheme}">(define (stream-ref s n)
+  (if (= n 0)
+      (stream-car s)
+      (stream-ref (stream-cdr s) (- n 1))))
+
+(define (stream-map proc s)
+  (if (stream-null? s)
+      the-empty-stream
+      (cons-stream 
+       (proc (stream-car s))
+       (stream-map proc (stream-cdr s)))))
+
+(define (stream-for-each proc s)
+  (if (stream-null? s)
+      'done
+      (begin 
+        (proc (stream-car s))
+        (stream-for-each proc 
+                         (stream-cdr s)))))
+</code></pre>
+<p><code>Stream-for-each</code> rất hữu ích để quan sát streams:</p>
+<pre><code class="language-{.scheme}">(define (display-stream s)
+  (stream-for-each display-line s))
+
+(define (display-line x)
+  (newline)
+  (display x))
+</code></pre>
+<p>Để làm cho việc hiện thực stream tự động và minh bạch xen kẽ việc xây dựng một stream với việc sử dụng nó, chúng ta sẽ sắp xếp để <code>cdr</code> của một stream chỉ được đánh giá khi nó được truy cập bởi procedure (thủ tục) <code>stream-cdr</code> thay vì khi stream được tạo bởi <code>cons-stream</code>. Lựa chọn hiện thực này gợi nhớ đến phần thảo luận của chúng ta về rational numbers (số hữu tỉ) trong 2.1.2, nơi chúng ta thấy rằng có thể chọn cách hiện thực rational numbers sao cho việc rút gọn tử số và mẫu số về dạng tối giản được thực hiện hoặc tại thời điểm tạo, hoặc tại thời điểm truy xuất. Hai cách hiện thực rational-number này tạo ra cùng một data abstraction (trừu tượng hóa dữ liệu), nhưng lựa chọn này ảnh hưởng đến hiệu năng. Có một mối quan hệ tương tự giữa streams và ordinary lists (danh sách thông thường). Về mặt data abstraction, streams giống hệt lists. Sự khác biệt nằm ở thời điểm các phần tử được đánh giá. Với ordinary lists, cả <code>car</code> và <code>cdr</code> đều được đánh giá tại thời điểm tạo. Với streams, <code>cdr</code> được đánh giá tại thời điểm truy xuất.</p>
+<p>Việc hiện thực streams của chúng ta sẽ dựa trên một special form (dạng đặc biệt) gọi là <code>delay</code>. Việc đánh giá <code>(delay ⟨exp⟩)</code> sẽ không đánh giá biểu thức <code>⟨</code>exp<code>⟩</code>, mà thay vào đó trả về một <em>delayed object</em> (đối tượng trì hoãn), mà ta có thể coi như một “lời hứa” sẽ đánh giá <code>⟨</code>exp<code>⟩</code> vào một thời điểm nào đó trong tương lai. Đi kèm với <code>delay</code>, có một procedure gọi là <code>force</code> nhận một delayed object làm đối số và thực hiện việc đánh giá — thực chất là buộc <code>delay</code> thực hiện lời hứa của nó. Chúng ta sẽ thấy bên dưới cách <code>delay</code> và <code>force</code> có thể được hiện thực, nhưng trước hết hãy sử dụng chúng để xây dựng streams.</p>
+<p><code>Cons-stream</code> là một special form được định nghĩa sao cho</p>
+<pre><code class="language-{.scheme}">(cons-stream ⟨a⟩ ⟨b⟩)
+</code></pre>
+<p>tương đương với</p>
+<pre><code class="language-{.scheme}">(cons ⟨a⟩ (delay ⟨b⟩))
+</code></pre>
+<p>Điều này có nghĩa là chúng ta sẽ xây dựng streams bằng các cặp (pairs). Tuy nhiên, thay vì đặt giá trị của phần còn lại của stream vào <code>cdr</code> của cặp, chúng ta sẽ đặt vào đó một lời hứa sẽ tính toán phần còn lại nếu nó được yêu cầu. <code>Stream-car</code> và <code>stream-cdr</code> bây giờ có thể được định nghĩa như các procedures:</p>
+<pre><code class="language-{.scheme}">(define (stream-car stream) 
+  (car stream))
+
+(define (stream-cdr stream) 
+  (force (cdr stream)))
+</code></pre>
+<p><code>Stream-car</code> chọn <code>car</code> của cặp; <code>stream-cdr</code> chọn <code>cdr</code> của cặp và đánh giá biểu thức bị trì hoãn được tìm thấy ở đó để lấy phần còn lại của stream.<sup class="footnote-reference"><a href="#5">5</a></sup></p>
+<h3 id="the-stream-implementation-in-action"><a class="header" href="#the-stream-implementation-in-action">The stream implementation in action</a></h3>
+<p>Để thấy cách hiện thực này hoạt động, hãy phân tích phép tính số nguyên tố “quá mức” mà chúng ta đã thấy ở trên, được viết lại theo dạng streams:</p>
+<pre><code class="language-{.scheme}">(stream-car 
+ (stream-cdr
+  (stream-filter 
+   prime? (stream-enumerate-interval 
+           10000 1000000))))
+</code></pre>
+<p>Chúng ta sẽ thấy rằng nó thực sự hoạt động hiệu quả.</p>
+<p>Chúng ta bắt đầu bằng cách gọi <code>stream-enumerate-interval</code> với các đối số 10.000 và 1.000.000. <code>Stream-enumerate-interval</code> là phiên bản stream của <code>enumerate-interval</code> (2.2.3):</p>
+<pre><code class="language-{.scheme}">(define (stream-enumerate-interval low high)
+  (if (&gt; low high)
+      the-empty-stream
+      (cons-stream
+       low
+       (stream-enumerate-interval (+ low 1)
+                                  high))))
+</code></pre>
+<p>và do đó kết quả trả về bởi <code>stream-enumerate-interval</code>, được tạo bởi <code>cons-stream</code>, là<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<pre><code class="language-{.scheme}">(cons 10000
+      (delay 
+        (stream-enumerate-interval 
+         10001 
+         1000000)))
+</code></pre>
+<p>Nghĩa là, <code>stream-enumerate-interval</code> trả về một stream được biểu diễn như một cặp có <code>car</code> là 10.000 và <code>cdr</code> là một lời hứa sẽ liệt kê thêm phần còn lại của khoảng nếu được yêu cầu. Stream này bây giờ được lọc để lấy các số nguyên tố, sử dụng phiên bản stream của procedure <code>filter</code> (2.2.3):</p>
+<pre><code class="language-{.scheme}">(define (stream-filter pred stream)
+  (cond ((stream-null? stream) 
+         the-empty-stream)
+        ((pred (stream-car stream))
+         (cons-stream 
+          (stream-car stream)
+          (stream-filter 
+           pred
+           (stream-cdr stream))))
+        (else (stream-filter 
+               pred 
+               (stream-cdr stream)))))
+</code></pre>
+<p><code>Stream-filter</code> kiểm tra <code>stream-car</code> của stream (tức <code>car</code> của cặp, là 10.000). Vì đây không phải số nguyên tố, <code>stream-filter</code> xem xét <code>stream-cdr</code> của stream đầu vào. Lời gọi <code>stream-cdr</code> buộc đánh giá <code>stream-enumerate-interval</code> bị trì hoãn, và bây giờ trả về:</p>
+<pre><code class="language-{.scheme}">(cons 10001
+      (delay 
+        (stream-enumerate-interval 
+         10002 
+         1000000)))
+</code></pre>
+<p><code>Stream-filter</code> bây giờ xem <code>stream-car</code> của stream này, 10.001, thấy rằng đây cũng không phải số nguyên tố, buộc thêm một <code>stream-cdr</code> nữa, và cứ thế tiếp tục, cho đến khi <code>stream-enumerate-interval</code> tạo ra số nguyên tố 10.007, khi đó <code>stream-filter</code>, theo định nghĩa của nó, trả về:</p>
+<pre><code class="language-{.scheme}">(cons-stream 
+ (stream-car stream)
+ (stream-filter pred (stream-cdr stream)))
+</code></pre>
+<p>trong trường hợp này là:</p>
+<pre><code class="language-{.scheme}">(cons 10007
+      (delay
+        (stream-filter
+         prime?
+         (cons 10008
+               (delay
+                 (stream-enumerate-interval 
+                  10009 1000000))))))
+</code></pre>
+<p>Kết quả này bây giờ được truyền cho <code>stream-cdr</code> trong biểu thức gốc của chúng ta. Điều này buộc <code>stream-filter</code> bị trì hoãn, và nó tiếp tục buộc <code>stream-enumerate-interval</code> bị trì hoãn cho đến khi tìm thấy số nguyên tố tiếp theo, là 10.009. Cuối cùng, kết quả được truyền cho <code>stream-car</code> trong biểu thức gốc của chúng ta là:</p>
+<pre><code class="language-{.scheme}">(cons 10009
+      (delay
+        (stream-filter
+         prime?
+         (cons 10010
+               (delay
+                 (stream-enumerate-interval 
+                  10011 1000000))))))
+</code></pre>
+<p><code>Stream-car</code> trả về 10.009, và phép tính hoàn tất. Chỉ có đúng số lượng số nguyên cần thiết được kiểm tra tính nguyên tố để tìm số nguyên tố thứ hai, và khoảng được liệt kê chỉ đến mức cần thiết để cung cấp cho bộ lọc nguyên tố.</p>
+<p>Nói chung, chúng ta có thể coi delayed evaluation (đánh giá trì hoãn) như lập trình “demand-driven” (theo nhu cầu), trong đó mỗi giai đoạn trong quá trình xử lý stream chỉ được kích hoạt vừa đủ để thỏa mãn giai đoạn tiếp theo. Điều chúng ta đã làm là tách rời thứ tự thực tế của các sự kiện trong phép tính khỏi cấu trúc bề ngoài của các procedures. Chúng ta viết procedures như thể các streams tồn tại “ngay lập tức” trong khi thực tế, phép tính được thực hiện từng bước, giống như trong các phong cách lập trình truyền thống.</p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Mặc dù <code>stream-car</code> và <code>stream-cdr</code> có thể được định nghĩa như các procedures, <code>cons-stream</code> phải là một special form. Nếu <code>cons-stream</code> là một procedure, thì theo mô hình đánh giá của chúng ta, việc đánh giá <code>(cons-stream ⟨a⟩ ⟨b⟩)</code> sẽ tự động khiến <code>⟨</code>b<code>⟩</code> được đánh giá, điều này chính là điều chúng ta không muốn xảy ra. Vì cùng lý do đó, <code>delay</code> phải là một special form, mặc dù <code>force</code> có thể là một procedure thông thường.</p>
+</div>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Các số được hiển thị ở đây thực tế không xuất hiện trong biểu thức bị trì hoãn...</p>
+</div>
+<h3 id="implementing-delay-and-force"><a class="header" href="#implementing-delay-and-force">Implementing <code>delay</code> and <code>force</code></a></h3>
+<p>Mặc dù <code>delay</code> và <code>force</code> có thể trông như những thao tác bí ẩn, nhưng việc hiện thực chúng thực ra khá đơn giản. <code>Delay</code> phải đóng gói một biểu thức để nó có thể được đánh giá sau này khi cần, và chúng ta có thể thực hiện điều này đơn giản bằng cách coi biểu thức như phần thân của một procedure (thủ tục). <code>Delay</code> có thể là một special form (dạng đặc biệt) sao cho</p>
+<pre><code class="language-{.scheme}">(delay ⟨exp⟩)
+</code></pre>
+<p>là cú pháp rút gọn (syntactic sugar) cho</p>
+<pre><code class="language-{.scheme}">(lambda () ⟨exp⟩)
+</code></pre>
+<p><code>Force</code> đơn giản chỉ gọi procedure (không có đối số) được tạo ra bởi <code>delay</code>, vì vậy chúng ta có thể hiện thực <code>force</code> như một procedure:</p>
+<pre><code class="language-{.scheme}">(define (force delayed-object)
+  (delayed-object))
+</code></pre>
+<p>Việc hiện thực này là đủ để <code>delay</code> và <code>force</code> hoạt động như đã mô tả, nhưng có một tối ưu hóa quan trọng mà chúng ta có thể bổ sung. Trong nhiều ứng dụng, chúng ta thường xuyên buộc (force) cùng một delayed object nhiều lần. Điều này có thể dẫn đến sự kém hiệu quả nghiêm trọng trong các chương trình đệ quy liên quan đến streams. (Xem Bài tập 3.57.) Giải pháp là xây dựng các delayed object sao cho lần đầu tiên chúng được buộc, chúng sẽ lưu trữ giá trị đã tính toán. Các lần buộc sau đó sẽ chỉ trả về giá trị đã lưu mà không lặp lại phép tính. Nói cách khác, chúng ta hiện thực <code>delay</code> như một procedure có chức năng memoization (ghi nhớ kết quả) đặc biệt, tương tự như procedure được mô tả trong Bài tập 3.27. Một cách để thực hiện điều này là sử dụng procedure sau, nhận một procedure (không có đối số) làm tham số và trả về một phiên bản có memoization của procedure đó. Lần đầu tiên procedure có memoization này chạy, nó sẽ lưu kết quả tính toán. Ở các lần đánh giá sau, nó chỉ đơn giản trả về kết quả đó.</p>
+<pre><code class="language-{.scheme}">(define (memo-proc proc)
+  (let ((already-run? false) (result false))
+    (lambda ()
+      (if (not already-run?)
+          (begin (set! result (proc))
+                 (set! already-run? true)
+                 result)
+          result))))
+</code></pre>
+<p><code>Delay</code> sau đó được định nghĩa sao cho <code>(delay ⟨exp⟩)</code> tương đương với</p>
+<pre><code class="language-{.scheme}">(memo-proc (lambda () ⟨exp⟩))
+</code></pre>
+<p>và <code>force</code> được định nghĩa như trước đây.<sup class="footnote-reference"><a href="#7">7</a></sup></p>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Có nhiều cách hiện thực streams khác ngoài cách được mô tả trong phần này. Delayed evaluation (đánh giá trì hoãn), yếu tố then chốt để làm cho streams trở nên khả thi, vốn có trong phương pháp truyền tham số <em>call-by-name</em> của Algol 60. Việc sử dụng cơ chế này để hiện thực streams lần đầu tiên được mô tả bởi Landin (1965). Delayed evaluation cho streams được đưa vào Lisp bởi Friedman và Wise (1976). Trong hiện thực của họ, <code>cons</code> luôn trì hoãn việc đánh giá các đối số của nó, để các lists tự động hoạt động như streams. Tối ưu hóa memoization này còn được gọi là <em>call-by-need</em>. Cộng đồng Algol sẽ gọi các delayed object ban đầu của chúng ta là <em>call-by-name thunks</em> và các phiên bản đã tối ưu hóa là <em>call-by-need thunks</em>.</p>
+</div>
+<h2 id="352-infinite-streams"><a class="header" href="#352-infinite-streams">3.5.2 Infinite Streams</a></h2>
+<p>Chúng ta đã thấy cách duy trì ảo giác rằng đang thao tác với streams như những thực thể hoàn chỉnh, mặc dù trên thực tế, chúng ta chỉ tính toán đúng phần của stream mà ta cần truy cập. Chúng ta có thể khai thác kỹ thuật này để biểu diễn các sequences (dãy) một cách hiệu quả dưới dạng streams, ngay cả khi các sequences này rất dài. Điều đáng chú ý hơn nữa là chúng ta có thể sử dụng streams để biểu diễn các sequences có độ dài vô hạn. Ví dụ, hãy xem định nghĩa sau về stream các số nguyên dương:</p>
+<pre><code class="language-{.scheme}">(define (integers-starting-from n)
+  (cons-stream 
+   n (integers-starting-from (+ n 1))))
+(define integers (integers-starting-from 1))
+</code></pre>
+<p>Điều này hợp lý vì <code>integers</code> sẽ là một cặp có <code>car</code> là 1 và <code>cdr</code> là một lời hứa sẽ sinh ra các số nguyên bắt đầu từ 2. Đây là một stream vô hạn, nhưng tại bất kỳ thời điểm nào, chúng ta chỉ có thể xem xét một phần hữu hạn của nó. Do đó, các chương trình của chúng ta sẽ không bao giờ “biết” rằng toàn bộ stream vô hạn này thực ra không tồn tại đầy đủ.</p>
+<p>Sử dụng <code>integers</code>, chúng ta có thể định nghĩa các streams vô hạn khác, chẳng hạn như stream các số nguyên không chia hết cho 7:</p>
+<pre><code class="language-{.scheme}">(define (divisible? x y) (= (remainder x y) 0))
+(define no-sevens
+  (stream-filter (lambda (x) 
+                   (not (divisible? x 7)))
+                 integers))
+</code></pre>
+<p>Khi đó, chúng ta có thể tìm các số nguyên không chia hết cho 7 đơn giản bằng cách truy cập các phần tử của stream này:</p>
+<pre><code class="language-{.scheme}">(stream-ref no-sevens 100)
+117
+</code></pre>
+<p>Tương tự như <code>integers</code>, chúng ta có thể định nghĩa stream vô hạn các số Fibonacci:</p>
+<pre><code class="language-{.scheme}">(define (fibgen a b)
+  (cons-stream a (fibgen b (+ a b))))
+(define fibs (fibgen 0 1))
+</code></pre>
+<p><code>Fibs</code> là một cặp có <code>car</code> là 0 và <code>cdr</code> là một lời hứa sẽ đánh giá <code>(fibgen 1 1)</code>. Khi chúng ta đánh giá <code>(fibgen 1 1)</code> bị trì hoãn này, nó sẽ tạo ra một cặp có <code>car</code> là 1 và <code>cdr</code> là một lời hứa sẽ đánh giá <code>(fibgen 1 2)</code>, và cứ thế tiếp tục.</p>
+<p>Để xem một stream vô hạn thú vị hơn, chúng ta có thể tổng quát hóa ví dụ <code>no-sevens</code> để xây dựng stream vô hạn các số nguyên tố, sử dụng một phương pháp gọi là <em>sieve of Eratosthenes</em> (“thuật toán sàng Eratosthenes”).<sup class="footnote-reference"><a href="#8">8</a></sup> Chúng ta bắt đầu với các số nguyên từ 2, là số nguyên tố đầu tiên. Để lấy các số nguyên tố tiếp theo, trước tiên chúng ta lọc bỏ các bội số của 2 khỏi phần còn lại của các số nguyên. Điều này để lại một stream bắt đầu từ 3, là số nguyên tố tiếp theo. Bây giờ chúng ta lọc bỏ các bội số của 3 khỏi phần còn lại của stream này. Điều này để lại một stream bắt đầu từ 5, là số nguyên tố tiếp theo, và cứ thế tiếp tục. Nói cách khác, chúng ta xây dựng các số nguyên tố bằng một quá trình sàng, được mô tả như sau: Để sàng một stream <code>S</code>, tạo một stream có phần tử đầu tiên là phần tử đầu tiên của <code>S</code> và phần còn lại thu được bằng cách lọc bỏ tất cả các bội số của phần tử đầu tiên của <code>S</code> khỏi phần còn lại của <code>S</code> rồi tiếp tục sàng kết quả. Quá trình này có thể được mô tả dễ dàng bằng các thao tác trên stream:</p>
+<pre><code class="language-{.scheme}">(define (sieve stream)
+  (cons-stream
+   (stream-car stream)
+   (sieve (stream-filter
+           (lambda (x)
+             (not (divisible? 
+                   x (stream-car stream))))
+           (stream-cdr stream)))))
+
+(define primes 
+  (sieve (integers-starting-from 2)))
+</code></pre>
+<p>Bây giờ, để tìm một số nguyên tố cụ thể, chúng ta chỉ cần yêu cầu nó:</p>
+<pre><code class="language-{.scheme}">(stream-ref primes 50)
+233
+</code></pre>
+<p>Thật thú vị khi suy ngẫm về hệ thống xử lý tín hiệu (signal-processing system) được thiết lập bởi <code>sieve</code>, được minh họa trong “Henderson diagram” ở Hình 3.31.<sup class="footnote-reference"><a href="#9">9</a></sup> Stream đầu vào đi vào một “un<code>cons</code>er” tách phần tử đầu tiên của stream khỏi phần còn lại. Phần tử đầu tiên này được dùng để tạo một bộ lọc chia hết (divisibility filter), qua đó phần còn lại được truyền, và đầu ra của bộ lọc được đưa vào một hộp sàng khác. Sau đó, phần tử đầu tiên ban đầu được <code>cons</code> vào đầu ra của bộ sàng bên trong để tạo thành stream đầu ra. Do đó, không chỉ stream là vô hạn, mà bộ xử lý tín hiệu cũng là vô hạn, vì bên trong một bộ sàng lại chứa một bộ sàng khác.</p>
+<p><img src="fig/Fig3.31a.jpg" alt="" /></p>
+<p><strong>Figure 3.31:</strong> The prime sieve viewed as a signal-processing system.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Eratosthenes, một triết gia Hy Lạp ở Alexandria thế kỷ thứ 3 trước Công nguyên, nổi tiếng vì đã đưa ra ước tính chính xác đầu tiên về chu vi Trái Đất, được ông tính toán bằng cách quan sát bóng đổ vào buổi trưa ngày hạ chí. Phương pháp sàng của Eratosthenes, mặc dù cổ xưa, đã tạo nền tảng cho các phần cứng “sàng” chuyên dụng mà cho đến gần đây vẫn là công cụ mạnh nhất để tìm các số nguyên tố lớn. Tuy nhiên, từ những năm 1970, các phương pháp này đã được thay thế bởi các biến thể của các kỹ thuật xác suất được thảo luận trong 1.2.6.</p>
+</div>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Chúng tôi đặt tên cho các hình này theo Peter Henderson, người đầu tiên cho chúng tôi thấy các sơ đồ dạng này như một cách để suy nghĩ về xử lý stream. Mỗi đường liền nét biểu diễn một stream các giá trị đang được truyền. Đường gạch nối từ <code>car</code> đến <code>cons</code> và <code>filter</code> cho biết đây là một giá trị đơn lẻ chứ không phải một stream.</p>
+</div>
+<h3 id="defining-streams-implicitly"><a class="header" href="#defining-streams-implicitly">Defining streams implicitly</a></h3>
+<p>Các streams <code>integers</code> và <code>fibs</code> ở trên được định nghĩa bằng cách chỉ rõ các procedure (thủ tục) “sinh” ra các phần tử của stream một cách tường minh, từng phần tử một. Một cách thay thế để chỉ định streams là tận dụng delayed evaluation (đánh giá trì hoãn) để định nghĩa streams một cách ngầm định. Ví dụ, biểu thức sau định nghĩa stream <code>ones</code> là một stream vô hạn gồm toàn số 1:</p>
+<pre><code class="language-{.scheme}">(define ones (cons-stream 1 ones))
+</code></pre>
+<p>Điều này hoạt động gần giống như định nghĩa của một recursive procedure (thủ tục đệ quy): <code>ones</code> là một cặp có <code>car</code> là 1 và <code>cdr</code> là một lời hứa sẽ đánh giá <code>ones</code>. Việc đánh giá <code>cdr</code> lại cho ta một số 1 và một lời hứa sẽ đánh giá <code>ones</code>, và cứ thế tiếp tục.</p>
+<p>Chúng ta có thể làm những điều thú vị hơn bằng cách thao tác trên streams với các phép toán như <code>add-streams</code>, phép này tạo ra tổng từng phần tử của hai streams cho trước:<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<pre><code class="language-{.scheme}">(define (add-streams s1 s2) 
+  (stream-map + s1 s2))
+</code></pre>
+<p>Bây giờ chúng ta có thể định nghĩa các số nguyên như sau:</p>
+<pre><code class="language-{.scheme}">(define integers 
+  (cons-stream 1 (add-streams ones integers)))
+</code></pre>
+<p>Định nghĩa này cho <code>integers</code> là một stream có phần tử đầu tiên là 1 và phần còn lại là tổng của <code>ones</code> và <code>integers</code>. Do đó, phần tử thứ hai của <code>integers</code> là 1 cộng với phần tử đầu tiên của <code>integers</code>, tức 2; phần tử thứ ba của <code>integers</code> là 1 cộng với phần tử thứ hai của <code>integers</code>, tức 3; và cứ thế tiếp tục. Định nghĩa này hoạt động vì, tại bất kỳ thời điểm nào, đã có đủ phần của stream <code>integers</code> được sinh ra để chúng ta có thể đưa nó trở lại định nghĩa nhằm tạo ra số nguyên tiếp theo.</p>
+<p>Chúng ta có thể định nghĩa các số Fibonacci theo cùng phong cách:</p>
+<pre><code class="language-{.scheme}">(define fibs 
+  (cons-stream 
+   0 (cons-stream
+      1 (add-streams 
+         (stream-cdr fibs) fibs))))
+</code></pre>
+<p>Định nghĩa này nói rằng <code>fibs</code> là một stream bắt đầu với 0 và 1, sao cho phần còn lại của stream có thể được tạo ra bằng cách cộng <code>fibs</code> với chính nó nhưng dịch sang phải một vị trí:</p>
+<pre><code class="language-{.example}">    1 1 2 3 5  8 13 21 … = (stream-cdr fibs)
+    0 1 1 2 3  5  8 13 … = fibs
+0 1 1 2 3 5 8 13 21 34 … = fibs
+</code></pre>
+<p><code>Scale-stream</code> là một procedure hữu ích khác trong việc xây dựng các định nghĩa stream như vậy. Nó nhân mỗi phần tử trong một stream với một hằng số cho trước:</p>
+<pre><code class="language-{.scheme}">(define (scale-stream stream factor)
+  (stream-map
+   (lambda (x) (* x factor))
+   stream))
+</code></pre>
+<p>Ví dụ:</p>
+<pre><code class="language-{.scheme}">(define double 
+  (cons-stream 1 (scale-stream double 2)))
+</code></pre>
+<p>tạo ra stream các lũy thừa của 2: 1, 2, 4, 8, 16, 32, ….</p>
+<p>Một định nghĩa khác của stream các số nguyên tố có thể được đưa ra bằng cách bắt đầu với các số nguyên và lọc chúng bằng cách kiểm tra tính nguyên tố. Chúng ta sẽ cần số nguyên tố đầu tiên, 2, để bắt đầu:</p>
+<pre><code class="language-{.scheme}">(define primes
+  (cons-stream
+   2 (stream-filter 
+      prime? (integers-starting-from 3))))
+</code></pre>
+<p>Định nghĩa này không đơn giản như vẻ bề ngoài, vì chúng ta sẽ kiểm tra một số $n$ có phải là số nguyên tố hay không bằng cách xem $n$ có chia hết cho một số nguyên tố (không phải bất kỳ số nguyên nào) nhỏ hơn hoặc bằng $\sqrt{n}$ hay không:</p>
+<pre><code class="language-{.scheme}">(define (prime? n)
+  (define (iter ps)
+    (cond ((&gt; (square (stream-car ps)) n) true)
+          ((divisible? n (stream-car ps)) false)
+          (else (iter (stream-cdr ps)))))
+  (iter primes))
+</code></pre>
+<p>Đây là một định nghĩa đệ quy, vì <code>primes</code> được định nghĩa dựa trên predicate <code>prime?</code>, mà bản thân nó lại sử dụng stream <code>primes</code>. Lý do procedure này hoạt động là vì, tại bất kỳ thời điểm nào, đã có đủ phần của stream <code>primes</code> được sinh ra để kiểm tra tính nguyên tố của các số mà chúng ta cần kiểm tra tiếp theo. Nghĩa là, với mỗi $n$ được kiểm tra tính nguyên tố, hoặc $n$ không phải là số nguyên tố (trong trường hợp này đã tồn tại một số nguyên tố được sinh ra chia hết cho nó) hoặc $n$ là số nguyên tố (trong trường hợp này đã tồn tại một số nguyên tố được sinh ra — tức là một số nguyên tố nhỏ hơn $n$ — mà lớn hơn $\sqrt{n}$).<sup class="footnote-reference"><a href="#11">11</a></sup></p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Điều này sử dụng phiên bản tổng quát của <code>stream-map</code> từ Bài tập 3.50.</p>
+</div>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Điểm cuối cùng này rất tinh tế và dựa trên thực tế rằng ${p_{n + 1} \leq p_{n}^{2}}.$ (Ở đây, $p_{k}$ ký hiệu số nguyên tố thứ $k$). Các ước lượng như thế này rất khó chứng minh. Chứng minh cổ xưa của Euclid rằng có vô hạn số nguyên tố cho thấy $p_{n + 1} \leq {p_{1}p_{2}\cdots p_{n} + 1}$, và không có kết quả nào tốt hơn đáng kể được chứng minh cho đến năm 1851, khi nhà toán học Nga P. L. Chebyshev chứng minh rằng $p_{n + 1} \leq 2p_{n}$ với mọi $n$. Kết quả này, ban đầu được dự đoán vào năm 1845, được gọi là <em>Bertrand’s hypothesis</em>. Một chứng minh có thể được tìm thấy trong mục 22.3 của Hardy và Wright 1960.</p>
+</div>
+<h2 id="353-exploiting-the-stream-paradigm"><a class="header" href="#353-exploiting-the-stream-paradigm">3.5.3 Exploiting the Stream Paradigm</a></h2>
+<p>Streams với delayed evaluation (đánh giá trì hoãn) có thể là một công cụ mô hình hóa mạnh mẽ, mang lại nhiều lợi ích của local state (trạng thái cục bộ) và assignment (gán). Hơn nữa, chúng tránh được một số rắc rối lý thuyết đi kèm với việc đưa assignment vào một ngôn ngữ lập trình.</p>
+<p>Cách tiếp cận bằng stream có thể mang tính khai sáng vì nó cho phép chúng ta xây dựng các hệ thống với ranh giới module khác so với các hệ thống được tổ chức xoay quanh việc gán cho các state variables (biến trạng thái). Ví dụ, chúng ta có thể coi toàn bộ một chuỗi thời gian (time series) hoặc một tín hiệu (signal) là trọng tâm của sự quan tâm, thay vì các giá trị của các state variables tại từng thời điểm riêng lẻ. Điều này giúp thuận tiện trong việc kết hợp và so sánh các thành phần trạng thái từ những thời điểm khác nhau.</p>
+<h3 id="formulating-iterations-as-stream-processes"><a class="header" href="#formulating-iterations-as-stream-processes">Formulating iterations as stream processes</a></h3>
+<p>Trong mục 1.2.1, chúng ta đã giới thiệu iterative processes (quá trình lặp), tiến hành bằng cách cập nhật các state variables. Giờ đây, chúng ta biết rằng có thể biểu diễn state như một stream “phi thời gian” (timeless) của các giá trị thay vì như một tập hợp các biến cần cập nhật. Hãy áp dụng góc nhìn này khi xem lại procedure (thủ tục) tính căn bậc hai từ 1.1.7. Nhớ rằng ý tưởng là tạo ra một sequence (dãy) các giá trị dự đoán ngày càng tốt hơn cho căn bậc hai của $x$ bằng cách áp dụng lặp đi lặp lại procedure cải thiện dự đoán:</p>
+<pre><code class="language-{.scheme}">(define (sqrt-improve guess x)
+  (average guess (/ x guess)))
+</code></pre>
+<p>Trong procedure <code>sqrt</code> ban đầu, chúng ta để các giá trị dự đoán này là các giá trị liên tiếp của một state variable. Thay vào đó, chúng ta có thể tạo ra stream vô hạn các giá trị dự đoán, bắt đầu với giá trị dự đoán ban đầu là 1:<sup class="footnote-reference"><a href="#12">12</a></sup></p>
+<pre><code class="language-{.scheme}">(define (sqrt-stream x)
+  (define guesses
+    (cons-stream 
+     1.0 (stream-map
+          (lambda (guess)
+            (sqrt-improve guess x))
+          guesses)))
+  guesses)
+
+(display-stream (sqrt-stream 2))
+1.
+1.5
+1.4166666666666665
+1.4142156862745097
+1.4142135623746899
+…
+</code></pre>
+<p>Chúng ta có thể tạo ra nhiều và nhiều hơn nữa các phần tử của stream để có các giá trị dự đoán ngày càng chính xác hơn. Nếu muốn, chúng ta có thể viết một procedure tiếp tục tạo ra các phần tử cho đến khi câu trả lời đủ chính xác. (Xem Bài tập 3.64.)</p>
+<p>Một phép lặp khác mà chúng ta có thể xử lý theo cùng cách là tạo ra một giá trị xấp xỉ $\pi$, dựa trên chuỗi luân phiên dấu mà chúng ta đã thấy trong 1.3.1:</p>
+<p>$$\frac{\pi}{4}, = , 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + {\ldots.}$$</p>
+<p>Trước tiên, chúng ta tạo ra stream các số hạng của chuỗi (nghịch đảo của các số lẻ, với dấu luân phiên). Sau đó, chúng ta lấy stream các tổng của ngày càng nhiều số hạng (sử dụng procedure <code>partial-sums</code> trong Bài tập 3.55) và nhân kết quả với 4:</p>
+<pre><code class="language-{.scheme}">(define (pi-summands n)
+  (cons-stream 
+   (/ 1.0 n)
+   (stream-map - (pi-summands (+ n 2)))))
+
+(define pi-stream
+  (scale-stream 
+   (partial-sums (pi-summands 1)) 4))
+
+(display-stream pi-stream)
+4.
+2.666666666666667
+3.466666666666667
+2.8952380952380956
+3.3396825396825403
+2.9760461760461765
+3.2837384837384844
+3.017071817071818
+…
+</code></pre>
+<p>Điều này cho chúng ta một stream các giá trị xấp xỉ $\pi$ ngày càng tốt hơn, mặc dù các giá trị này hội tụ khá chậm. Tám số hạng của dãy giới hạn giá trị của $\pi$ trong khoảng từ 3.284 đến 3.017.</p>
+<p>Cho đến giờ, việc sử dụng cách tiếp cận stream của các trạng thái không khác nhiều so với việc cập nhật các state variables. Nhưng streams cho chúng ta cơ hội thực hiện một số thủ thuật thú vị. Ví dụ, chúng ta có thể biến đổi một stream bằng một <em>sequence accelerator</em> (bộ tăng tốc dãy) để chuyển một dãy các giá trị xấp xỉ thành một dãy mới hội tụ đến cùng giá trị với dãy ban đầu, nhưng nhanh hơn.</p>
+<p>Một bộ tăng tốc như vậy, do nhà toán học Thụy Sĩ thế kỷ 18 Leonhard Euler đề xuất, hoạt động tốt với các dãy là tổng từng phần của các chuỗi luân phiên dấu (các chuỗi có các số hạng luân phiên dấu). Trong kỹ thuật của Euler, nếu $S_{n}$ là số hạng thứ $n$ của dãy tổng ban đầu, thì dãy được tăng tốc có các số hạng:</p>
+<p>$$S_{n + 1} - {\frac{(S_{n + 1} - S_{n})^{2}}{S_{n - 1} - 2S_{n} + S_{n + 1}}.}$$</p>
+<p>Do đó, nếu dãy ban đầu được biểu diễn như một stream các giá trị, thì dãy đã biến đổi được cho bởi:</p>
+<pre><code class="language-{.scheme}">(define (euler-transform s)
+  (let ((s0 (stream-ref s 0))     ; Sₙ₋₁
+        (s1 (stream-ref s 1))     ; Sₙ
+        (s2 (stream-ref s 2)))    ; Sₙ₊₁
+    (cons-stream 
+     (- s2 (/ (square (- s2 s1))
+              (+ s0 (* -2 s1) s2)))
+     (euler-transform (stream-cdr s)))))
+</code></pre>
+<p>Chúng ta có thể minh họa việc tăng tốc Euler với dãy xấp xỉ $\pi$ của mình:</p>
+<pre><code class="language-{.scheme}">(display-stream 
+ (euler-transform pi-stream))
+3.166666666666667
+3.1333333333333337
+3.1452380952380956
+3.13968253968254
+3.1427128427128435
+3.1408813408813416
+3.142071817071818
+3.1412548236077655
+…
+</code></pre>
+<p>Thậm chí tốt hơn, chúng ta có thể tăng tốc dãy đã được tăng tốc, rồi đệ quy tăng tốc tiếp, và cứ thế. Cụ thể, chúng ta tạo ra một stream của các streams (một cấu trúc mà chúng ta sẽ gọi là <em>tableau</em>), trong đó mỗi stream là kết quả biến đổi của stream trước đó:</p>
+<pre><code class="language-{.scheme}">(define (make-tableau transform s)
+  (cons-stream 
+   s
+   (make-tableau
+    transform
+    (transform s))))
+</code></pre>
+<p>Tableau có dạng:</p>
+<p>$$\begin{array}{llllll}
+s_{00} &amp; s_{01} &amp; s_{02} &amp; s_{03} &amp; s_{04} &amp; \ldots \
+&amp; s_{10} &amp; s_{11} &amp; s_{12} &amp; s_{13} &amp; \ldots \
+&amp; &amp; s_{20} &amp; s_{21} &amp; s_{22} &amp; \ldots \
+&amp; &amp; &amp; \ldots &amp; &amp; \
+\end{array}$$</p>
+<p>Cuối cùng, chúng ta tạo ra một dãy bằng cách lấy phần tử đầu tiên trong mỗi hàng của tableau:</p>
+<pre><code class="language-{.scheme}">(define (accelerated-sequence transform s)
+  (stream-map stream-car
+              (make-tableau transform s)))
+</code></pre>
+<p>Chúng ta có thể minh họa kiểu “siêu tăng tốc” này với dãy $\pi$:</p>
+<pre><code class="language-{.scheme}">(display-stream 
+ (accelerated-sequence euler-transform
+                       pi-stream))
+4.
+3.166666666666667
+3.142105263157895
+3.141599357319005
+3.1415927140337785
+3.1415926539752927
+3.1415926535911765
+3.141592653589778
+…
+</code></pre>
+<p>Kết quả thật ấn tượng. Lấy tám số hạng của dãy cho ra giá trị chính xác của $\pi$ đến 14 chữ số thập phân. Nếu chỉ dùng dãy $\pi$ ban đầu, chúng ta sẽ cần tính khoảng $10^{13}$ số hạng (tức là khai triển chuỗi đủ xa để các số hạng riêng lẻ nhỏ hơn $10^{- 13}$) để đạt được độ chính xác đó!</p>
+<p>Chúng ta hoàn toàn có thể hiện thực các kỹ thuật tăng tốc này mà không cần dùng streams. Nhưng cách diễn đạt bằng streams đặc biệt tao nhã và tiện lợi vì toàn bộ... (But the stream formulation is particularly elegant and convenient because the entire sequence of states is available to us as a data structure that can be manipulated with a uniform set of operations).</p>
+<h3 id="streams-as-signals"><a class="header" href="#streams-as-signals">Streams as signals</a></h3>
+<p>Chúng ta bắt đầu thảo luận về streams bằng cách mô tả chúng như các tương đồng tính toán (computational analogs) của “signals” (tín hiệu) trong các hệ thống signal-processing (xử lý tín hiệu). Thực tế, chúng ta có thể sử dụng streams để mô hình hóa các hệ thống signal-processing một cách trực tiếp, bằng cách biểu diễn các giá trị của một tín hiệu tại các khoảng thời gian liên tiếp như các phần tử liên tiếp của một stream. Ví dụ, chúng ta có thể hiện thực một <em>integrator</em> (bộ tích phân) hoặc <em>summer</em> (bộ cộng dồn) sao cho, với một input stream $x = (x_{i})$, một giá trị ban đầu $C$, và một bước tăng nhỏ $dt$, sẽ cộng dồn tổng</p>
+<p>$$S_{i}, = , C + {\sum\limits_{j = 1}^{i}x_{j}, dt}$$</p>
+<p>và trả về stream các giá trị $S = (S_{i})$. Procedure (thủ tục) <code>integral</code> dưới đây gợi nhớ đến định nghĩa “implicit style” (phong cách ngầm định) của stream các số nguyên (3.5.2):</p>
+<pre><code class="language-{.scheme}">(define (integral integrand initial-value dt)
+  (define int
+    (cons-stream 
+     initial-value
+     (add-streams (scale-stream integrand dt)
+                  int)))
+  int)
+</code></pre>
+<p>Figure 3.32 là hình ảnh của một hệ thống signal-processing tương ứng với procedure <code>integral</code>. Input stream được nhân với $dt$ và truyền qua một adder (bộ cộng), đầu ra của nó lại được đưa ngược trở lại qua cùng adder đó. Sự tự tham chiếu trong định nghĩa của <code>int</code> được phản ánh trong hình bởi vòng phản hồi (feedback loop) nối đầu ra của adder với một trong các đầu vào của nó.</p>
+<p><img src="fig/Fig3.32a.jpg" alt="" /></p>
+<p><strong>Figure 3.32:</strong> The <code>integral</code> procedure viewed as a signal-processing system.</p>
+<h2 id="354-streams-and-delayed-evaluation"><a class="header" href="#354-streams-and-delayed-evaluation">3.5.4 Streams and Delayed Evaluation</a></h2>
+<p>Procedure <code>integral</code> ở cuối phần trước cho thấy cách chúng ta có thể sử dụng streams để mô hình hóa các hệ thống signal-processing có chứa các feedback loops (vòng phản hồi). Feedback loop cho adder được minh họa trong Hình 3.32 được mô hình hóa bởi thực tế là stream nội bộ <code>int</code> của <code>integral</code> được định nghĩa dựa trên chính nó:</p>
+<pre><code class="language-{.scheme}">(define int
+  (cons-stream 
+   initial-value
+   (add-streams 
+    (scale-stream integrand dt) int)))
+</code></pre>
+<p>Khả năng của interpreter (trình thông dịch) trong việc xử lý một định nghĩa ngầm định như vậy phụ thuộc vào <code>delay</code> được tích hợp trong <code>cons-stream</code>. Nếu không có <code>delay</code> này, interpreter sẽ không thể tạo ra <code>int</code> trước khi đánh giá cả hai đối số của <code>cons-stream</code>, điều này sẽ yêu cầu <code>int</code> đã được định nghĩa từ trước. Nói chung, <code>delay</code> là yếu tố then chốt để sử dụng streams nhằm mô hình hóa các hệ thống signal-processing có chứa vòng lặp. Nếu không có <code>delay</code>, các mô hình của chúng ta sẽ phải được xây dựng sao cho các input của bất kỳ thành phần signal-processing nào đều phải được đánh giá đầy đủ trước khi output có thể được tạo ra. Điều này sẽ loại bỏ khả năng có vòng lặp.</p>
+<p>Thật không may, các mô hình stream của hệ thống có vòng lặp đôi khi đòi hỏi việc sử dụng <code>delay</code> vượt ra ngoài <code>delay</code> “ẩn” được cung cấp bởi <code>cons-stream</code>. Ví dụ, Hình 3.34 cho thấy một hệ thống signal-processing để giải phương trình vi phân $dy/dt = f(y)$, trong đó $f$ là một hàm cho trước. Hình này cho thấy một thành phần mapping (ánh xạ), áp dụng $f$ cho tín hiệu đầu vào của nó, được nối trong một vòng phản hồi với một integrator theo cách rất giống với các mạch analog computer (máy tính tương tự) thực tế được sử dụng để giải các phương trình như vậy.</p>
+<p><img src="fig/Fig3.34.jpg" alt="" /></p>
+<p><strong>Figure 3.34:</strong> An “analog computer circuit” that solves the equation $dy/dt = f(y)$.</p>
+<p>Giả sử chúng ta được cho một giá trị ban đầu $y_{0}$ cho $y$, ta có thể thử mô hình hóa hệ thống này bằng procedure:</p>
+<pre><code class="language-{.scheme}">(define (solve f y0 dt)
+  (define y (integral dy y0 dt))
+  (define dy (stream-map f y))
+  y)
+</code></pre>
+<p>Procedure này không hoạt động, vì ở dòng đầu tiên của <code>solve</code>, lời gọi <code>integral</code> yêu cầu input <code>dy</code> phải được định nghĩa, điều này chưa xảy ra cho đến dòng thứ hai của <code>solve</code>.</p>
+<p>Mặt khác, ý định của định nghĩa này là hợp lý, vì về nguyên tắc, chúng ta có thể bắt đầu tạo ra stream <code>y</code> mà không cần biết <code>dy</code>. Thật vậy, <code>integral</code> và nhiều thao tác stream khác có các đặc tính tương tự như <code>cons-stream</code>, ở chỗ chúng ta có thể tạo ra một phần của kết quả chỉ với thông tin một phần về các đối số. Với <code>integral</code>, phần tử đầu tiên của output stream là <code>initial-value</code> được chỉ định. Do đó, chúng ta có thể tạo ra phần tử đầu tiên của output stream mà không cần đánh giá integrand <code>dy</code>. Khi đã biết phần tử đầu tiên của <code>y</code>, <code>stream-map</code> ở dòng thứ hai của <code>solve</code> có thể bắt đầu hoạt động để tạo ra phần tử đầu tiên của <code>dy</code>, từ đó tạo ra phần tử tiếp theo của <code>y</code>, và cứ thế tiếp tục.</p>
+<p>Để tận dụng ý tưởng này, chúng ta sẽ định nghĩa lại <code>integral</code> để mong đợi integrand stream là một <em>delayed argument</em> (đối số bị trì hoãn). <code>Integral</code> sẽ <code>force</code> integrand được đánh giá chỉ khi cần tạo ra nhiều hơn phần tử đầu tiên của output stream:</p>
+<pre><code class="language-{.scheme}">(define (integral
+         delayed-integrand initial-value dt)
+  (define int
+    (cons-stream 
+     initial-value
+     (let ((integrand 
+            (force delayed-integrand)))
+       (add-streams 
+        (scale-stream integrand dt)
+        int))))
+  int)
+</code></pre>
+<p>Bây giờ chúng ta có thể hiện thực procedure <code>solve</code> bằng cách trì hoãn việc đánh giá <code>dy</code> trong định nghĩa của <code>y</code>:<sup class="footnote-reference"><a href="#13">13</a></sup></p>
+<pre><code class="language-{.scheme}">(define (solve f y0 dt)
+  (define y (integral (delay dy) y0 dt))
+  (define dy (stream-map f y))
+  y)
+</code></pre>
+<p>Nói chung, mọi lời gọi <code>integral</code> bây giờ đều phải <code>delay</code> đối số integrand. Chúng ta có thể chứng minh rằng procedure <code>solve</code> hoạt động bằng cách xấp xỉ $e \approx 2.718$ thông qua việc tính giá trị tại $y = 1$ của nghiệm phương trình vi phân $dy/dt = y$ với điều kiện ban đầu $y(0) = 1$:</p>
+<pre><code class="language-{.scheme}">(stream-ref 
+ (solve (lambda (y) y) 1 0.001) 1000)
+2.716924
+</code></pre>
+<div class="footnote-definition" id="13"><sup class="footnote-definition-label">13</sup>
+<p>Procedure này không được đảm bảo hoạt động trong mọi hiện thực Scheme, mặc dù với bất kỳ hiện thực nào cũng có một biến thể đơn giản sẽ hoạt động. Vấn đề liên quan đến sự khác biệt tinh vi trong cách các hiện thực Scheme xử lý các định nghĩa nội bộ. (Xem 4.1.6.)</p>
+</div>
+<h3 id="normal-order-evaluation"><a class="header" href="#normal-order-evaluation">Normal-order evaluation</a></h3>
+<p>Các ví dụ trong phần này minh họa cách việc sử dụng tường minh <code>delay</code> và <code>force</code> mang lại sự linh hoạt lớn trong lập trình, nhưng cũng cho thấy điều này có thể làm chương trình của chúng ta trở nên phức tạp hơn. Ví dụ, procedure (thủ tục) <code>integral</code> mới của chúng ta cho phép mô hình hóa các hệ thống có vòng lặp, nhưng giờ đây chúng ta phải nhớ rằng <code>integral</code> cần được gọi với một integrand (hàm tích phân) bị trì hoãn, và mọi procedure sử dụng <code>integral</code> đều phải nhận thức được điều này. Thực chất, chúng ta đã tạo ra hai loại procedure: các ordinary procedures (thủ tục thông thường) và các procedures nhận delayed arguments (đối số bị trì hoãn). Nói chung, việc tạo ra các loại procedure riêng biệt buộc chúng ta cũng phải tạo ra các loại higher-order procedures (thủ tục bậc cao) riêng biệt.<sup class="footnote-reference"><a href="#14">14</a></sup></p>
+<p>Một cách để tránh nhu cầu có hai loại procedure khác nhau là làm cho tất cả các procedure đều nhận delayed arguments. Chúng ta có thể áp dụng một mô hình evaluation (đánh giá) trong đó mọi đối số truyền vào procedure đều tự động bị trì hoãn và chỉ được <code>force</code> khi thực sự cần thiết (ví dụ, khi được yêu cầu bởi một primitive operation). Điều này sẽ biến đổi ngôn ngữ của chúng ta sang sử dụng normal-order evaluation (đánh giá theo thứ tự chuẩn), mà chúng ta đã mô tả lần đầu khi giới thiệu substitution model (mô hình thế) cho evaluation trong 1.1.5. Việc chuyển sang normal-order evaluation mang lại một cách tiếp cận thống nhất và tao nhã để đơn giản hóa việc sử dụng delayed evaluation, và đây sẽ là một chiến lược tự nhiên nếu chúng ta chỉ quan tâm đến stream processing. Trong 4.2, sau khi nghiên cứu evaluator, chúng ta sẽ thấy cách biến đổi ngôn ngữ theo hướng này. Thật không may, việc đưa delays vào các lời gọi procedure sẽ phá vỡ khả năng thiết kế các chương trình phụ thuộc vào thứ tự sự kiện, chẳng hạn như các chương trình sử dụng assignment, thay đổi dữ liệu (mutate data), hoặc thực hiện input/output. Ngay cả một <code>delay</code> duy nhất trong <code>cons-stream</code> cũng có thể gây ra sự nhầm lẫn lớn, như minh họa trong Bài tập 3.51 và Bài tập 3.52. Theo như mọi người biết, mutability (tính thay đổi) và delayed evaluation không kết hợp tốt trong các ngôn ngữ lập trình, và việc tìm ra cách xử lý cả hai cùng lúc vẫn là một lĩnh vực nghiên cứu đang diễn ra.</p>
+<h2 id="355-modularity-of-functional-programs-and-modularity-of-objects"><a class="header" href="#355-modularity-of-functional-programs-and-modularity-of-objects">3.5.5 Modularity of Functional Programs and Modularity of Objects</a></h2>
+<p>Như chúng ta đã thấy trong 3.1.2, một trong những lợi ích lớn của việc đưa assignment vào là chúng ta có thể tăng tính modularity (tính mô-đun) của hệ thống bằng cách đóng gói (encapsulating), hay “ẩn” một phần state (trạng thái) của một hệ thống lớn bên trong các local variables (biến cục bộ). Các mô hình stream có thể cung cấp tính modularity tương đương mà không cần sử dụng assignment. Để minh họa, chúng ta có thể hiện thực lại phép ước lượng Monte Carlo cho $\pi$, mà chúng ta đã xem xét trong 3.1.2, từ góc nhìn stream-processing.</p>
+<p>Vấn đề modularity chính là chúng ta muốn ẩn state nội bộ của một random-number generator (bộ sinh số ngẫu nhiên) khỏi các chương trình sử dụng số ngẫu nhiên. Chúng ta bắt đầu với một procedure <code>rand-update</code>, các giá trị liên tiếp của nó cung cấp nguồn số ngẫu nhiên, và sử dụng nó để tạo ra một random-number generator:</p>
+<pre><code class="language-{.scheme}">(define rand
+  (let ((x random-init))
+    (lambda ()
+      (set! x (rand-update x))
+      x)))
+</code></pre>
+<p>Trong cách diễn đạt bằng stream, không có random-number generator <em>per se</em> (tự thân), chỉ có một stream các số ngẫu nhiên được tạo ra bởi các lời gọi liên tiếp tới <code>rand-update</code>:</p>
+<pre><code class="language-{.scheme}">(define random-numbers
+  (cons-stream random-init
+               (stream-map rand-update 
+                           random-numbers)))
+</code></pre>
+<p>Chúng ta sử dụng stream này để tạo ra stream kết quả của thí nghiệm Cesàro được thực hiện trên các cặp liên tiếp trong stream <code>random-numbers</code>:</p>
+<pre><code class="language-{.scheme}">(define cesaro-stream
+  (map-successive-pairs
+   (lambda (r1 r2) (= (gcd r1 r2) 1))
+   random-numbers))
+
+(define (map-successive-pairs f s)
+  (cons-stream
+   (f (stream-car s) 
+      (stream-car (stream-cdr s)))
+   (map-successive-pairs 
+    f (stream-cdr (stream-cdr s)))))
+</code></pre>
+<p><code>Cesaro-stream</code> sau đó được đưa vào procedure <code>monte-carlo</code>, procedure này tạo ra một stream các ước lượng xác suất. Các kết quả sau đó được chuyển đổi thành một stream các ước lượng của $\pi$. Phiên bản chương trình này không cần một tham số cho biết cần thực hiện bao nhiêu phép thử. Các ước lượng tốt hơn của $\pi$ (từ việc thực hiện nhiều thí nghiệm hơn) được thu nhận bằng cách xem sâu hơn vào stream <code>pi</code>:</p>
+<pre><code class="language-{.scheme}">(define (monte-carlo experiment-stream 
+                     passed 
+                     failed)
+  (define (next passed failed)
+    (cons-stream
+     (/ passed (+ passed failed))
+     (monte-carlo
+      (stream-cdr experiment-stream) 
+      passed 
+      failed)))
+  (if (stream-car experiment-stream)
+      (next (+ passed 1) failed)
+      (next passed (+ failed 1))))
+
+(define pi
+  (stream-map
+   (lambda (p) (sqrt (/ 6 p)))
+   (monte-carlo cesaro-stream 0 0)))
+</code></pre>
+<p>Cách tiếp cận này có tính modularity đáng kể, vì chúng ta vẫn có thể xây dựng một procedure <code>monte-carlo</code> tổng quát có thể xử lý các thí nghiệm bất kỳ. Tuy nhiên, không hề có assignment hay local state.</p>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p>Đây là một phản ánh nhỏ, trong Lisp, về những khó khăn mà các ngôn ngữ strongly typed (kiểu dữ liệu chặt chẽ) truyền thống như Pascal gặp phải khi xử lý higher-order procedures. Trong các ngôn ngữ như vậy, lập trình viên phải chỉ rõ kiểu dữ liệu của các đối số và kết quả của mỗi procedure: số, giá trị logic, sequence, v.v. Do đó, chúng ta không thể biểu diễn một abstraction như “áp dụng một procedure <code>proc</code> cho tất cả các phần tử trong một sequence” bằng một higher-order procedure duy nhất như <code>stream-map</code>. Thay vào đó, chúng ta sẽ cần một mapping procedure khác nhau cho mỗi tổ hợp kiểu dữ liệu đối số và kết quả có thể được chỉ định cho một <code>proc</code>. Việc duy trì một khái niệm “kiểu dữ liệu” thực tiễn trong bối cảnh có higher-order procedures đặt ra nhiều vấn đề khó khăn. Một cách xử lý vấn đề này được minh họa bởi ngôn ngữ ML (Gordon et al. 1979), với “polymorphic data types” bao gồm các mẫu cho các phép biến đổi bậc cao giữa các kiểu dữ liệu. Hơn nữa, kiểu dữ liệu cho hầu hết các procedure trong ML không bao giờ được lập trình viên khai báo tường minh. Thay vào đó, ML bao gồm một cơ chế <em>type-inferencing</em> sử dụng thông tin trong môi trường để suy ra kiểu dữ liệu cho các procedure mới được định nghĩa.</p>
+</div>
+<h3 id="a-functional-programming-view-of-time"><a class="header" href="#a-functional-programming-view-of-time">A functional-programming view of time</a></h3>
+<p>Bây giờ, chúng ta hãy quay lại các vấn đề về objects (đối tượng) và state (trạng thái) đã được nêu ra ở đầu chương này và xem xét chúng dưới một góc nhìn mới. Chúng ta đã giới thiệu assignment (gán) và mutable objects (đối tượng có thể thay đổi) để cung cấp một cơ chế cho việc xây dựng mô-đun các chương trình mô hình hóa các hệ thống có state. Chúng ta đã xây dựng các computational objects (đối tượng tính toán) với các local state variables (biến trạng thái cục bộ) và sử dụng assignment để thay đổi các biến này. Chúng ta đã mô hình hóa hành vi theo thời gian của các đối tượng trong thế giới thực bằng hành vi theo thời gian của các computational objects tương ứng.</p>
+<p>Giờ đây, chúng ta đã thấy rằng streams cung cấp một cách tiếp cận thay thế để mô hình hóa các objects với local state. Chúng ta có thể mô hình hóa một đại lượng thay đổi, chẳng hạn như local state của một object, bằng cách sử dụng một stream biểu diễn lịch sử thời gian của các trạng thái liên tiếp. Về bản chất, chúng ta biểu diễn thời gian một cách tường minh, sử dụng streams, để tách rời thời gian trong thế giới mô phỏng khỏi chuỗi các sự kiện diễn ra trong quá trình evaluation (đánh giá). Thật vậy, do sự hiện diện của <code>delay</code>, có thể sẽ có rất ít mối liên hệ giữa thời gian mô phỏng trong mô hình và thứ tự các sự kiện trong quá trình evaluation.</p>
+<p>Để so sánh hai cách tiếp cận này trong việc mô hình hóa, hãy xem xét lại việc hiện thực một “withdrawal processor” (bộ xử lý rút tiền) theo dõi số dư trong một tài khoản ngân hàng. Trong 3.1.3, chúng ta đã hiện thực một phiên bản đơn giản hóa của bộ xử lý này:</p>
+<pre><code class="language-{.scheme}">(define (make-simplified-withdraw balance)
+  (lambda (amount)
+    (set! balance (- balance amount))
+    balance))
+</code></pre>
+<p>Các lời gọi tới <code>make-simplified-withdraw</code> tạo ra các computational objects, mỗi object có một local state variable <code>balance</code> được giảm dần qua các lần gọi liên tiếp tới object đó. Object nhận một <code>amount</code> làm đối số và trả về số dư mới. Chúng ta có thể hình dung người dùng của một tài khoản ngân hàng nhập một chuỗi các giá trị vào object này và quan sát chuỗi giá trị trả về hiển thị trên màn hình.</p>
+<p>Ngoài ra, chúng ta có thể mô hình hóa một withdrawal processor như một procedure nhận vào một số dư và một stream các khoản tiền cần rút, và tạo ra stream các số dư liên tiếp trong tài khoản:</p>
+<pre><code class="language-{.scheme}">(define (stream-withdraw balance amount-stream)
+  (cons-stream
+   balance
+   (stream-withdraw 
+    (- balance (stream-car amount-stream))
+    (stream-cdr amount-stream))))
+</code></pre>
+<p><code>Stream-withdraw</code> hiện thực một hàm toán học được xác định rõ ràng, trong đó output được xác định hoàn toàn bởi input. Tuy nhiên, giả sử rằng input <code>amount-stream</code> là stream các giá trị liên tiếp được người dùng nhập vào và stream số dư kết quả được hiển thị. Khi đó, từ góc nhìn của người dùng đang nhập giá trị và quan sát kết quả, quá trình stream này có cùng hành vi như object được tạo bởi <code>make-simplified-withdraw</code>. Tuy nhiên, với phiên bản stream, không có assignment, không có local state variable, và do đó không có những khó khăn lý thuyết mà chúng ta đã gặp trong 3.1.3. Thế nhưng hệ thống vẫn có state!</p>
+<p>Điều này thực sự đáng chú ý. Mặc dù <code>stream-withdraw</code> hiện thực một hàm toán học được xác định rõ ràng với hành vi không thay đổi, nhưng cảm nhận của người dùng ở đây lại là đang tương tác với một hệ thống có state thay đổi. Một cách để giải quyết nghịch lý này là nhận ra rằng chính sự tồn tại theo thời gian của người dùng đã áp đặt state lên hệ thống. Nếu người dùng có thể tách mình ra khỏi quá trình tương tác và suy nghĩ theo các streams của số dư thay vì các giao dịch riêng lẻ, hệ thống sẽ có vẻ như không có state.<sup class="footnote-reference"><a href="#15">15</a></sup></p>
+<p>Từ góc nhìn của một phần trong một quá trình phức tạp, các phần khác có vẻ thay đổi theo thời gian. Chúng có local state ẩn thay đổi theo thời gian. Nếu chúng ta muốn viết các chương trình mô hình hóa kiểu phân rã tự nhiên này trong thế giới của chúng ta (như chúng ta nhìn thấy nó từ góc nhìn của mình như một phần của thế giới đó) bằng các cấu trúc trong máy tính, chúng ta tạo ra các computational objects không phải là functional — chúng phải thay đổi theo thời gian. Chúng ta mô hình hóa state bằng các local state variables, và mô hình hóa sự thay đổi của state bằng các assignment tới các biến đó. Bằng cách này, chúng ta làm cho thời gian thực thi của một phép tính mô hình hóa thời gian trong thế giới mà chúng ta là một phần của nó, và do đó chúng ta có được các “objects” trong máy tính của mình.</p>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">15</sup>
+<p>Tương tự trong vật lý, khi chúng ta quan sát một hạt đang chuyển động, chúng ta nói rằng vị trí (state) của hạt đang thay đổi. Tuy nhiên, từ góc nhìn của world line (đường thế giới) của hạt trong không-thời gian, không có sự thay đổi nào xảy ra.</p>
+</div>
+<p>Việc mô hình hóa bằng objects (đối tượng) là mạnh mẽ và trực quan, phần lớn vì điều này phù hợp với nhận thức về việc tương tác với một thế giới mà chúng ta là một phần của nó. Tuy nhiên, như chúng ta đã thấy nhiều lần trong suốt chương này, các mô hình này nảy sinh những vấn đề nan giải về việc ràng buộc thứ tự các sự kiện và đồng bộ hóa nhiều tiến trình. Khả năng tránh được những vấn đề này đã thúc đẩy sự phát triển của <em>functional programming languages</em> (“ngôn ngữ lập trình hàm”), vốn không bao gồm bất kỳ cơ chế nào cho assignment (gán) hoặc mutable data (dữ liệu có thể thay đổi). Trong một ngôn ngữ như vậy, tất cả các procedures (thủ tục) đều hiện thực các hàm toán học được xác định rõ ràng của các đối số của chúng, với hành vi không thay đổi. Cách tiếp cận functional đặc biệt hấp dẫn khi xử lý các hệ thống đồng thời.<sup class="footnote-reference"><a href="#16">16</a></sup></p>
+<p>Mặt khác, nếu quan sát kỹ, chúng ta có thể thấy các vấn đề liên quan đến thời gian cũng len lỏi vào các mô hình functional. Một lĩnh vực đặc biệt rắc rối xuất hiện khi chúng ta muốn thiết kế các hệ thống tương tác, đặc biệt là những hệ thống mô hình hóa sự tương tác giữa các thực thể độc lập. Ví dụ, hãy xem xét lại việc hiện thực một hệ thống ngân hàng cho phép các tài khoản chung. Trong một hệ thống thông thường sử dụng assignment và objects, chúng ta sẽ mô hình hóa việc Peter và Paul chia sẻ một tài khoản bằng cách để cả Peter và Paul gửi các yêu cầu giao dịch của họ tới cùng một bank-account object (đối tượng tài khoản ngân hàng), như chúng ta đã thấy trong 3.1.3. Từ góc nhìn stream, nơi không có “objects” <em>per se</em> (tự thân), chúng ta đã chỉ ra rằng một tài khoản ngân hàng có thể được mô hình hóa như một process (tiến trình) hoạt động trên một stream các yêu cầu giao dịch để tạo ra một stream các phản hồi. Theo đó, chúng ta có thể mô hình hóa việc Peter và Paul có một tài khoản chung bằng cách trộn (merge) stream các yêu cầu giao dịch của Peter với stream các yêu cầu của Paul và đưa kết quả vào process stream của tài khoản ngân hàng, như minh họa trong Hình 3.38.</p>
+<p><img src="fig/Fig3.38a.jpg" alt="" /></p>
+<p><strong>Figure 3.38:</strong> A joint bank account, modeled by merging two streams of transaction requests.</p>
+<p>Vấn đề với cách diễn đạt này nằm ở khái niệm <em>merge</em>. Không thể chỉ đơn giản trộn hai stream bằng cách lần lượt lấy một yêu cầu từ Peter rồi một yêu cầu từ Paul. Giả sử Paul chỉ truy cập tài khoản rất hiếm khi. Chúng ta khó có thể bắt Peter phải đợi Paul truy cập tài khoản trước khi anh ta có thể thực hiện giao dịch thứ hai. Dù merge được hiện thực theo cách nào, nó phải xen kẽ hai stream giao dịch theo một cách nào đó bị ràng buộc bởi “thời gian thực” như Peter và Paul cảm nhận, theo nghĩa là, nếu Peter và Paul gặp nhau, họ có thể đồng ý rằng một số giao dịch đã được xử lý trước khi gặp, và các giao dịch khác được xử lý sau khi gặp.<sup class="footnote-reference"><a href="#17">17</a></sup> Đây chính xác là cùng một ràng buộc mà chúng ta đã phải xử lý trong 3.4.1, nơi chúng ta nhận thấy cần phải đưa vào cơ chế đồng bộ hóa tường minh để đảm bảo một thứ tự sự kiện “đúng” trong xử lý đồng thời các objects có state. Do đó, trong nỗ lực hỗ trợ phong cách functional, nhu cầu trộn các input từ các tác nhân khác nhau lại tái đưa vào những vấn đề mà phong cách functional vốn nhằm loại bỏ.</p>
+<p>Chúng ta bắt đầu chương này với mục tiêu xây dựng các mô hình tính toán có cấu trúc phù hợp với nhận thức của chúng ta về thế giới thực mà chúng ta đang cố gắng mô hình hóa. Chúng ta có thể mô hình hóa thế giới như một tập hợp các objects riêng biệt, bị ràng buộc bởi thời gian, tương tác với nhau và có state, hoặc chúng ta có thể mô hình hóa thế giới như một thể thống nhất, phi thời gian, không có state. Mỗi góc nhìn đều có những ưu điểm mạnh mẽ, nhưng không góc nhìn nào tự nó là hoàn toàn thỏa đáng. Một sự thống nhất lớn vẫn chưa xuất hiện.<sup class="footnote-reference"><a href="#18">18</a></sup></p>
+<div class="footnote-definition" id="16"><sup class="footnote-definition-label">16</sup>
+<p>John Backus, nhà phát minh Fortran, đã đưa lập trình hàm lên vị trí nổi bật khi ông được trao giải ACM Turing năm 1978. Bài phát biểu nhận giải của ông (Backus 1978) đã mạnh mẽ ủng hộ cách tiếp cận functional. Một cái nhìn tổng quan tốt về lập trình hàm được trình bày trong Henderson 1980 và Darlington et al. 1982.</p>
+</div>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">17</sup>
+<p>Lưu ý rằng, với bất kỳ hai stream nào, nói chung sẽ có nhiều hơn một thứ tự xen kẽ chấp nhận được. Do đó, về mặt kỹ thuật, “merge” là một quan hệ hơn là một hàm — câu trả lời không phải là một hàm xác định của các input. Chúng ta đã đề cập (Footnote 167) rằng tính không xác định (nondeterminism) là điều thiết yếu khi xử lý tính đồng thời. Quan hệ merge minh họa cùng một tính không xác định thiết yếu đó, từ góc nhìn functional. Trong 4.3, chúng ta sẽ xem xét tính không xác định từ một góc nhìn khác.</p>
+</div>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">18</sup>
+<p>Mô hình object mô phỏng thế giới bằng cách chia nó thành các phần riêng biệt. Mô hình functional không phân mô-đun theo ranh giới object. Mô hình object hữu ích khi phần state không chia sẻ của các “objects” lớn hơn nhiều so với phần state mà chúng chia sẻ. Một ví dụ về nơi góc nhìn object thất bại là cơ học lượng tử, nơi việc nghĩ về sự vật như các hạt riêng lẻ dẫn đến nghịch lý và nhầm lẫn. Việc thống nhất góc nhìn object với góc nhìn functional có thể ít liên quan đến lập trình, mà nhiều hơn đến các vấn đề nhận thức luận cơ bản.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="3-4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="4-1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="3-4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="4-1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

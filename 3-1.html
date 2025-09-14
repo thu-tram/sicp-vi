@@ -1,0 +1,497 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Assignment and Local State - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html" class="active"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="31-assignment-và-local-state"><a class="header" href="#31-assignment-và-local-state">3.1 Assignment và Local State</a></h1>
+<p>Thông thường, chúng ta nhìn nhận thế giới như được tạo thành từ các đối tượng độc lập, mỗi đối tượng có một trạng thái thay đổi theo thời gian. Một đối tượng được cho là “có state (trạng thái)” nếu hành vi của nó bị ảnh hưởng bởi lịch sử của nó. Ví dụ, một tài khoản ngân hàng có state ở chỗ câu trả lời cho câu hỏi “Tôi có thể rút $100 không?” phụ thuộc vào lịch sử các giao dịch gửi và rút tiền. Chúng ta có thể đặc trưng hóa state của một đối tượng bằng một hoặc nhiều <em>state variables (biến trạng thái)</em>, mà giữa chúng lưu giữ đủ thông tin về lịch sử để xác định hành vi hiện tại của đối tượng. Trong một hệ thống ngân hàng đơn giản, chúng ta có thể đặc trưng hóa state của một tài khoản bằng số dư hiện tại thay vì phải ghi nhớ toàn bộ lịch sử giao dịch của tài khoản.</p>
+<p>Trong một hệ thống gồm nhiều đối tượng, các đối tượng hiếm khi hoàn toàn độc lập. Mỗi đối tượng có thể ảnh hưởng đến state của các đối tượng khác thông qua các tương tác, vốn liên kết các state variables của một đối tượng với các state variables của đối tượng khác. Thật vậy, quan điểm cho rằng một hệ thống được tạo thành từ các đối tượng riêng biệt là hữu ích nhất khi các state variables của hệ thống có thể được nhóm thành các hệ con liên kết chặt chẽ với nhau nhưng chỉ liên kết lỏng lẻo với các hệ con khác.</p>
+<p>Cách nhìn này về một hệ thống có thể là một khuôn khổ mạnh mẽ để tổ chức các mô hình tính toán của hệ thống. Để một mô hình như vậy có tính modular (mô-đun), nó nên được phân tách thành các computational objects (đối tượng tính toán) mô phỏng các đối tượng thực trong hệ thống. Mỗi computational object phải có <em>local state variables (biến trạng thái cục bộ)</em> riêng mô tả state của đối tượng thực. Vì state của các đối tượng trong hệ thống được mô phỏng thay đổi theo thời gian, các state variables của các computational objects tương ứng cũng phải thay đổi. Nếu chúng ta chọn mô phỏng dòng chảy của thời gian trong hệ thống bằng thời gian trôi qua trong máy tính, thì chúng ta phải có cách xây dựng các computational objects có hành vi thay đổi khi chương trình của chúng ta chạy. Đặc biệt, nếu chúng ta muốn mô phỏng các state variables bằng các tên ký hiệu thông thường trong ngôn ngữ lập trình, thì ngôn ngữ đó phải cung cấp một <em>assignment operator (toán tử gán)</em> để cho phép chúng ta thay đổi giá trị gắn với một tên.</p>
+<h2 id="311-local-state-variables"><a class="header" href="#311-local-state-variables">3.1.1 Local State Variables</a></h2>
+<p>Để minh họa ý nghĩa của việc có một computational object với state thay đổi theo thời gian, hãy mô phỏng tình huống rút tiền từ một tài khoản ngân hàng. Chúng ta sẽ làm điều này bằng cách sử dụng một procedure (thủ tục) <code>withdraw</code>, nhận đối số là một <code>amount</code> cần rút. Nếu trong tài khoản có đủ tiền để đáp ứng yêu cầu rút, thì <code>withdraw</code> sẽ trả về số dư còn lại sau khi rút. Ngược lại, <code>withdraw</code> sẽ trả về thông báo <em>Insufficient funds</em>. Ví dụ, nếu chúng ta bắt đầu với $100 trong tài khoản, chúng ta sẽ nhận được chuỗi phản hồi sau khi dùng <code>withdraw</code>:</p>
+<pre><code class="language-{.scheme}">(withdraw 25)
+75
+
+(withdraw 25)
+50
+
+(withdraw 60)
+&quot;Insufficient funds&quot;
+
+(withdraw 15)
+35
+</code></pre>
+<p>Hãy chú ý rằng biểu thức <code>(withdraw 25)</code>, khi được tính hai lần, cho ra các giá trị khác nhau. Đây là một kiểu hành vi mới đối với một procedure. Cho đến nay, tất cả các procedure của chúng ta có thể được xem như các đặc tả để tính toán các hàm toán học. Một lần gọi procedure sẽ tính giá trị của hàm được áp dụng cho các đối số đã cho, và hai lần gọi cùng một procedure với cùng đối số luôn cho cùng một kết quả.<sup class="footnote-reference"><a href="#1">1</a></sup></p>
+<p>Để hiện thực <code>withdraw</code>, chúng ta có thể dùng một biến <code>balance</code> để biểu thị số dư tiền trong tài khoản và định nghĩa <code>withdraw</code> như một procedure truy cập <code>balance</code>. Procedure <code>withdraw</code> kiểm tra xem <code>balance</code> có ít nhất bằng <code>amount</code> yêu cầu hay không. Nếu có, <code>withdraw</code> sẽ giảm <code>balance</code> đi <code>amount</code> và trả về giá trị mới của <code>balance</code>. Ngược lại, <code>withdraw</code> trả về thông báo <em>Insufficient funds</em>. Dưới đây là định nghĩa của <code>balance</code> và <code>withdraw</code>:</p>
+<pre><code class="language-{.scheme}">(define balance 100)
+
+(define (withdraw amount)
+  (if (&gt;= balance amount)
+      (begin (set! balance (- balance amount))
+             balance)
+      &quot;Insufficient funds&quot;))
+</code></pre>
+<p>Việc giảm <code>balance</code> được thực hiện bằng biểu thức:</p>
+<pre><code class="language-{.scheme}">(set! balance (- balance amount))
+</code></pre>
+<p>Điều này sử dụng special form (dạng đặc biệt) <code>set!</code>, với cú pháp:</p>
+<pre><code class="language-{.scheme}">(set! ⟨name⟩ ⟨new-value⟩)
+</code></pre>
+<p>Ở đây <code>⟨</code>name<code>⟩</code> là một symbol và <code>⟨</code>new-value<code>⟩</code> là bất kỳ biểu thức nào. <code>Set!</code> thay đổi <code>⟨</code>name<code>⟩</code> sao cho giá trị của nó là kết quả thu được khi tính <code>⟨</code>new-value<code>⟩</code>. Trong trường hợp này, chúng ta đang thay đổi <code>balance</code> sao cho giá trị mới của nó là kết quả của việc trừ <code>amount</code> khỏi giá trị trước đó của <code>balance</code>.<sup class="footnote-reference"><a href="#2">2</a></sup></p>
+<p><code>Withdraw</code> cũng sử dụng special form <code>begin</code> để khiến hai biểu thức được tính trong trường hợp kiểm tra <code>if</code> là đúng: đầu tiên giảm <code>balance</code> và sau đó trả về giá trị của <code>balance</code>. Nói chung, việc tính biểu thức:</p>
+<pre><code class="language-{.scheme}">(begin ⟨exp₁⟩ ⟨exp₂⟩ … ⟨expₖ⟩)
+</code></pre>
+<p>sẽ khiến các biểu thức $\langle exp_{1}\rangle$ đến $\langle exp_{k}\rangle$ được tính tuần tự và giá trị của biểu thức cuối cùng $\langle exp_{k}\rangle$ được trả về như giá trị của toàn bộ form <code>begin</code>.<sup class="footnote-reference"><a href="#3">3</a></sup></p>
+<p>Mặc dù <code>withdraw</code> hoạt động như mong muốn, biến <code>balance</code> lại gây ra một vấn đề. Như đã nêu ở trên, <code>balance</code> là một tên được định nghĩa trong global environment (môi trường toàn cục) và có thể được tự do truy cập hoặc sửa đổi bởi bất kỳ procedure nào. Sẽ tốt hơn nhiều nếu chúng ta có thể làm cho <code>balance</code> trở thành nội bộ của <code>withdraw</code>, sao cho <code>withdraw</code> là procedure duy nhất có thể truy cập trực tiếp <code>balance</code> và bất kỳ procedure nào khác chỉ có thể truy cập <code>balance</code> một cách gián tiếp (thông qua các lần gọi <code>withdraw</code>). Điều này sẽ mô phỏng chính xác hơn khái niệm rằng <code>balance</code> là một local state variable được <code>withdraw</code> sử dụng để theo dõi state của tài khoản.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Thực ra, điều này không hoàn toàn đúng. Một ngoại lệ là bộ sinh số ngẫu nhiên trong 1.2.6. Ngoại lệ khác liên quan đến các bảng operation/type mà chúng ta đã giới thiệu ở 2.4.3, nơi giá trị của hai lần gọi <code>get</code> với cùng đối số phụ thuộc vào các lần gọi <code>put</code> xen giữa. Mặt khác, cho đến khi chúng ta giới thiệu assignment, chúng ta không có cách nào tự tạo ra các procedure như vậy.</p>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Giá trị của một biểu thức <code>set!</code> phụ thuộc vào cách hiện thực. <code>Set!</code> chỉ nên được dùng cho hiệu ứng của nó, không phải cho giá trị của nó.</p>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Chúng ta đã sử dụng <code>begin</code> một cách ngầm định trong các chương trình của mình, bởi vì trong Scheme phần thân của một procedure có thể là một chuỗi các biểu thức. Ngoài ra, phần <code>⟨</code>consequent<code>⟩</code> của mỗi mệnh đề trong một biểu thức <code>cond</code> có thể là một chuỗi các biểu thức thay vì chỉ một biểu thức duy nhất.</p>
+</div>
+<p>Chúng ta có thể làm cho <code>balance</code> trở thành nội bộ của <code>withdraw</code> bằng cách viết lại định nghĩa như sau:</p>
+<pre><code class="language-{.scheme}">(define new-withdraw
+  (let ((balance 100))
+    (lambda (amount)
+      (if (&gt;= balance amount)
+          (begin (set! balance 
+                       (- balance amount))
+                 balance)
+          &quot;Insufficient funds&quot;))))
+</code></pre>
+<p>Những gì chúng ta đã làm ở đây là sử dụng <code>let</code> để thiết lập một environment (môi trường) với một local variable (biến cục bộ) <code>balance</code>, được gán với giá trị khởi tạo 100. Bên trong local environment này, chúng ta dùng <code>lambda</code> để tạo một procedure (thủ tục) nhận <code>amount</code> làm đối số và hoạt động giống như procedure <code>withdraw</code> trước đó. Procedure này — được trả về như kết quả của việc tính toán biểu thức <code>let</code> — là <code>new-withdraw</code>, hoạt động chính xác như <code>withdraw</code> nhưng biến <code>balance</code> của nó không thể được truy cập bởi bất kỳ procedure nào khác.<sup class="footnote-reference"><a href="#4">4</a></sup></p>
+<p>Kết hợp <code>set!</code> với local variables là kỹ thuật lập trình tổng quát mà chúng ta sẽ sử dụng để xây dựng các computational objects (đối tượng tính toán) với local state (trạng thái cục bộ). Thật không may, việc sử dụng kỹ thuật này lại nảy sinh một vấn đề nghiêm trọng: Khi lần đầu tiên giới thiệu về procedures, chúng ta cũng đã giới thiệu substitution model of evaluation (mô hình thay thế trong tính toán) (1.1.5) để cung cấp một cách diễn giải ý nghĩa của việc áp dụng procedure. Chúng ta đã nói rằng việc áp dụng một procedure nên được hiểu là tính toán phần thân của procedure với các tham số hình thức được thay thế bằng giá trị của chúng. Vấn đề là, ngay khi chúng ta đưa assignment (gán) vào ngôn ngữ, substitution model không còn là một mô hình đầy đủ cho việc áp dụng procedure nữa. (Chúng ta sẽ thấy lý do tại sao trong 3.1.3.) Do đó, về mặt kỹ thuật, tại thời điểm này chúng ta chưa có cách nào để hiểu tại sao procedure <code>new-withdraw</code> lại hoạt động như đã mô tả ở trên. Để thực sự hiểu một procedure như <code>new-withdraw</code>, chúng ta sẽ cần phát triển một mô hình mới cho việc áp dụng procedure. Trong 3.2, chúng ta sẽ giới thiệu mô hình đó, cùng với lời giải thích về <code>set!</code> và local variables. Tuy nhiên, trước tiên, chúng ta sẽ xem xét một số biến thể dựa trên ý tưởng của <code>new-withdraw</code>.</p>
+<p>Procedure sau đây, <code>make-withdraw</code>, tạo ra các “withdrawal processors” (bộ xử lý rút tiền). Tham số hình thức <code>balance</code> trong <code>make-withdraw</code> chỉ định số tiền ban đầu trong tài khoản.<sup class="footnote-reference"><a href="#5">5</a></sup></p>
+<pre><code class="language-{.scheme}">(define (make-withdraw balance)
+  (lambda (amount)
+    (if (&gt;= balance amount)
+        (begin (set! balance 
+                     (- balance amount))
+               balance)
+        &quot;Insufficient funds&quot;)))
+</code></pre>
+<p><code>Make-withdraw</code> có thể được sử dụng như sau để tạo ra hai đối tượng <code>W1</code> và <code>W2</code>:</p>
+<pre><code class="language-{.scheme}">(define W1 (make-withdraw 100))
+(define W2 (make-withdraw 100))
+
+(W1 50)
+50
+
+(W2 70)
+30
+
+(W2 40)
+&quot;Insufficient funds&quot;
+
+(W1 40)
+10
+</code></pre>
+<p>Hãy chú ý rằng <code>W1</code> và <code>W2</code> là hai đối tượng hoàn toàn độc lập, mỗi đối tượng có local state variable <code>balance</code> riêng. Việc rút tiền từ một đối tượng không ảnh hưởng đến đối tượng kia.</p>
+<p>Chúng ta cũng có thể tạo ra các đối tượng xử lý cả việc gửi tiền (deposit) lẫn rút tiền (withdraw), và do đó có thể biểu diễn các tài khoản ngân hàng đơn giản. Dưới đây là một procedure trả về một “bank-account object” (đối tượng tài khoản ngân hàng) với số dư khởi tạo được chỉ định:</p>
+<pre><code class="language-{.scheme}">(define (make-account balance)
+  (define (withdraw amount)
+    (if (&gt;= balance amount)
+        (begin (set! balance 
+                     (- balance amount))
+               balance)
+        &quot;Insufficient funds&quot;))
+  (define (deposit amount)
+    (set! balance (+ balance amount))
+    balance)
+  (define (dispatch m)
+    (cond ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)
+          (else (error &quot;Unknown request: 
+                 MAKE-ACCOUNT&quot; m))))
+  dispatch)
+</code></pre>
+<p>Mỗi lần gọi <code>make-account</code> sẽ thiết lập một environment với một local state variable <code>balance</code>. Bên trong environment này, <code>make-account</code> định nghĩa các procedure <code>deposit</code> và <code>withdraw</code> để truy cập <code>balance</code>, cùng một procedure bổ sung <code>dispatch</code> nhận một “message” (thông điệp) làm đầu vào và trả về một trong hai procedure cục bộ đó. Procedure <code>dispatch</code> này được trả về như giá trị đại diện cho bank-account object. Đây chính là phong cách lập trình <em>message-passing</em> (truyền thông điệp) mà chúng ta đã thấy trong 2.4.3, mặc dù ở đây chúng ta sử dụng nó kết hợp với khả năng thay đổi local variables.</p>
+<p><code>Make-account</code> có thể được sử dụng như sau:</p>
+<pre><code class="language-{.scheme}">(define acc (make-account 100))
+
+((acc 'withdraw) 50)
+50
+
+((acc 'withdraw) 60)
+&quot;Insufficient funds&quot;
+
+((acc 'deposit) 40)
+90
+
+((acc 'withdraw) 60)
+30
+</code></pre>
+<p>Mỗi lần gọi <code>acc</code> sẽ trả về procedure <code>deposit</code> hoặc <code>withdraw</code> được định nghĩa cục bộ, sau đó procedure này được áp dụng cho <code>amount</code> đã chỉ định. Giống như với <code>make-withdraw</code>, một lần gọi khác tới <code>make-account</code>:</p>
+<pre><code class="language-{.scheme}">(define acc2 (make-account 100))
+</code></pre>
+<p>sẽ tạo ra một account object hoàn toàn riêng biệt, duy trì local <code>balance</code> của riêng nó.</p>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Trong thuật ngữ của ngôn ngữ lập trình, biến <code>balance</code> được gọi là <em>encapsulated</em> (đóng gói) bên trong procedure <code>new-withdraw</code>. Encapsulation phản ánh nguyên tắc thiết kế hệ thống tổng quát được gọi là <em>hiding principle</em> (nguyên tắc ẩn giấu): Có thể làm cho một hệ thống có tính mô-đun và ổn định hơn bằng cách bảo vệ các phần của hệ thống khỏi nhau; nghĩa là chỉ cung cấp quyền truy cập thông tin cho những phần của hệ thống thực sự “cần biết”.</p>
+</div>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Khác với <code>new-withdraw</code> ở trên, chúng ta không cần dùng <code>let</code> để biến <code>balance</code> thành local variable, vì các tham số hình thức vốn đã là biến cục bộ. Điều này sẽ rõ ràng hơn sau phần thảo luận về environment model of evaluation (mô hình môi trường của tính toán) trong 3.2. (Xem thêm Bài tập 3.10.)</p>
+</div>
+<h2 id="312-lợi-ích-của-việc-đưa-assignment-vào"><a class="header" href="#312-lợi-ích-của-việc-đưa-assignment-vào">3.1.2 Lợi ích của việc đưa Assignment vào</a></h2>
+<p>Như chúng ta sẽ thấy, việc đưa assignment (gán) vào ngôn ngữ lập trình sẽ dẫn chúng ta vào một “bụi rậm” của những vấn đề khái niệm phức tạp. Tuy nhiên, việc nhìn nhận các hệ thống như tập hợp các đối tượng với local state (trạng thái cục bộ) là một kỹ thuật mạnh mẽ để duy trì thiết kế mang tính modular (mô-đun). Như một ví dụ đơn giản, hãy xem xét thiết kế của một procedure (thủ tục) <code>rand</code> mà mỗi khi được gọi sẽ trả về một số nguyên được chọn ngẫu nhiên.</p>
+<p>Không hề rõ ràng “được chọn ngẫu nhiên” nghĩa là gì. Điều mà chúng ta mong muốn là các lần gọi liên tiếp tới <code>rand</code> sẽ tạo ra một dãy số có các đặc tính thống kê của phân phối đều. Chúng ta sẽ không bàn về các phương pháp tạo ra các dãy phù hợp ở đây. Thay vào đó, giả sử rằng chúng ta có một procedure <code>rand-update</code> với tính chất là nếu bắt đầu với một số $x_{1}$ và tạo ra</p>
+<pre><code class="language-{.scheme}">x₂ = (rand-update x₁)
+x₃ = (rand-update x₂)
+</code></pre>
+<p>thì dãy giá trị $x_{1}$, $x_{2}$, $x_{3}$, … sẽ có các đặc tính thống kê mong muốn.<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<p>Chúng ta có thể hiện thực <code>rand</code> như một procedure với một local state variable <code>x</code> được khởi tạo bằng một giá trị cố định <code>random-init</code>. Mỗi lần gọi <code>rand</code> sẽ tính <code>rand-update</code> của giá trị hiện tại của <code>x</code>, trả về giá trị này như số ngẫu nhiên, đồng thời lưu giá trị này làm giá trị mới của <code>x</code>.</p>
+<pre><code class="language-{.scheme}">(define rand
+  (let ((x random-init))
+    (lambda () (set! x (rand-update x)) x)))
+</code></pre>
+<p>Tất nhiên, chúng ta có thể tạo ra cùng một dãy số ngẫu nhiên mà không cần dùng assignment, chỉ bằng cách gọi trực tiếp <code>rand-update</code>. Tuy nhiên, điều này sẽ có nghĩa là bất kỳ phần nào của chương trình sử dụng số ngẫu nhiên đều phải ghi nhớ rõ giá trị hiện tại của <code>x</code> để truyền làm đối số cho <code>rand-update</code>. Để thấy điều này phiền toái thế nào, hãy xem xét việc sử dụng số ngẫu nhiên để hiện thực một kỹ thuật gọi là <em>Monte Carlo simulation</em> (mô phỏng Monte Carlo).</p>
+<p>Phương pháp Monte Carlo bao gồm việc chọn ngẫu nhiên các thí nghiệm mẫu từ một tập hợp lớn, sau đó rút ra kết luận dựa trên các xác suất ước lượng từ việc thống kê kết quả của các thí nghiệm đó. Ví dụ, chúng ta có thể xấp xỉ $\pi$ bằng cách sử dụng thực tế rằng $6/\pi^{2}$ là xác suất để hai số nguyên được chọn ngẫu nhiên không có ước số chung; nghĩa là, ước số chung lớn nhất của chúng bằng 1.<sup class="footnote-reference"><a href="#7">7</a></sup> Để thu được giá trị xấp xỉ của $\pi$, chúng ta thực hiện một số lượng lớn thí nghiệm. Trong mỗi thí nghiệm, chúng ta chọn hai số nguyên ngẫu nhiên và kiểm tra xem GCD của chúng có bằng 1 hay không. Tỷ lệ số lần kiểm tra thành công sẽ cho chúng ta ước lượng của $6/\pi^{2}$, và từ đó suy ra giá trị xấp xỉ của $\pi$.</p>
+<p>Trọng tâm của chương trình là một procedure <code>monte-carlo</code>, nhận vào số lần thử nghiệm và một thí nghiệm, được biểu diễn dưới dạng một procedure không đối số, mỗi lần chạy sẽ trả về true hoặc false. <code>Monte-carlo</code> chạy thí nghiệm số lần đã định và trả về một số biểu thị tỷ lệ các lần thí nghiệm cho kết quả true.</p>
+<pre><code class="language-{.scheme}">(define (estimate-pi trials)
+  (sqrt (/ 6 (monte-carlo trials 
+                          cesaro-test))))
+(define (cesaro-test)
+   (= (gcd (rand) (rand)) 1))
+
+(define (monte-carlo trials experiment)
+  (define (iter trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
+           (/ trials-passed trials))
+          ((experiment)
+           (iter (- trials-remaining 1) 
+                 (+ trials-passed 1)))
+          (else
+           (iter (- trials-remaining 1) 
+                 trials-passed))))
+  (iter trials 0))
+</code></pre>
+<p>Bây giờ, hãy thử thực hiện cùng phép tính đó nhưng dùng trực tiếp <code>rand-update</code> thay vì <code>rand</code>, theo cách mà chúng ta buộc phải làm nếu không dùng assignment để mô hình hóa local state:</p>
+<pre><code class="language-{.scheme}">(define (estimate-pi trials)
+  (sqrt (/ 6 (random-gcd-test trials 
+                              random-init))))
+
+(define (random-gcd-test trials initial-x)
+  (define (iter trials-remaining 
+                trials-passed 
+                x)
+    (let ((x1 (rand-update x)))
+      (let ((x2 (rand-update x1)))
+        (cond ((= trials-remaining 0)
+               (/ trials-passed trials))
+              ((= (gcd x1 x2) 1)
+               (iter (- trials-remaining 1)
+                     (+ trials-passed 1)
+                     x2))
+              (else
+               (iter (- trials-remaining 1)
+                     trials-passed
+                     x2))))))
+  (iter trials 0 initial-x))
+</code></pre>
+<p>Mặc dù chương trình vẫn đơn giản, nhưng nó bộc lộ một số vi phạm khó chịu đối với tính modular. Trong phiên bản đầu tiên của chương trình, sử dụng <code>rand</code>, chúng ta có thể diễn đạt phương pháp Monte Carlo trực tiếp như một procedure tổng quát <code>monte-carlo</code> nhận vào một procedure <code>experiment</code> bất kỳ. Trong phiên bản thứ hai, khi không có local state cho bộ sinh số ngẫu nhiên, <code>random-gcd-test</code> phải thao tác tường minh với các số ngẫu nhiên <code>x1</code> và <code>x2</code>, đồng thời truyền lại <code>x2</code> qua vòng lặp lặp lại như đầu vào mới cho <code>rand-update</code>. Việc xử lý tường minh các số ngẫu nhiên này làm đan xen cấu trúc tích lũy kết quả kiểm tra với thực tế rằng thí nghiệm cụ thể của chúng ta sử dụng hai số ngẫu nhiên, trong khi các thí nghiệm Monte Carlo khác có thể dùng một hoặc ba số ngẫu nhiên. Ngay cả procedure cấp cao nhất <code>estimate-pi</code> cũng phải quan tâm đến việc cung cấp một số ngẫu nhiên ban đầu. Việc “ruột” của bộ sinh số ngẫu nhiên bị lộ ra các phần khác của chương trình khiến chúng ta khó cô lập ý tưởng Monte Carlo để áp dụng cho các tác vụ khác. Trong phiên bản đầu tiên của chương trình, assignment đã encapsulate (đóng gói) state của bộ sinh số ngẫu nhiên bên trong procedure <code>rand</code>, nhờ đó chi tiết về việc sinh số ngẫu nhiên vẫn độc lập với phần còn lại của chương trình.</p>
+<p>Hiện tượng tổng quát được minh họa qua ví dụ Monte Carlo là: từ góc nhìn của một phần trong một quá trình phức tạp, các phần khác dường như thay đổi theo thời gian. Chúng có local state ẩn và thay đổi theo thời gian. Nếu chúng ta muốn viết các chương trình máy tính có cấu trúc phản ánh sự phân tách này, chúng ta tạo ra các computational objects (như tài khoản ngân hàng và bộ sinh số ngẫu nhiên) có hành vi thay đổi theo thời gian. Chúng ta mô hình hóa state bằng local state variables, và mô hình hóa sự thay đổi state bằng các assignment tới những biến đó.</p>
+<p>Thật dễ bị cám dỗ để kết thúc phần thảo luận này bằng cách nói rằng, bằng việc đưa assignment và kỹ thuật ẩn state trong local variables, chúng ta có thể cấu trúc hệ thống theo cách modular hơn so với việc phải thao tác tường minh toàn bộ state bằng cách truyền thêm các tham số. Tuy nhiên, như chúng ta sẽ thấy, câu chuyện không đơn giản như vậy.</p>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Một cách phổ biến để hiện thực <code>rand-update</code> là sử dụng quy tắc cập nhật $x$ thành $ax + b$ modulo $m$, trong đó $a$, $b$, và $m$ là các số nguyên được chọn phù hợp. Chương 3 của Knuth 1981 có một phần thảo luận chi tiết về các kỹ thuật tạo dãy số ngẫu nhiên và xác lập các đặc tính thống kê của chúng. Lưu ý rằng procedure <code>rand-update</code> tính một hàm toán học: Với cùng một đầu vào, nó luôn cho cùng một đầu ra. Do đó, dãy số được tạo ra bởi <code>rand-update</code> chắc chắn không “ngẫu nhiên” nếu ta yêu cầu “ngẫu nhiên” nghĩa là mỗi số trong dãy không liên quan đến số trước đó. Mối quan hệ giữa “ngẫu nhiên thực sự” và các dãy <em>pseudo-random</em> (giả ngẫu nhiên), vốn được tạo ra bởi các phép tính xác định nhưng lại có các đặc tính thống kê phù hợp, là một câu hỏi phức tạp liên quan đến các vấn đề khó trong toán học và triết học. Kolmogorov, Solomonoff, và Chaitin đã đạt được nhiều tiến bộ trong việc làm sáng tỏ các vấn đề...</p>
+</div>
+<h2 id="313-the-costs-of-introducing-assignment"><a class="header" href="#313-the-costs-of-introducing-assignment">3.1.3 The Costs of Introducing Assignment</a></h2>
+<p>Như chúng ta đã thấy, thao tác <code>set!</code> cho phép chúng ta mô hình hóa các đối tượng có local state (trạng thái cục bộ). Tuy nhiên, lợi thế này đi kèm một cái giá. Ngôn ngữ lập trình của chúng ta không còn có thể được diễn giải theo substitution model of procedure application đã giới thiệu ở 1.1.5. Hơn nữa, không có một mô hình đơn giản nào với các tính chất toán học “đẹp” lại có thể làm khung khái niệm đầy đủ để xử lý các đối tượng và assignment (gán) trong ngôn ngữ lập trình.</p>
+<p>Chừng nào chúng ta chưa dùng assignment, hai lần tính cùng một procedure với cùng các đối số sẽ cho cùng một kết quả, nhờ đó các procedure có thể được xem là đang tính các hàm toán học. Lập trình không sử dụng bất kỳ assignment nào, như chúng ta đã làm xuyên suốt hai chương đầu của cuốn sách, vì thế được gọi là functional programming (lập trình hàm).</p>
+<p>Để hiểu assignment làm phức tạp vấn đề như thế nào, hãy xem xét một phiên bản đơn giản hóa của procedure <code>make-withdraw</code> trong 3.1.1, bỏ qua việc kiểm tra thiếu số dư:</p>
+<pre><code class="language-{.scheme}">(define (make-simplified-withdraw balance)
+  (lambda (amount)
+    (set! balance (- balance amount))
+    balance))
+
+(define W (make-simplified-withdraw 25))
+
+(W 20)
+5
+
+(W 10)
+-5
+</code></pre>
+<p>So sánh procedure này với procedure <code>make-decrementer</code> sau, vốn không dùng <code>set!</code>:</p>
+<pre><code class="language-{.scheme}">(define (make-decrementer balance)
+  (lambda (amount)
+    (- balance amount)))
+</code></pre>
+<p><code>Make-decrementer</code> trả về một procedure trừ đầu vào của nó khỏi một lượng xác định <code>balance</code>, nhưng không có hiệu ứng tích lũy qua các lần gọi liên tiếp như với <code>make-simplified-withdraw</code>:</p>
+<pre><code class="language-{.scheme}">(define D (make-decrementer 25))
+
+(D 20)
+5
+
+(D 10)
+15
+</code></pre>
+<p>Chúng ta có thể dùng substitution model để giải thích <code>make-decrementer</code> hoạt động ra sao. Chẳng hạn, hãy phân tích việc tính biểu thức</p>
+<pre><code class="language-{.scheme}">((make-decrementer 25) 20)
+</code></pre>
+<p>Trước hết, ta đơn giản hóa toán tử của phép kết hợp bằng cách thay 25 cho <code>balance</code> trong thân của <code>make-decrementer</code>. Điều này rút gọn biểu thức thành</p>
+<pre><code class="language-{.scheme}">((lambda (amount) (- 25 amount)) 20)
+</code></pre>
+<p>Bây giờ ta áp dụng toán tử bằng cách thay 20 cho <code>amount</code> trong thân của biểu thức <code>lambda</code>:</p>
+<pre><code class="language-{.scheme}">(- 25 20)
+</code></pre>
+<p>Kết quả cuối cùng là 5.</p>
+<p>Tuy nhiên, hãy để ý điều gì xảy ra nếu chúng ta cố gắng phân tích thay thế tương tự với <code>make-simplified-withdraw</code>:</p>
+<pre><code class="language-{.scheme}">((make-simplified-withdraw 25) 20)
+</code></pre>
+<p>Trước hết, ta đơn giản hóa toán tử bằng cách thay 25 cho <code>balance</code> trong thân của <code>make-simplified-withdraw</code>. Điều này rút gọn biểu thức thành<sup class="footnote-reference"><a href="#8">8</a></sup></p>
+<pre><code class="language-{.scheme}">((lambda (amount) 
+   (set! balance (- 25 amount)) 25)
+ 20)
+</code></pre>
+<p>Bây giờ ta áp dụng toán tử bằng cách thay 20 cho <code>amount</code> trong thân của biểu thức <code>lambda</code>:</p>
+<pre><code class="language-{.scheme}">(set! balance (- 25 20)) 25
+</code></pre>
+<p>Nếu tuân thủ substitution model, chúng ta sẽ phải nói rằng ý nghĩa của việc áp dụng procedure là trước tiên đặt <code>balance</code> thành 5 rồi trả về 25 như giá trị của biểu thức. Điều này cho ra đáp án sai. Để có được đáp án đúng, chúng ta sẽ phải bằng cách nào đó phân biệt lần xuất hiện thứ nhất của <code>balance</code> (trước hiệu ứng của <code>set!</code>) với lần xuất hiện thứ hai của <code>balance</code> (sau hiệu ứng của <code>set!</code>), và substitution model không thể làm điều này.</p>
+<p>Vấn đề ở đây là substitution rốt cuộc dựa trên quan niệm rằng các symbol trong ngôn ngữ của chúng ta về bản chất là tên gọi cho các giá trị. Nhưng ngay khi chúng ta đưa vào <code>set!</code> và ý tưởng rằng giá trị của một biến có thể thay đổi, một biến không còn đơn giản chỉ là một cái tên. Giờ đây một biến bằng cách nào đó tham chiếu đến một nơi (place) mà tại đó một giá trị có thể được lưu trữ, và giá trị được lưu tại nơi này có thể thay đổi. Trong 3.2, chúng ta sẽ thấy environments đóng vai trò “place” này trong mô hình tính toán của chúng ta như thế nào.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Chúng ta không thay thế lần xuất hiện của <code>balance</code> trong biểu thức <code>set!</code> vì <code>⟨</code>name<code>⟩</code> trong một <code>set!</code> không được tính. Nếu ta có thay thế, ta sẽ nhận được <code>(set! 25 (- 25 amount))</code>, điều này vô nghĩa.</p>
+</div>
+<h3 id="sameness-và-change"><a class="header" href="#sameness-và-change">Sameness và change</a></h3>
+<p>Vấn đề xuất hiện ở đây sâu sắc hơn nhiều so với việc chỉ đơn thuần là sự sụp đổ của một mô hình tính toán cụ thể. Ngay khi chúng ta đưa khái niệm change (thay đổi) vào các mô hình tính toán, nhiều khái niệm vốn trước đây đơn giản trở nên khó xử lý. Hãy xem xét khái niệm hai thứ “giống nhau” (the same).</p>
+<p>Giả sử chúng ta gọi <code>make-decrementer</code> hai lần với cùng một đối số để tạo ra hai procedures (thủ tục):</p>
+<pre><code class="language-{.scheme}">(define D1 (make-decrementer 25))
+(define D2 (make-decrementer 25))
+</code></pre>
+<p><code>D1</code> và <code>D2</code> có giống nhau không? Một câu trả lời chấp nhận được là có, bởi vì <code>D1</code> và <code>D2</code> có cùng computational behavior (hành vi tính toán) — mỗi cái là một procedure trừ đầu vào của nó khỏi 25. Thực tế, <code>D1</code> có thể được thay thế cho <code>D2</code> trong bất kỳ phép tính nào mà không làm thay đổi kết quả.</p>
+<p>Hãy so sánh điều này với việc gọi <code>make-simplified-withdraw</code> hai lần:</p>
+<pre><code class="language-{.scheme}">(define W1 (make-simplified-withdraw 25))
+(define W2 (make-simplified-withdraw 25))
+</code></pre>
+<p><code>W1</code> và <code>W2</code> có giống nhau không? Chắc chắn là không, bởi vì các lần gọi <code>W1</code> và <code>W2</code> tạo ra các hiệu ứng khác nhau, như được thể hiện qua chuỗi tương tác sau:</p>
+<pre><code class="language-{.scheme}">(W1 20)
+5
+
+(W1 20)
+-15
+
+(W2 20)
+5
+</code></pre>
+<p>Mặc dù <code>W1</code> và <code>W2</code> “bằng nhau” theo nghĩa là cả hai đều được tạo ra bằng cách tính cùng một biểu thức <code>(make-simplified-withdraw 25)</code>, nhưng không đúng khi nói rằng <code>W1</code> có thể được thay thế cho <code>W2</code> trong bất kỳ biểu thức nào mà không làm thay đổi kết quả của việc tính biểu thức đó.</p>
+<p>Một ngôn ngữ hỗ trợ khái niệm “equals can be substituted for equals” (các giá trị bằng nhau có thể thay thế cho nhau) trong một biểu thức mà không làm thay đổi giá trị của biểu thức đó được gọi là <em>referentially transparent</em> (trong suốt tham chiếu). Referential transparency bị vi phạm khi chúng ta đưa <code>set!</code> vào ngôn ngữ lập trình. Điều này khiến cho việc xác định khi nào có thể đơn giản hóa các biểu thức bằng cách thay thế các biểu thức tương đương trở nên phức tạp. Do đó, việc lập luận về các chương trình sử dụng assignment trở nên khó khăn hơn rất nhiều.</p>
+<p>Khi từ bỏ referential transparency, khái niệm “giống nhau” đối với các computational objects trở nên khó nắm bắt một cách hình thức. Thật vậy, ý nghĩa của “giống nhau” trong thế giới thực mà các chương trình của chúng ta mô phỏng vốn dĩ cũng không rõ ràng. Nói chung, chúng ta chỉ có thể xác định rằng hai đối tượng trông giống hệt nhau thực sự là “cùng một đối tượng” bằng cách thay đổi một đối tượng và sau đó quan sát xem đối tượng còn lại có thay đổi theo cùng cách hay không. Nhưng làm sao chúng ta biết một đối tượng đã “thay đổi” nếu không phải bằng cách quan sát “cùng một” đối tượng hai lần và xem liệu một thuộc tính nào đó của đối tượng có khác nhau giữa hai lần quan sát hay không? Như vậy, chúng ta không thể xác định “thay đổi” nếu không có một khái niệm <em>a priori</em> (tiên nghiệm) về “giống nhau”, và cũng không thể xác định “giống nhau” nếu không quan sát các hiệu ứng của thay đổi.</p>
+<p>Ví dụ về cách vấn đề này nảy sinh trong lập trình: giả sử Peter và Paul có một tài khoản ngân hàng với $100. Có một sự khác biệt đáng kể giữa việc mô hình hóa tình huống này như sau:</p>
+<pre><code class="language-{.scheme}">(define peter-acc (make-account 100))
+(define paul-acc (make-account 100))
+</code></pre>
+<p>và mô hình hóa như sau:</p>
+<pre><code class="language-{.scheme}">(define peter-acc (make-account 100))
+(define paul-acc peter-acc)
+</code></pre>
+<p>Trong tình huống đầu tiên, hai tài khoản ngân hàng là riêng biệt. Các giao dịch của Peter sẽ không ảnh hưởng đến tài khoản của Paul, và ngược lại. Trong tình huống thứ hai, tuy nhiên, chúng ta đã định nghĩa <code>paul-acc</code> là <em>the same thing</em> (cùng một thứ) với <code>peter-acc</code>. Thực tế, Peter và Paul giờ đây có một tài khoản ngân hàng chung, và nếu Peter rút tiền từ <code>peter-acc</code> thì Paul sẽ thấy số dư trong <code>paul-acc</code> giảm xuống. Hai tình huống tương tự nhưng khác biệt này có thể gây nhầm lẫn khi xây dựng các mô hình tính toán. Với tài khoản chung, đặc biệt dễ gây nhầm lẫn khi chỉ có một đối tượng (tài khoản ngân hàng) nhưng lại có hai tên khác nhau (<code>peter-acc</code> và <code>paul-acc</code>); nếu chúng ta đang tìm tất cả các vị trí trong chương trình nơi <code>paul-acc</code> có thể bị thay đổi, chúng ta phải nhớ kiểm tra cả những chỗ thay đổi <code>peter-acc</code> nữa.<sup class="footnote-reference"><a href="#9">9</a></sup></p>
+<p>Liên hệ với những nhận xét ở trên về “sameness” và “change”, hãy để ý rằng nếu Peter và Paul chỉ có thể xem số dư tài khoản của họ, và không thể thực hiện các thao tác thay đổi số dư, thì vấn đề liệu hai tài khoản có khác nhau hay không sẽ trở nên vô nghĩa. Nói chung, miễn là chúng ta không bao giờ thay đổi các data objects, chúng ta có thể coi một compound data object (đối tượng dữ liệu phức hợp) chính xác là tổng thể các thành phần của nó. Ví dụ, một số hữu tỉ được xác định bằng cách cho tử số và mẫu số của nó. Nhưng cách nhìn này không còn đúng khi có sự thay đổi, nơi một compound data object có một “identity” (danh tính) khác với các thành phần cấu thành nó. Một tài khoản ngân hàng vẫn là “cùng một” tài khoản ngân hàng ngay cả khi chúng ta thay đổi số dư bằng cách rút tiền; ngược lại, chúng ta có thể có hai tài khoản ngân hàng khác nhau với cùng thông tin trạng thái. Sự phức tạp này là hệ quả, không phải của ngôn ngữ lập trình, mà là của cách chúng ta nhìn nhận một tài khoản ngân hàng như một đối tượng. Chúng ta, chẳng hạn, không coi một số hữu tỉ là một đối tượng có thể thay đổi với identity, sao cho chúng ta có thể thay đổi tử số mà vẫn có “cùng một” số hữu tỉ.</p>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Hiện tượng một computational object duy nhất được truy cập bằng nhiều tên được gọi là <em>aliasing</em>. Tình huống tài khoản ngân hàng chung minh họa một ví dụ rất đơn giản về alias. Trong 3.3, chúng ta sẽ thấy những ví dụ phức tạp hơn nhiều, chẳng hạn như các cấu trúc dữ liệu phức hợp “khác nhau” nhưng chia sẻ các phần. Lỗi có thể xảy ra trong chương trình nếu chúng ta quên rằng thay đổi một đối tượng cũng có thể, như một “side effect” (tác dụng phụ), thay đổi một đối tượng “khác” vì hai đối tượng “khác” đó thực chất là một đối tượng duy nhất xuất hiện dưới các alias khác nhau. Những lỗi gọi là <em>side-effect bugs</em> này rất khó xác định và phân tích đến mức một số người đã đề xuất rằng ngôn ngữ lập trình nên được thiết kế sao cho không cho phép side effects hoặc aliasing (Lampson et al. 1981; Morris et al. 1980).</p>
+</div>
+<h3 id="pitfalls-of-imperative-programming"><a class="header" href="#pitfalls-of-imperative-programming">Pitfalls of imperative programming</a></h3>
+<p>Trái ngược với functional programming (lập trình hàm), lập trình sử dụng nhiều assignment (gán) được gọi là <em>imperative programming</em> (lập trình mệnh lệnh). Bên cạnh việc làm phức tạp các mô hình tính toán, các chương trình viết theo phong cách imperative còn dễ mắc phải những lỗi mà functional programs không thể gặp. Ví dụ, hãy nhớ lại chương trình tính giai thừa dạng lặp trong 1.2.1:</p>
+<pre><code class="language-{.scheme}">(define (factorial n)
+  (define (iter product counter)
+    (if (&gt; counter n)
+        product
+        (iter (* counter product)
+              (+ counter 1))))
+  (iter 1 1))
+</code></pre>
+<p>Thay vì truyền các đối số trong vòng lặp lặp lại bên trong, chúng ta có thể áp dụng phong cách imperative hơn bằng cách sử dụng assignment tường minh để cập nhật giá trị của các biến <code>product</code> và <code>counter</code>:</p>
+<pre><code class="language-{.scheme}">(define (factorial n)
+  (let ((product 1)
+        (counter 1))
+    (define (iter)
+      (if (&gt; counter n)
+          product
+          (begin (set! product (* counter 
+                                  product))
+                 (set! counter (+ counter 1))
+                 (iter))))
+    (iter)))
+</code></pre>
+<p>Điều này không làm thay đổi kết quả mà chương trình tạo ra, nhưng lại đưa vào một cái bẫy tinh vi. Làm thế nào để chúng ta quyết định thứ tự của các phép gán? Trong trường hợp này, chương trình đúng như đã viết. Nhưng nếu viết các phép gán theo thứ tự ngược lại:</p>
+<pre><code class="language-{.scheme}">(set! counter (+ counter 1))
+(set! product (* counter product))
+</code></pre>
+<p>thì sẽ tạo ra một kết quả khác, sai. Nói chung, lập trình với assignment buộc chúng ta phải cân nhắc cẩn thận thứ tự tương đối của các phép gán để đảm bảo rằng mỗi câu lệnh đang sử dụng đúng phiên bản của các biến đã được thay đổi. Vấn đề này đơn giản là không xuất hiện trong functional programs.<sup class="footnote-reference"><a href="#10">10</a></sup></p>
+<p>Độ phức tạp của các chương trình imperative còn trở nên tồi tệ hơn nếu chúng ta xét đến các ứng dụng trong đó nhiều tiến trình được thực thi đồng thời. Chúng ta sẽ quay lại vấn đề này trong 3.4. Tuy nhiên, trước tiên, chúng ta sẽ giải quyết vấn đề cung cấp một computational model (mô hình tính toán) cho các biểu thức có liên quan đến assignment, và khám phá việc sử dụng các objects (đối tượng) với local state trong thiết kế các mô phỏng.</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Xét về điều này, thật mỉa mai khi lập trình nhập môn thường được dạy theo phong cách imperative cao độ. Điều này có thể là tàn dư của một niềm tin, phổ biến trong suốt những năm 1960 và 1970, rằng các chương trình gọi procedures vốn dĩ kém hiệu quả hơn các chương trình thực hiện assignments. (Steele 1977 đã bác bỏ lập luận này.) Hoặc cũng có thể phản ánh quan điểm rằng việc gán từng bước dễ hình dung hơn đối với người mới bắt đầu so với gọi procedure. Dù lý do là gì, điều này thường khiến lập trình viên mới phải bận tâm với những câu hỏi kiểu “tôi nên gán biến này trước hay sau biến kia”, điều có thể làm phức tạp việc lập trình và che mờ các ý tưởng quan trọng.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="2-5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="3-2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="2-5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="3-2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

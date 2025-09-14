@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Variations on a Scheme — Lazy Evaluation - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html" class="active"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="42-các-biến-thể-của-scheme--lazy-evaluation-đánh-giá-lười"><a class="header" href="#42-các-biến-thể-của-scheme--lazy-evaluation-đánh-giá-lười">4.2 Các biến thể của Scheme — Lazy Evaluation (đánh giá lười)</a></h1>
+<p>Giờ đây, khi chúng ta đã có một <em>evaluator</em> (bộ đánh giá) được biểu diễn dưới dạng một chương trình Lisp, ta có thể thử nghiệm các lựa chọn thay thế trong thiết kế ngôn ngữ chỉ đơn giản bằng cách chỉnh sửa <em>evaluator</em>. Thực tế, các ngôn ngữ mới thường được phát minh bằng cách trước tiên viết một <em>evaluator</em> nhúng ngôn ngữ mới vào trong một ngôn ngữ bậc cao đã tồn tại. Ví dụ, nếu chúng ta muốn thảo luận một khía cạnh nào đó của một đề xuất sửa đổi Lisp với một thành viên khác trong cộng đồng Lisp, ta có thể cung cấp một <em>evaluator</em> thể hiện sự thay đổi đó. Người nhận có thể thử nghiệm với <em>evaluator</em> mới và gửi lại phản hồi dưới dạng các chỉnh sửa tiếp theo. Không chỉ nền tảng triển khai bậc cao giúp việc kiểm thử và gỡ lỗi <em>evaluator</em> dễ dàng hơn; ngoài ra, việc nhúng này còn cho phép nhà thiết kế <em>snarf</em><sup class="footnote-reference"><a href="#1">1</a></sup> các đặc tính từ ngôn ngữ nền, giống như <em>evaluator</em> Lisp nhúng của chúng ta sử dụng các <em>primitive</em> (nguyên thủy) và <em>control structure</em> (cấu trúc điều khiển) từ Lisp nền. Chỉ về sau (nếu có) nhà thiết kế mới cần bỏ công xây dựng một bản triển khai hoàn chỉnh bằng ngôn ngữ bậc thấp hoặc bằng phần cứng. Trong phần này và phần tiếp theo, chúng ta sẽ khám phá một số biến thể của Scheme mang lại sức mạnh biểu đạt bổ sung đáng kể.</p>
+<h2 id="421-normal-order-và-applicative-order"><a class="header" href="#421-normal-order-và-applicative-order">4.2.1 Normal Order và Applicative Order</a></h2>
+<p>Trong mục 1.1, khi bắt đầu thảo luận về các mô hình đánh giá, chúng ta đã lưu ý rằng Scheme là một ngôn ngữ <em>applicative-order</em> (“thứ tự áp dụng”), nghĩa là tất cả các đối số truyền vào <em>procedure</em> (thủ tục) của Scheme đều được đánh giá khi <em>procedure</em> được gọi. Ngược lại, các ngôn ngữ <em>normal-order</em> (“thứ tự chuẩn”) sẽ trì hoãn việc đánh giá các đối số của <em>procedure</em> cho đến khi giá trị thực sự của đối số đó được cần đến. Việc trì hoãn đánh giá các đối số của <em>procedure</em> cho đến thời điểm muộn nhất có thể (ví dụ: cho đến khi chúng được yêu cầu bởi một <em>primitive operation</em>) được gọi là <em>lazy evaluation</em> (“đánh giá lười”).<sup class="footnote-reference"><a href="#2">2</a></sup> Xem xét <em>procedure</em> sau:</p>
+<pre><code class="language-{.scheme}">(define (try a b)
+  (if (= a 0) 1 b))
+</code></pre>
+<p>Đánh giá <code>(try 0 (/ 1 0))</code> sẽ tạo ra lỗi trong Scheme. Với <em>lazy evaluation</em>, sẽ không có lỗi. Việc đánh giá biểu thức này sẽ trả về 1, bởi vì đối số <code>(/ 1 0)</code> sẽ không bao giờ được đánh giá.</p>
+<p>Một ví dụ khai thác <em>lazy evaluation</em> là định nghĩa của <em>procedure</em> <code>unless</code>:</p>
+<pre><code class="language-{.scheme}">(define (unless condition 
+                usual-value 
+                exceptional-value)
+  (if condition 
+      exceptional-value 
+      usual-value))
+</code></pre>
+<p>có thể được sử dụng trong các biểu thức như:</p>
+<pre><code class="language-{.scheme}">(unless (= b 0)
+        (/ a b)
+        (begin 
+          (display &quot;exception: returning 0&quot;)
+          0))
+</code></pre>
+<p>Điều này sẽ không hoạt động trong một ngôn ngữ <em>applicative-order</em> vì cả <em>usual value</em> và <em>exceptional value</em> đều sẽ được đánh giá trước khi <code>unless</code> được gọi (so sánh với Bài tập 1.6). Một ưu điểm của <em>lazy evaluation</em> là một số <em>procedure</em>, như <code>unless</code>, có thể thực hiện tính toán hữu ích ngay cả khi việc đánh giá một số đối số của chúng sẽ gây ra lỗi hoặc không bao giờ kết thúc.</p>
+<p>Nếu phần thân của một <em>procedure</em> được thực thi trước khi một đối số được đánh giá, ta nói rằng <em>procedure</em> đó là <em>non-strict</em> (“không nghiêm ngặt”) đối với đối số đó. Nếu đối số được đánh giá trước khi phần thân của <em>procedure</em> được thực thi, ta nói rằng <em>procedure</em> đó là <em>strict</em> (“nghiêm ngặt”) đối với đối số đó.<sup class="footnote-reference"><a href="#3">3</a></sup> Trong một ngôn ngữ thuần <em>applicative-order</em>, tất cả các <em>procedure</em> đều <em>strict</em> với từng đối số. Trong một ngôn ngữ thuần <em>normal-order</em>, tất cả các <em>compound procedure</em> (thủ tục hợp) đều <em>non-strict</em> với từng đối số, và các <em>primitive procedure</em> có thể <em>strict</em> hoặc <em>non-strict</em>. Cũng có những ngôn ngữ (xem Bài tập 4.31) cho phép lập trình viên kiểm soát chi tiết mức độ <em>strict</em> của các <em>procedure</em> mà họ định nghĩa.</p>
+<p>Một ví dụ nổi bật về <em>procedure</em> có thể hữu ích khi được làm <em>non-strict</em> là <code>cons</code> (hoặc nói chung, hầu như bất kỳ <em>constructor</em> cho cấu trúc dữ liệu nào). Ta có thể thực hiện tính toán hữu ích, kết hợp các phần tử để tạo thành cấu trúc dữ liệu và thao tác trên cấu trúc dữ liệu kết quả, ngay cả khi giá trị của các phần tử chưa được biết. Ví dụ, hoàn toàn hợp lý khi tính độ dài của một danh sách mà không cần biết giá trị của từng phần tử trong danh sách. Chúng ta sẽ khai thác ý tưởng này trong mục 4.2.3 để triển khai <em>streams</em> của Chương 3 dưới dạng các danh sách được tạo thành từ các cặp <code>cons</code> <em>non-strict</em>.</p>
+<h2 id="422-một-interpreter-với-lazy-evaluation"><a class="header" href="#422-một-interpreter-với-lazy-evaluation">4.2.2 Một Interpreter với Lazy Evaluation</a></h2>
+<p>Trong phần này, chúng ta sẽ triển khai một ngôn ngữ <em>normal-order</em> giống hệt Scheme ngoại trừ việc các <em>compound procedure</em> sẽ <em>non-strict</em> với từng đối số. Các <em>primitive procedure</em> vẫn sẽ <em>strict</em>. Việc chỉnh sửa <em>evaluator</em> ở mục 4.1.1 để ngôn ngữ mà nó thông dịch hoạt động theo cách này không khó. Hầu hết các thay đổi cần thiết tập trung quanh việc áp dụng <em>procedure</em>.</p>
+<p>Ý tưởng cơ bản là khi áp dụng một <em>procedure</em>, <em>interpreter</em> phải xác định đối số nào sẽ được đánh giá và đối số nào sẽ bị trì hoãn. Các đối số bị trì hoãn sẽ không được đánh giá; thay vào đó, chúng được biến đổi thành các đối tượng gọi là <em>thunks</em>.<sup class="footnote-reference"><a href="#4">4</a></sup> Một <em>thunk</em> phải chứa thông tin cần thiết để tạo ra giá trị của đối số khi cần, như thể nó đã được đánh giá tại thời điểm gọi <em>procedure</em>. Do đó, <em>thunk</em> phải chứa biểu thức đối số và <em>environment</em> (môi trường) trong đó việc gọi <em>procedure</em> đang được đánh giá.</p>
+<p>Quá trình đánh giá biểu thức trong một <em>thunk</em> được gọi là <em>forcing</em>.<sup class="footnote-reference"><a href="#5">5</a></sup> Nói chung, một <em>thunk</em> sẽ chỉ bị <em>force</em> khi giá trị của nó được cần đến: khi nó được truyền vào một <em>primitive procedure</em> sẽ sử dụng giá trị của <em>thunk</em>; khi nó là giá trị của một <em>predicate</em> trong một câu điều kiện; và khi nó là giá trị của một <em>operator</em> sắp được áp dụng như một <em>procedure</em>. Một lựa chọn thiết kế mà chúng ta có là có nên <em>memoize</em> (ghi nhớ) các <em>thunk</em> hay không, giống như ta đã làm với các đối tượng <em>delayed</em> trong mục 3.5.1. Với <em>memoization</em>, lần đầu tiên một <em>thunk</em> bị <em>force</em>, nó sẽ lưu trữ giá trị đã tính toán. Các lần <em>force</em> tiếp theo chỉ đơn giản trả về giá trị đã lưu mà không lặp lại việc tính toán. Chúng ta sẽ làm cho <em>interpreter</em> của mình <em>memoize</em>, vì điều này hiệu quả hơn cho nhiều ứng dụng. Tuy nhiên, ở đây cũng có những cân nhắc phức tạp.<sup class="footnote-reference"><a href="#6">6</a></sup></p>
+<h3 id="modifying-the-evaluator-chỉnh-sửa-evaluator"><a class="header" href="#modifying-the-evaluator-chỉnh-sửa-evaluator">Modifying the evaluator (Chỉnh sửa evaluator)</a></h3>
+<p>Sự khác biệt chính giữa <em>lazy evaluator</em> (bộ đánh giá lười) và bộ ở mục 4.1 nằm ở cách xử lý <em>procedure applications</em> (việc áp dụng thủ tục) trong <code>eval</code> và <code>apply</code>.</p>
+<p>Mệnh đề <code>application?</code> của <code>eval</code> trở thành:</p>
+<pre><code class="language-{.scheme}">((application? exp)
+ (apply (actual-value (operator exp) env)
+        (operands exp)
+        env))
+</code></pre>
+<p>Điều này gần như giống hệt mệnh đề <code>application?</code> của <code>eval</code> trong 4.1.1. Tuy nhiên, đối với <em>lazy evaluation</em>, chúng ta gọi <code>apply</code> với các <em>operand expressions</em> (biểu thức toán hạng), thay vì các đối số được tạo ra bằng cách đánh giá chúng. Vì chúng ta sẽ cần <em>environment</em> (môi trường) để tạo <em>thunks</em> nếu các đối số bị trì hoãn, nên ta cũng phải truyền môi trường này vào. Chúng ta vẫn đánh giá <em>operator</em>, vì <code>apply</code> cần <em>procedure</em> thực sự để áp dụng nhằm phân loại theo kiểu (primitive so với compound) và thực hiện áp dụng.</p>
+<p>Bất cứ khi nào cần giá trị thực của một biểu thức, ta sử dụng:</p>
+<pre><code class="language-{.scheme}">(define (actual-value exp env)
+  (force-it (eval exp env)))
+</code></pre>
+<p>thay vì chỉ dùng <code>eval</code>, để nếu giá trị của biểu thức là một <em>thunk</em>, nó sẽ được <em>force</em>.</p>
+<p>Phiên bản mới của <code>apply</code> cũng gần giống với phiên bản trong 4.1.1. Khác biệt là <code>eval</code> đã truyền vào các <em>operand expressions</em> chưa được đánh giá: Đối với <em>primitive procedures</em> (vốn <em>strict</em>), ta đánh giá tất cả các đối số trước khi áp dụng <em>primitive</em>; đối với <em>compound procedures</em> (vốn <em>non-strict</em>), ta trì hoãn tất cả các đối số trước khi áp dụng <em>procedure</em>.</p>
+<pre><code class="language-{.scheme}">(define (apply procedure arguments env)
+  (cond ((primitive-procedure? procedure)
+         (apply-primitive-procedure
+          procedure
+          (list-of-arg-values 
+           arguments 
+           env)))  ; changed
+        ((compound-procedure? procedure)
+         (eval-sequence
+          (procedure-body procedure)
+          (extend-environment
+           (procedure-parameters procedure)
+           (list-of-delayed-args 
+            arguments 
+            env)   ; changed
+           (procedure-environment procedure))))
+        (else (error &quot;Unknown procedure 
+                      type: APPLY&quot; 
+                     procedure))))
+</code></pre>
+<p>Các <em>procedure</em> xử lý đối số này giống như <code>list-of-values</code> trong 4.1.1, ngoại trừ việc <code>list-of-delayed-args</code> trì hoãn các đối số thay vì đánh giá chúng, và <code>list-of-arg-values</code> sử dụng <code>actual-value</code> thay vì <code>eval</code>:</p>
+<pre><code class="language-{.scheme}">(define (list-of-arg-values exps env)
+  (if (no-operands? exps)
+      '()
+      (cons (actual-value 
+             (first-operand exps) 
+             env)
+            (list-of-arg-values 
+             (rest-operands exps)
+             env))))
+
+(define (list-of-delayed-args exps env)
+  (if (no-operands? exps)
+      '()
+      (cons (delay-it 
+             (first-operand exps) 
+             env)
+            (list-of-delayed-args 
+             (rest-operands exps)
+             env))))
+</code></pre>
+<p>Một nơi khác cần thay đổi <em>evaluator</em> là trong xử lý <code>if</code>, nơi ta phải dùng <code>actual-value</code> thay vì <code>eval</code> để lấy giá trị của <em>predicate expression</em> trước khi kiểm tra nó đúng hay sai:</p>
+<pre><code class="language-{.scheme}">(define (eval-if exp env)
+  (if (true? (actual-value (if-predicate exp) 
+                           env))
+      (eval (if-consequent exp) env)
+      (eval (if-alternative exp) env)))
+</code></pre>
+<p>Cuối cùng, ta phải thay đổi <em>procedure</em> <code>driver-loop</code> (4.1.4) để dùng <code>actual-value</code> thay vì <code>eval</code>, nhằm đảm bảo nếu một giá trị bị trì hoãn được trả về vòng lặp <em>read-eval-print</em>, nó sẽ được <em>force</em> trước khi in ra. Ta cũng thay đổi <em>prompts</em> để chỉ ra rằng đây là <em>lazy evaluator</em>:</p>
+<pre><code class="language-{.scheme}">(define input-prompt  &quot;;;; L-Eval input:&quot;)
+(define output-prompt &quot;;;; L-Eval value:&quot;)
+
+(define (driver-loop)
+  (prompt-for-input input-prompt)
+  (let ((input (read)))
+    (let ((output (actual-value 
+                   input 
+                   the-global-environment)))
+      (announce-output output-prompt)
+      (user-print output)))
+  (driver-loop))
+</code></pre>
+<p>Với những thay đổi này, ta có thể khởi động <em>evaluator</em> và kiểm thử. Việc đánh giá thành công biểu thức <code>try</code> đã thảo luận ở 4.2.1 cho thấy <em>interpreter</em> đang thực hiện <em>lazy evaluation</em>:</p>
+<pre><code class="language-{.scheme}">(define the-global-environment 
+  (setup-environment))
+
+(driver-loop)
+
+;;; L-Eval input:
+(define (try a b) (if (= a 0) 1 b))
+
+;;; L-Eval value:
+ok
+
+;;; L-Eval input:
+(try 0 (/ 1 0))
+
+;;; L-Eval value:
+1
+</code></pre>
+<h3 id="representing-thunks-biểu-diễn-thunks"><a class="header" href="#representing-thunks-biểu-diễn-thunks">Representing thunks (Biểu diễn thunks)</a></h3>
+<p><em>Evaluator</em> của chúng ta phải sắp xếp để tạo <em>thunks</em> khi <em>procedures</em> được áp dụng cho các đối số và <em>force</em> các <em>thunks</em> này sau đó. Một <em>thunk</em> phải đóng gói một biểu thức cùng với <em>environment</em>, để đối số có thể được tạo ra sau này. Để <em>force</em> <em>thunk</em>, ta chỉ cần trích xuất biểu thức và <em>environment</em> từ <em>thunk</em> và đánh giá biểu thức trong <em>environment</em>. Ta dùng <code>actual-value</code> thay vì <code>eval</code> để nếu giá trị của biểu thức bản thân nó là một <em>thunk</em>, ta sẽ <em>force</em> tiếp, và cứ thế cho đến khi gặp một thứ không phải <em>thunk</em>:</p>
+<pre><code class="language-{.scheme}">(define (force-it obj)
+  (if (thunk? obj)
+      (actual-value (thunk-exp obj) 
+                    (thunk-env obj))
+      obj))
+</code></pre>
+<p>Một cách đơn giản để đóng gói một biểu thức với <em>environment</em> là tạo một danh sách chứa biểu thức và <em>environment</em>. Do đó, ta tạo một <em>thunk</em> như sau:</p>
+<pre><code class="language-{.scheme}">(define (delay-it exp env)
+  (list 'thunk exp env))
+(define (thunk? obj) (tagged-list? obj 'thunk))
+(define (thunk-exp thunk) (cadr thunk))
+(define (thunk-env thunk) (caddr thunk))
+</code></pre>
+<p>Thực tế, điều chúng ta muốn cho <em>interpreter</em> không hoàn toàn như vậy, mà là các <em>thunks</em> đã được <em>memoized</em>. Khi một <em>thunk</em> bị <em>force</em>, ta sẽ biến nó thành một <em>evaluated thunk</em> bằng cách thay thế biểu thức đã lưu bằng giá trị của nó và thay đổi thẻ <code>thunk</code> để có thể nhận diện là đã được đánh giá<sup class="footnote-reference"><a href="#7">7</a></sup>.</p>
+<pre><code class="language-{.scheme}">(define (evaluated-thunk? obj)
+  (tagged-list? obj 'evaluated-thunk))
+
+(define (thunk-value evaluated-thunk) 
+  (cadr evaluated-thunk))
+
+(define (force-it obj)
+  (cond ((thunk? obj)
+         (let ((result
+                (actual-value 
+                 (thunk-exp obj)
+                 (thunk-env obj))))
+           (set-car! obj 'evaluated-thunk)
+           ;; replace exp with its value:
+           (set-car! (cdr obj) result) 
+           ;; forget unneeded env:
+           (set-cdr! (cdr obj) '()) 
+           result))
+        ((evaluated-thunk? obj)
+         (thunk-value obj))
+        (else obj)))
+</code></pre>
+<p>Lưu ý rằng cùng một <em>procedure</em> <code>delay-it</code> hoạt động được cả khi có và không có <em>memoization</em>.</p>
+<h2 id="423-streams-như-lazy-lists"><a class="header" href="#423-streams-như-lazy-lists">4.2.3 Streams như Lazy Lists</a></h2>
+<p>Trong 3.5.1, chúng ta đã chỉ ra cách triển khai <em>streams</em> (luồng) như các <em>delayed lists</em> (danh sách bị trì hoãn). Chúng ta đã giới thiệu các <em>special forms</em> (dạng đặc biệt) <code>delay</code> và <code>cons-stream</code>, cho phép tạo ra một “<em>promise</em>” (lời hứa) để tính toán <code>cdr</code> của một <em>stream</em>, mà không thực hiện lời hứa đó cho đến sau này. Chúng ta có thể sử dụng kỹ thuật tổng quát này — giới thiệu các <em>special forms</em> bất cứ khi nào cần kiểm soát nhiều hơn quá trình đánh giá — nhưng điều này khá bất tiện. Một lý do là <em>special form</em> không phải là một <em>first-class object</em> (đối tượng hạng nhất) như một <em>procedure</em>, nên ta không thể sử dụng nó cùng với các <em>higher-order procedures</em> (thủ tục bậc cao)<sup class="footnote-reference"><a href="#5">5</a></sup>. Ngoài ra, chúng ta buộc phải tạo <em>streams</em> như một loại đối tượng dữ liệu mới, tương tự nhưng không hoàn toàn giống <em>lists</em>, và điều này yêu cầu phải triển khai lại nhiều phép toán danh sách thông thường (<code>map</code>, <code>append</code>, v.v.) để dùng với <em>streams</em>.</p>
+<p>Với <em>lazy evaluation</em>, <em>streams</em> và <em>lists</em> có thể giống hệt nhau, nên không cần <em>special forms</em> hoặc các phép toán riêng biệt cho <em>list</em> và <em>stream</em>. Tất cả những gì cần làm là sắp xếp để <code>cons</code> là <em>non-strict</em>. Một cách để đạt được điều này là mở rộng <em>lazy evaluator</em> để cho phép các <em>primitive</em> <em>non-strict</em>, và triển khai <code>cons</code> như một trong số đó. Một cách dễ hơn là nhớ lại (2.1.3) rằng không có nhu cầu cơ bản nào phải triển khai <code>cons</code> như một <em>primitive</em>. Thay vào đó, ta có thể biểu diễn <em>pairs</em> (cặp) như các <em>procedures</em><sup class="footnote-reference"><a href="#4">4</a></sup>:</p>
+<pre><code class="language-{.scheme}">(define (cons x y) (lambda (m) (m x y)))
+(define (car z) (z (lambda (p q) p)))
+(define (cdr z) (z (lambda (p q) q)))
+</code></pre>
+<p>Xét theo các phép toán cơ bản này, các định nghĩa chuẩn của phép toán danh sách sẽ hoạt động với cả <em>infinite lists</em> (danh sách vô hạn — <em>streams</em>) cũng như danh sách hữu hạn, và các phép toán <em>stream</em> có thể được triển khai như các phép toán <em>list</em>. Dưới đây là một số ví dụ:</p>
+<pre><code class="language-{.scheme}">(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
+
+(define (map proc items)
+  (if (null? items)
+      '()
+      (cons (proc (car items))
+            (map proc (cdr items)))))
+
+(define (scale-list items factor)
+  (map (lambda (x) (* x factor))
+       items))
+
+(define (add-lists list1 list2)
+  (cond ((null? list1) list2)
+        ((null? list2) list1)
+        (else (cons (+ (car list1) 
+                       (car list2))
+                    (add-lists
+                     (cdr list1) 
+                     (cdr list2))))))
+
+(define ones (cons 1 ones))
+
+(define integers 
+  (cons 1 (add-lists ones integers)))
+
+;;; L-Eval input:
+(list-ref integers 17)
+
+;;; L-Eval value:
+18
+</code></pre>
+<p>Lưu ý rằng các <em>lazy lists</em> này thậm chí còn “lười” hơn các <em>streams</em> của Chương 3: <code>car</code> của danh sách, cũng như <code>cdr</code>, đều bị trì hoãn<sup class="footnote-reference"><a href="#6">6</a></sup>. Thực tế, ngay cả việc truy cập <code>car</code> hoặc <code>cdr</code> của một <em>lazy pair</em> cũng không nhất thiết phải <em>force</em> giá trị của một phần tử danh sách. Giá trị chỉ bị <em>force</em> khi thật sự cần — ví dụ: khi dùng làm đối số của một <em>primitive</em>, hoặc khi in ra làm kết quả.</p>
+<p>Các <em>lazy pairs</em> cũng giúp giải quyết vấn đề đã gặp với <em>streams</em> ở 3.5.4, nơi ta thấy rằng việc xây dựng các mô hình <em>stream</em> của hệ thống có vòng lặp có thể yêu cầu rải rác trong chương trình các phép <code>delay</code> tường minh, ngoài những phép được cung cấp bởi <code>cons-stream</code>. Với <em>lazy evaluation</em>, tất cả các đối số của <em>procedures</em> đều bị trì hoãn một cách đồng nhất. Ví dụ, ta có thể triển khai các <em>procedures</em> để tích phân danh sách và giải phương trình vi phân như dự định ban đầu ở 3.5.4:</p>
+<pre><code class="language-{.scheme}">(define (integral integrand initial-value dt)
+  (define int
+    (cons initial-value
+          (add-lists (scale-list integrand dt) 
+                     int)))
+  int)
+
+(define (solve f y0 dt)
+  (define y (integral dy y0 dt))
+  (define dy (map f y))
+  y)
+
+;;; L-Eval input:
+(list-ref (solve (lambda (x) x) 1 0.001) 1000)
+
+;;; L-Eval value:
+2.716924
+</code></pre>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p><em>Snarf</em>: “To grab, especially a large document or file for the purpose of using it either with or without the owner’s permission.” <em>Snarf down</em>: “To snarf, sometimes with the connotation of absorbing, processing, or understanding.” (Các định nghĩa này được <em>snarfed</em> từ Steele et al. 1983. Xem thêm Raymond 1993.)<br />
+<sup class="footnote-reference"><a href="#2">2</a></sup>: Sự khác biệt giữa thuật ngữ “lazy” và “normal-order” khá mơ hồ. Nói chung, “lazy” đề cập đến cơ chế của các <em>evaluator</em> cụ thể, trong khi “normal-order” đề cập đến ngữ nghĩa của các ngôn ngữ, độc lập với bất kỳ chiến lược đánh giá cụ thể nào. Tuy nhiên, đây không phải là một ranh giới cứng nhắc, và hai thuật ngữ này thường được sử dụng thay thế cho nhau.<br />
+<sup class="footnote-reference"><a href="#3">3</a></sup>: Thuật ngữ “strict” so với “non-strict” về cơ bản có nghĩa giống như “applicative-order” so với “normal-order”, ngoại trừ việc nó đề cập đến từng <em>procedure</em> và đối số riêng lẻ thay vì toàn bộ ngôn ngữ. Tại một hội nghị về ngôn ngữ lập trình, bạn có thể nghe ai đó nói
+<sup class="footnote-reference"><a href="#4">4</a></sup>: Đây là cách biểu diễn thủ tục (<em>procedural representation</em>) được mô tả trong Bài tập 2.4. Về cơ bản, bất kỳ cách biểu diễn thủ tục nào (ví dụ: triển khai theo kiểu <em>message-passing</em>) cũng có thể hoạt động tốt. Lưu ý rằng ta có thể cài đặt các định nghĩa này vào <em>lazy evaluator</em> chỉ bằng cách gõ chúng tại <em>driver loop</em>. Nếu ban đầu ta đã bao gồm <code>cons</code>, <code>car</code>, và <code>cdr</code> như các <em>primitives</em> trong <em>global environment</em>, chúng sẽ bị định nghĩa lại. (Xem thêm Bài tập 4.33 và Bài tập 4.34.)<br />
+<sup class="footnote-reference"><a href="#5">5</a></sup>: Đây chính xác là vấn đề với <em>procedure</em> <code>unless</code>, như trong Bài tập 4.26.<br />
+<sup class="footnote-reference"><a href="#6">6</a></sup>: Điều này cho phép chúng ta tạo các phiên bản trì hoãn của những cấu trúc danh sách tổng quát hơn, không chỉ là các dãy. Hughes 1990 thảo luận một số ứng dụng của “<em>lazy trees</em>.”
+<sup class="footnote-reference"><a href="#7">7</a></sup>: Lưu ý rằng chúng ta cũng xóa <code>env</code> khỏi <em>thunk</em> khi giá trị của biểu thức đã được tính toán. Điều này không ảnh hưởng đến các giá trị mà <em>interpreter</em> trả về. Tuy nhiên, nó giúp tiết kiệm bộ nhớ, vì việc loại bỏ tham chiếu từ <em>thunk</em> đến <code>env</code> khi không còn cần thiết cho phép cấu trúc này được <em>garbage-collected</em> và tái sử dụng vùng nhớ, như sẽ thảo luận ở 5.3.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="4-1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="4-3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="4-1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="4-3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>

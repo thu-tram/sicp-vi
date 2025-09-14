@@ -1,0 +1,637 @@
+<!DOCTYPE HTML>
+<html lang="vi" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Explicit-Control Evaluator - Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <!-- MathJax -->
+        <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">1 Building Abstractions with Procedures</li><li class="chapter-item expanded "><a href="1-1.html"><strong aria-hidden="true">1.</strong> The Elements of Programming</a></li><li class="chapter-item expanded "><a href="1-2.html"><strong aria-hidden="true">2.</strong> Procedures and the Processes They Generate</a></li><li class="chapter-item expanded "><a href="1-3.html"><strong aria-hidden="true">3.</strong> Formulating Abstractions with Higher-Order Procedures</a></li><li class="chapter-item expanded affix "><li class="part-title">2 Building Abstractions with Data</li><li class="chapter-item expanded "><a href="2-1.html"><strong aria-hidden="true">4.</strong> Introduction to Data Abstraction</a></li><li class="chapter-item expanded "><a href="2-2.html"><strong aria-hidden="true">5.</strong> Hierarchical Data and the Closure Property</a></li><li class="chapter-item expanded "><a href="2-3.html"><strong aria-hidden="true">6.</strong> Symbolic Data</a></li><li class="chapter-item expanded "><a href="2-4.html"><strong aria-hidden="true">7.</strong> Multiple Representations for Abstract Data</a></li><li class="chapter-item expanded "><a href="2-5.html"><strong aria-hidden="true">8.</strong> Systems with Generic Operations</a></li><li class="chapter-item expanded affix "><li class="part-title">3 Modularity, Objects, and State</li><li class="chapter-item expanded "><a href="3-1.html"><strong aria-hidden="true">9.</strong> Assignment and Local State</a></li><li class="chapter-item expanded "><a href="3-2.html"><strong aria-hidden="true">10.</strong> The Environment Model of Evaluation</a></li><li class="chapter-item expanded "><a href="3-3.html"><strong aria-hidden="true">11.</strong> Modeling with Mutable Data</a></li><li class="chapter-item expanded "><a href="3-4.html"><strong aria-hidden="true">12.</strong> Concurrency: Time Is of the Essence</a></li><li class="chapter-item expanded "><a href="3-5.html"><strong aria-hidden="true">13.</strong> Streams</a></li><li class="chapter-item expanded affix "><li class="part-title">4 Metalinguistic Abstraction</li><li class="chapter-item expanded "><a href="4-1.html"><strong aria-hidden="true">14.</strong> The Metacircular Evaluator</a></li><li class="chapter-item expanded "><a href="4-2.html"><strong aria-hidden="true">15.</strong> Variations on a Scheme — Lazy Evaluation</a></li><li class="chapter-item expanded "><a href="4-3.html"><strong aria-hidden="true">16.</strong> Variations on a Scheme — Nondeterministic Computing</a></li><li class="chapter-item expanded "><a href="4-4.html"><strong aria-hidden="true">17.</strong> Logic Programming</a></li><li class="chapter-item expanded affix "><li class="part-title">5 Computing with Register Machines</li><li class="chapter-item expanded "><a href="5-1.html"><strong aria-hidden="true">18.</strong> Designing Register Machines</a></li><li class="chapter-item expanded "><a href="5-2.html"><strong aria-hidden="true">19.</strong> A Register-Machine Simulator</a></li><li class="chapter-item expanded "><a href="5-3.html"><strong aria-hidden="true">20.</strong> Storage Allocation and Garbage Collection</a></li><li class="chapter-item expanded "><a href="5-4.html" class="active"><strong aria-hidden="true">21.</strong> The Explicit-Control Evaluator</a></li><li class="chapter-item expanded "><a href="5-5.html"><strong aria-hidden="true">22.</strong> Compilation</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Cấu trúc và diễn giải chương trình máy tính - SICP 2nd.</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="54-bộ-thông-dịch-điều-khiển-tường-minh-the-explicit-control-evaluator"><a class="header" href="#54-bộ-thông-dịch-điều-khiển-tường-minh-the-explicit-control-evaluator">5.4 Bộ thông dịch điều khiển tường minh (The Explicit-Control Evaluator)</a></h1>
+<p>Trong 5.1, chúng ta đã thấy cách biến đổi các chương trình Scheme đơn giản thành các mô tả của register machine (máy thanh ghi). Giờ đây, chúng ta sẽ thực hiện phép biến đổi này trên một chương trình phức tạp hơn — <em>metacircular evaluator</em> (bộ thông dịch siêu vòng) ở các mục 4.1.1–4.1.4, chương trình này cho thấy cách hành vi của một Scheme interpreter (bộ thông dịch Scheme) có thể được mô tả thông qua các procedure (thủ tục) <code>eval</code> và <code>apply</code>.</p>
+<p><em>Explicit-control evaluator</em> (bộ thông dịch điều khiển tường minh) mà chúng ta phát triển trong phần này cho thấy cách các cơ chế gọi procedure và truyền đối số được sử dụng trong quá trình đánh giá (evaluation) có thể được mô tả dưới dạng các thao tác trên register và stack. Ngoài ra, explicit-control evaluator có thể đóng vai trò như một hiện thực của Scheme interpreter, được viết bằng một ngôn ngữ rất giống với ngôn ngữ máy gốc của các máy tính thông thường. Bộ thông dịch này có thể được thực thi bởi register-machine simulator (trình mô phỏng máy thanh ghi) ở 5.2. Ngoài ra, nó có thể được dùng làm điểm khởi đầu để xây dựng một hiện thực bằng ngôn ngữ máy của Scheme evaluator, hoặc thậm chí một máy chuyên dụng để đánh giá các biểu thức Scheme.</p>
+<p>Hình 5.16 cho thấy một hiện thực phần cứng như vậy: một chip silicon đóng vai trò là evaluator cho Scheme. Các kỹ sư thiết kế chip bắt đầu với đặc tả data-path (đường dữ liệu) và controller (bộ điều khiển) cho một register machine tương tự như evaluator được mô tả trong phần này, và sử dụng các chương trình thiết kế tự động để xây dựng sơ đồ mạch tích hợp<sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Xem Batali et al. 1982 để biết thêm thông tin về con chip và phương pháp thiết kế.</p>
+</div>
+<p><img src="fig/chip.jpg" alt="" /></p>
+<p><strong>Figure 5.16:</strong> A silicon-chip implementation of an evaluator for Scheme.</p>
+<h3 id="registers-và-operations"><a class="header" href="#registers-và-operations">Registers và operations</a></h3>
+<p>Khi thiết kế explicit-control evaluator, chúng ta phải chỉ rõ các operation sẽ được sử dụng trong register machine. Chúng ta đã mô tả metacircular evaluator theo cú pháp trừu tượng (abstract syntax), sử dụng các procedure như <code>quoted?</code> và <code>make-procedure</code>. Khi hiện thực register machine, chúng ta có thể triển khai các procedure này thành các chuỗi thao tác bộ nhớ cấu trúc danh sách (list-structure memory operations) cơ bản, và hiện thực các thao tác này trên register machine.</p>
+<p>Tuy nhiên, điều này sẽ khiến evaluator của chúng ta trở nên rất dài, làm lu mờ cấu trúc cơ bản bởi các chi tiết. Để trình bày rõ ràng hơn, chúng ta sẽ đưa vào như các operation nguyên thủy của register machine các syntax procedure đã nêu trong 4.1.2 và các procedure để biểu diễn environment và các dữ liệu thời gian chạy khác được nêu trong các mục 4.1.3 và 4.1.4. Để đặc tả đầy đủ một evaluator có thể được lập trình bằng ngôn ngữ máy mức thấp hoặc hiện thực bằng phần cứng, chúng ta sẽ thay thế các operation này bằng các operation cơ bản hơn, sử dụng hiện thực cấu trúc danh sách đã mô tả trong 5.3.</p>
+<p>Register machine của Scheme evaluator bao gồm một stack và bảy register: <code>exp</code>, <code>env</code>, <code>val</code>, <code>continue</code>, <code>proc</code>, <code>argl</code>, và <code>unev</code>.</p>
+<ul>
+<li><code>exp</code> được dùng để giữ biểu thức cần đánh giá.</li>
+<li><code>env</code> chứa environment trong đó việc đánh giá sẽ được thực hiện.</li>
+<li>Khi kết thúc đánh giá, <code>val</code> chứa giá trị thu được từ việc đánh giá biểu thức trong environment đã chỉ định.</li>
+<li>Register <code>continue</code> được dùng để hiện thực đệ quy, như đã giải thích trong 5.1.4. (Evaluator cần tự gọi lại chính nó, vì việc đánh giá một biểu thức đòi hỏi phải đánh giá các biểu thức con của nó.)</li>
+<li>Các register <code>proc</code>, <code>argl</code>, và <code>unev</code> được dùng trong việc đánh giá các combination (tổ hợp).</li>
+</ul>
+<p>Chúng ta sẽ không cung cấp sơ đồ data-path để chỉ ra cách các register và operation của evaluator được kết nối, cũng như không đưa ra danh sách đầy đủ các operation của máy. Những điều này đã được ngầm định trong controller của evaluator, sẽ được trình bày chi tiết.</p>
+<h2 id="541-lõi-của-explicit-control-evaluator"><a class="header" href="#541-lõi-của-explicit-control-evaluator">5.4.1 Lõi của Explicit-Control Evaluator</a></h2>
+<p>Thành phần trung tâm trong evaluator là chuỗi các lệnh bắt đầu tại <code>eval-dispatch</code>. Thành phần này tương ứng với procedure <code>eval</code> của metacircular evaluator được mô tả trong 4.1.1. Khi controller bắt đầu tại <code>eval-dispatch</code>, nó sẽ đánh giá biểu thức được chỉ định bởi <code>exp</code> trong environment được chỉ định bởi <code>env</code>. Khi việc đánh giá hoàn tất, controller sẽ chuyển đến điểm vào được lưu trong <code>continue</code>, và register <code>val</code> sẽ chứa giá trị của biểu thức.</p>
+<p>Giống như <code>eval</code> trong metacircular evaluator, cấu trúc của <code>eval-dispatch</code> là một phân tích theo trường hợp (case analysis) dựa trên loại cú pháp của biểu thức cần đánh giá<sup class="footnote-reference"><a href="#2">2</a></sup>.</p>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Trong controller của chúng ta, việc phân nhánh (dispatch) được viết dưới dạng một chuỗi các lệnh <code>test</code> và <code>branch</code>. Ngoài ra, nó cũng có thể được viết theo phong cách <em>data-directed</em> (hướng dữ liệu) (và trong một hệ thống thực tế có lẽ sẽ được viết như vậy) để tránh việc phải thực hiện các phép kiểm tra tuần tự và để dễ dàng định nghĩa các loại biểu thức mới. Một máy được thiết kế để chạy Lisp có thể sẽ bao gồm một lệnh <code>dispatch-on-type</code> để thực thi hiệu quả các phân nhánh hướng dữ liệu như vậy.</p>
+</div>
+<pre><code class="language-{.scheme}">eval-dispatch
+  (test (op self-evaluating?) (reg exp))
+  (branch (label ev-self-eval))
+  (test (op variable?) (reg exp))
+  (branch (label ev-variable))
+  (test (op quoted?) (reg exp))
+  (branch (label ev-quoted))
+  (test (op assignment?) (reg exp))
+  (branch (label ev-assignment))
+  (test (op definition?) (reg exp))
+  (branch (label ev-definition))
+  (test (op if?) (reg exp))
+  (branch (label ev-if))
+  (test (op lambda?) (reg exp))
+  (branch (label ev-lambda))
+  (test (op begin?) (reg exp))
+  (branch (label ev-begin))
+  (test (op application?) (reg exp))
+  (branch (label ev-application))
+  (goto (label unknown-expression-type))
+</code></pre>
+<h3 id="Đánh-giá-các-biểu-thức-đơn-giản"><a class="header" href="#Đánh-giá-các-biểu-thức-đơn-giản">Đánh giá các biểu thức đơn giản</a></h3>
+<p>Các số và chuỗi (là các biểu thức tự đánh giá), biến, biểu thức trích dẫn (quotation), và biểu thức <code>lambda</code> không có các biểu thức con cần đánh giá. Với các trường hợp này, evaluator chỉ cần đặt giá trị đúng vào register <code>val</code> và tiếp tục thực thi tại điểm vào được chỉ định bởi <code>continue</code>. Việc đánh giá các biểu thức đơn giản được thực hiện bởi đoạn mã controller sau:</p>
+<pre><code class="language-{.scheme}">ev-self-eval
+  (assign val (reg exp))
+  (goto (reg continue))
+ev-variable
+  (assign val
+          (op lookup-variable-value)
+          (reg exp)
+          (reg env))
+  (goto (reg continue))
+ev-quoted
+  (assign val
+          (op text-of-quotation)
+          (reg exp))
+  (goto (reg continue))
+ev-lambda
+  (assign unev
+          (op lambda-parameters)
+          (reg exp))
+  (assign exp 
+          (op lambda-body)
+          (reg exp))
+  (assign val 
+          (op make-procedure)
+          (reg unev)
+          (reg exp)
+          (reg env))
+  (goto (reg continue))
+</code></pre>
+<p>Hãy chú ý cách <code>ev-lambda</code> sử dụng các register <code>unev</code> và <code>exp</code> để giữ các tham số và thân của biểu thức lambda, để chúng có thể được truyền cho operation <code>make-procedure</code>, cùng với environment trong <code>env</code>.</p>
+<h3 id="Đánh-giá-các-lời-gọi-procedure"><a class="header" href="#Đánh-giá-các-lời-gọi-procedure">Đánh giá các lời gọi procedure</a></h3>
+<p>Một lời gọi procedure (procedure application) được xác định bởi một combination (tổ hợp) chứa một operator (toán tử) và các operand (toán hạng). Operator là một biểu thức con mà giá trị của nó là một procedure, và các operand là các biểu thức con mà giá trị của chúng là các đối số sẽ được truyền vào procedure đó.</p>
+<p>Metacircular <code>eval</code> xử lý các lời gọi bằng cách tự gọi đệ quy để đánh giá từng phần tử của combination, sau đó truyền các kết quả cho <code>apply</code>, thủ tục thực hiện việc gọi procedure thực sự. Explicit-control evaluator cũng làm điều tương tự; các lời gọi đệ quy này được hiện thực bằng các lệnh <code>goto</code>, kết hợp với việc sử dụng stack để lưu các register sẽ được khôi phục sau khi lời gọi đệ quy trả về. Trước mỗi lời gọi, chúng ta sẽ cẩn thận xác định những register nào cần lưu (vì giá trị của chúng sẽ cần dùng sau này) <sup class="footnote-reference"><a href="#3">3</a></sup>.</p>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>Đây là một điểm quan trọng nhưng tinh tế khi dịch các thuật toán từ một ngôn ngữ thủ tục như Lisp sang ngôn ngữ register-machine. Thay vì chỉ lưu những gì cần thiết, chúng ta có thể lưu tất cả các register (trừ <code>val</code>) trước mỗi lời gọi đệ quy. Điều này được gọi là <em>framed-stack</em> discipline. Cách này sẽ hoạt động nhưng có thể lưu nhiều register hơn mức cần thiết; đây có thể là một yếu tố quan trọng trong hệ thống mà các thao tác stack tốn kém. Lưu các register có nội dung không cần thiết sau này cũng có thể giữ lại dữ liệu vô ích mà lẽ ra có thể được garbage-collected, giải phóng bộ nhớ để tái sử dụng.</p>
+</div>
+<p>Chúng ta bắt đầu việc đánh giá một application bằng cách đánh giá operator để tạo ra một procedure, procedure này sau đó sẽ được áp dụng cho các operand đã được đánh giá. Để đánh giá operator, chúng ta đưa nó vào register <code>exp</code> và chuyển đến <code>eval-dispatch</code>. Environment trong register <code>env</code> đã là environment đúng để đánh giá operator. Tuy nhiên, chúng ta lưu <code>env</code> vì sẽ cần nó sau để đánh giá các operand. Chúng ta cũng trích xuất các operand vào <code>unev</code> và lưu nó trên stack. Chúng ta thiết lập <code>continue</code> để <code>eval-dispatch</code> sẽ tiếp tục tại <code>ev-appl-did-operator</code> sau khi operator đã được đánh giá. Trước hết, chúng ta lưu giá trị cũ của <code>continue</code>, giá trị này cho controller biết sẽ tiếp tục ở đâu sau khi application hoàn tất.</p>
+<pre><code class="language-scheme">ev-application
+  (save continue)
+  (save env)
+  (assign unev (op operands) (reg exp))
+  (save unev)
+  (assign exp (op operator) (reg exp))
+  (assign
+   continue (label ev-appl-did-operator))
+  (goto (label eval-dispatch))
+</code></pre>
+<p>Khi quay lại từ việc đánh giá biểu thức con operator, chúng ta tiếp tục đánh giá các operand của combination và tích lũy các đối số thu được vào một danh sách, được giữ trong <code>argl</code>. Trước tiên, chúng ta khôi phục các operand chưa đánh giá và environment. Chúng ta khởi tạo <code>argl</code> thành danh sách rỗng. Sau đó, chúng ta gán vào register <code>proc</code> procedure được tạo ra từ việc đánh giá operator. Nếu không có operand nào, chúng ta đi thẳng đến <code>apply-dispatch</code>. Ngược lại, chúng ta lưu <code>proc</code> trên stack và bắt đầu vòng lặp đánh giá đối số<sup class="footnote-reference"><a href="#4">4</a></sup>:</p>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p>Chúng ta bổ sung vào các procedure cấu trúc dữ liệu của evaluator trong 4.1.3 hai procedure sau để thao tác danh sách đối số:...</p>
+</div>
+<pre><code class="language-scheme">ev-appl-did-operator
+  (restore unev)             ; the operands
+  (restore env)
+  (assign argl (op empty-arglist))
+  (assign proc (reg val))    ; the operator
+  (test (op no-operands?) (reg unev))
+  (branch (label apply-dispatch))
+  (save proc)
+</code></pre>
+<p>Mỗi vòng lặp đánh giá đối số sẽ đánh giá một operand từ danh sách trong <code>unev</code> và tích lũy kết quả vào <code>argl</code>. Để đánh giá một operand, chúng ta đặt nó vào register <code>exp</code> và chuyển đến <code>eval-dispatch</code>, sau khi thiết lập <code>continue</code> để việc thực thi sẽ tiếp tục với giai đoạn tích lũy đối số. Nhưng trước hết, chúng ta lưu các đối số đã tích lũy cho đến thời điểm này (trong <code>argl</code>), environment (trong <code>env</code>), và các operand còn lại cần đánh giá (trong <code>unev</code>). Một trường hợp đặc biệt được xử lý cho operand cuối cùng, được thực hiện tại <code>ev-appl-last-arg</code>.</p>
+<pre><code class="language-scheme">ev-appl-operand-loop
+  (save argl)
+  (assign exp
+          (op first-operand)
+          (reg unev))
+  (test (op last-operand?) (reg unev))
+  (branch (label ev-appl-last-arg))
+  (save env)
+  (save unev)
+  (assign continue 
+          (label ev-appl-accumulate-arg))
+  (goto (label eval-dispatch))
+</code></pre>
+<p>Khi một operand đã được đánh giá, giá trị của nó được tích lũy vào danh sách trong <code>argl</code>. Operand đó sau đó được loại bỏ khỏi danh sách các operand chưa đánh giá trong <code>unev</code>, và việc đánh giá đối số tiếp tục.</p>
+<pre><code class="language-scheme">ev-appl-accumulate-arg
+  (restore unev)
+  (restore env)
+  (restore argl)
+  (assign argl 
+          (op adjoin-arg)
+          (reg val)
+          (reg argl))
+  (assign unev
+          (op rest-operands)
+          (reg unev))
+  (goto (label ev-appl-operand-loop))
+</code></pre>
+<p>Việc đánh giá đối số cuối cùng được xử lý khác đi. Không cần lưu environment hoặc danh sách các operand chưa đánh giá trước khi chuyển đến <code>eval-dispatch</code>, vì chúng sẽ không cần thiết sau khi operand cuối cùng được đánh giá. Do đó, chúng ta quay lại từ việc đánh giá đến một điểm vào đặc biệt <code>ev-appl-accum-last-arg</code>, nơi khôi phục danh sách đối số, tích lũy đối số mới, khôi phục procedure đã lưu, và chuyển sang thực hiện application<sup class="footnote-reference"><a href="#5">5</a></sup>.</p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p>Việc tối ưu hóa xử lý riêng operand cuối cùng được gọi là <em>evlis tail recursion</em> (xem Wand 1980). Chúng ta có thể hiệu quả hơn một chút trong vòng lặp đánh giá đối số nếu cũng xử lý riêng operand đầu tiên. Điều này sẽ cho phép trì hoãn việc khởi tạo <code>argl</code> cho đến sau khi đánh giá operand đầu tiên, để tránh phải lưu <code>argl</code> trong trường hợp này. Trình biên dịch ở 5.5 thực hiện tối ưu hóa này. (So sánh với procedure <code>construct-arglist</code> ở 5.5.3.)</p>
+</div>
+<pre><code class="language-scheme">ev-appl-last-arg
+  (assign continue 
+          (label ev-appl-accum-last-arg))
+  (goto (label eval-dispatch))
+ev-appl-accum-last-arg
+  (restore argl)
+  (assign argl 
+          (op adjoin-arg)
+          (reg val)
+          (reg argl))
+  (restore proc)
+  (goto (label apply-dispatch))
+</code></pre>
+<p>Chi tiết của vòng lặp đánh giá đối số quyết định thứ tự mà interpreter đánh giá các operand của một combination (ví dụ, từ trái sang phải hoặc từ phải sang trái — xem Bài tập 3.8). Thứ tự này không được xác định bởi metacircular evaluator, vốn kế thừa cấu trúc điều khiển từ Scheme nền tảng mà nó được hiện thực<sup class="footnote-reference"><a href="#6">6</a></sup>. Bởi vì selector <code>first-operand</code> (được dùng trong <code>ev-appl-operand-loop</code> để trích xuất các operand liên tiếp từ <code>unev</code>) được hiện thực bằng <code>car</code> và selector <code>rest-operands</code> được hiện thực bằng <code>cdr</code>, explicit-control evaluator sẽ đánh giá các operand của một combination theo thứ tự từ trái sang phải.</p>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>Thứ tự đánh giá operand trong metacircular evaluator được xác định bởi thứ tự đánh giá các đối số của <code>cons</code> trong procedure <code>list-of-values</code> ở 4.1.1 (xem Bài tập 4.1).</p>
+</div>
+<h3 id="lời-gọi-procedure"><a class="header" href="#lời-gọi-procedure">Lời gọi procedure</a></h3>
+<p>Điểm vào <code>apply-dispatch</code> tương ứng với procedure <code>apply</code> của <em>metacircular evaluator</em>. Tại thời điểm chúng ta đến <code>apply-dispatch</code>, register <code>proc</code> chứa procedure cần được gọi và <code>argl</code> chứa danh sách các đối số đã được đánh giá mà procedure này sẽ áp dụng. Giá trị đã lưu của <code>continue</code> (ban đầu được truyền cho <code>eval-dispatch</code> và lưu tại <code>ev-application</code>), giá trị này cho biết sẽ quay lại đâu với kết quả của lời gọi procedure, đang nằm trên stack. Khi việc gọi hoàn tất, controller sẽ chuyển đến điểm vào được chỉ định bởi giá trị <code>continue</code> đã lưu, với kết quả của lời gọi nằm trong <code>val</code>. Giống như <code>apply</code> trong metacircular evaluator, có hai trường hợp cần xem xét: hoặc procedure được gọi là một primitive, hoặc nó là một compound procedure.</p>
+<pre><code class="language-{.scheme}">apply-dispatch
+  (test (op primitive-procedure?) (reg proc))
+  (branch (label primitive-apply))
+  (test (op compound-procedure?) (reg proc))
+  (branch (label compound-apply))
+  (goto (label unknown-procedure-type))
+</code></pre>
+<p>Chúng ta giả định rằng mỗi primitive được hiện thực sao cho nó lấy các đối số từ <code>argl</code> và đặt kết quả vào <code>val</code>. Để chỉ rõ cách máy xử lý các primitive, chúng ta sẽ phải cung cấp một chuỗi các lệnh controller để hiện thực từng primitive và sắp xếp để <code>primitive-apply</code> phân nhánh đến các lệnh của primitive được xác định bởi nội dung của <code>proc</code>. Vì chúng ta quan tâm đến cấu trúc của quá trình đánh giá hơn là chi tiết của các primitive, nên thay vào đó chúng ta chỉ sử dụng một operation <code>apply-primitive-procedure</code> để áp dụng procedure trong <code>proc</code> cho các đối số trong <code>argl</code>.</p>
+<p>Để mô phỏng evaluator bằng simulator ở 5.2, chúng ta sử dụng procedure <code>apply-primitive-procedure</code>, procedure này gọi hệ thống Scheme nền tảng để thực hiện lời gọi, giống như chúng ta đã làm với metacircular evaluator trong 4.1.4. Sau khi tính toán giá trị của lời gọi primitive, chúng ta khôi phục <code>continue</code> và chuyển đến điểm vào được chỉ định.</p>
+<pre><code class="language-{.scheme}">primitive-apply
+  (assign val (op apply-primitive-procedure)
+              (reg proc)
+              (reg argl))
+  (restore continue)
+  (goto (reg continue))
+</code></pre>
+<p>Để áp dụng một compound procedure, chúng ta tiến hành giống như với metacircular evaluator. Chúng ta tạo một frame để ràng buộc các tham số của procedure với các đối số, sử dụng frame này để mở rộng environment mà procedure mang theo, và đánh giá trong environment đã mở rộng này chuỗi các biểu thức tạo thành thân của procedure. <code>Ev-sequence</code>, được mô tả bên dưới trong 5.4.2, xử lý việc đánh giá chuỗi này.</p>
+<pre><code class="language-{.scheme}">compound-apply
+  (assign unev 
+          (op procedure-parameters)
+          (reg proc))
+  (assign env
+          (op procedure-environment)
+          (reg proc))
+  (assign env
+          (op extend-environment)
+          (reg unev)
+          (reg argl)
+          (reg env))
+  (assign unev
+          (op procedure-body)
+          (reg proc))
+  (goto (label ev-sequence))
+</code></pre>
+<p><code>Compound-apply</code> là nơi duy nhất trong interpreter mà register <code>env</code> được gán một giá trị mới. Giống như trong metacircular evaluator, environment mới được tạo từ environment mà procedure mang theo, cùng với danh sách đối số và danh sách biến tương ứng cần được ràng buộc.</p>
+<h2 id="542-Đánh-giá-chuỗi-lệnh-và-đệ-quy-đuôi-tail-recursion"><a class="header" href="#542-Đánh-giá-chuỗi-lệnh-và-đệ-quy-đuôi-tail-recursion">5.4.2 Đánh giá chuỗi lệnh và đệ quy đuôi (Tail Recursion)</a></h2>
+<p>Phần của explicit-control evaluator tại <code>ev-sequence</code> tương tự với procedure <code>eval-sequence</code> của metacircular evaluator. Nó xử lý các chuỗi biểu thức trong thân procedure hoặc trong các biểu thức <code>begin</code> tường minh.</p>
+<p>Các biểu thức <code>begin</code> tường minh được đánh giá bằng cách đặt chuỗi các biểu thức cần đánh giá vào <code>unev</code>, lưu <code>continue</code> trên stack, và nhảy đến <code>ev-sequence</code>.</p>
+<pre><code class="language-{.scheme}">ev-begin
+  (assign unev
+          (op begin-actions)
+          (reg exp))
+  (save continue)
+  (goto (label ev-sequence))
+</code></pre>
+<p>Các chuỗi ngầm trong thân procedure được xử lý bằng cách nhảy đến <code>ev-sequence</code> từ <code>compound-apply</code>, tại thời điểm đó <code>continue</code> đã nằm trên stack, do đã được lưu tại <code>ev-application</code>.</p>
+<p>Các điểm vào <code>ev-sequence</code> và <code>ev-sequence-continue</code> tạo thành một vòng lặp lần lượt đánh giá từng biểu thức trong một chuỗi. Danh sách các biểu thức chưa đánh giá được giữ trong <code>unev</code>. Trước khi đánh giá mỗi biểu thức, chúng ta kiểm tra xem còn biểu thức nào khác cần đánh giá trong chuỗi hay không. Nếu còn, chúng ta lưu phần còn lại của các biểu thức chưa đánh giá (trong <code>unev</code>) và environment mà chúng cần được đánh giá (trong <code>env</code>), rồi gọi <code>eval-dispatch</code> để đánh giá biểu thức. Hai register đã lưu sẽ được khôi phục khi quay lại từ việc đánh giá này, tại <code>ev-sequence-continue</code>.</p>
+<p>Biểu thức cuối cùng trong chuỗi được xử lý khác đi, tại điểm vào <code>ev-sequence-last-exp</code>. Vì không còn biểu thức nào cần đánh giá sau biểu thức này, chúng ta không cần lưu <code>unev</code> hoặc <code>env</code> trước khi chuyển đến <code>eval-dispatch</code>. Giá trị của toàn bộ chuỗi chính là giá trị của biểu thức cuối cùng, nên sau khi đánh giá biểu thức cuối cùng, không còn gì để làm ngoài việc tiếp tục tại điểm vào hiện đang nằm trên stack (điểm này đã được lưu bởi <code>ev-application</code> hoặc <code>ev-begin</code>). Thay vì thiết lập <code>continue</code> để sắp xếp cho <code>eval-dispatch</code> quay lại đây rồi khôi phục <code>continue</code> từ stack và tiếp tục tại điểm đó, chúng ta khôi phục <code>continue</code> từ stack trước khi chuyển đến <code>eval-dispatch</code>, để <code>eval-dispatch</code> sẽ tiếp tục tại điểm đó sau khi đánh giá xong biểu thức.</p>
+<pre><code class="language-{.scheme}">ev-sequence
+  (assign exp (op first-exp) (reg unev))
+  (test (op last-exp?) (reg unev))
+  (branch (label ev-sequence-last-exp))
+  (save unev)
+  (save env)
+  (assign continue
+          (label ev-sequence-continue))
+  (goto (label eval-dispatch))
+ev-sequence-continue
+  (restore env)
+  (restore unev)
+  (assign unev
+          (op rest-exps)
+          (reg unev))
+  (goto (label ev-sequence))
+ev-sequence-last-exp
+  (restore continue)
+  (goto (label eval-dispatch))
+</code></pre>
+<h3 id="Đệ-quy-đuôi-tail-recursion"><a class="header" href="#Đệ-quy-đuôi-tail-recursion">Đệ quy đuôi (Tail recursion)</a></h3>
+<p>Trong Chương 1, chúng ta đã nói rằng quá trình được mô tả bởi một procedure (thủ tục) như:</p>
+<pre><code class="language-{.scheme}">(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x) x)))
+</code></pre>
+<p>là một quá trình lặp (iterative process). Mặc dù procedure này về mặt cú pháp là đệ quy (được định nghĩa dựa trên chính nó), nhưng về mặt logic, evaluator không nhất thiết phải lưu thông tin khi chuyển từ một lần gọi <code>sqrt-iter</code> sang lần tiếp theo<sup class="footnote-reference"><a href="#7">7</a></sup>. Một evaluator có thể thực thi một procedure như <code>sqrt-iter</code> mà không cần thêm bộ nhớ khi procedure tiếp tục tự gọi chính nó được gọi là <em>tail-recursive</em> evaluator (bộ thông dịch đệ quy đuôi). Hiện thực metacircular của evaluator trong Chương 4 không chỉ rõ liệu evaluator có tail-recursive hay không, bởi vì evaluator đó kế thừa cơ chế lưu trạng thái từ Scheme nền tảng. Tuy nhiên, với explicit-control evaluator, chúng ta có thể lần theo quá trình đánh giá để xem khi nào các lời gọi procedure gây ra sự tích lũy thông tin trên stack.</p>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p>Chúng ta đã thấy trong 5.1 cách hiện thực một quá trình như vậy bằng một register machine không có stack; trạng thái của quá trình được lưu trong một tập hợp cố định các register.</p>
+</div>
+<p>Evaluator của chúng ta là tail-recursive, bởi vì để đánh giá biểu thức cuối cùng của một chuỗi, chúng ta chuyển trực tiếp đến <code>eval-dispatch</code> mà không lưu bất kỳ thông tin nào trên stack. Do đó, việc đánh giá biểu thức cuối cùng trong một chuỗi — ngay cả khi đó là một lời gọi procedure (như trong <code>sqrt-iter</code>, nơi biểu thức <code>if</code>, vốn là biểu thức cuối cùng trong thân procedure, rút gọn thành một lời gọi <code>sqrt-iter</code>) — sẽ không làm tích lũy thông tin trên stack<sup class="footnote-reference"><a href="#8">8</a></sup>.</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p>Việc hiện thực tail recursion trong <code>ev-sequence</code> này là một dạng của kỹ thuật tối ưu hóa nổi tiếng được nhiều trình biên dịch sử dụng. Khi biên dịch một procedure kết thúc bằng một lời gọi procedure, ta có thể thay lời gọi đó bằng một lệnh nhảy (jump) đến điểm vào của procedure được gọi. Việc xây dựng chiến lược này vào interpreter, như chúng ta đã làm trong phần này, cung cấp tối ưu hóa này một cách đồng nhất trong toàn bộ ngôn ngữ.</p>
+</div>
+<p>Nếu chúng ta không tận dụng được thực tế rằng không cần lưu thông tin trong trường hợp này, chúng ta có thể đã hiện thực <code>eval-sequence</code> bằng cách xử lý tất cả các biểu thức trong một chuỗi theo cùng một cách — lưu các register, đánh giá biểu thức, quay lại để khôi phục các register, và lặp lại cho đến khi tất cả các biểu thức được đánh giá <sup class="footnote-reference"><a href="#9">9</a></sup>:</p>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p>Chúng ta có thể định nghĩa <code>no-more-exps?</code> như sau:...</p>
+</div>
+<pre><code class="language-{.scheme}">ev-sequence
+  (test (op no-more-exps?) (reg unev))
+  (branch (label ev-sequence-end))
+  (assign exp (op first-exp) (reg unev))
+  (save unev)
+  (save env)
+  (assign continue
+          (label ev-sequence-continue))
+  (goto (label eval-dispatch))
+ev-sequence-continue
+  (restore env)
+  (restore unev)
+  (assign unev (op rest-exps) (reg unev))
+  (goto (label ev-sequence))
+ev-sequence-end
+  (restore continue)
+  (goto (reg continue))
+</code></pre>
+<p>Điều này có vẻ chỉ là một thay đổi nhỏ so với mã trước đây để đánh giá một chuỗi: Sự khác biệt duy nhất là chúng ta thực hiện chu trình lưu–khôi phục cho cả biểu thức cuối cùng trong chuỗi cũng như các biểu thức khác. Interpreter vẫn sẽ cho cùng một giá trị với bất kỳ biểu thức nào. Nhưng thay đổi này lại phá vỡ hiện thực tail-recursive, bởi vì giờ đây chúng ta phải quay lại sau khi đánh giá biểu thức cuối cùng trong chuỗi để hoàn tác các thao tác lưu register (vốn là vô ích). Các thao tác lưu thừa này sẽ tích lũy trong quá trình lồng nhau của các lời gọi procedure. Do đó, các quá trình như <code>sqrt-iter</code> sẽ cần bộ nhớ tỉ lệ với số vòng lặp thay vì chỉ cần bộ nhớ hằng số. Sự khác biệt này có thể rất đáng kể. Ví dụ, với tail recursion, một vòng lặp vô hạn có thể được biểu diễn chỉ bằng cơ chế gọi procedure:</p>
+<pre><code class="language-{.scheme}">(define (count n)
+  (newline)
+  (display n)
+  (count (+ n 1)))
+</code></pre>
+<p>Không có tail recursion, một procedure như vậy cuối cùng sẽ hết không gian stack, và để biểu diễn một vòng lặp thực sự sẽ cần một cơ chế điều khiển khác ngoài lời gọi procedure.</p>
+<h2 id="543-cấu-trúc-điều-kiện-gán-và-định-nghĩa"><a class="header" href="#543-cấu-trúc-điều-kiện-gán-và-định-nghĩa">5.4.3 Cấu trúc điều kiện, gán và định nghĩa</a></h2>
+<p>Giống như trong metacircular evaluator, các special form (dạng đặc biệt) được xử lý bằng cách chọn lọc đánh giá các phần của biểu thức. Với một biểu thức <code>if</code>, chúng ta phải đánh giá predicate (mệnh đề điều kiện) và quyết định, dựa trên giá trị của predicate, sẽ đánh giá consequent (nhánh đúng) hay alternative (nhánh sai).</p>
+<p>Trước khi đánh giá predicate, chúng ta lưu chính biểu thức <code>if</code> để sau này có thể trích xuất consequent hoặc alternative. Chúng ta cũng lưu environment, vì sẽ cần nó sau này để đánh giá consequent hoặc alternative, và lưu <code>continue</code>, vì sẽ cần nó để quay lại đánh giá biểu thức đang chờ giá trị của <code>if</code>.</p>
+<pre><code class="language-{.scheme}">ev-if
+  (save exp)   ; save expression for later
+  (save env)
+  (save continue)
+  (assign continue (label ev-if-decide))
+  (assign exp (op if-predicate) (reg exp))
+  ; evaluate the predicate:
+  (goto (label eval-dispatch))  
+</code></pre>
+<p>Khi quay lại từ việc đánh giá predicate, chúng ta kiểm tra xem nó đúng hay sai và, tùy thuộc vào kết quả, đặt consequent hoặc alternative vào <code>exp</code> trước khi chuyển đến <code>eval-dispatch</code>. Lưu ý rằng việc khôi phục <code>env</code> và <code>continue</code> ở đây giúp <code>eval-dispatch</code> có environment đúng và tiếp tục ở vị trí thích hợp để nhận giá trị của biểu thức <code>if</code>.</p>
+<pre><code class="language-{.scheme}">ev-if-decide
+  (restore continue)
+  (restore env)
+  (restore exp)
+  (test (op true?) (reg val))
+  (branch (label ev-if-consequent))
+ev-if-alternative
+  (assign exp (op if-alternative) (reg exp))
+  (goto (label eval-dispatch))
+ev-if-consequent
+  (assign exp (op if-consequent) (reg exp))
+  (goto (label eval-dispatch))
+</code></pre>
+<h3 id="gán-và-định-nghĩa"><a class="header" href="#gán-và-định-nghĩa">Gán và định nghĩa</a></h3>
+<p>Các phép gán được xử lý bởi <code>ev-assignment</code>, được gọi từ <code>eval-dispatch</code> với biểu thức gán trong <code>exp</code>. Mã tại <code>ev-assignment</code> trước tiên đánh giá phần giá trị của biểu thức, sau đó cài đặt giá trị mới vào environment. <code>Set-variable-value!</code> được giả định là có sẵn như một operation của máy.</p>
+<pre><code class="language-{.scheme}">ev-assignment
+  (assign unev 
+          (op assignment-variable)
+          (reg exp))
+  (save unev)   ; save variable for later
+  (assign exp
+          (op assignment-value)
+          (reg exp))
+  (save env)
+  (save continue)
+  (assign continue
+          (label ev-assignment-1))
+  ; evaluate the assignment value:
+  (goto (label eval-dispatch))  
+ev-assignment-1
+  (restore continue)
+  (restore env)
+  (restore unev)
+  (perform (op set-variable-value!)
+           (reg unev)
+           (reg val)
+           (reg env))
+  (assign val
+          (const ok))
+  (goto (reg continue))
+</code></pre>
+<p>Các định nghĩa được xử lý theo cách tương tự:</p>
+<pre><code class="language-{.scheme}">ev-definition
+  (assign unev 
+          (op definition-variable)
+          (reg exp))
+  (save unev)   ; save variable for later
+  (assign exp 
+          (op definition-value)
+          (reg exp))
+  (save env)
+  (save continue)
+  (assign continue (label ev-definition-1))
+  ; evaluate the definition value:
+  (goto (label eval-dispatch))  
+ev-definition-1
+  (restore continue)
+  (restore env)
+  (restore unev)
+  (perform (op define-variable!)
+           (reg unev)
+           (reg val)
+           (reg env))
+  (assign val (const ok))
+  (goto (reg continue))
+</code></pre>
+<h2 id="544-chạy-evaluator"><a class="header" href="#544-chạy-evaluator">5.4.4 Chạy Evaluator</a></h2>
+<p>Với việc hiện thực explicit-control evaluator (bộ thông dịch điều khiển tường minh), chúng ta đi đến phần kết thúc của một quá trình phát triển bắt đầu từ Chương 1, trong đó chúng ta đã lần lượt khám phá các mô hình ngày càng chính xác hơn của quá trình đánh giá (evaluation). Chúng ta bắt đầu với mô hình thay thế (substitution model) tương đối phi hình thức, sau đó mở rộng nó trong Chương 3 thành mô hình môi trường (environment model), cho phép chúng ta xử lý trạng thái và sự thay đổi. Trong metacircular evaluator của Chương 4, chúng ta sử dụng chính Scheme như một ngôn ngữ để làm rõ hơn cấu trúc môi trường được tạo ra trong quá trình đánh giá một biểu thức. Giờ đây, với register machine, chúng ta đã xem xét kỹ lưỡng các cơ chế của evaluator cho việc quản lý bộ nhớ, truyền đối số và điều khiển. Ở mỗi cấp độ mô tả mới, chúng ta phải đặt ra các vấn đề và giải quyết những điểm mơ hồ vốn chưa xuất hiện ở các cách tiếp cận trước đó, ít chính xác hơn. Để hiểu hành vi của explicit-control evaluator, chúng ta có thể mô phỏng nó và theo dõi hiệu năng của nó.</p>
+<p>Chúng ta sẽ cài đặt một driver loop (vòng lặp điều khiển) trong evaluator machine. Vòng lặp này đóng vai trò của procedure <code>driver-loop</code> ở 4.1.4. Evaluator sẽ lặp lại việc in ra một prompt, đọc một biểu thức, đánh giá biểu thức đó bằng cách chuyển đến <code>eval-dispatch</code>, và in ra kết quả. Các lệnh sau đây tạo thành phần mở đầu của chuỗi lệnh controller của explicit-control evaluator<sup class="footnote-reference"><a href="#10">10</a></sup>:</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>Chúng ta giả định ở đây rằng <code>read</code> và các thao tác in ấn khác nhau có sẵn như các operation nguyên thủy của máy, điều này hữu ích cho việc mô phỏng của chúng ta, nhưng hoàn toàn không thực tế trong thực tiễn. Đây thực chất là các thao tác cực kỳ phức tạp. Trong thực tế, chúng sẽ được hiện thực bằng các thao tác nhập/xuất mức thấp như truyền từng ký tự đến và từ một thiết bị.</p>
+</div>
+<pre><code class="language-{.scheme}">read-eval-print-loop
+  (perform (op initialize-stack))
+  (perform (op prompt-for-input)
+           (const &quot;;;; EC-Eval input:&quot;))
+  (assign exp (op read))
+  (assign env (op get-global-environment))
+  (assign continue (label print-result))
+  (goto (label eval-dispatch))
+print-result
+  (perform (op announce-output)
+           (const &quot;;;; EC-Eval value:&quot;))
+  (perform (op user-print) (reg val))
+  (goto (label read-eval-print-loop))
+</code></pre>
+<p>Khi gặp lỗi trong một procedure (chẳng hạn như lỗi “unknown procedure type error” được chỉ ra tại <code>apply-dispatch</code>), chúng ta in ra thông báo lỗi và quay lại driver loop<sup class="footnote-reference"><a href="#11">11</a></sup>.</p>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p>Có những lỗi khác mà chúng ta muốn interpreter xử lý, nhưng chúng không đơn giản như vậy. Xem Bài tập 5.30.</p>
+</div>
+<pre><code class="language-{.scheme}">unknown-expression-type
+  (assign 
+   val
+   (const unknown-expression-type-error))
+  (goto (label signal-error))
+unknown-procedure-type
+  ; clean up stack (from apply-dispatch):
+  (restore continue)    
+  (assign 
+   val
+   (const unknown-procedure-type-error))
+  (goto (label signal-error))
+signal-error
+  (perform (op user-print) (reg val))
+  (goto (label read-eval-print-loop))
+</code></pre>
+<p>Vì mục đích mô phỏng, chúng ta khởi tạo stack mỗi lần qua driver loop, vì nó có thể không rỗng sau khi một lỗi (chẳng hạn như biến chưa được định nghĩa) làm gián đoạn quá trình đánh giá<sup class="footnote-reference"><a href="#12">12</a></sup>.</p>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p>Chúng ta có thể thực hiện việc khởi tạo stack chỉ sau khi xảy ra lỗi, nhưng làm điều đó trong driver loop sẽ thuận tiện cho việc theo dõi hiệu năng của evaluator, như mô tả bên dưới.</p>
+</div>
+<p>Nếu kết hợp tất cả các đoạn mã được trình bày trong 5.4.1–5.4.4, chúng ta có thể tạo ra một mô hình evaluator machine mà chúng ta có thể chạy bằng register-machine simulator ở 5.2.</p>
+<pre><code class="language-{.scheme}">(define eceval
+  (make-machine
+   '(exp env val proc argl continue unev)
+   eceval-operations
+   '(read-eval-print-loop
+     ⟨entire machine controller 
+      as given above⟩)))
+</code></pre>
+<p>Chúng ta phải định nghĩa các procedure Scheme để mô phỏng các operation được sử dụng như các primitive bởi evaluator. Đây là các procedure giống như chúng ta đã dùng cho metacircular evaluator ở 4.1, cùng với một vài procedure bổ sung được định nghĩa trong các chú thích suốt phần 5.4.</p>
+<pre><code class="language-{.scheme}">(define eceval-operations
+  (list (list 'self-evaluating? 
+              self-evaluating)
+        ⟨complete list of operations 
+         for eceval machine⟩))
+</code></pre>
+<p>Cuối cùng, chúng ta có thể khởi tạo global environment và chạy evaluator:</p>
+<pre><code class="language-{.scheme}">(define the-global-environment
+  (setup-environment))
+
+(start eceval)
+
+;;; EC-Eval input:
+(define (append x y)
+  (if (null? x)
+      y
+      (cons (car x) (append (cdr x) y))))
+
+;;; EC-Eval value:
+ok
+
+;;; EC-Eval input:
+(append '(a b c) '(d e f))
+
+;;; EC-Eval value:
+(a b c d e f)
+</code></pre>
+<p>Tất nhiên, việc đánh giá các biểu thức theo cách này sẽ mất nhiều thời gian hơn so với việc gõ trực tiếp chúng vào Scheme, bởi vì có nhiều tầng mô phỏng liên quan. Các biểu thức của chúng ta được đánh giá bởi explicit-control-evaluator machine, vốn đang được mô phỏng bởi một chương trình Scheme, và bản thân chương trình này lại đang được đánh giá bởi Scheme interpreter.</p>
+<h3 id="theo-dõi-hiệu-năng-của-evaluator"><a class="header" href="#theo-dõi-hiệu-năng-của-evaluator">Theo dõi hiệu năng của evaluator</a></h3>
+<p>Mô phỏng có thể là một công cụ mạnh mẽ để định hướng việc hiện thực các evaluator. Mô phỏng giúp dễ dàng không chỉ khám phá các biến thể của thiết kế register-machine mà còn theo dõi hiệu năng của evaluator được mô phỏng. Ví dụ, một yếu tố quan trọng trong hiệu năng là mức độ sử dụng stack hiệu quả của evaluator. Chúng ta có thể quan sát số lượng thao tác stack cần thiết để đánh giá các biểu thức khác nhau bằng cách định nghĩa evaluator register machine với phiên bản simulator có thu thập thống kê về việc sử dụng stack (5.2.4), và thêm một lệnh tại điểm vào <code>print-result</code> của evaluator để in ra các thống kê:</p>
+<pre><code class="language-{.scheme}">print-result
+  ; added instruction:
+  (perform (op print-stack-statistics))
+  (perform (op announce-output)
+           (const &quot;;;; EC-Eval value:&quot;))
+  … ; same as before
+</code></pre>
+<p>Tương tác với evaluator bây giờ sẽ như sau:</p>
+<pre><code class="language-{.scheme}">;;; EC-Eval input:
+(define (factorial n)
+  (if (= n 1) 1 (* (factorial (- n 1)) n)))
+(total-pushes = 3, maximum-depth = 3)
+
+;;; EC-Eval value:
+ok
+
+;;; EC-Eval input:
+(factorial 5)
+(total-pushes = 144, maximum-depth = 28)
+
+;;; EC-Eval value:
+120
+</code></pre>
+<p>Lưu ý rằng driver loop của evaluator khởi tạo lại stack ở đầu mỗi lần tương tác, để các thống kê được in ra chỉ liên quan đến các thao tác stack được sử dụng để đánh giá biểu thức trước đó.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5-3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="5-5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5-3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="5-5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
